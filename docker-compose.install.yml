@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  composer:
+    image: composer
+    volumes:
+      - .:/app
+    command: composer install --ignore-platform-reqs --no-interaction
+
+  node:
+    image: node
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - '8030:8081'
+    command: npm install
+
+  mysql:
+    image: mysql:5.6
+    ports:
+      - '3306:3306'
+    volumes:
+      - .docker/mysql/data:/var/lib/mysql
+      - .docker/seed.sql:/tmp/seed.sql
+      - .docker/seed-db.sh:/tmp/seed-db.sh
+    env_file:
+      - .docker/.env

@@ -1,0 +1,31 @@
+# Project files #
+#################
+/config/app.php
+/tmp
+/logs/*
+/.idea/*
+/protected/finalimages/*
+/webroot/gradients/*
+/protected/rawimages/*
+/protected/fonts/*
+/node_modules
+webroot/tmp
+webroot/css/*
+webroot/js/*
+.htaccess
+.docker/mysql
+vendor
+scripts/deploy.sh
+scripts/translate.sh
+scripts/report_errors.sh
+
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

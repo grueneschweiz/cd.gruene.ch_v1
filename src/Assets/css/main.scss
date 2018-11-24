@@ -1,0 +1,227 @@
+@import '~font-awesome/scss/font-awesome.scss';
+@import "./variables.scss";
+@import "~bootstrap/scss/bootstrap";
+@import './cropit.css';
+@import "~bootstrap4c-chosen/dist/css/component-chosen.min.css";
+@import '~jquery-ui-css/all.css';
+@import "./styler.scss";
+
+@font-face {
+  font-family: 'Sanuk';
+  font-weight: 900;
+  font-style: normal;
+  src: url("/protected/fonts/SanukOT-Fat.otf") format("opentype");
+}
+
+@font-face {
+  font-family: 'Sanuk';
+  font-weight: 700;
+  font-style: normal;
+  src: url("/protected/fonts/SanukOT-Bold.otf") format("opentype");
+}
+
+.bg-green {
+  background: $green;
+}
+
+.bg-magenta {
+  background: $magenta;
+}
+
+.btn-outline-secondary, .btn-outline-primary {
+  background-color: white;
+}
+
+div.message {
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  font-weight: normal;
+  padding: 0 1.5rem 0 1.5rem;
+  transition: height 300ms ease-out 0s;
+  background-color: #a0d3e8;
+  color: #626262;
+  top: 15px;
+  right: 15px;
+  z-index: 999;
+  overflow: hidden;
+  height: 50px;
+  line-height: 2.5em;
+
+  &:before {
+    line-height: 0px;
+    font-size: 20px;
+    height: 12px;
+    width: 12px;
+    border-radius: 15px;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    position: relative;
+    left: -11px;
+    background-color: #FFF;
+    padding: 12px 14px 12px 10px;
+    content: "i";
+    color: #a0d3e8;
+  }
+
+  &.error {
+    background-color: #C3232D;
+    color: #FFF;
+
+    &:before {
+      padding: 11px 16px 14px 7px;
+      color: #C3232D;
+      content: "x";
+    }
+  }
+
+  &.hidden {
+    height: 0;
+  }
+}
+
+input[type="range"] {
+  cursor: pointer;
+}
+
+.custom-range-slider {
+  min-width: 12em;
+
+  .icon-small {
+    width: 2em;
+  }
+
+  .icon-big {
+    width: 3em;
+    text-align: right;
+  }
+
+  .slider {
+    width: calc(100% - 5em);
+  }
+}
+
+.helptext {
+  float: left;
+  margin: 0.35em 0.35em 0 0;
+  background-image: url('../img/info.svg');
+  background-size: contain;
+  filter: grayscale(100%);
+  width: 0.85em;
+  height: 0.85em;
+
+  &:hover {
+    filter: none;
+  }
+}
+
+.input .error-message {
+  color: $danger;
+}
+
+header {
+  background: $header-bg;
+  height: auto;
+  box-shadow: none;
+
+  .titlebar-wrapper {
+    transform: rotate(-5deg);
+    margin-left: -0.5em;
+    margin-top: 2em;
+    display: inline-block;
+  }
+
+  h1 {
+    font-family: sanuk, tahoma, sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 0 0.2em 0 1em;
+    line-height: 1.17em;
+    height: 1.17em;
+    display: inline-block;
+    width: auto;
+    margin: 0.05em 0;
+    float: left;
+  }
+
+  nav {
+    .nav-item:first-of-type {
+      margin-left: 1em;
+    }
+  }
+
+}
+
+.deleted {
+  text-decoration: line-through;
+}
+
+/* -------- tables -------- */
+.table {
+  &:not(.vertical-table) {
+    tr:first-of-type th {
+      border-top: none;
+    }
+    tr:last-of-type td {
+      border-bottom: 2px solid #dee2e6;
+    }
+  }
+  &.vertical-table {
+    tr:last-of-type {
+      td, th {
+        border-bottom: 2px solid #dee2e6;
+      }
+    }
+  }
+}
+
+table .actions {
+  width: 7em;
+
+  .view-icon,
+  .edit-icon,
+  .delete-icon {
+    padding: 0.25rem 0.25rem 0;
+    line-height: 1rem;
+    width: 1.4rem;
+    transition: 0.15s;
+
+    &:hover {
+      padding: 0 0;
+      font-size: 1.4rem;
+      line-height: 1rem;
+    }
+  }
+}
+
+/* ------- admin logo stuff ------ */
+.index-logo-preview {
+  max-width: 150px;
+  width: 100%;
+}
+
+/* ------- login, registration --------- */
+.clean-content-width {
+  max-width: 400px;
+  margin: auto;
+  margin-top: 1em;
+}
+
+/* ------- footer ---------- */
+.footer {
+  width: 100%;
+  background-color: $gray-300;
+
+  a:not(.btn) {
+    color: $secondary;
+  }
+}
+
+/* -------- beta ---------- */
+.beta {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

@@ -1,0 +1,234 @@
+#builder-canvas {
+  max-width: 720px;
+}
+
+.input-group .custom-file .custom-file-label::after {
+  border-radius: 0;
+}
+
+#image-cropper {
+  position: relative;
+
+  .cropit-preview {
+    border: none !important;
+    border-radius: 0;
+
+    .cropit-preview-image:hover {
+      filter: saturate(150%) brightness(120%);
+      transition: all 0.2s;
+    }
+  }
+
+  #border-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    overflow: visible;
+
+    .border-container {
+      background: #ffffff;
+      position: absolute;
+    }
+
+    .border-corner {
+      background: none;
+      border-color: #ffffff;
+      border-style: solid;
+      border-width: 0;
+    }
+
+    .border-top, .border-right, .border-bottom, .border-left {
+      border: 0 !important;
+    }
+  }
+
+  #image-bars-dragger {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+
+    &:hover {
+      cursor: ns-resize;
+      filter: saturate(200%) brightness(200%);
+      transition: all 0.2s;
+    }
+  }
+
+  #image-bars {
+    position: relative;
+    font-size: 30px;
+    font-family: Sanuk, Arial, sans-serif;
+    font-weight: 900;
+    transform: rotate(-5deg);
+
+    .barwrapper {
+      width: 100%;
+
+      &:last-child .bar {
+        margin-bottom: 0;
+      }
+    }
+
+    .bar {
+      text-transform: uppercase;
+      margin-bottom: 0.0972em; /* depends on line-height */
+      line-height: 1.17em; /* make ÜJ just fit */
+      height: 1.17em;
+      text-overflow: ellipsis; /* crucial for font size adjusting in js */
+      white-space: nowrap; /* crucial for font size adjusting in js */
+
+      &.headline {
+        font-size: 1em;
+      }
+
+      &.subline {
+        font-size: 0.4em;
+      }
+
+      &.white {
+        color: $green;
+        background-color: $white;
+      }
+
+      &.green {
+        color: $white;
+        background-color: $green;
+      }
+
+      &.magenta {
+        color: #ffffff;
+        background-color: $magenta;
+      }
+
+    }
+
+    &.left .bar {
+      float: left;
+      padding: 0 0.2em 0 500px;
+    }
+
+    &.right .bar {
+      float: right;
+      padding: 0 500px 0 0.2em;
+    }
+  }
+
+  .left {
+    float: left !important;
+  }
+
+  .right {
+    float: right !important;
+  }
+
+  #logo-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    #logo-rotator {
+      transform: rotate(-5deg);
+      position: relative;
+    }
+
+    #logo-top {
+      display: block;
+      width: 500px;
+    }
+
+    #logo-subline {
+      margin-top: 0.0972em; /* depends on line-hight */
+      margin-left: 4.37em;
+      font-size: 29px;
+      line-height: 1em;
+      text-overflow: ellipsis; /* crucial for font size adjusting in js */
+      white-space: nowrap; /* crucial for font size adjusting in js */
+
+      span {
+        font-family: Sanuk, Arial, sans-serif;
+        font-weight: 700;
+        color: $white;
+        background-color: $magenta;
+        text-transform: uppercase;
+        line-height: 1.17em; /* make ÜJ just fit */
+        height: 1.17em;
+        display: inline-block;
+        padding: 0 0.2em;
+      }
+    }
+  }
+}
+
+.image-modifier-controls {
+  display: none;
+}
+
+.btn-styler:hover {
+  color: $magenta;
+  cursor: pointer;
+  transition: $btn-transition;
+}
+
+.rotate-btn {
+  font-size: 1.25em;
+  width: 85px;
+
+  span {
+    padding: 0.35em 0.5em;
+  }
+}
+
+.warning-to-much-text {
+  display: none;
+}
+
+#bars-form {
+  .row.bar {
+    .barbuttons {
+      width: 85px;
+    }
+
+    &.green {
+      input.bar {
+        border-color: $green;
+        color: $green;
+
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba($green, 0.25);
+        }
+      }
+
+      .barbuttons span.btn {
+        color: $green;
+        border-color: $green;
+
+        &:hover {
+          color: $white;
+          background-color: $green;
+        }
+      }
+    }
+
+    &.magenta {
+      input.bar {
+        border-color: $magenta;
+        color: $magenta;
+      }
+    }
+  }
+}
+
+#download-img {
+  color: $magenta;
+
+  &:hover {
+    color: $white;
+  }
+}
+
+#others_can_use.form-check-input:disabled ~ .form-check-label {
+  text-decoration: line-through;
+}
