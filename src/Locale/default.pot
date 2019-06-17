@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-06-17 17:29+0000\n"
+"POT-Creation-Date: 2019-06-17 19:03+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -46,95 +46,95 @@ msgstr ""
 msgid "The logo could not be deleted. Please, try again."
 msgstr ""
 
-#: Controller/UsersControllerphp:146;229
+#: Controller/UsersControllerphp:146;239
 msgid "The user has been saved."
 msgstr ""
 
-#: Controller/UsersControllerphp:153
-msgid "The user could not be informed about his new login. Please, do it manually."
-msgstr ""
-
-#: Controller/UsersControllerphp:158
-msgid "cd.gruene.ch: Account created"
-msgstr ""
-
-#: Controller/UsersControllerphp:159
-msgid "Salut {{first_name}},\n\nWe're very happy to inform you about your new login on cd.gruene.ch. Now it's time to set your password.\n\nDefine a password: {{password_reset_link}}\n\nOnce you've set the password, use it in combination with this email address to log in:\n\n Email: {{email}}\n\nSincerely,\nThe cd.gruene.ch registration service."
-msgstr ""
-
-#: Controller/UsersControllerphp:183;243
+#: Controller/UsersControllerphp:155;258
 msgid "The user could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/UsersControllerphp:312
+#: Controller/UsersControllerphp:187
+msgid "The user could not be informed about his new login. Please, do it manually."
+msgstr ""
+
+#: Controller/UsersControllerphp:192
+msgid "cd.gruene.ch: Account created"
+msgstr ""
+
+#: Controller/UsersControllerphp:193
+msgid "Salut {{first_name}},\n\nWe're very happy to inform you about your new login on cd.gruene.ch. Now it's time to set your password.\n\nDefine a password: {{password_reset_link}}\n\nOnce you've set the password, use it in combination with this email address to log in:\n\n Email: {{email}}\n\nSincerely,\nThe cd.gruene.ch registration service."
+msgstr ""
+
+#: Controller/UsersControllerphp:327
 msgid "The user has been deleted."
 msgstr ""
 
-#: Controller/UsersControllerphp:314
+#: Controller/UsersControllerphp:329
 msgid "The user could not be deleted. Please, try again."
 msgstr ""
 
-#: Controller/UsersControllerphp:361
+#: Controller/UsersControllerphp:376
 msgid "Your username or password is incorrect."
 msgstr ""
 
-#: Controller/UsersControllerphp:363
+#: Controller/UsersControllerphp:378
 msgid "Click here to reset your password."
 msgstr ""
 
-#: Controller/UsersControllerphp:365
+#: Controller/UsersControllerphp:380
 msgid "Too many invalid login attempts. Please try again tomorrow."
 msgstr ""
 
-#: Controller/UsersControllerphp:390
+#: Controller/UsersControllerphp:405
 msgid "You are now logged out."
 msgstr ""
 
-#: Controller/UsersControllerphp:400
+#: Controller/UsersControllerphp:415
 msgid "Access denied"
 msgstr ""
 
-#: Controller/UsersControllerphp:448
+#: Controller/UsersControllerphp:463
 msgid "Password reset cd.gruene.ch"
 msgstr ""
 
-#: Controller/UsersControllerphp:449
+#: Controller/UsersControllerphp:464
 msgid "Salut {{first_name}}\n\nYou've requested to reset the password for your account on cd.gruene.ch. Click the following link, to set a new password:\n\nSet new password: {{password_reset_link}}\n\nEnjoy,\nThe Greens of Switzerland"
 msgstr ""
 
-#: Controller/UsersControllerphp:477
+#: Controller/UsersControllerphp:492
 msgid "New user"
 msgstr ""
 
-#: Controller/UsersControllerphp:478
+#: Controller/UsersControllerphp:493
 msgid "Hello Admin\n\n{{first_name}} {{last_name}} ({{email}}) from {{city}} just applied for a login to cd.gruene.ch.\n\nCreate account: {{approve_url}}\n\nSincerely,\nThe cd.gruene.ch registration service."
 msgstr ""
 
-#: Controller/UsersControllerphp:500
+#: Controller/UsersControllerphp:515
 msgid "Your application was successfully sent to the Greens Switzerland."
 msgstr ""
 
-#: Controller/UsersControllerphp:521
+#: Controller/UsersControllerphp:536
 msgid "Permanent login revoked for all devices."
 msgstr ""
 
-#: Controller/UsersControllerphp:549
+#: Controller/UsersControllerphp:564
 msgid "Your password reset link has expired."
 msgstr ""
 
-#: Controller/UsersControllerphp:551
+#: Controller/UsersControllerphp:566
 msgid "Click here to get a new password reset link."
 msgstr ""
 
-#: Controller/UsersControllerphp:553
+#: Controller/UsersControllerphp:568
 msgid "Please make sure to reset your password within the next {number} hours."
 msgstr ""
 
-#: Controller/UsersControllerphp:580
+#: Controller/UsersControllerphp:595
 msgid "The new password was saved."
 msgstr ""
 
-#: Controller/UsersControllerphp:585
+#: Controller/UsersControllerphp:600
 msgid "The password could not be saved. Is it secure enough?"
 msgstr ""
 
@@ -392,21 +392,21 @@ msgstr ""
 msgid "The password must be at least 8 characters long and contain one lowercase character, one uppercase character and one digit."
 msgstr ""
 
-#: Template/Element/User/change_password_fieldctp:39
+#: Template/Element/User/change_password_fieldctp:40
 msgid "The password must be at least 8 characters long and contain at least:"
-msgstr ""
-
-#: Template/Element/User/change_password_fieldctp:41
-msgctxt "password rule"
-msgid "one lowercase character"
 msgstr ""
 
 #: Template/Element/User/change_password_fieldctp:42
 msgctxt "password rule"
-msgid "one uppercase character"
+msgid "one lowercase character"
 msgstr ""
 
 #: Template/Element/User/change_password_fieldctp:43
+msgctxt "password rule"
+msgid "one uppercase character"
+msgstr ""
+
+#: Template/Element/User/change_password_fieldctp:44
 msgctxt "password rule"
 msgid "one digit"
 msgstr ""
@@ -482,11 +482,15 @@ msgstr ""
 msgid "This user inherited admin privileges of {groups}. Remove the corresponding parent group to change that."
 msgstr ""
 
-#: Template/Element/User/inputctp:110
+#: Template/Element/User/inputctp:109
 msgid "Notify the user by email and send him a link to set a password."
 msgstr ""
 
-#: Template/Element/User/inputctp:120
+#: Template/Element/User/inputctp:109
+msgid "Resend user invitation"
+msgstr ""
+
+#: Template/Element/User/inputctp:119
 msgid "Save User"
 msgstr ""
 

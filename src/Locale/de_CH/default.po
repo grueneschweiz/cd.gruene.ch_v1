@@ -39,39 +39,39 @@ msgstr "Das Logo wurde gelöscht."
 msgid "The logo could not be deleted. Please, try again."
 msgstr "Das Logo konnte nicht gelöscht werden. Bitte versuche es erneut."
 
-#: Controller/UsersControllerphp:146;229
+#: Controller/UsersControllerphp:146;239
 msgid "The user has been saved."
 msgstr "Die Benutzerin wurde gespeichert."
 
-#: Controller/UsersControllerphp:183;243
+#: Controller/UsersControllerphp:155;258
 msgid "The user could not be saved. Please, try again."
 msgstr "Die Benutzerin konnte nicht gespeichert werden. Bitte versuche es erneut."
 
-#: Controller/UsersControllerphp:312
+#: Controller/UsersControllerphp:327
 msgid "The user has been deleted."
 msgstr "Die Benutzerin wurde gelöscht."
 
-#: Controller/UsersControllerphp:314
+#: Controller/UsersControllerphp:329
 msgid "The user could not be deleted. Please, try again."
 msgstr "Die Benutzerin konnte nicht gelöscht werden. Bitte versuche es erneut."
 
-#: Controller/UsersControllerphp:361
+#: Controller/UsersControllerphp:376
 msgid "Your username or password is incorrect."
 msgstr "Dein Benutzername oder Passwort ist nicht korrekt."
 
-#: Controller/UsersControllerphp:390
+#: Controller/UsersControllerphp:405
 msgid "You are now logged out."
 msgstr "Du bist nun abgemeldet."
 
-#: Controller/UsersControllerphp:400
+#: Controller/UsersControllerphp:415
 msgid "Access denied"
 msgstr "Zugriff verweigert"
 
-#: Controller/Component/ImageEditorComponentphp:188
+#: Controller/Component/ImageEditorComponentphp:190
 msgid "Logo not found."
 msgstr "Logo nicht gefunden."
 
-#: Controller/Component/ImageEditorComponentphp:284
+#: Controller/Component/ImageEditorComponentphp:286
 msgid "No valid color scheme given."
 msgstr "Kein gültiges Farbschema angegeben."
 
@@ -379,7 +379,7 @@ msgstr "Sprache"
 msgid "This user is admin of the following groups"
 msgstr "Diese Benutzerin ist Administratorin der folgenden Gruppen"
 
-#: Template/Element/User/inputctp:120
+#: Template/Element/User/inputctp:119
 msgid "Save User"
 msgstr "Benutzerin speichern"
 
@@ -850,15 +850,15 @@ msgstr "Ein interner Fehler ist aufgetreten"
 msgid "Generate Image"
 msgstr "Bild generieren"
 
-#: Controller/UsersControllerphp:448
+#: Controller/UsersControllerphp:463
 msgid "Password reset cd.gruene.ch"
 msgstr "Neues Passwort cd.gruene.ch"
 
-#: Controller/UsersControllerphp:477
+#: Controller/UsersControllerphp:492
 msgid "New user"
 msgstr "Neue Benutzerin"
 
-#: Controller/UsersControllerphp:478
+#: Controller/UsersControllerphp:493
 msgid "Hello Admin\n"
 "\n"
 "{{first_name}} {{last_name}} ({{email}}) from {{city}} just applied for a login to cd.gruene.ch.\n"
@@ -995,11 +995,11 @@ msgstr "Verwaltet von"
 msgid "Email address not found. Might your login be registered to an other email address?"
 msgstr "Emailadresse nicht gefunden. Könnte es sein, dass dein Login auf eine andere Mailadresse lautet?"
 
-#: Controller/UsersControllerphp:500
+#: Controller/UsersControllerphp:515
 msgid "Your application was successfully sent to the Greens Switzerland."
 msgstr "Dein Antrag wurde erfolgreich an die Grünen Schweiz geschickt."
 
-#: Controller/UsersControllerphp:521
+#: Controller/UsersControllerphp:536
 msgid "Permanent login revoked for all devices."
 msgstr "Permanentes Login von allen Geräten zurückgezogen."
 
@@ -1011,11 +1011,11 @@ msgstr "Auf allen Geräten abmelden"
 msgid "Stay logged in"
 msgstr "Angemeldet bleiben"
 
-#: Controller/UsersControllerphp:363
+#: Controller/UsersControllerphp:378
 msgid "Click here to reset your password."
 msgstr "Hier klicken um das Passwort zurückzusetzen."
 
-#: Controller/UsersControllerphp:449
+#: Controller/UsersControllerphp:464
 msgid "Salut {{first_name}}\n"
 "\n"
 "You've requested to reset the password for your account on cd.gruene.ch. Click the following link, to set a new password:\n"
@@ -1033,23 +1033,23 @@ msgstr "Hallo {{first_name}}\n"
 "Viel Spass,\n"
 "Die Grünen Schweiz"
 
-#: Controller/UsersControllerphp:549
+#: Controller/UsersControllerphp:564
 msgid "Your password reset link has expired."
 msgstr "Dein Link um das Passwort zurückzusetzen ist abgelaufen."
 
-#: Controller/UsersControllerphp:551
+#: Controller/UsersControllerphp:566
 msgid "Click here to get a new password reset link."
 msgstr "Klicke hier um einen neuen Passwort-Zurücksetzen-Link zu erhalten."
 
-#: Controller/UsersControllerphp:553
+#: Controller/UsersControllerphp:568
 msgid "Please make sure to reset your password within the next {number} hours."
 msgstr "Vergewissere dich, dass du das Passwort binnen {number} Stunden zurücksetzt."
 
-#: Controller/UsersControllerphp:580
+#: Controller/UsersControllerphp:595
 msgid "The new password was saved."
 msgstr "Das neue Passwort wurde gespeichert."
 
-#: Controller/UsersControllerphp:585
+#: Controller/UsersControllerphp:600
 msgid "The password could not be saved. Is it secure enough?"
 msgstr "Das Passwort konnte nicht gespeichert werden. Ist es sicher genug?"
 
@@ -1057,21 +1057,21 @@ msgstr "Das Passwort konnte nicht gespeichert werden. Ist es sicher genug?"
 msgid "The password must be at least 8 characters long and contain one lowercase character, one uppercase character and one digit."
 msgstr "Das Passwort muss mindestens 8 Zeichen lang sein und ein Kleinbuchstabe, ein Grossbuchstabe und eine Zahl enthalten."
 
-#: Template/Element/User/change_password_fieldctp:39
+#: Template/Element/User/change_password_fieldctp:40
 msgid "The password must be at least 8 characters long and contain at least:"
 msgstr "Das Passwort muss mindestens 8 Zeichen lang sein und braucht mindestens:"
 
-#: Template/Element/User/change_password_fieldctp:41
+#: Template/Element/User/change_password_fieldctp:42
 msgctxt "password rule"
 msgid "one lowercase character"
 msgstr "ein Kleinbuchstabe"
 
-#: Template/Element/User/change_password_fieldctp:42
+#: Template/Element/User/change_password_fieldctp:43
 msgctxt "password rule"
 msgid "one uppercase character"
 msgstr "ein Grossbuchstabe"
 
-#: Template/Element/User/change_password_fieldctp:43
+#: Template/Element/User/change_password_fieldctp:44
 msgctxt "password rule"
 msgid "one digit"
 msgstr "eine Zahl"
@@ -1105,19 +1105,19 @@ msgstr "Wenn du das Passwortfeld leer lässt, wird ein zufällig generiertes Pas
 msgid "Enter new password"
 msgstr "Neues Passwort eingeben"
 
-#: Template/Element/User/inputctp:110
+#: Template/Element/User/inputctp:109
 msgid "Notify the user by email and send him a link to set a password."
 msgstr "Benachrichtige die Benutzerin und sende ihr ein Link, damit sie sich ein Passwort definieren kann."
 
-#: Controller/UsersControllerphp:153
+#: Controller/UsersControllerphp:187
 msgid "The user could not be informed about his new login. Please, do it manually."
 msgstr "Die Benutzerin konnte nicht automatisch über ihr neues Login unterrichtet werden. Bitte informiere sie selbst."
 
-#: Controller/UsersControllerphp:158
+#: Controller/UsersControllerphp:192
 msgid "cd.gruene.ch: Account created"
 msgstr "cd.gruene.ch: Konto erstellt"
 
-#: Controller/UsersControllerphp:159
+#: Controller/UsersControllerphp:193
 msgid "Salut {{first_name}},\n"
 "\n"
 "We're very happy to inform you about your new login on cd.gruene.ch. Now it's time to set your password.\n"
@@ -1217,7 +1217,7 @@ msgctxt "User can manage {list of groups}"
 msgid "{user} can manage"
 msgstr "{user} kann die folgenden Gruppen verwalten"
 
-#: Controller/UsersControllerphp:365
+#: Controller/UsersControllerphp:380
 msgid "Too many invalid login attempts. Please try again tomorrow."
 msgstr "Zu viele ungültige Login-Versuche. Dein Login bleibt bis morgen gesperrt."
 
@@ -1248,4 +1248,8 @@ msgstr "Facebook Banner (Sichtbar auf PC: 820x312px, auf Handy: 820x360px)"
 #: Template/Layout/defaultctp:111
 msgid "Input not valid: Please make sure you do not leave any bars empty."
 msgstr "Eingabe ungültig: Bitte schaue, dass es keine leere Head- oder Sublines gibt."
+
+#: Template/Element/User/inputctp:109
+msgid "Resend user invitation"
+msgstr "Einladungsmail erneut senden"
 
