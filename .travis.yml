@@ -3,14 +3,7 @@ services:
 
 install:
   - scripts/install.sh
-  - docker-compose -f docker-compose.install.yml up
-  - docker-compose -f docker-compose.install.yml run composer cp .env.travis .env
-  - docker-compose -f docker-compose.install.yml run composer php artisan key:generate
-  - docker-compose -f docker-compose.install.yml run composer composer require php-coveralls/php-coveralls
-  - docker-compose stop
+  - docker-compose up -d
 
 script:
-  - docker-compose run -e MAILCHIMP_APIKEY=${MAILCHIMP_APIKEY} -e LOG_SLACK_WEBHOOK_URL=${LOG_SLACK_WEBHOOK_URL} app php /var/www/html/vendor/phpunit/phpunit/phpunit --configuration /var/www/html/phpunit.xml --coverage-clover /var/www/html/build/logs/clover.xml
-
-after_success:
-  - travis_retry docker-compose run -e TRAVIS=${TRAVIS} -e TRAVIS_JOB_ID=${TRAVIS_JOB_ID} app php /var/www/html/vendor/bin/php-coveralls -v
+  - docker-compose run app php /var/www/html/vendor/phpunit/phpunit/phpunit --configuration /var/www/html/phpunit.xml.dist
