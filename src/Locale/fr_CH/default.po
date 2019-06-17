@@ -911,7 +911,7 @@ msgid "Hello Admin\n"
 "The cd.gruene.ch registration service."
 msgstr "Chère administratrice,\n"
 "\n"
-"{{first_name}} {{last_name}} ({{email}}) de {{city}} vient de demander un logo pour cd.gruene.ch.\n"
+"{{first_name}} {{last_name}} ({{email}}) de {{city}} vient de demander un login pour cd.gruene.ch.\n"
 "\n"
 "Pour créer le compte : {{approve_url}}\n"
 "\n"
@@ -1297,5 +1297,5 @@ msgstr "Photo de couverture Facebook (Visible sur les ordinateurs: 820x312px, su
 
 #: Template/Layout/defaultctp:111
 msgid "Input not valid: Please make sure you do not leave any bars empty."
-msgstr ""
+msgstr "Saisie invalide: merci de vérifier qu'aucune barre ne soit restée vide."
 
