@@ -265,7 +265,7 @@ return [
 		 * The test connection is used during the test suite.
 		 */
 		'test'    => [
-			'unix_socket'      => '/Applications/MAMP/tmp/mysql/mysql.sock',
+			//'unix_socket'      => '/Applications/MAMP/tmp/mysql/mysql.sock',
 			'className'        => 'Cake\Database\Connection',
 			'driver'           => 'Cake\Database\Driver\Mysql',
 			'persistent'       => false,
