@@ -128,18 +128,20 @@ class ImageEditorComponent extends Component
         // add it to the canvas
         $canvas->compositeImage($top_logo, \imagick::COMPOSITE_DEFAULT, 0, 0);
 
-        // get subline
-        $text = $this->_sanitizeText((string)$logo->subline);
-        $subline = $this->_getSubline($text, (float)$logo->fontsize);
+        if ( ! empty($logo->subline)) {
+            // get subline
+            $text    = $this->_sanitizeText( (string) $logo->subline );
+            $subline = $this->_getSubline( $text, (float) $logo->fontsize );
 
-        // get subline position
-        $top_logo_height = $top_logo->getimageheight();
-        $subline_height = $subline->getimageheight();
-        $subline_top = $top_logo_height + $subline_height / 12;
-        $subline_left = $logo->left;
+            // get subline position
+            $top_logo_height = $top_logo->getimageheight();
+            $subline_height  = $subline->getimageheight();
+            $subline_top     = $top_logo_height + $subline_height / 12;
+            $subline_left    = $logo->left;
 
-        // add it to the canvas
-        $canvas->compositeImage($subline, \imagick::COMPOSITE_DEFAULT, $subline_left, $subline_top);
+            // add it to the canvas
+            $canvas->compositeImage($subline, \imagick::COMPOSITE_DEFAULT, $subline_left, $subline_top);
+        }
 
         // resize it to the actual size
         $canvas->resizeImage(

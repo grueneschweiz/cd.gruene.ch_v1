@@ -93,7 +93,7 @@ function LogoModule($cibuilder, $wrapper) {
         // if a logo was given
         if (this.data !== 'missing_id') {
             img = '<object id="logo-top" data="' + path + '" type="image/svg+xml"></object>';
-            sub = '<div id="logo-subline"><span>' + this.data.subline + '</span></div>';
+            sub = this.data.subline ? '<div id="logo-subline"><span>' + this.data.subline + '</span></div>' : '';
         } else {
             img = '';
             sub = '';

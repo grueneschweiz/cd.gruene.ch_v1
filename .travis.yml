@@ -1,0 +1,9 @@
+services:
+  - docker
+
+install:
+  - scripts/install.sh
+  - docker-compose up -d
+
+script:
+  - docker-compose run app php /var/www/html/vendor/phpunit/phpunit/phpunit --configuration /var/www/html/phpunit.xml.dist
