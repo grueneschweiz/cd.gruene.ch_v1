@@ -39,31 +39,31 @@ msgstr "Le logo a été supprimé."
 msgid "The logo could not be deleted. Please, try again."
 msgstr "Le logo n'a pas pu être supprimé. Merci de réessayer."
 
-#: Controller/UsersControllerphp:146;229
+#: Controller/UsersControllerphp:146;239
 msgid "The user has been saved."
 msgstr "L'utilisatrice a été enregistrée."
 
-#: Controller/UsersControllerphp:183;243
+#: Controller/UsersControllerphp:155;258
 msgid "The user could not be saved. Please, try again."
 msgstr "L'utilisatrice n'a pas pu être enregistrée. Merci de réessayer."
 
-#: Controller/UsersControllerphp:312
+#: Controller/UsersControllerphp:327
 msgid "The user has been deleted."
 msgstr "L'utilisatrice a été supprimée."
 
-#: Controller/UsersControllerphp:314
+#: Controller/UsersControllerphp:329
 msgid "The user could not be deleted. Please, try again."
 msgstr "L'utilisatrice n'a pas pu être supprimée. Merci de réessayer."
 
-#: Controller/UsersControllerphp:361
+#: Controller/UsersControllerphp:376
 msgid "Your username or password is incorrect."
 msgstr "Ton nom d'utilisatrice ou ton mot de passe est erroné."
 
-#: Controller/UsersControllerphp:390
+#: Controller/UsersControllerphp:405
 msgid "You are now logged out."
 msgstr "Tu t'es bien déconnectée."
 
-#: Controller/UsersControllerphp:400
+#: Controller/UsersControllerphp:415
 msgid "Access denied"
 msgstr "Accès refusé."
 
@@ -398,7 +398,7 @@ msgid "This user is admin of the following groups"
 msgstr "Cette utilisatrice est administratrice des groupes suivants"
 
 #. Du kannst gerne einfach immer die weibliche form nehmen, analog deutsch.
-#: Template/Element/User/inputctp:120
+#: Template/Element/User/inputctp:119
 msgid "Save User"
 msgstr "Enregistrer l'utilisatrice"
 
@@ -891,16 +891,16 @@ msgstr "Une erreur interne s'est produite."
 msgid "Generate Image"
 msgstr "Générer l'image"
 
-#: Controller/UsersControllerphp:448
+#: Controller/UsersControllerphp:463
 msgid "Password reset cd.gruene.ch"
 msgstr "Nouveau mot de passe pour cd.gruene.ch"
 
-#: Controller/UsersControllerphp:477
+#: Controller/UsersControllerphp:492
 msgid "New user"
 msgstr "Nouvelle utilisatrice"
 
 #. oder d'
-#: Controller/UsersControllerphp:478
+#: Controller/UsersControllerphp:493
 msgid "Hello Admin\n"
 "\n"
 "{{first_name}} {{last_name}} ({{email}}) from {{city}} just applied for a login to cd.gruene.ch.\n"
@@ -1041,12 +1041,12 @@ msgstr "Administré par"
 msgid "Email address not found. Might your login be registered to an other email address?"
 msgstr "Cette adresse électronique est inconnue. Se pourrait-il que ton accès soit associé à une autre adresse ?"
 
-#: Controller/UsersControllerphp:500
+#: Controller/UsersControllerphp:515
 msgid "Your application was successfully sent to the Greens Switzerland."
 msgstr "Ta demande a bien été transmise aux Verts Suisse."
 
 #. bitte überprüfen
-#: Controller/UsersControllerphp:521
+#: Controller/UsersControllerphp:536
 msgid "Permanent login revoked for all devices."
 msgstr "Annulation de la connexion permanente pour tous les appareils."
 
@@ -1058,11 +1058,11 @@ msgstr "Se déconnecter de tous les appareils"
 msgid "Stay logged in"
 msgstr "Rester connectée"
 
-#: Controller/UsersControllerphp:363
+#: Controller/UsersControllerphp:378
 msgid "Click here to reset your password."
 msgstr "Cliquer ici pour réinitialiser le mot de passe."
 
-#: Controller/UsersControllerphp:449
+#: Controller/UsersControllerphp:464
 msgid "Salut {{first_name}}\n"
 "\n"
 "You've requested to reset the password for your account on cd.gruene.ch. Click the following link, to set a new password:\n"
@@ -1081,23 +1081,23 @@ msgstr "Salut {{first_name}},\n"
 "\n"
 "Les Verts Suisse"
 
-#: Controller/UsersControllerphp:549
+#: Controller/UsersControllerphp:564
 msgid "Your password reset link has expired."
 msgstr "Le lien pour la réinitialisation du mot de passe est périmé."
 
-#: Controller/UsersControllerphp:551
+#: Controller/UsersControllerphp:566
 msgid "Click here to get a new password reset link."
 msgstr "Clique ici pour obtenir un nouveau lien de réinitialisation."
 
-#: Controller/UsersControllerphp:553
+#: Controller/UsersControllerphp:568
 msgid "Please make sure to reset your password within the next {number} hours."
 msgstr "Merci de réinitialiser le mot de passe dans un délai de {number} heures."
 
-#: Controller/UsersControllerphp:580
+#: Controller/UsersControllerphp:595
 msgid "The new password was saved."
 msgstr "Le nouveau mot de passe a été enregistré."
 
-#: Controller/UsersControllerphp:585
+#: Controller/UsersControllerphp:600
 msgid "The password could not be saved. Is it secure enough?"
 msgstr "Le mot de passe n'a pas pu être enregistré. Est-il assez sûr ?"
 
@@ -1105,21 +1105,21 @@ msgstr "Le mot de passe n'a pas pu être enregistré. Est-il assez sûr ?"
 msgid "The password must be at least 8 characters long and contain one lowercase character, one uppercase character and one digit."
 msgstr "Le mot de passe doit contenir au moins huit caractères, dont une minuscule, une majuscule et un chiffre."
 
-#: Template/Element/User/change_password_fieldctp:39
+#: Template/Element/User/change_password_fieldctp:40
 msgid "The password must be at least 8 characters long and contain at least:"
 msgstr "La longueur minimale du mot de passe est de huit caractères. Il doit contenir au moins :"
 
-#: Template/Element/User/change_password_fieldctp:41
+#: Template/Element/User/change_password_fieldctp:42
 msgctxt "password rule"
 msgid "one lowercase character"
 msgstr "une minuscule"
 
-#: Template/Element/User/change_password_fieldctp:42
+#: Template/Element/User/change_password_fieldctp:43
 msgctxt "password rule"
 msgid "one uppercase character"
 msgstr "une majuscule"
 
-#: Template/Element/User/change_password_fieldctp:43
+#: Template/Element/User/change_password_fieldctp:44
 msgctxt "password rule"
 msgid "one digit"
 msgstr "un chiffre"
@@ -1153,19 +1153,19 @@ msgstr "Si le champ « mot de passe » n'est pas renseigné, un mot de passe gé
 msgid "Enter new password"
 msgstr "Saisir un nouveau mot de passe."
 
-#: Template/Element/User/inputctp:110
+#: Template/Element/User/inputctp:109
 msgid "Notify the user by email and send him a link to set a password."
 msgstr "Informe l'utilisatrice et envoie-lui un lien pour qu'elle puisse définir un mot de passe pour son compte."
 
-#: Controller/UsersControllerphp:153
+#: Controller/UsersControllerphp:187
 msgid "The user could not be informed about his new login. Please, do it manually."
 msgstr "L'utilisatrice n'a pas pu être informée automatiquement de son nouvel accès. Merci de l'informer personnellement."
 
-#: Controller/UsersControllerphp:158
+#: Controller/UsersControllerphp:192
 msgid "cd.gruene.ch: Account created"
 msgstr "cd.gruene.ch : ton compte est prêt !"
 
-#: Controller/UsersControllerphp:159
+#: Controller/UsersControllerphp:193
 msgid "Salut {{first_name}},\n"
 "\n"
 "We're very happy to inform you about your new login on cd.gruene.ch. Now it's time to set your password.\n"
@@ -1267,7 +1267,7 @@ msgctxt "User can manage {list of groups}"
 msgid "{user} can manage"
 msgstr "{user} peut gérer les groupes suivants"
 
-#: Controller/UsersControllerphp:365
+#: Controller/UsersControllerphp:380
 msgid "Too many invalid login attempts. Please try again tomorrow."
 msgstr "Trop de tentatives de connexion refusées. Ton accès restera bloqué jusqu'à demain."
 
@@ -1298,4 +1298,8 @@ msgstr "Photo de couverture Facebook (Visible sur les ordinateurs: 820x312px, su
 #: Template/Layout/defaultctp:111
 msgid "Input not valid: Please make sure you do not leave any bars empty."
 msgstr "Saisie invalide: merci de vérifier qu'aucune barre ne soit restée vide."
+
+#: Template/Element/User/inputctp:109
+msgid "Resend user invitation"
+msgstr ""
 
