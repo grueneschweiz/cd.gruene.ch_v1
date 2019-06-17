@@ -147,35 +147,7 @@ class UsersController extends AppController
 
                 // notify user
                 if ($data['notify']) {
-
-                    $hash = $this->Users->LoginHashes->register($user->id);
-                    if (!$hash) {
-                        $this->Flash->error(__('The user could not be informed about his new login. Please, do it manually.'));
-
-                        return $this->redirect(['action' => 'index']);
-                    }
-
-                    $subject = __('cd.gruene.ch: Account created');
-                    $body = __("Salut {{first_name}},\n\nWe're very happy to inform you about your new login on cd.gruene.ch. Now it's time to set your password.\n\nDefine a password: {{password_reset_link}}\n\nOnce you've set the password, use it in combination with this email address to log in:\n\n Email: {{email}}\n\nSincerely,\nThe cd.gruene.ch registration service.");
-                    $password_reset_link = Router::url([
-                        '_full' => true,
-                        'controller' => 'Users',
-                        'action' => 'reset-password',
-                        $hash->selector,
-                        $hash->token
-                    ]);
-                    $replacements = [
-                        '{{first_name}}' => $user->first_name,
-                        '{{email}}' => $user->email,
-                        '{{password_reset_link}}' => $password_reset_link,
-                    ];
-
-                    $body = str_replace(array_keys($replacements), $replacements, $body);
-                    $email = new Email('default');
-                    $email->setTo($user->email)
-                        ->setReplyTo($this->Auth->user('email'))
-                        ->setSubject($subject)
-                        ->send($body);
+                    $this->sendUserNotification($user);
                 }
 
                 return $this->redirect(['action' => 'index']);
@@ -203,6 +175,44 @@ class UsersController extends AppController
     }
 
     /**
+     * Notify the user about his account and invite him to set a password
+     *
+     * @param User $user
+     *
+     * @return \Cake\Http\Response|null
+     */
+    private function sendUserNotification(User $user) {
+        $hash = $this->Users->LoginHashes->register($user->id);
+        if (!$hash) {
+            $this->Flash->error(__('The user could not be informed about his new login. Please, do it manually.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+
+        $subject = __('cd.gruene.ch: Account created');
+        $body = __("Salut {{first_name}},\n\nWe're very happy to inform you about your new login on cd.gruene.ch. Now it's time to set your password.\n\nDefine a password: {{password_reset_link}}\n\nOnce you've set the password, use it in combination with this email address to log in:\n\n Email: {{email}}\n\nSincerely,\nThe cd.gruene.ch registration service.");
+        $password_reset_link = Router::url([
+            '_full' => true,
+            'controller' => 'Users',
+            'action' => 'reset-password',
+            $hash->selector,
+            $hash->token
+        ]);
+        $replacements = [
+            '{{first_name}}' => $user->first_name,
+            '{{email}}' => $user->email,
+            '{{password_reset_link}}' => $password_reset_link,
+        ];
+
+        $body = str_replace(array_keys($replacements), $replacements, $body);
+        $email = new Email('default');
+        $email->setTo($user->email)
+              ->setReplyTo($this->Auth->user('email'))
+              ->setSubject($subject)
+              ->send($body);
+    }
+
+    /**
      * Edit method
      *
      * @param string|null $id User id.
@@ -227,6 +237,11 @@ class UsersController extends AppController
 
             if ($this->Users->saveEntityIncludingGroups($user, $data, $userId)) {
                 $this->Flash->success(__('The user has been saved.'));
+
+                // notify edited user if editor chose so
+                if ($data['notify']) {
+                    $this->sendUserNotification($user);
+                }
 
                 // if i edited myself
                 if ($userId === $user->id) {
