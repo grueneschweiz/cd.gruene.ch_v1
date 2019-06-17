@@ -30,6 +30,7 @@ switch ($mode) {
             'pattern' => $pattern . '^(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$',
             'title' => __('The password must be at least 8 characters long and contain one lowercase character, one uppercase character and one digit.'),
             'required' => $mode === 'forceChange',
+            'autocomplete' => 'new-password',
         ]); ?>
         <div class="input-group-append">
             <button class="btn btn-outline-primary password-show-switch"><i class="fa fa-eye"></i></button>
