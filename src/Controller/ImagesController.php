@@ -6,6 +6,7 @@ use App\Controller\Component\ImageEditorComponent;
 use App\Controller\Component\ImageFileHandlerComponent;
 use App\Model\Entity\User;
 use Cake\Event\Event;
+use Cake\Filesystem\Folder;
 
 /**
  * Images Controller
@@ -83,6 +84,17 @@ class ImagesController extends AppController
 
         $this->set('image', $image);
         $this->set('_serialize', ['image']);
+    }
+
+    public function test(  ) {
+        $im = new \Imagick();
+        $im->readimage(ROOT . DS . 'protected' . DS . 'logos' . DS . 'colored' . DS .'alternative-green.png');
+        $filename = 'a.png';
+        $dir = new Folder(ROOT . DS . 'protected' . DS . 'finalimages', true);
+        $path = $dir->path . DS . $filename;
+        $im->setImageFormat('png');
+        $im->writeImage($path);
+        die('a');
     }
 
     /**
@@ -190,6 +202,13 @@ class ImagesController extends AppController
 
             // if all went right until now
             if (!isset($error)) {
+                if (strpos($data->logo->src, 'alternative')) {
+                    /**
+                     * Hack to cope with imagick 6.9.4-10's difficulties with rendering the svg correctly
+                     * This only applies to the logo of the alternative zug
+                     */
+                    $data->logo->src = preg_replace('/.svg$/', '.png', $data->logo->src );
+                }
                 $success = $this->ImageEditor->addLogo($data->logo, $width, $height);
                 if (!$success) {
                     $error = $success;
