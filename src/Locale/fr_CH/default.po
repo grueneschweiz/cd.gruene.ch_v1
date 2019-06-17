@@ -67,12 +67,12 @@ msgstr "Tu t'es bien déconnectée."
 msgid "Access denied"
 msgstr "Accès refusé."
 
-#: Controller/Component/ImageEditorComponentphp:188
+#: Controller/Component/ImageEditorComponentphp:190
 msgid "Logo not found."
 msgstr "Logo introuvable"
 
 #. Hier geht es um die Balken, also zB. ob grüner Balken mit weisser Schrift oder weisser Balken mit grüner Schrift. (Um es live zu sehen auf cd.gruene.ch musst du zuerst ein Bild hochladen, danach erscheint die Auswahlliste unten)
-#: Controller/Component/ImageEditorComponentphp:284
+#: Controller/Component/ImageEditorComponentphp:286
 msgid "No valid color scheme given."
 msgstr "Aucun modèle de couleurs valide n'a été indiqué."
 

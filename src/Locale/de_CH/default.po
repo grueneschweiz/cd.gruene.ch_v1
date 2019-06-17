@@ -67,11 +67,11 @@ msgstr "Du bist nun abgemeldet."
 msgid "Access denied"
 msgstr "Zugriff verweigert"
 
-#: Controller/Component/ImageEditorComponentphp:188
+#: Controller/Component/ImageEditorComponentphp:190
 msgid "Logo not found."
 msgstr "Logo nicht gefunden."
 
-#: Controller/Component/ImageEditorComponentphp:284
+#: Controller/Component/ImageEditorComponentphp:286
 msgid "No valid color scheme given."
 msgstr "Kein gültiges Farbschema angegeben."
 
