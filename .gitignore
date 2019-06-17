@@ -18,7 +18,9 @@ vendor
 scripts/deploy.sh
 scripts/translate.sh
 scripts/report_errors.sh
-
+.well-known
+scripts/deploy.sh
+scripts/translations.sh
 
 # OS generated files #
 ######################
