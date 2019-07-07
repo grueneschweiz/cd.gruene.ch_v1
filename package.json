@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "cli-real-favicon": "0.0.8",
-    "css-loader": "^0.28.11",
+    "css-loader": "^3.0.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
     "node-sass": "^4.12.0",
