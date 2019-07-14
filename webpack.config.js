@@ -1,9 +1,7 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
-
-
-const extractPlugin = new ExtractTextPlugin('./../css/bundle.css');
+const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
     entry: ['./src/Assets/js/app.js'],
@@ -15,10 +13,17 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.s?css$/,
-                use: extractPlugin.extract({
-                    use: ['css-loader', 'sass-loader']
-                })
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            hmr: process.env.NODE_ENV === 'development',
+                        },
+                    },
+                    'css-loader',
+                    'sass-loader',
+                ],
             },
             {
                 test: /\.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
@@ -59,7 +64,12 @@ module.exports = {
             jQuery: 'jquery',
             $: 'jquery'
         }),
-        extractPlugin
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: './../css/bundle.css',
+            chunkFilename: '[id].css',
+        }),
     ],
     //devtool: 'eval-source-map'
 };
