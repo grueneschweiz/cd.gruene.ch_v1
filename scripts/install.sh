@@ -41,7 +41,7 @@ docker-compose -f docker-compose.install.yml run composer
 docker-compose -f docker-compose.install.yml run node
 
 # stop everything
-docker-compose down
+docker-compose -f docker-compose.install.yml down
 
 
 ############################################
