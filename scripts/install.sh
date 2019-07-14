@@ -22,7 +22,7 @@ docker-compose build
 docker-compose -f docker-compose.install.yml run -d --name=cd_mysql_seed mysql
 
 # wait until the container is ready
-until [ "`/usr/bin/docker inspect -f {{.State.Running}} cd_mysql_seed`" == "true" ]; do
+until [ "`docker inspect -f {{.State.Running}} cd_mysql_seed`" == "true" ]; do
     sleep 1;
 done;
 
