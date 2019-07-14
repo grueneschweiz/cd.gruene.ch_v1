@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-06-17 19:03+0000\n"
+"POT-Creation-Date: 2019-07-14 19:08+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -166,67 +166,63 @@ msgstr ""
 msgid "Except for God, one can not be his own parent ;)"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:118
-msgid "Square 500px * 500px"
+#: Model/Table/ImagesTablephp:113
+msgid "Square"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:119
-msgid "Facebook Banner (Visible on Desktop: 820x312px, on mobile: 820x360px)"
-msgstr ""
-
-#: Model/Table/ImagesTablephp:120
-msgid "Facebook Event Banner"
-msgstr ""
-
-#: Model/Table/ImagesTablephp:121
+#: Model/Table/ImagesTablephp:114
 msgid "Facebook Timeline Image"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:122
+#: Model/Table/ImagesTablephp:115
+msgid "Facebook Event Image"
+msgstr ""
+
+#: Model/Table/ImagesTablephp:116
 msgid "Facebook Featured Website"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:123
-msgid "Twitter Banner (Visible on Desktop: 1500x366px, on mobile: 1500x500px)"
-msgstr ""
-
-#: Model/Table/ImagesTablephp:124
+#: Model/Table/ImagesTablephp:117
 msgid "Twitter Feed Image"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:125
+#: Model/Table/ImagesTablephp:118
+msgid "Instagram Story"
+msgstr ""
+
+#: Model/Table/ImagesTablephp:119
 msgid "Website Slider"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:126
+#: Model/Table/ImagesTablephp:120
 msgid "Custom size"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:138
+#: Model/Table/ImagesTablephp:131
 msgid "Bars left"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:139
+#: Model/Table/ImagesTablephp:132
 msgid "Bars right"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:151
+#: Model/Table/ImagesTablephp:143
 msgid "White"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:152
+#: Model/Table/ImagesTablephp:144
 msgid "Green"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:153
+#: Model/Table/ImagesTablephp:145
 msgid "Green head- & sublines"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:165
+#: Model/Table/ImagesTablephp:156
 msgid "Standard"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:166
+#: Model/Table/ImagesTablephp:157
 msgid "None"
 msgstr ""
 
@@ -421,13 +417,13 @@ msgid "Are you sure you want to delete \"{0} {1}\"?"
 msgstr ""
 
 #: Template/Element/User/inputctp:27
-#: Template/Images/addctp:184;197
+#: Template/Images/addctp:190;203
 #: Template/Users/viewctp:28
 msgid "Yes"
 msgstr ""
 
 #: Template/Element/User/inputctp:27
-#: Template/Images/addctp:187;206
+#: Template/Images/addctp:193;212
 #: Template/Users/viewctp:28
 msgid "No"
 msgstr ""
@@ -595,7 +591,7 @@ msgstr ""
 msgid "Remove image"
 msgstr ""
 
-#: Template/Images/addctp:72;76;88;137;280
+#: Template/Images/addctp:72;76;94;143;286
 msgid "Warning!"
 msgstr ""
 
@@ -607,167 +603,175 @@ msgstr ""
 msgid "This image is to small. Please upload one with a higher resolution."
 msgstr ""
 
-#: Template/Images/addctp:89;138
+#: Template/Images/addctp:84
+msgid "The preview image may be smaller than the final image."
+msgstr ""
+
+#: Template/Images/addctp:85
+msgid "Position the bars by drag and drop"
+msgstr ""
+
+#: Template/Images/addctp:95;144
 msgid "At least one bar contains to much text."
 msgstr ""
 
-#: Template/Images/addctp:131
+#: Template/Images/addctp:137
 msgid "Be as short as possible. The system will constraint the number of bars and the text size to suit the corporate design."
 msgstr ""
 
-#: Template/Images/addctp:132
+#: Template/Images/addctp:138
 msgid "Bar text"
 msgstr ""
 
-#: Template/Images/addctp:135
+#: Template/Images/addctp:141
 msgid "Add subline"
 msgstr ""
 
-#: Template/Images/addctp:142
+#: Template/Images/addctp:148
 msgid "Generally the bars are on the left side. But you may put them on the right side, if the photo requires it."
 msgstr ""
 
-#: Template/Images/addctp:145
+#: Template/Images/addctp:151
 msgid "Layout"
 msgstr ""
 
-#: Template/Images/addctp:150
+#: Template/Images/addctp:156
 msgid "Default is the green color schema. Use the white color scheme if your image has a green background. Use green head- & sublines if your background is white."
 msgstr ""
 
-#: Template/Images/addctp:153
+#: Template/Images/addctp:159
 msgid "Color scheme"
 msgstr ""
 
-#: Template/Images/addctp:159
+#: Template/Images/addctp:165
 msgid "The border is part of the corporate design. You may however omit the border if you use the image in a context where a border looks ugly."
 msgstr ""
 
-#: Template/Images/addctp:162
+#: Template/Images/addctp:168
 msgid "Border"
 msgstr ""
 
-#: Template/Images/addctp:166
+#: Template/Images/addctp:172
 msgid "Generate Image"
 msgstr ""
 
-#: Template/Images/addctp:170
+#: Template/Images/addctp:176
 msgid "Working hard"
 msgstr ""
 
-#: Template/Images/addctp:171
+#: Template/Images/addctp:177
 msgid "I'm busy generating your image, please hang on a few ticks. I'll be right there."
 msgstr ""
 
-#: Template/Images/addctp:172
+#: Template/Images/addctp:178
 msgid "Please answer meanwhile the legal questions below."
 msgstr ""
 
-#: Template/Images/addctp:177
+#: Template/Images/addctp:183
 msgid "Right of personality"
 msgstr ""
 
-#: Template/Images/addctp:180
+#: Template/Images/addctp:186
 msgid "Are there any identifiably people in the image?"
 msgstr ""
 
-#: Template/Images/addctp:193
+#: Template/Images/addctp:199
 msgid "Are they either people of public interest or have they agreed to the publication of this image?"
 msgstr ""
 
-#: Template/Images/addctp:202
+#: Template/Images/addctp:208
 msgid "Unclear"
 msgstr ""
 
-#: Template/Images/addctp:210
+#: Template/Images/addctp:216
 msgid "Right of personality:"
 msgstr ""
 
-#: Template/Images/addctp:211
+#: Template/Images/addctp:217
 msgid "By law, people have to agree on the publication of photos, where they are identifiably."
 msgstr ""
 
-#: Template/Images/addctp:217
+#: Template/Images/addctp:223
 msgid "Copyright"
 msgstr ""
 
-#: Template/Images/addctp:220;249
+#: Template/Images/addctp:226;255
 msgid "Who is the originator of the raw image?"
 msgstr ""
 
-#: Template/Images/addctp:223
+#: Template/Images/addctp:229
 msgid "Me"
 msgstr ""
 
-#: Template/Images/addctp:224
+#: Template/Images/addctp:230
 msgid "Stock image"
 msgstr ""
 
-#: Template/Images/addctp:225
+#: Template/Images/addctp:231
 msgid "Agency / Photographer"
 msgstr ""
 
-#: Template/Images/addctp:226
+#: Template/Images/addctp:232
 msgid "Friend / Member of the party"
 msgstr ""
 
-#: Template/Images/addctp:227
+#: Template/Images/addctp:233
 msgid "I don't know / I'm not sure"
 msgstr ""
 
-#: Template/Images/addctp:233
+#: Template/Images/addctp:239
 msgid "Where is the raw image from?"
 msgstr ""
 
-#: Template/Images/addctp:234
+#: Template/Images/addctp:240
 msgid "Url to the raw image on the stock image platform."
 msgstr ""
 
-#: Template/Images/addctp:238
+#: Template/Images/addctp:244
 msgid "Select the raw images licence"
 msgstr ""
 
-#: Template/Images/addctp:240
+#: Template/Images/addctp:246
 msgid "Other"
 msgstr ""
 
-#: Template/Images/addctp:241
+#: Template/Images/addctp:247
 msgid "Creative Commons with Attribution"
 msgstr ""
 
-#: Template/Images/addctp:242
+#: Template/Images/addctp:248
 msgid "Creative Commons without Limitation"
 msgstr ""
 
-#: Template/Images/addctp:250
+#: Template/Images/addctp:256
 msgid "Name of the photographer, agency or person who did this artwork"
 msgstr ""
 
-#: Template/Images/addctp:255
+#: Template/Images/addctp:261
 msgid "Copyright:"
 msgstr ""
 
-#: Template/Images/addctp:256
+#: Template/Images/addctp:262
 msgid "Publishing this image may violate the intellectual property right."
 msgstr ""
 
-#: Template/Images/addctp:259
+#: Template/Images/addctp:265
 msgid "I hereby confirm that:"
 msgstr ""
 
-#: Template/Images/addctp:263
+#: Template/Images/addctp:269
 msgid "I have the right to use this raw image"
 msgstr ""
 
-#: Template/Images/addctp:270
+#: Template/Images/addctp:276
 msgid "Others can use this raw image without limitation"
 msgstr ""
 
-#: Template/Images/addctp:275
+#: Template/Images/addctp:281
 msgid "Confirm legal declarations"
 msgstr ""
 
-#: Template/Images/addctp:281
+#: Template/Images/addctp:287
 msgid "The image could not be generated. Please try again."
 msgstr ""
 
