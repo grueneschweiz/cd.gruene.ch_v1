@@ -79,6 +79,12 @@
 
     <div class="spacer mb-2">&nbsp;</div>
 
+    <div class="col-12">
+            <span class="helptext"
+                  title="<?= __('The preview image may be smaller than the final image.') ?>"></span>
+        <span><?= __('Position the bars by drag and drop'); ?></span>
+    </div>
+
     <div id="image-cropper" class="image-editor">
         <div class="cropit-preview"></div>
         <div style="clear:both"></div>
