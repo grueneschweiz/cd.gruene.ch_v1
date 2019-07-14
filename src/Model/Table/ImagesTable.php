@@ -16,18 +16,17 @@ use Cake\Validation\Validator;
  * @property UsersTable $Users
  * @property LogosTable $Logos
  *
- * @method \App\Model\Entity\Image get($primaryKey, $options = [])
- * @method \App\Model\Entity\Image newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Image[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Image|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Image patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Image[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Image findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\Image get( $primaryKey, $options = [] )
+ * @method \App\Model\Entity\Image newEntity( $data = null, array $options = [] )
+ * @method \App\Model\Entity\Image[] newEntities( array $data, array $options = [] )
+ * @method \App\Model\Entity\Image|bool save( \Cake\Datasource\EntityInterface $entity, $options = [] )
+ * @method \App\Model\Entity\Image patchEntity( \Cake\Datasource\EntityInterface $entity, array $data, array $options = [] )
+ * @method \App\Model\Entity\Image[] patchEntities( $entities, array $data, array $options = [] )
+ * @method \App\Model\Entity\Image findOrCreate( $search, callable $callback = null )
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class ImagesTable extends Table
-{
+class ImagesTable extends Table {
 
     /**
      * Initialize method
@@ -36,26 +35,25 @@ class ImagesTable extends Table
      *
      * @return void
      */
-    public function initialize(array $config)
-    {
-        parent::initialize($config);
+    public function initialize( array $config ) {
+        parent::initialize( $config );
 
-        $this->setTable('images');
-        $this->setDisplayField('id');
-        $this->setPrimaryKey('id');
+        $this->setTable( 'images' );
+        $this->setDisplayField( 'id' );
+        $this->setPrimaryKey( 'id' );
 
-        $this->addBehavior('Timestamp');
-        $this->addBehavior('Muffin/Trash.Trash');
+        $this->addBehavior( 'Timestamp' );
+        $this->addBehavior( 'Muffin/Trash.Trash' );
 
-        $this->belongsTo('Users', [
+        $this->belongsTo( 'Users', [
             'foreignKey' => 'user_id',
-            'joinType' => 'LEFT'
-        ]);
+            'joinType'   => 'LEFT'
+        ] );
 
-        $this->belongsTo('Logos', [
+        $this->belongsTo( 'Logos', [
             'foreignKey' => 'logo_id',
-            'joinType' => 'LEFT'
-        ]);
+            'joinType'   => 'LEFT'
+        ] );
     }
 
     /**
@@ -65,28 +63,27 @@ class ImagesTable extends Table
      *
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault( Validator $validator ) {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+            ->integer( 'id' )
+            ->allowEmpty( 'id', 'create' );
 
         $validator
-            ->numeric('width')
-            ->allowEmpty('width');
+            ->numeric( 'width' )
+            ->allowEmpty( 'width' );
 
         $validator
-            ->numeric('height')
-            ->allowEmpty('height');
+            ->numeric( 'height' )
+            ->allowEmpty( 'height' );
 
         $validator
-            ->allowEmpty('flattext');
+            ->allowEmpty( 'flattext' );
 
         $validator
-            ->allowEmpty('logo_id');
+            ->allowEmpty( 'logo_id' );
 
         $validator
-            ->allowEmpty('legal');
+            ->allowEmpty( 'legal' );
 
         return $validator;
     }
@@ -99,10 +96,9 @@ class ImagesTable extends Table
      *
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['logo_id'], 'Logos'));
+    public function buildRules( RulesChecker $rules ) {
+        $rules->add( $rules->existsIn( [ 'user_id' ], 'Users' ) );
+        $rules->add( $rules->existsIn( [ 'logo_id' ], 'Logos' ) );
 
         return $rules;
     }
@@ -112,18 +108,16 @@ class ImagesTable extends Table
      *
      * @return array
      */
-    public function getImageSizes()
-    {
+    public function getImageSizes() {
         return [
-            '500x500' => __('Square 500px * 500px'),
-            '820x360' => __('Facebook Banner (Visible on Desktop: 820x312px, on mobile: 820x360px)'),
-            '1920x1080' => __('Facebook Event Banner'),
-            '470x394' => __('Facebook Timeline Image'),
-            '470x224' => __('Facebook Featured Website'),
-            '1500x500' => __('Twitter Banner (Visible on Desktop: 1500x366px, on mobile: 1500x500px)'),
-            '506x253' => __('Twitter Feed Image'),
-            '1140x638' => __('Website Slider'),
-            'custom' => __('Custom size'),
+            '1080x1080' => __( 'Square' ),
+            '1200x630'  => __( 'Facebook Timeline Image' ),
+            '1920x1080' => __( 'Facebook Event Image' ),
+            '1200x628'  => __( 'Facebook Featured Website' ),
+            '1024x512'  => __( 'Twitter Feed Image' ),
+            '1080x1920' => __( 'Instagram Story' ),
+            '1140x638'  => __( 'Website Slider' ),
+            'custom'    => __( 'Custom size' ),
         ];
     }
 
@@ -132,11 +126,10 @@ class ImagesTable extends Table
      *
      * @return array
      */
-    public function getLayouts()
-    {
+    public function getLayouts() {
         return [
-            'left' => __('Bars left'),
-            'right' => __('Bars right'),
+            'left'  => __( 'Bars left' ),
+            'right' => __( 'Bars right' ),
         ];
     }
 
@@ -145,12 +138,11 @@ class ImagesTable extends Table
      *
      * @return array
      */
-    public function getColorSchemes()
-    {
+    public function getColorSchemes() {
         return [
-            'white' => __('White'),
-            'green' => __('Green'),
-            'greengreen' => __('Green head- & sublines'),
+            'white'      => __( 'White' ),
+            'green'      => __( 'Green' ),
+            'greengreen' => __( 'Green head- & sublines' ),
         ];
     }
 
@@ -159,11 +151,10 @@ class ImagesTable extends Table
      *
      * @return array
      */
-    public function getBorderOptions()
-    {
+    public function getBorderOptions() {
         return [
-            'auto' => __('Standard'),
-            'none' => __('None'),
+            'auto' => __( 'Standard' ),
+            'none' => __( 'None' ),
         ];
     }
 
@@ -175,20 +166,19 @@ class ImagesTable extends Table
      *
      * @return int image id
      */
-    public function addOriginal(string $path, \stdClass $data)
-    {
+    public function addOriginal( string $path, \stdClass $data ) {
         $hash = $this->getNewHash();
-        $dims = getimagesize($path);
+        $dims = getimagesize( $path );
 
-        $image = $this->newEntity();
+        $image           = $this->newEntity();
         $image->filename = $data->image->name;
-        $image->width = $dims[0];
-        $image->height = $dims[1];
-        $image->hash = $hash;
-        $image->user_id = $data->user_id;
-        $image->flattext = $this->_getBarText($data->bars->data) . ' ' . $data->logo->subline;
+        $image->width    = $dims[0];
+        $image->height   = $dims[1];
+        $image->hash     = $hash;
+        $image->user_id  = $data->user_id;
+        $image->flattext = $this->_getBarText( $data->bars->data ) . ' ' . $data->logo->subline;
 
-        $this->save($image);
+        $this->save( $image );
 
         return $image->id;
     }
@@ -198,9 +188,8 @@ class ImagesTable extends Table
      *
      * @return string
      */
-    public function getNewHash()
-    {
-        return uniqid('');
+    public function getNewHash() {
+        return uniqid( '' );
     }
 
     /**
@@ -210,14 +199,13 @@ class ImagesTable extends Table
      *
      * @return string
      */
-    private function _getBarText(array $bars): string
-    {
+    private function _getBarText( array $bars ): string {
         $tmp = '';
-        foreach ($bars as $bar) {
+        foreach ( $bars as $bar ) {
             $tmp .= $bar->text . ' ';
         }
 
-        return trim($tmp);
+        return trim( $tmp );
     }
 
     /**
@@ -228,21 +216,20 @@ class ImagesTable extends Table
      * @param string $filename
      * @param int $original_id the primary key of the original image
      */
-    public function addFinal(string $path, \stdClass $data, string $filename, int $original_id)
-    {
-        $dims = getimagesize($path);
+    public function addFinal( string $path, \stdClass $data, string $filename, int $original_id ) {
+        $dims = getimagesize( $path );
 
-        $image = $this->_getOrCreateByHash($data->hash);
+        $image = $this->_getOrCreateByHash( $data->hash );
 
         $image->original_id = $original_id;
-        $image->filename = $filename;
-        $image->width = $dims[0];
-        $image->height = $dims[1];
-        $image->user_id = $data->user_id;
+        $image->filename    = $filename;
+        $image->width       = $dims[0];
+        $image->height      = $dims[1];
+        $image->user_id     = $data->user_id;
 
-        $image->flattext .= $this->_getBarText($data->bars->data);
+        $image->flattext .= $this->_getBarText( $data->bars->data );
 
-        $this->save($image);
+        $this->save( $image );
     }
 
     /**
@@ -252,11 +239,10 @@ class ImagesTable extends Table
      *
      * @return Image
      */
-    private function _getOrCreateByHash($hash): Image
-    {
-        $image = $this->find()->where(['hash' => $hash])->first();
-        if (!$image) {
-            $image = $this->newEntity();
+    private function _getOrCreateByHash( $hash ): Image {
+        $image = $this->find()->where( [ 'hash' => $hash ] )->first();
+        if ( ! $image ) {
+            $image       = $this->newEntity();
             $image->hash = $hash;
         }
 
@@ -279,30 +265,29 @@ class ImagesTable extends Table
      *
      * @return bool
      */
-    public function addLegal(array $data)
-    {
+    public function addLegal( array $data ) {
         do {
-            $image = $this->find()->where(['hash' => $data['hash']])->first();
-            if (!$image) {
-                sleep(1);
+            $image = $this->find()->where( [ 'hash' => $data['hash'] ] )->first();
+            if ( ! $image ) {
+                sleep( 1 );
             }
-        } while (!$image);
+        } while ( ! $image );
 
-        if ($image->original_id) {
-            $original = $this->get($image->original_id);
+        if ( $image->original_id ) {
+            $original = $this->get( $image->original_id );
         } else {
             $original = $image;
         }
 
         $others_can_use = false;
-        if (!empty($data['others_can_use'])) {
-            $others_can_use = $this->_preValidateOthersCanUse($data);
+        if ( ! empty( $data['others_can_use'] ) ) {
+            $others_can_use = $this->_preValidateOthersCanUse( $data );
         }
 
         $original->reusable = $others_can_use;
-        $original->legal = json_encode($this->_preValidateLegal($data));
+        $original->legal    = json_encode( $this->_preValidateLegal( $data ) );
 
-        return (bool)$this->save($original);
+        return (bool) $this->save( $original );
     }
 
     /**
@@ -312,20 +297,19 @@ class ImagesTable extends Table
      *
      * @return bool
      */
-    private function _preValidateOthersCanUse(array $data)
-    {
+    private function _preValidateOthersCanUse( array $data ) {
         $others_can_use = true;
 
-        if ("1" === $data['people'] && "1" !== $data['right_of_personality']) {
+        if ( "1" === $data['people'] && "1" !== $data['right_of_personality'] ) {
             $others_can_use = false;
         }
 
-        if (in_array($data['own_image'], ['stock', 'unknown', '0'])) {
+        if ( in_array( $data['own_image'], [ 'stock', 'unknown', '0' ] ) ) {
             $others_can_use = false;
         }
 
-        if ($others_can_use) {
-            $others_can_use = (bool)$data['others_can_use'];
+        if ( $others_can_use ) {
+            $others_can_use = (bool) $data['others_can_use'];
         }
 
         return $others_can_use;
@@ -338,12 +322,11 @@ class ImagesTable extends Table
      *
      * @return array
      */
-    private function _preValidateLegal($data)
-    {
+    private function _preValidateLegal( $data ) {
         $return = [];
 
-        $return['people'] = (int)$data['people'];
-        if (!$return['people']) {
+        $return['people'] = (int) $data['people'];
+        if ( ! $return['people'] ) {
             $return['right_of_personality'] = null;
         } else {
             $return['right_of_personality'] = $data['right_of_personality'];
@@ -351,15 +334,15 @@ class ImagesTable extends Table
 
         $return['own_image'] = $data['own_image'];
 
-        if ('stock' === $data['own_image']) {
-            $return['source'] = $data['source'];
+        if ( 'stock' === $data['own_image'] ) {
+            $return['source']  = $data['source'];
             $return['licence'] = $data['licence'];
         } else {
-            $return['source'] = null;
+            $return['source']  = null;
             $return['licence'] = null;
         }
 
-        if ('unknown' === $data['own_image']) {
+        if ( 'unknown' === $data['own_image'] ) {
             $return['originator'] = null;
         } else {
             $return['originator'] = $data['originator'];

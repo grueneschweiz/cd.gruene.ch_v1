@@ -3,17 +3,17 @@
 set -e
 
 # wait until MySQL is really available
-maxcounter=45
+maxcounter=60
 
 counter=1
-while ! mysql -uroot -p"$MYSQL_ROOT_PASSWORD" > /dev/null 2>&1; do
+until mysql -uroot -p"$MYSQL_ROOT_PASSWORD" -e 'status' &> /dev/null; do
     sleep 1
     counter=`expr $counter + 1`
     if [ $counter -gt $maxcounter ]; then
         >&2 echo "We have been waiting for MySQL too long already; failing."
         exit 1
     fi;
-    echo "Waiting for MySQL to get ready..."
+    echo "Waiting for MySQL to get ready... ${counter}s"
 done
 echo "Yay, MySQL is up and ready"
 

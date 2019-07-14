@@ -86,17 +86,6 @@ class ImagesController extends AppController
         $this->set('_serialize', ['image']);
     }
 
-    public function test(  ) {
-        $im = new \Imagick();
-        $im->readimage(ROOT . DS . 'protected' . DS . 'logos' . DS . 'colored' . DS .'alternative-green.png');
-        $filename = 'a.png';
-        $dir = new Folder(ROOT . DS . 'protected' . DS . 'finalimages', true);
-        $path = $dir->path . DS . $filename;
-        $im->setImageFormat('png');
-        $im->writeImage($path);
-        die('a');
-    }
-
     /**
      * Add method
      *
@@ -202,7 +191,7 @@ class ImagesController extends AppController
 
             // if all went right until now
             if (!isset($error)) {
-                if (strpos($data->logo->src, 'alternative')) {
+                if (isset($data->logo->src) && strpos($data->logo->src, 'alternative')) {
                     /**
                      * Hack to cope with imagick 6.9.4-10's difficulties with rendering the svg correctly
                      * This only applies to the logo of the alternative zug
