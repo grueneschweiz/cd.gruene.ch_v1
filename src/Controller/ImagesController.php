@@ -86,17 +86,6 @@ class ImagesController extends AppController
         $this->set('_serialize', ['image']);
     }
 
-    public function test(  ) {
-        $im = new \Imagick();
-        $im->readimage(ROOT . DS . 'protected' . DS . 'logos' . DS . 'colored' . DS .'alternative-green.png');
-        $filename = 'a.png';
-        $dir = new Folder(ROOT . DS . 'protected' . DS . 'finalimages', true);
-        $path = $dir->path . DS . $filename;
-        $im->setImageFormat('png');
-        $im->writeImage($path);
-        die('a');
-    }
-
     /**
      * Add method
      *

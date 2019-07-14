@@ -115,7 +115,7 @@ class ImagesTable extends Table
     public function getImageSizes()
     {
         return [
-            '500x500' => __('Square 500px * 500px'),
+            '1000x1000' => __('Square 1000px * 1000px'),
             '820x360' => __('Facebook Banner (Visible on Desktop: 820x312px, on mobile: 820x360px)'),
             '1920x1080' => __('Facebook Event Banner'),
             '470x394' => __('Facebook Timeline Image'),
