@@ -460,8 +460,11 @@ class ImageEditorComponent extends Component
                 $shadow_width = false;
             }
 
+            // sublines are bold, headlines fat
+            $font_weight = 'headline' === $type ? 'Fat' : 'Bold';
+
             // draw the bar
-            $b = $this->_drawBar($text, $color_scheme, $font_size, $align, 'Fat', $shadow_width);
+            $b = $this->_drawBar($text, $color_scheme, $font_size, $align, $font_weight, $shadow_width);
 
             // compute position on the x axis
             $x_pos_bar = 'left' === $align ? 0 : $width - $b->getimagewidth();
