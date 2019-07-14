@@ -76,7 +76,7 @@ $(document).ready(function () {
         imageBackgroundBorderWidth: 75,
         width: startup_width / scaleFactor,
         height: startup_height / scaleFactor,
-        smallImage: 'allow',
+        exportZoom: scaleFactor,
         $fileInput: $('input.cropit-image-input'),
         $zoomSlider: $('input.cropit-image-zoom-input'),
         onImageError: function (err) {
