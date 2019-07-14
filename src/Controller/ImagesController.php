@@ -191,7 +191,7 @@ class ImagesController extends AppController
 
             // if all went right until now
             if (!isset($error)) {
-                if (strpos($data->logo->src, 'alternative')) {
+                if (isset($data->logo->src) && strpos($data->logo->src, 'alternative')) {
                     /**
                      * Hack to cope with imagick 6.9.4-10's difficulties with rendering the svg correctly
                      * This only applies to the logo of the alternative zug
