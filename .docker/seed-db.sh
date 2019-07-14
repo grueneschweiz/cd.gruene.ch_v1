@@ -13,7 +13,7 @@ while ! mysql -uroot -p"$MYSQL_ROOT_PASSWORD" > /dev/null 2>&1; do
         >&2 echo "We have been waiting for MySQL too long already; failing."
         exit 1
     fi;
-    echo "Waiting for MySQL to get ready..."
+    echo "Waiting for MySQL to get ready... ${counter}s"
 done
 echo "Yay, MySQL is up and ready"
 
