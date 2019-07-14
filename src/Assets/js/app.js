@@ -36,6 +36,30 @@ $(document).ready(function () {
     var startup_height = $('#canvas-height-setter').val();
     var initialImage = true;
 
+    var initialScaleFactor = 2;
+    var scaleFactor = initialScaleFactor;
+
+    var calculateScaleFactor = function () {
+        var sideMargin = $('#image-cropper').offset().left;
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+        var maxImageCropperWidth = windowWidth - 2 * sideMargin;
+        var imageWidth = $('#canvas-width-setter').val();
+        var imageHeight = $('#canvas-height-setter').val();
+
+        if ((imageWidth / maxImageCropperWidth) > initialScaleFactor) {
+            scaleFactor = imageWidth / maxImageCropperWidth;
+        } else {
+            scaleFactor = initialScaleFactor;
+        }
+
+        if ((imageHeight / windowHeight) > scaleFactor) {
+            scaleFactor = imageHeight / windowHeight;
+        }
+    };
+    // run initially because we need the scale factor to start
+    calculateScaleFactor();
+
     // downloading dialog
     $('#generating-image').dialog({
         autoOpen: false,
@@ -50,8 +74,8 @@ $(document).ready(function () {
         imageState: {src: '/img/bg5000.png'},
         imageBackground: true,
         imageBackgroundBorderWidth: 75,
-        width: startup_width,
-        height: startup_height,
+        width: startup_width / scaleFactor,
+        height: startup_height / scaleFactor,
         smallImage: 'allow',
         $fileInput: $('input.cropit-image-input'),
         $zoomSlider: $('input.cropit-image-zoom-input'),
@@ -170,7 +194,9 @@ $(document).ready(function () {
             wfactor,
             hfactor,
             factor,
-            dims;
+            dims,
+            width,
+            height;
 
         if ('custom' === $(this).val()) {
             $width.add($height).removeAttr('disabled');
@@ -182,17 +208,22 @@ $(document).ready(function () {
             $height.val(dims[1]);
         }
 
-        $imageCropper.cropit('previewSize', {width: $width.val(), height: $height.val()});
+        calculateScaleFactor();
+
+        width = $width.val() / scaleFactor;
+        height = $height.val() / scaleFactor;
+
+        $imageCropper.cropit('previewSize', {width: width, height: height});
 
         // set zoom of initial image
         if (initialImage) {
-            wfactor = $width.val() / image.width;
-            hfactor = $height.val() / image.height;
+            wfactor = width / image.width;
+            hfactor = height / image.height;
             factor = wfactor > hfactor ? wfactor : hfactor;
             $imageCropper.cropit('zoom', factor);
         }
 
-        $("#image-bars-dragger").width($width.val());
+        $("#image-bars-dragger").width(width);
 
         $cibuilder.trigger('canvasSizeChanged');
     });
@@ -274,17 +305,33 @@ $(document).ready(function () {
     $("#image-generate").click(function () {
         var jsondata,
             bardata = [],
-            data = {},
+            data,
             $rotator = $('#logo-rotator'),
             $logo_top = $('#logo-top'),
             $subline = $('#logo-subline'),
-            image_pos = $('#image-bars').offset(),
+            $bars = $('#image-bars'),
+            bars_pos = $bars.offset(),
             cropper_pos = $('#image-cropper').offset(),
             logo_pos = $('#logo-wrapper').offset(),
-            y_pos = image_pos.top - cropper_pos.top,
-            x_pos = image_pos.left - cropper_pos.left,
+            border_width = Math.round($('.border-container.border-left').width()) * scaleFactor,
+            y_pos = (bars_pos.top - cropper_pos.top) * scaleFactor,
+            x_pos,
             logo_y_pos = logo_pos.top - cropper_pos.top,
             logo_x_pos = logo_pos.left - cropper_pos.left;
+
+        // calculate bar position
+        if ($bars.hasClass('left')) {
+            x_pos = bars_pos.left - cropper_pos.left + border_width;
+        } else {
+            x_pos = (bars_pos.left - cropper_pos.left) * scaleFactor;
+
+            // we need to add a correction because we don't scale the 500px, we
+            // overlap the bars on the right, in the backend.
+            var angle = 5 * Math.PI / 180; // 5deg in radians
+            var padding = parseInt($bar.first().css('padding-right'));
+            var height_correction = Math.sin(angle) * padding * (scaleFactor - 1);
+            y_pos += height_correction;
+        }
 
         $('#image-bars div.bar').each(function (index, value) {
             var $obj = $(value);
@@ -292,7 +339,7 @@ $(document).ready(function () {
             bardata[index] = {
                 text: $obj.text(),
                 type: $obj.attr('class'),
-                fontsize: parseFloat($obj.css('font-size'))
+                fontsize: parseFloat($obj.css('font-size')) * scaleFactor
             };
         });
 
@@ -308,14 +355,20 @@ $(document).ready(function () {
 
         data = {
             image: {
-                zoom: $imageCropper.cropit('zoom'),
+                zoom: $imageCropper.cropit('zoom') * scaleFactor,
                 size: $imageCropper.cropit('imageSize'),
-                pos: $imageCropper.cropit('offset'),
+                pos: {
+                    x: $imageCropper.cropit('offset').x * scaleFactor,
+                    y: $imageCropper.cropit('offset').y * scaleFactor
+                },
                 src: $imageCropper.cropit('imageSrc'),
                 name: $('.cropit-image-input').val().split('\\').pop().split('/').pop() // http://stackoverflow.com/questions/423376/how-to-get-the-file-name-from-a-full-path-using-javascript
             },
             preview: {
-                size: $imageCropper.cropit('previewSize')
+                size: {
+                    width: $imageCropper.cropit('previewSize').width * scaleFactor,
+                    height: $imageCropper.cropit('previewSize').height * scaleFactor
+                }
             },
             bars: {
                 data: bardata,
@@ -324,18 +377,18 @@ $(document).ready(function () {
             },
             border: {
                 type: $('#border-form').val(),
-                width: Math.round($('.border-container.border-left').width())
+                width: border_width
             },
             logo: {
                 src: $logo_top.attr('data'),
-                width: $logo_top.width(),
-                height: $logo_top.height(),
-                y_pos: logo_y_pos,
-                x_pos: logo_x_pos,
-                margin: parseFloat($rotator.css('margin-top')),
-                fontsize: parseFloat($subline.css('font-size')),
+                width: $logo_top.width() * scaleFactor,
+                height: $logo_top.height() * scaleFactor,
+                y_pos: logo_y_pos * scaleFactor,
+                x_pos: logo_x_pos * scaleFactor,
+                margin: parseFloat($rotator.css('margin-top')) * scaleFactor,
+                fontsize: parseFloat($subline.css('font-size')) * scaleFactor,
                 subline: $subline.text(),
-                left: parseFloat($subline.css('margin-left'))
+                left: parseFloat($subline.css('margin-left')) * scaleFactor
             },
             hash: $('input[name="hash"]').val()
         };
