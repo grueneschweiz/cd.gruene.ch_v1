@@ -6,7 +6,7 @@ set -e
 maxcounter=60
 
 counter=1
-while ! mysql -uroot -p"$MYSQL_ROOT_PASSWORD"; do
+until mysql -uroot -p"$MYSQL_ROOT_PASSWORD" -e 'status'; do
     sleep 1
     counter=`expr $counter + 1`
     if [ $counter -gt $maxcounter ]; then
