@@ -18,7 +18,7 @@ module.exports = {
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                            hmr: process.env.NODE_ENV === 'development',
+                            hmr: devMode,
                         },
                     },
                     'css-loader',
@@ -71,5 +71,5 @@ module.exports = {
             chunkFilename: '[id].css',
         }),
     ],
-    //devtool: 'eval-source-map'
+    devtool: devMode ? 'eval-source-map' : false
 };

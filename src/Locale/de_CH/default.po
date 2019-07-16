@@ -91,59 +91,51 @@ msgstr "Sorry, es gab einen Fehler beim Hochladen deiner Datei."
 msgid "A group with this name already exists"
 msgstr "Eine Gruppe mit diesem Namen existiert bereits"
 
-#: Model/Table/ImagesTablephp:118
-msgid "Square 500px * 500px"
-msgstr "Quadratisch 500px * 500px"
-
-#: Model/Table/ImagesTablephp:120
-msgid "Facebook Event Banner"
-msgstr "Facebook Event Banner"
-
-#: Model/Table/ImagesTablephp:121
+#: Model/Table/ImagesTablephp:114
 msgid "Facebook Timeline Image"
 msgstr "Facebook Timeline Bild"
 
-#: Model/Table/ImagesTablephp:122
+#: Model/Table/ImagesTablephp:116
 msgid "Facebook Featured Website"
 msgstr "Facebook Website Vorschaubild (Linkvorschau)"
 
-#: Model/Table/ImagesTablephp:124
+#: Model/Table/ImagesTablephp:117
 msgid "Twitter Feed Image"
 msgstr "Twitter Feed Bild"
 
-#: Model/Table/ImagesTablephp:125
+#: Model/Table/ImagesTablephp:119
 msgid "Website Slider"
 msgstr "Website Slider"
 
-#: Model/Table/ImagesTablephp:126
+#: Model/Table/ImagesTablephp:120
 msgid "Custom size"
 msgstr "Eigene Größe"
 
-#: Model/Table/ImagesTablephp:138
+#: Model/Table/ImagesTablephp:131
 msgid "Bars left"
 msgstr "Balken links"
 
-#: Model/Table/ImagesTablephp:139
+#: Model/Table/ImagesTablephp:132
 msgid "Bars right"
 msgstr "Balken rechts"
 
-#: Model/Table/ImagesTablephp:151
+#: Model/Table/ImagesTablephp:143
 msgid "White"
 msgstr "Weiss"
 
-#: Model/Table/ImagesTablephp:152
+#: Model/Table/ImagesTablephp:144
 msgid "Green"
 msgstr "Grün"
 
-#: Model/Table/ImagesTablephp:153
+#: Model/Table/ImagesTablephp:145
 msgid "Green head- & sublines"
 msgstr "Grüne Head- und Sublines"
 
-#: Model/Table/ImagesTablephp:165
+#: Model/Table/ImagesTablephp:156
 msgid "Standard"
 msgstr "Standard"
 
-#: Model/Table/ImagesTablephp:166
+#: Model/Table/ImagesTablephp:157
 msgid "None"
 msgstr "Keine"
 
@@ -342,13 +334,13 @@ msgid "Enter password"
 msgstr "Passwort eingeben"
 
 #: Template/Element/User/inputctp:27
-#: Template/Images/addctp:184;197
+#: Template/Images/addctp:190;203
 #: Template/Users/viewctp:28
 msgid "Yes"
 msgstr "Ja"
 
 #: Template/Element/User/inputctp:27
-#: Template/Images/addctp:187;206
+#: Template/Images/addctp:193;212
 #: Template/Users/viewctp:28
 msgid "No"
 msgstr "Nein"
@@ -484,7 +476,7 @@ msgstr "Klicke um ein Bild hochzuladen"
 msgid "Remove image"
 msgstr "Bild entfernen"
 
-#: Template/Images/addctp:72;76;88;137;280
+#: Template/Images/addctp:72;76;94;143;286
 msgid "Warning!"
 msgstr "Warnung!"
 
@@ -496,163 +488,163 @@ msgstr "Das Bild konnte nicht geladen werden. Stellen bitte sicher sicher, dass 
 msgid "This image is to small. Please upload one with a higher resolution."
 msgstr "Dieses Bild ist zu klein. Bitte lade ein Bild mit einer höheren Auflösung hoch."
 
-#: Template/Images/addctp:89;138
+#: Template/Images/addctp:95;144
 msgid "At least one bar contains to much text."
 msgstr "Mindestens ein Balken enthält zu viel Text."
 
-#: Template/Images/addctp:131
+#: Template/Images/addctp:137
 msgid "Be as short as possible. The system will constraint the number of bars and the text size to suit the corporate design."
 msgstr "Halte dich so kurz wie möglich. Das System beschränkt die Anzahl Balken und die Textgrösse damit die Regeln des Corporate Designs immer eingehalten werden."
 
-#: Template/Images/addctp:132
+#: Template/Images/addctp:138
 msgid "Bar text"
 msgstr "Balken Text"
 
-#: Template/Images/addctp:135
+#: Template/Images/addctp:141
 msgid "Add subline"
 msgstr "Subline hinzufügen"
 
-#: Template/Images/addctp:142
+#: Template/Images/addctp:148
 msgid "Generally the bars are on the left side. But you may put them on the right side, if the photo requires it."
 msgstr "In der Regel befinden sich die Balken auf der linken Seite. Sollte es das Foto erfordern, kann es rechts platziert werden."
 
-#: Template/Images/addctp:145
+#: Template/Images/addctp:151
 msgid "Layout"
 msgstr "Layout"
 
-#: Template/Images/addctp:150
+#: Template/Images/addctp:156
 msgid "Default is the green color schema. Use the white color scheme if your image has a green background. Use green head- & sublines if your background is white."
 msgstr "Das grüne Farbschema ist der Standard. Wenn der Hintergrund grün ist, ist das weisse Farbschema zu verwenden. Das Farbschema mit grünen Head- und Sublines ist für weisse Hintergründe."
 
-#: Template/Images/addctp:153
+#: Template/Images/addctp:159
 msgid "Color scheme"
 msgstr "Wähle den Farbmodus"
 
-#: Template/Images/addctp:159
+#: Template/Images/addctp:165
 msgid "The border is part of the corporate design. You may however omit the border if you use the image in a context where a border looks ugly."
 msgstr "Der weisse Rand ist Teil des Corporate Designs. Du kannst den Rahmen jedoch weglassen, wen das Bild in einem Kontext verwenden wird, in dem ein Rahmen hässlich aussieht."
 
-#: Template/Images/addctp:162
+#: Template/Images/addctp:168
 msgid "Border"
 msgstr "Rahmen"
 
-#: Template/Images/addctp:170
+#: Template/Images/addctp:176
 msgid "Working hard"
 msgstr "Ich arbeite hart"
 
-#: Template/Images/addctp:171
+#: Template/Images/addctp:177
 msgid "I'm busy generating your image, please hang on a few ticks. I'll be right there."
 msgstr "Ich generiere gerade dein Bild. Bitte habe einen Augenblick Geduld. Es dauert nicht lange."
 
-#: Template/Images/addctp:172
+#: Template/Images/addctp:178
 msgid "Please answer meanwhile the legal questions below."
 msgstr "Bitte beantworte zwischenzeitlich die untenstehenden rechtlichen Fragen."
 
-#: Template/Images/addctp:177
+#: Template/Images/addctp:183
 msgid "Right of personality"
 msgstr "Persönlichkeitsrecht"
 
-#: Template/Images/addctp:180
+#: Template/Images/addctp:186
 msgid "Are there any identifiably people in the image?"
 msgstr "Gibt es identifizierbare Personen auf dem Bild?"
 
-#: Template/Images/addctp:193
+#: Template/Images/addctp:199
 msgid "Are they either people of public interest or have they agreed to the publication of this image?"
 msgstr "Sind sie entweder Personen von öffentlichem Interesse oder haben sie der Veröffentlichung dieses Bildes zugestimmt?"
 
-#: Template/Images/addctp:202
+#: Template/Images/addctp:208
 msgid "Unclear"
 msgstr "Unklar"
 
-#: Template/Images/addctp:210
+#: Template/Images/addctp:216
 msgid "Right of personality:"
 msgstr "Persönlichkeitsrecht:"
 
-#: Template/Images/addctp:211
+#: Template/Images/addctp:217
 msgid "By law, people have to agree on the publication of photos, where they are identifiably."
 msgstr "Nach dem Gesetz müssen sich die Menschen mit der Veröffentlichung von Fotos einverstanden erklären, wenn sie darauf identifizierbar sind."
 
-#: Template/Images/addctp:217
+#: Template/Images/addctp:223
 msgid "Copyright"
 msgstr "Urheberrecht"
 
-#: Template/Images/addctp:220;249
+#: Template/Images/addctp:226;255
 msgid "Who is the originator of the raw image?"
 msgstr "Wer ist der Urheber des Rohbildes?"
 
-#: Template/Images/addctp:223
+#: Template/Images/addctp:229
 msgid "Me"
 msgstr "Ich"
 
-#: Template/Images/addctp:224
+#: Template/Images/addctp:230
 msgid "Stock image"
 msgstr "Bilddatenbank"
 
-#: Template/Images/addctp:225
+#: Template/Images/addctp:231
 msgid "Agency / Photographer"
 msgstr "Agentur / Fotograf"
 
-#: Template/Images/addctp:226
+#: Template/Images/addctp:232
 msgid "Friend / Member of the party"
 msgstr "Freund / Mitglied der Partei"
 
-#: Template/Images/addctp:227
+#: Template/Images/addctp:233
 msgid "I don't know / I'm not sure"
 msgstr "Ich weiss es nicht / Ich bin mir nicht sicher"
 
-#: Template/Images/addctp:233
+#: Template/Images/addctp:239
 msgid "Where is the raw image from?"
 msgstr "Woher kommt das Rohbild?"
 
-#: Template/Images/addctp:234
+#: Template/Images/addctp:240
 msgid "Url to the raw image on the stock image platform."
 msgstr "Url zum Rohbild der Bilddatenbank."
 
-#: Template/Images/addctp:238
+#: Template/Images/addctp:244
 msgid "Select the raw images licence"
 msgstr "Wähle die Lizenz des Rohbildes aus"
 
-#: Template/Images/addctp:240
+#: Template/Images/addctp:246
 msgid "Other"
 msgstr "Sonstige"
 
-#: Template/Images/addctp:241
+#: Template/Images/addctp:247
 msgid "Creative Commons with Attribution"
 msgstr "Creative Commons mit Namensnennung"
 
-#: Template/Images/addctp:242
+#: Template/Images/addctp:248
 msgid "Creative Commons without Limitation"
 msgstr "Creative Commons ohne Einschränkung"
 
-#: Template/Images/addctp:250
+#: Template/Images/addctp:256
 msgid "Name of the photographer, agency or person who did this artwork"
 msgstr "Name des Fotografen, der Agentur oder der Person, die dieses Bild gemacht hat"
 
-#: Template/Images/addctp:255
+#: Template/Images/addctp:261
 msgid "Copyright:"
 msgstr "Urheberrecht:"
 
-#: Template/Images/addctp:256
+#: Template/Images/addctp:262
 msgid "Publishing this image may violate the intellectual property right."
 msgstr "Die Veröffentlichung dieses Bildes kann eine Verletzung des Urheberrechts darstellen."
 
-#: Template/Images/addctp:259
+#: Template/Images/addctp:265
 msgid "I hereby confirm that:"
 msgstr "Hiermit bestätige ich, dass:"
 
-#: Template/Images/addctp:263
+#: Template/Images/addctp:269
 msgid "I have the right to use this raw image"
 msgstr "ich das Recht habe, dieses Bild zu veröffentlichen"
 
-#: Template/Images/addctp:270
+#: Template/Images/addctp:276
 msgid "Others can use this raw image without limitation"
 msgstr "Andere dieses Bild ohne Einschränkung nutzen können"
 
-#: Template/Images/addctp:275
+#: Template/Images/addctp:281
 msgid "Confirm legal declarations"
 msgstr "Richtigkeit der Angaben bestätigen"
 
-#: Template/Images/addctp:281
+#: Template/Images/addctp:287
 msgid "The image could not be generated. Please try again."
 msgstr "Das Bild konnte nicht generiert werden. Bitte versuche es erneut."
 
@@ -846,7 +838,7 @@ msgstr "Die gesuchte Adresse {0} konnte auf diesem Server nicht gefunden werden.
 msgid "An Internal Error Has Occurred"
 msgstr "Ein interner Fehler ist aufgetreten"
 
-#: Template/Images/addctp:166
+#: Template/Images/addctp:172
 msgid "Generate Image"
 msgstr "Bild generieren"
 
@@ -875,10 +867,6 @@ msgstr "Hallo Admin\n"
 "\n"
 "Herzlich,\n"
 "Der Registrationsservice von cd.gruene.ch"
-
-#: Model/Table/ImagesTablephp:123
-msgid "Twitter Banner (Visible on Desktop: 1500x366px, on mobile: 1500x500px)"
-msgstr "Twitter Banner (Sichtbar auf dem Desktop: 1500x366px, auf dem Handy: 1500x500px)"
 
 #: Model/Table/UsersGroupsTablephp:100
 msgid "This user already belongs to this group."
@@ -1241,10 +1229,6 @@ msgstr "Diese Benutzerin kann die Logos der folgenden {strong}Gruppen{close_stro
 msgid "and of their subordinated groups"
 msgstr "und ihrer untergeordneten Gruppen"
 
-#: Model/Table/ImagesTablephp:119
-msgid "Facebook Banner (Visible on Desktop: 820x312px, on mobile: 820x360px)"
-msgstr "Facebook Banner (Sichtbar auf PC: 820x312px, auf Handy: 820x360px)"
-
 #: Template/Layout/defaultctp:111
 msgid "Input not valid: Please make sure you do not leave any bars empty."
 msgstr "Eingabe ungültig: Bitte schaue, dass es keine leere Head- oder Sublines gibt."
@@ -1252,4 +1236,24 @@ msgstr "Eingabe ungültig: Bitte schaue, dass es keine leere Head- oder Sublines
 #: Template/Element/User/inputctp:109
 msgid "Resend user invitation"
 msgstr "Einladungsmail erneut senden"
+
+#: Model/Table/ImagesTablephp:113
+msgid "Square"
+msgstr ""
+
+#: Model/Table/ImagesTablephp:115
+msgid "Facebook Event Image"
+msgstr "Facebook Veranstaltungsbild"
+
+#: Model/Table/ImagesTablephp:118
+msgid "Instagram Story"
+msgstr "Instagram Story"
+
+#: Template/Images/addctp:84
+msgid "The preview image may be smaller than the final image."
+msgstr "Das Vorschaubild kann kleiner sein als das fertige Bild."
+
+#: Template/Images/addctp:85
+msgid "Position the bars by drag and drop"
+msgstr "Positioniere die Balken mittels Drag & Drop"
 

@@ -92,64 +92,56 @@ msgstr "Désolé, une erreur s'est produite lors de la mise en ligne du fichier.
 msgid "A group with this name already exists"
 msgstr "Il existe déjà un groupe de ce nom."
 
-#: Model/Table/ImagesTablephp:118
-msgid "Square 500px * 500px"
-msgstr "Carré de 500 px * 500 px"
-
-#: Model/Table/ImagesTablephp:120
-msgid "Facebook Event Banner"
-msgstr "Bannière d'évènement Facebook"
-
-#: Model/Table/ImagesTablephp:121
+#: Model/Table/ImagesTablephp:114
 msgid "Facebook Timeline Image"
 msgstr "Image partagée sur le fil d'actualités Facebook"
 
-#: Model/Table/ImagesTablephp:122
+#: Model/Table/ImagesTablephp:116
 msgid "Facebook Featured Website"
 msgstr "Aperçu d'un lien partagé sur Facebook"
 
-#: Model/Table/ImagesTablephp:124
+#: Model/Table/ImagesTablephp:117
 msgid "Twitter Feed Image"
 msgstr "Image du flux Twitter"
 
 #. Hier geht es um die Bildergrösse (zB für einen Slider auf der Website 1140x638px)
-#: Model/Table/ImagesTablephp:125
+#: Model/Table/ImagesTablephp:119
 msgid "Website Slider"
 msgstr "Diapositive pour le site"
 
 #. Wenn ich "Eigene Grösse" auswähle, kann ich danach beliebige Pixelwerte für die Breite und die Höhe eingeben
-#: Model/Table/ImagesTablephp:126
+#: Model/Table/ImagesTablephp:120
 msgid "Custom size"
 msgstr "Taille personnalisée"
 
 #. Das sind die Auswahlwerte vom "Layout" und definiert, ob die Balken auf der linken oder auf der rechten Seite über das Bild ragen.
-#: Model/Table/ImagesTablephp:138
+#: Model/Table/ImagesTablephp:131
 msgid "Bars left"
 msgstr "Afficher les barres à gauche"
 
 #. Das sind die Auswahlwerte vom "Layout" und definiert, ob die Balken auf der linken oder auf der rechten Seite über das Bild ragen.
-#: Model/Table/ImagesTablephp:139
+#: Model/Table/ImagesTablephp:132
 msgid "Bars right"
 msgstr "Afficher les barres à droite"
 
-#: Model/Table/ImagesTablephp:151
+#: Model/Table/ImagesTablephp:143
 msgid "White"
 msgstr "blanc"
 
-#: Model/Table/ImagesTablephp:152
+#: Model/Table/ImagesTablephp:144
 msgid "Green"
 msgstr "vert"
 
-#: Model/Table/ImagesTablephp:153
+#: Model/Table/ImagesTablephp:145
 msgid "Green head- & sublines"
 msgstr "Titres et sous-titres verts"
 
 #. Das ist ein Auswahlwert für die Rahmen (mit Standard wird ein weisser Rahmen eingefügt)
-#: Model/Table/ImagesTablephp:165
+#: Model/Table/ImagesTablephp:156
 msgid "Standard"
 msgstr "Par défaut"
 
-#: Model/Table/ImagesTablephp:166
+#: Model/Table/ImagesTablephp:157
 msgid "None"
 msgstr "aucun(e)"
 
@@ -358,13 +350,13 @@ msgid "Enter password"
 msgstr "Merci de saisir le mot de passe"
 
 #: Template/Element/User/inputctp:27
-#: Template/Images/addctp:184;197
+#: Template/Images/addctp:190;203
 #: Template/Users/viewctp:28
 msgid "Yes"
 msgstr "Oui"
 
 #: Template/Element/User/inputctp:27
-#: Template/Images/addctp:187;206
+#: Template/Images/addctp:193;212
 #: Template/Users/viewctp:28
 msgid "No"
 msgstr "Non"
@@ -510,7 +502,7 @@ msgstr "Cliquez pour sélectionner l'image à mettre en ligne."
 msgid "Remove image"
 msgstr "Supprimer l'image"
 
-#: Template/Images/addctp:72;76;88;137;280
+#: Template/Images/addctp:72;76;94;143;286
 msgid "Warning!"
 msgstr "Attention !"
 
@@ -522,171 +514,171 @@ msgstr "L'image n'a pas pu être chargée. Assure-toi d'utiliser un fichier JPEG
 msgid "This image is to small. Please upload one with a higher resolution."
 msgstr "L'image est trop petite. Merci de sélectionner une image avec une résolution plus élevée."
 
-#: Template/Images/addctp:89;138
+#: Template/Images/addctp:95;144
 msgid "At least one bar contains to much text."
 msgstr "Au moins une barre contient trop de texte."
 
 #. ...
-#: Template/Images/addctp:131
+#: Template/Images/addctp:137
 msgid "Be as short as possible. The system will constraint the number of bars and the text size to suit the corporate design."
 msgstr "Sois aussi concise que possible. Le système limite le nombre de barres et la taille de police afin que les règles du corporate design soient toujours respectées."
 
-#: Template/Images/addctp:132
+#: Template/Images/addctp:138
 msgid "Bar text"
 msgstr "Texte de la barre"
 
 #. Hier ist ein "kleiner Balken" gemeint. Oben sind ja 2 oder mehr grosse Balken und darunter 0-2 kleine. Diese kleinen nennen wir "Subline"
-#: Template/Images/addctp:135
+#: Template/Images/addctp:141
 msgid "Add subline"
 msgstr "Rajouter un sous-titre"
 
-#: Template/Images/addctp:142
+#: Template/Images/addctp:148
 msgid "Generally the bars are on the left side. But you may put them on the right side, if the photo requires it."
 msgstr "En général, les barres se trouvent à gauche. Mais tu peux les placer à droite si la photo l'exige."
 
-#: Template/Images/addctp:145
+#: Template/Images/addctp:151
 msgid "Layout"
 msgstr "Mise en page"
 
-#: Template/Images/addctp:150
+#: Template/Images/addctp:156
 msgid "Default is the green color schema. Use the white color scheme if your image has a green background. Use green head- & sublines if your background is white."
 msgstr "Le choix par défaut est le jeu de couleurs vert. Utilise le jeu blanc si l'arrière-plan de votre image est vert. Utilise des titres et des sous-titres verts si l'arrière-plan est blanc."
 
-#: Template/Images/addctp:153
+#: Template/Images/addctp:159
 msgid "Color scheme"
 msgstr "Jeu de couleurs"
 
-#: Template/Images/addctp:159
+#: Template/Images/addctp:165
 msgid "The border is part of the corporate design. You may however omit the border if you use the image in a context where a border looks ugly."
 msgstr "La bordure fait partie du design retenu. Tu as toutefois la possibilité de supprimer la bordure si tu utilises l'image dans un contexte où la bordure semble détonner."
 
-#: Template/Images/addctp:162
+#: Template/Images/addctp:168
 msgid "Border"
 msgstr "Bordure"
 
-#: Template/Images/addctp:170
+#: Template/Images/addctp:176
 msgid "Working hard"
 msgstr "La machine tourne..."
 
-#: Template/Images/addctp:171
+#: Template/Images/addctp:177
 msgid "I'm busy generating your image, please hang on a few ticks. I'll be right there."
 msgstr "Je suis en train de générer ton image. Merci de patienter quelques instants - j'y suis presque."
 
-#: Template/Images/addctp:172
+#: Template/Images/addctp:178
 msgid "Please answer meanwhile the legal questions below."
 msgstr "Dans l'intervalle, merci de répondre à quelques questions d'ordre juridique."
 
-#: Template/Images/addctp:177
+#: Template/Images/addctp:183
 msgid "Right of personality"
 msgstr "Respect de la vie privée"
 
-#: Template/Images/addctp:180
+#: Template/Images/addctp:186
 msgid "Are there any identifiably people in the image?"
 msgstr "Y a-t-il des personnes identifiables sur l'image ?"
 
-#: Template/Images/addctp:193
+#: Template/Images/addctp:199
 msgid "Are they either people of public interest or have they agreed to the publication of this image?"
 msgstr "S'agit-il de personnalités publiques, ou de personnes ayant donné leur accord à la publication de l'image ?"
 
-#: Template/Images/addctp:202
+#: Template/Images/addctp:208
 msgid "Unclear"
 msgstr "Difficile de répondre"
 
-#: Template/Images/addctp:210
+#: Template/Images/addctp:216
 msgid "Right of personality:"
 msgstr "Respect de la vie privée :"
 
-#: Template/Images/addctp:211
+#: Template/Images/addctp:217
 msgid "By law, people have to agree on the publication of photos, where they are identifiably."
 msgstr "La loi exige que les personnes identifiables sur une photo doivent donner leur accord à sa publication."
 
-#: Template/Images/addctp:217
+#: Template/Images/addctp:223
 msgid "Copyright"
 msgstr "Droit d'auteur"
 
-#: Template/Images/addctp:220;249
+#: Template/Images/addctp:226;255
 msgid "Who is the originator of the raw image?"
 msgstr "Qui est l'auteur de l'image de départ ?"
 
-#: Template/Images/addctp:223
+#: Template/Images/addctp:229
 msgid "Me"
 msgstr "C'est moi."
 
-#: Template/Images/addctp:224
+#: Template/Images/addctp:230
 msgid "Stock image"
 msgstr "Image d'archive"
 
-#: Template/Images/addctp:225
+#: Template/Images/addctp:231
 msgid "Agency / Photographer"
 msgstr "Agence / photographe"
 
 #. Ist das Fragezeichen nicht eher verwirrlich?
-#: Template/Images/addctp:226
+#: Template/Images/addctp:232
 msgid "Friend / Member of the party"
 msgstr "Amie / membre du parti"
 
 #. weiblich ;)
-#: Template/Images/addctp:227
+#: Template/Images/addctp:233
 msgid "I don't know / I'm not sure"
 msgstr "Je ne sais pas / je ne suis pas sûre."
 
-#: Template/Images/addctp:233
+#: Template/Images/addctp:239
 msgid "Where is the raw image from?"
 msgstr "D'ou provient l'image de départ ?"
 
-#: Template/Images/addctp:234
+#: Template/Images/addctp:240
 msgid "Url to the raw image on the stock image platform."
 msgstr "URL vers l'image brute sur la plateforme d'archivage"
 
-#: Template/Images/addctp:238
+#: Template/Images/addctp:244
 msgid "Select the raw images licence"
 msgstr "Sélectionne la licence de l'image brute"
 
-#: Template/Images/addctp:240
+#: Template/Images/addctp:246
 msgid "Other"
 msgstr "autre"
 
-#: Template/Images/addctp:241
+#: Template/Images/addctp:247
 msgid "Creative Commons with Attribution"
 msgstr "Creative Commons avec mention de l'auteure"
 
-#: Template/Images/addctp:242
+#: Template/Images/addctp:248
 msgid "Creative Commons without Limitation"
 msgstr "Creative Commons sans restriction"
 
 #. weiblich :)
-#: Template/Images/addctp:250
+#: Template/Images/addctp:256
 msgid "Name of the photographer, agency or person who did this artwork"
 msgstr "Nom de la photographe, de l'agence ou de la personne à l'origine de l'œuvre."
 
-#: Template/Images/addctp:255
+#: Template/Images/addctp:261
 msgid "Copyright:"
 msgstr "Droit d'auteure :"
 
-#: Template/Images/addctp:256
+#: Template/Images/addctp:262
 msgid "Publishing this image may violate the intellectual property right."
 msgstr "La publication de cette image est susceptible de violer les droit de propriété intellectuelle."
 
 #. Steht über den Auswahlwerten: "J'ai le droit d'utiliser cette image brute." und "D'autres personnes peuvent utiliser cette image brute sans restrictions."
-#: Template/Images/addctp:259
+#: Template/Images/addctp:265
 msgid "I hereby confirm that:"
 msgstr "Je confirme que :"
 
-#: Template/Images/addctp:263
+#: Template/Images/addctp:269
 msgid "I have the right to use this raw image"
 msgstr "J'ai le droit d'utiliser cette image brute."
 
-#: Template/Images/addctp:270
+#: Template/Images/addctp:276
 msgid "Others can use this raw image without limitation"
 msgstr "D'autres personnes peuvent utiliser cette image brute sans restrictions."
 
 #. Bezieht sich auf alle die Fragen zum Rechtlichen, die du vorher übersetzt hast.
-#: Template/Images/addctp:275
+#: Template/Images/addctp:281
 msgid "Confirm legal declarations"
 msgstr "Confirmer l'exactitude des informations fournies"
 
 #. duzen?
-#: Template/Images/addctp:281
+#: Template/Images/addctp:287
 msgid "The image could not be generated. Please try again."
 msgstr "L'image n'a pas pu être générée. Merci de réessayer."
 
@@ -887,7 +879,7 @@ msgid "An Internal Error Has Occurred"
 msgstr "Une erreur interne s'est produite."
 
 #. oder "une
-#: Template/Images/addctp:166
+#: Template/Images/addctp:172
 msgid "Generate Image"
 msgstr "Générer l'image"
 
@@ -918,10 +910,6 @@ msgstr "Chère administratrice,\n"
 "Sincère salutations,\n"
 "\n"
 "Le service d'enregistrement de cd.gruene.ch"
-
-#: Model/Table/ImagesTablephp:123
-msgid "Twitter Banner (Visible on Desktop: 1500x366px, on mobile: 1500x500px)"
-msgstr "Bannière Twitter (Taille ordinateur : 1500x366 px ; taille téléphone 1500x500px)"
 
 #. Warum dt. nicht weiblich?
 #: Model/Table/UsersGroupsTablephp:100
@@ -1291,15 +1279,31 @@ msgstr "Cette utilisatrice peut utiliser les logos des {strong}groupes{close_str
 msgid "and of their subordinated groups"
 msgstr "et de ses groupes subordonnés"
 
-#: Model/Table/ImagesTablephp:119
-msgid "Facebook Banner (Visible on Desktop: 820x312px, on mobile: 820x360px)"
-msgstr "Photo de couverture Facebook (Visible sur les ordinateurs: 820x312px, sur les téléphones: 820x360px)"
-
 #: Template/Layout/defaultctp:111
 msgid "Input not valid: Please make sure you do not leave any bars empty."
 msgstr "Saisie invalide: merci de vérifier qu'aucune barre ne soit restée vide."
 
 #: Template/Element/User/inputctp:109
 msgid "Resend user invitation"
+msgstr ""
+
+#: Model/Table/ImagesTablephp:113
+msgid "Square"
+msgstr ""
+
+#: Model/Table/ImagesTablephp:115
+msgid "Facebook Event Image"
+msgstr ""
+
+#: Model/Table/ImagesTablephp:118
+msgid "Instagram Story"
+msgstr ""
+
+#: Template/Images/addctp:84
+msgid "The preview image may be smaller than the final image."
+msgstr ""
+
+#: Template/Images/addctp:85
+msgid "Position the bars by drag and drop"
 msgstr ""
 
