@@ -328,7 +328,7 @@ $(document).ready(function () {
             // we need to add a correction because we don't scale the 500px, we
             // overlap the bars on the right, in the backend.
             var angle = 5 * Math.PI / 180; // 5deg in radians
-            var padding = parseInt($bar.first().css('padding-right'));
+            var padding = parseInt($bars.first().css('padding-right'));
             var height_correction = Math.sin(angle) * padding * (scaleFactor - 1);
             y_pos += height_correction;
         }
