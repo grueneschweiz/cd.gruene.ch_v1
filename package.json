@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "build:dev": "webpack -d --watch",
-    "build:prod": "webpack -p"
+    "build:dev": "webpack -d --watch --mode=development",
+    "build:prod": "webpack -p --mode=production"
   },
   "repository": {
     "type": "git",
