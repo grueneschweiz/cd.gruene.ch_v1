@@ -66,9 +66,8 @@ class Group extends Entity
             return null;
         }
 
-        $locator = TableRegistry::getTableLocator();
         /** @var GroupsTable $Groups */
-        $Groups = $locator->get('Groups');
+        $Groups = TableRegistry::getTableLocator()->get('Groups');
 
         return $Groups->find()->where(['id' => $this->parent_id])->first();
     }
@@ -84,9 +83,8 @@ class Group extends Entity
             return null;
         }
 
-        $locator = TableRegistry::getTableLocator();
         /** @var UsersTable $Users */
-        $Users = $locator->get('Users');
+        $Users = TableRegistry::getTableLocator()->get('Users');
         return $Users->find('withTrashed')->where(['id' => $this->added_by_user_id])->first();
     }
 
@@ -109,9 +107,8 @@ class Group extends Entity
      */
     public function getDescendants(bool $nested = false)
     {
-        $locator = TableRegistry::getTableLocator();
         /** @var GroupsTable $Groups */
-        $Groups = $locator->get('Groups');
+        $Groups = TableRegistry::getTableLocator()->get('Groups');
 
         $groups = $Groups->find('children', ['for' => $this->id]);
 

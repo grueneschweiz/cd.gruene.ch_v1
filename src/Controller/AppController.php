@@ -117,9 +117,8 @@ class AppController extends Controller
             return false;
         }
 
-        $locator = TableRegistry::getTableLocator();
         /** @var LoginHashesTable $LoginHashes */
-        $LoginHashes = $locator->get('LoginHashes');
+        $LoginHashes = TableRegistry::getTableLocator()->get('LoginHashes');
         $user_id = $LoginHashes->authenticate($cookie['selector'], $cookie['token']);
 
         if (!$user_id) {
@@ -179,8 +178,7 @@ class AppController extends Controller
 
         // set $admin as global var for all views
         if ($this->Auth && $this->Auth->user('id')) {
-            $locator = TableRegistry::getTableLocator();
-            $Users = $locator->get('Users');
+            $Users = TableRegistry::getTableLocator()->get('Users');
             /** @var User $user */
             $user = $Users->get($this->Auth->user('id'));
             $admin = $user->isAdmin();

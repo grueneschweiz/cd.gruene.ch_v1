@@ -71,8 +71,7 @@ class User extends Entity
     public function getManageableLogos()
     {
         /** @var LogosTable $Logos */
-        $locator = TableRegistry::getTableLocator();
-        $Logos = $locator->get('Logos');
+        $Logos = TableRegistry::getTableLocator()->get('Logos');
 
         $logos = $Logos->find();
         $adminLogos = [];
@@ -110,9 +109,8 @@ class User extends Entity
         }
 
         // get logo again in every case to make sure we've got the associations loaded
-        $locator = TableRegistry::getTableLocator();
         /** @var LogosTable $Logos */
-        $Logos = $locator->get('Logos');
+        $Logos = TableRegistry::getTableLocator()->get('Logos');
 
         /** @var Logo $logo */
         $logo = $Logos->find()
@@ -155,9 +153,8 @@ class User extends Entity
             return true;
         }
 
-        $locator = TableRegistry::getTableLocator();
         /** @var UsersTable $Users */
-        $Users = $locator->get('Users');
+        $Users = TableRegistry::getTableLocator()->get('Users');
 
         return (bool)$Users->UsersGroups->find()
             ->where(['user_id' => $this->id, 'admin' => true])
@@ -177,9 +174,8 @@ class User extends Entity
             return true;
         }
 
-        $locator = TableRegistry::getTableLocator();
         /** @var GroupsTable $Groups */
-        $Groups = $locator->get('Groups');
+        $Groups = TableRegistry::getTableLocator()->get('Groups');
 
         if ($group instanceof Group) {
             $group_id = $group->id;
@@ -217,9 +213,8 @@ class User extends Entity
      */
     public function getManageableUsers()
     {
-        $locator = TableRegistry::getTableLocator();
         /** @var UsersTable $Users */
-        $Users = $locator->get('Users');
+        $Users = TableRegistry::getTableLocator()->get('Users');
 
         $users = $Users->find();
         $adminUsers = [];
@@ -247,9 +242,8 @@ class User extends Entity
         }
 
         if (!($user instanceof User)) {
-            $locator = TableRegistry::getTableLocator();
             /** @var UsersTable $Users */
-            $Users = $locator->get('Users');
+            $Users = TableRegistry::getTableLocator()->get('Users');
             $user = $Users->get($user);
         }
 
@@ -296,9 +290,8 @@ class User extends Entity
             $groups = [-1];
         }
 
-        $locator = TableRegistry::getTableLocator();
         /** @var LogosTable $Logos */
-        $Logos = $locator->get('Logos');
+        $Logos = TableRegistry::getTableLocator()->get('Logos');
 
         return $Logos->find()
             ->distinct('Logos.id')
@@ -317,9 +310,8 @@ class User extends Entity
      */
     public function getGroups(bool $includeDescendants = true)
     {
-        $locator = TableRegistry::getTableLocator();
         /** @var GroupsTable $Groups */
-        $Groups = $locator->get('Groups');
+        $Groups = TableRegistry::getTableLocator()->get('Groups');
 
         if ($this->isSuperAdmin()) {
             $allIds = $Groups->find()->extract('id')->toArray();
@@ -383,9 +375,8 @@ class User extends Entity
             return null;
         }
 
-        $locator = TableRegistry::getTableLocator();
         /** @var GroupsTable $Groups */
-        $Groups = $locator->get('Groups');
+        $Groups = TableRegistry::getTableLocator()->get('Groups');
 
         return $Groups->find('withTrashed')->where(['id' => $this->managed_by_group_id])->first();
     }
@@ -401,9 +392,8 @@ class User extends Entity
             return null;
         }
 
-        $locator = TableRegistry::getTableLocator();
         /** @var UsersTable $Users */
-        $Users = $locator->get('Users');
+        $Users = TableRegistry::getTableLocator()->get('Users');
 
         return $Users->find('withTrashed')->where(['id' => $this->added_by_user_id])->first();
     }
@@ -450,9 +440,8 @@ class User extends Entity
             $manageableGroups = [-1];
         }
 
-        $locator = TableRegistry::getTableLocator();
         /** @var GroupsTable $Groups */
-        $Groups = $locator->get('Groups');
+        $Groups = TableRegistry::getTableLocator()->get('Groups');
 
         $manageableGroupsIds = implode(',', $manageableGroups);
 
