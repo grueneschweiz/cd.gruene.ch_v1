@@ -3,6 +3,7 @@
 namespace App\Test\TestCase\Model\Table;
 
 use Cake\Datasource\Exception\RecordNotFoundException;
+use Cake\ORM\Locator\TableLocator;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
@@ -40,8 +41,8 @@ class GroupsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Groups') ? [] : ['className' => 'App\Model\Table\GroupsTable'];
-        $this->Groups = TableRegistry::get('Groups', $config);
+        $config = TableLocator::exists('Groups') ? [] : ['className' => 'App\Model\Table\GroupsTable'];
+        $this->Groups = TableLocator::get('Groups', $config);
         $this->Groups->recover();
     }
 

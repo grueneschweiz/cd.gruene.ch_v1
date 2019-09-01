@@ -45,9 +45,9 @@ class LoginHashesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('login_hashes');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('login_hashes');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 

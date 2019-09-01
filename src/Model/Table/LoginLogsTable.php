@@ -45,9 +45,9 @@ class LoginLogsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('login_logs');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('login_logs');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 

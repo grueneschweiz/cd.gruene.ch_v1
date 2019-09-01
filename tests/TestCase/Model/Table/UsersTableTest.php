@@ -3,6 +3,7 @@
 namespace App\Test\TestCase\Model\Table;
 
 use App\Model\Table\UsersTable;
+use Cake\ORM\Locator\TableLocator;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
@@ -40,8 +41,8 @@ class UsersTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Users') ? [] : ['className' => 'App\Model\Table\UsersTable'];
-        $this->Users = TableRegistry::get('Users', $config);
+        $config = TableLocator::exists('Users') ? [] : ['className' => 'App\Model\Table\UsersTable'];
+        $this->Users = TableLocator::get('Users', $config);
         $this->Users->Groups->recover();
     }
 
@@ -173,7 +174,7 @@ class UsersTableTest extends TestCase
         // super admin
         $user = $this->Users->get(1);
 
-        $Logos = TableRegistry::get('Logos');
+        $Logos = TableLocator::get('Logos');
         $logos = $Logos->find();
 
         foreach ($logos as $l) {
