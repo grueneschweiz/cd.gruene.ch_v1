@@ -14,7 +14,7 @@ everybodys hobby to learn all the rules of the corporate design.
 1. Install [docker](https://docker.com). (If you're on a linux machine, make sure to follow the 
 [post installation steps](https://docs.docker.com/install/linux/linux-postinstall/).)
 1. Start docker
-1. Clone this repo `git clone https://github.com/grueneschweiz/weblingservice.git`
+1. Clone this repo `git clone git@github.com:grueneschweiz/cd.gruene.ch.git`
 1. `cd` into the folder containing the repo
 1. Execute `bash scripts/install.sh` and have a ☕️ while 
 it installs. 
