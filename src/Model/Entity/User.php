@@ -301,7 +301,7 @@ class User extends Entity
         $Logos = $locator->get('Logos');
 
         return $Logos->find()
-            ->distinct('subline')
+            ->distinct('Logos.id')
             ->matching('Groups', function (Query $q) use ($groups) {
                 return $q->where('Groups.id IN (' . implode(',', $groups) . ')');
             })->order(['subline' => 'ASC']);
