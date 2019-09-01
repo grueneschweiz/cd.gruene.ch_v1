@@ -41,8 +41,8 @@ class GroupsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableLocator::exists('Groups') ? [] : ['className' => 'App\Model\Table\GroupsTable'];
-        $this->Groups = TableLocator::get('Groups', $config);
+        $config = TableRegistry::getTableLocator()->exists('Groups') ? [] : ['className' => 'App\Model\Table\GroupsTable'];
+        $this->Groups = TableRegistry::getTableLocator()->get('Groups', $config);
         $this->Groups->recover();
     }
 
