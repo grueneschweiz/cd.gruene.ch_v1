@@ -26,6 +26,7 @@ until [ "`docker inspect -f {{.State.Running}} cd_mysql_seed`" == "true" ]; do
     sleep 1;
 done;
 
+docker exec cd_mysql_seed mysql -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "CREATE DATABASE cake_test;"
 docker exec cd_mysql_seed bash /tmp/seed-db.sh
 
 
