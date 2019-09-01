@@ -20,13 +20,14 @@ use Cake\Error\Middleware\ErrorHandlerMiddleware;
 use Cake\Http\MiddlewareQueue;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
-use Cake\TestSuite\IntegrationTestCase;
+use Cake\TestSuite\IntegrationTestTrait;
 
 /**
  * ApplicationTest class
  */
-class ApplicationTest extends IntegrationTestCase
+class ApplicationTest
 {
+    use IntegrationTestTrait;
 
     /**
      * testMiddleware
