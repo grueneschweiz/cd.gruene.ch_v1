@@ -294,10 +294,12 @@ class User extends Entity
         $Logos = TableRegistry::getTableLocator()->get('Logos');
 
         return $Logos->find()
-            ->distinct('Logos.id')
-            ->matching('Groups', function (Query $q) use ($groups) {
-                return $q->where('Groups.id IN (' . implode(',', $groups) . ')');
-            })->order(['subline' => 'ASC']);
+                       ->select(['Logos.id', 'Logos.subline', 'Logos.top_path', 'Logos.name'])
+                       ->distinct(['Logos.id', 'Logos.subline', 'Logos.top_path', 'Logos.name'])
+                       ->matching('Groups', function (Query $q) use ($groups) {
+                           return $q->where('Groups.id IN (' . implode(',', $groups) . ')');
+                       })
+                       ->order(['subline' => 'ASC']);
     }
 
     /**
