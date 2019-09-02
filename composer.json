@@ -6,12 +6,14 @@
   "license": "MIT",
   "require": {
     "php": ">=7.2",
-    "cakephp/cakephp": "3.5.*",
+    "cakephp/cakephp": "3.7.*",
     "mobiledetect/mobiledetectlib": "2.*",
     "cakephp/migrations": "~1.0",
     "cakephp/plugin-installer": "*",
     "jenssegers/imagehash": "^0.5.0",
-    "muffin/trash": "^2.1"
+    "muffin/trash": "^2.1",
+      "ext-json": "*",
+      "ext-imagick": "*"
   },
   "require-dev": {
     "psy/psysh": "@stable",

@@ -22,6 +22,7 @@ use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\I18n\I18n;
 use Cake\ORM\Entity;
+use Cake\ORM\Locator\TableLocator;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 
@@ -117,7 +118,7 @@ class AppController extends Controller
         }
 
         /** @var LoginHashesTable $LoginHashes */
-        $LoginHashes = TableRegistry::get('LoginHashes');
+        $LoginHashes = TableRegistry::getTableLocator()->get('LoginHashes');
         $user_id = $LoginHashes->authenticate($cookie['selector'], $cookie['token']);
 
         if (!$user_id) {
@@ -125,7 +126,7 @@ class AppController extends Controller
         }
 
         /** @var UsersTable $Users */
-        $Users = TableRegistry::get('Users');
+        $Users = $locator->get('Users');
         $user = $Users->find()->where(['id' => $user_id])->first();
 
         if (!$user) {
@@ -169,15 +170,15 @@ class AppController extends Controller
      */
     public function beforeRender(Event $event)
     {
-        if (!array_key_exists('_serialize', $this->viewVars) &&
-            in_array($this->response->type(), ['application/json', 'application/xml'])
+        if (!$this->viewBuilder()->getVar('_serialize') &&
+            in_array($this->response->getType(), ['application/json', 'application/xml'])
         ) {
             $this->set('_serialize', true);
         }
 
         // set $admin as global var for all views
         if ($this->Auth && $this->Auth->user('id')) {
-            $Users = TableRegistry::get('Users');
+            $Users = TableRegistry::getTableLocator()->get('Users');
             /** @var User $user */
             $user = $Users->get($this->Auth->user('id'));
             $admin = $user->isAdmin();

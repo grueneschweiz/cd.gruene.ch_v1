@@ -37,9 +37,9 @@ class LogosTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('logos');
-        $this->displayField('name');
-        $this->primaryKey('id');
+        $this->setTable('logos');
+        $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
         $this->addBehavior('Muffin/Trash.Trash');

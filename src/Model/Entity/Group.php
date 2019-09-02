@@ -5,6 +5,7 @@ namespace App\Model\Entity;
 use App\Model\Table\GroupsTable;
 use App\Model\Table\UsersTable;
 use Cake\ORM\Entity;
+use Cake\ORM\Locator\TableLocator;
 use Cake\ORM\TableRegistry;
 
 /**
@@ -66,7 +67,7 @@ class Group extends Entity
         }
 
         /** @var GroupsTable $Groups */
-        $Groups = TableRegistry::get('Groups');
+        $Groups = TableRegistry::getTableLocator()->get('Groups');
 
         return $Groups->find()->where(['id' => $this->parent_id])->first();
     }
@@ -83,7 +84,7 @@ class Group extends Entity
         }
 
         /** @var UsersTable $Users */
-        $Users = TableRegistry::get('Users');
+        $Users = TableRegistry::getTableLocator()->get('Users');
         return $Users->find('withTrashed')->where(['id' => $this->added_by_user_id])->first();
     }
 
@@ -107,7 +108,7 @@ class Group extends Entity
     public function getDescendants(bool $nested = false)
     {
         /** @var GroupsTable $Groups */
-        $Groups = TableRegistry::get('Groups');
+        $Groups = TableRegistry::getTableLocator()->get('Groups');
 
         $groups = $Groups->find('children', ['for' => $this->id]);
 

@@ -43,9 +43,9 @@ class UsersGroupsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('users_groups');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->getTable('users_groups');
+        $this->getDisplayField('id');
+        $this->getPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
         $this->addBehavior('Muffin/Trash.Trash');

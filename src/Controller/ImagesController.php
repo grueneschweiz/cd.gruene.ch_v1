@@ -283,7 +283,7 @@ class ImagesController extends AppController
     {
         if ($this->request->is('post') && $this->request->is('ajax')) {
             // get data
-            $data = $this->request->data;
+            $data = $this->request->getData();
             $return = $this->Images->addLegal($data);
         } else {
             $return = 'access denied';

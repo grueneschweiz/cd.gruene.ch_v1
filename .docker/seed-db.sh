@@ -21,4 +21,5 @@ echo "Yay, MySQL is up and ready"
 # seed the database
 echo "Start seeding..."
 mysql "$MYSQL_DATABASE" -uroot -p"$MYSQL_ROOT_PASSWORD" < /tmp/seed.sql
+mysql -uroot -p"$MYSQL_ROOT_PASSWORD" -e "CREATE DATABASE cake_test;"
 echo "Seeding successful"
