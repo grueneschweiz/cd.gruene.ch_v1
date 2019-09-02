@@ -48,7 +48,7 @@ class ImageEditorComponent extends Component
      */
     public function resizeByWidth(int $width)
     {
-        $this->im->scaleImage($width, 0);
+        $this->im->resizeImage($width, 0, \Imagick::FILTER_CATROM, 1);
     }
 
     /**
