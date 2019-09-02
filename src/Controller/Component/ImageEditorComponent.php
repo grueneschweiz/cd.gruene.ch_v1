@@ -141,7 +141,7 @@ class ImageEditorComponent extends Component
             // get subline position
             $top_logo_height = $top_logo->getimageheight();
             $subline_height  = $subline->getimageheight();
-            $subline_top     = $top_logo_height + $subline_height / 12;
+            $subline_top     = ceil($top_logo_height + $subline_height / 12 );
             $subline_left    = $logo->left;
 
             // add it to the canvas
