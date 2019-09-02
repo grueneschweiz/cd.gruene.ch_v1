@@ -22,7 +22,6 @@ use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\I18n\I18n;
 use Cake\ORM\Entity;
-use Cake\ORM\Locator\TableLocator;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 
@@ -126,7 +125,7 @@ class AppController extends Controller
         }
 
         /** @var UsersTable $Users */
-        $Users = $locator->get('Users');
+        $Users = TableRegistry::getTableLocator()->get('Users');
         $user = $Users->find()->where(['id' => $user_id])->first();
 
         if (!$user) {
