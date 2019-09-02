@@ -8,6 +8,11 @@ use Cake\Network\Exception\NotFoundException;
 
 class ImageEditorComponent extends Component
 {
+    /**
+     * @var \Imagick
+     */
+    private $im;
+
     public function initialize(array $config)
     {
         parent::initialize($config);
@@ -126,7 +131,7 @@ class ImageEditorComponent extends Component
         $top_logo = $this->_getTopLogoByURL((string)$logo->src, (float)$logo->width);
 
         // add it to the canvas
-        $canvas->compositeImage($top_logo, \imagick::COMPOSITE_DEFAULT, 0, 0);
+        $canvas->compositeImage($top_logo, \Imagick::COMPOSITE_DEFAULT, 0, 0);
 
         if ( ! empty($logo->subline)) {
             // get subline
@@ -140,14 +145,14 @@ class ImageEditorComponent extends Component
             $subline_left    = $logo->left;
 
             // add it to the canvas
-            $canvas->compositeImage($subline, \imagick::COMPOSITE_DEFAULT, $subline_left, $subline_top);
+            $canvas->compositeImage($subline, \Imagick::COMPOSITE_DEFAULT, $subline_left, $subline_top);
         }
 
         // resize it to the actual size
         $canvas->resizeImage(
             round($width / $scale_factor),
             round($height / $scale_factor),
-            \imagick::FILTER_LANCZOS,
+            \Imagick::FILTER_LANCZOS,
             1);
 
         // cut transparent borders (do this now, and after rotation to make sure
@@ -165,7 +170,7 @@ class ImageEditorComponent extends Component
         $left = $logo->x_pos + $logo->margin;
 
         // add bars to image
-        $this->im->compositeImage($canvas, \imagick::COMPOSITE_DEFAULT, $left, $top);
+        $this->im->compositeImage($canvas, \Imagick::COMPOSITE_DEFAULT, $left, $top);
 
         return true;
     }
@@ -342,7 +347,7 @@ class ImageEditorComponent extends Component
                 : $text_width + $padding['left'];
             $bar->compositeimage(
                 $gradient,
-                \imagick::COMPOSITE_DEFAULT,
+                \Imagick::COMPOSITE_DEFAULT,
                 $x_pos,
                 0
             );
@@ -361,7 +366,7 @@ class ImageEditorComponent extends Component
         $bar->resizeImage(
             round($width / $scale_factor),
             round($height / $scale_factor),
-            \imagick::FILTER_LANCZOS,
+            \Imagick::FILTER_LANCZOS,
             1);
 
         // return it
@@ -470,7 +475,7 @@ class ImageEditorComponent extends Component
             $x_pos_bar = 'left' === $align ? 0 : $width - $b->getimagewidth();
 
             // add bar to bars canvas
-            $canvas->compositeImage($b, \imagick::COMPOSITE_DEFAULT, $x_pos_bar, $y_pos_bar);
+            $canvas->compositeImage($b, \Imagick::COMPOSITE_DEFAULT, $x_pos_bar, $y_pos_bar);
 
             // determine position of the next bar
             $y_pos_next_bar += $this->_getBarOuterHeight($b);
@@ -483,7 +488,7 @@ class ImageEditorComponent extends Component
         $canvas->rotateImage('transparent', $rotation_angle);
 
         // add bars to image
-        $this->im->compositeImage($canvas, \imagick::COMPOSITE_DEFAULT, $x_pos_bars, $y_pos_bars);
+        $this->im->compositeImage($canvas, \Imagick::COMPOSITE_DEFAULT, $x_pos_bars, $y_pos_bars);
 
         return true;
     }
@@ -694,13 +699,13 @@ class ImageEditorComponent extends Component
         );
         $gradient->compositeimage(
             $im1,
-            \imagick::COMPOSITE_DEFAULT,
+            \Imagick::COMPOSITE_DEFAULT,
             0,
             0
         );
         $gradient->compositeimage(
             $im2,
-            \imagick::COMPOSITE_DEFAULT,
+            \Imagick::COMPOSITE_DEFAULT,
             0,
             round($gradient_height / 2, 0)
         );
@@ -713,7 +718,7 @@ class ImageEditorComponent extends Component
         $image->newImage($width, $height, 'transparent');
         $image->compositeimage(
             $gradient,
-            \imagick::COMPOSITE_DEFAULT,
+            \Imagick::COMPOSITE_DEFAULT,
             -$angle_corr_x,
             -$angle_corr_y
         );
@@ -730,6 +735,13 @@ class ImageEditorComponent extends Component
     {
         $this->width = $dims->width;
         $this->height = $dims->height;
+    }
+
+    /**
+     * Set the image orientation do default, so it won't get rotated or flipped
+     */
+    public function setOrientation() {
+        $this->im->setImageOrientation(\Imagick::ORIENTATION_TOPLEFT);
     }
 
 }

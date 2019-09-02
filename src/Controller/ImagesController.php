@@ -157,8 +157,14 @@ class ImagesController extends AppController
             if (true === $success) {
                 $this->ImageEditor->createFromImage($this->ImageFileHandler->getPath());
 
-                // if its not a gradient, resize image by width
+                // if its not a gradient
                 if (!isset($gradient)) {
+                    // since we've already read the image with the right orientation
+                    // (according to the EXIF information) we should now reset the
+                    // orientation, so the final image won't get rotated again.
+                    $this->ImageEditor->setOrientation();
+
+                    // resize image by width
                     $width = round($data->image->size->width * $data->image->zoom, 0);
                     $this->ImageEditor->resizeByWidth($width);
                 }
