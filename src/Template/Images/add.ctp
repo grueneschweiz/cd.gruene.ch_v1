@@ -126,10 +126,6 @@
                 </tr>
             </table>
         </div>
-        <div class="rotate-btn clearfix image-modifier-controls">
-            <span class="btn-styler fa fa-rotate-left rotate-ccw-btn float-left"></span>
-            <span class="btn-styler fa fa-rotate-right rotate-cw-btn float-right"></span>
-        </div>
     </div>
 
     <div class="mt-3 mb-2">

@@ -107,14 +107,6 @@ $(document).ready(function () {
         }
     });
 
-    // handle rotation
-    $('.rotate-cw-btn').click(function () {
-        $imageCropper.cropit('rotateCW');
-    });
-    $('.rotate-ccw-btn').click(function () {
-        $imageCropper.cropit('rotateCCW');
-    });
-
     // hide bars and logo on image move
     $('.cropit-preview-image').on('mousedown', function () {
         $("#image-bars-dragger, #logo-wrapper").hide();
