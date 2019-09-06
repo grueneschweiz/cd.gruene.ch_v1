@@ -208,7 +208,7 @@ function LogoModule($cibuilder, $wrapper) {
     };
 
     /**
-     * calculates and sets the size of the logo
+     * sets the size of the logo
      *
      * @uses this.scale_factor
      * @uses this.margin_factor
@@ -227,10 +227,7 @@ function LogoModule($cibuilder, $wrapper) {
             $svg = $('#logo-top'),
             svg_width = parseFloat($svg.outerWidth()),
             $font = $('#logo-subline'),
-            font_size = parseFloat($font.css('font-size')),
-            $img = $('.cropit-preview-image-container'),
-            img_width = parseFloat($img.outerWidth()),
-            img_height = parseFloat($img.outerHeight());
+            font_size = parseFloat($font.css('font-size'));
 
         // set size if logo hasn't loaded yet
         if (0 === svg_width) {
@@ -244,13 +241,7 @@ function LogoModule($cibuilder, $wrapper) {
             this.data.scaled = true;
         }
 
-        if (img_width < img_height) {
-            small_side = img_width;
-        } else {
-            small_side = img_height;
-        }
-
-        target_width = this.scale_factor * small_side;
+        target_width = this.calculateTargetWidth();
         factor = target_width / svg_width;
 
         $svg.width(target_width);
@@ -265,6 +256,33 @@ function LogoModule($cibuilder, $wrapper) {
 
         return this;
     };
+
+    /**
+     * calulates the size of the logo
+     *
+     * for portrait images, the width of the image is the measure,
+     * for landscape images the surface is authorative. this was
+     * decided by the responsible person, since it increases the logo
+     * on landscape images, but doesn't break the rules for landscape.
+     *
+     * @returns {number}
+     */
+    this.calculateTargetWidth = function () {
+        var $img = $('.cropit-preview-image-container'),
+            img_width = parseFloat($img.outerWidth()),
+            img_height = parseFloat($img.outerHeight()),
+            measure;
+
+        if (img_width < img_height) {
+            // for portrait images the smaller side is authorative
+            measure = img_width;
+        } else {
+            // for landscape images the surface is autorative
+            measure = Math.sqrt(img_height * img_width);
+        }
+
+        return this.scale_factor * measure;
+    }
 
     /**
      * invoke the constructor
