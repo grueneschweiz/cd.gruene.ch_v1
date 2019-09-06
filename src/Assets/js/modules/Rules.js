@@ -135,13 +135,13 @@ function RulesModule($cibuilder) {
                 break;
 
             case 'accent_headline':
-                if (this.accent_headline_num < 2 && (this.main_headline_num + this.accent_headline_num) < 5) {
+                if (this.accent_headline_num < 2 && (this.main_headline_num + this.accent_headline_num) < 3) {
                     show = true;
                 }
                 break;
 
             case 'main_headline':
-                if ((this.main_headline_num + this.accent_headline_num) < 5) {
+                if ((this.main_headline_num + this.accent_headline_num) < 3) {
                     show = true;
                 }
                 break;
