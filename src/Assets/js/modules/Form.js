@@ -337,7 +337,7 @@ function FormModule($cibuilder, $form) {
             // check if user wants more magenta than green
             if (self.isAccentColorDominating(num)) {
                 // if so, ask him, if he is sure
-                resp = confirm(trans.accent_headline_warning);
+                resp = ! confirm(trans.accent_headline_warning);
             }
 
             // add bar if magenta doesn't dominate or if user wants it to dominate
