@@ -741,7 +741,21 @@ class ImageEditorComponent extends Component
      * Set the image orientation do default, so it won't get rotated or flipped
      */
     public function setOrientation() {
-        $this->im->setImageOrientation(\Imagick::ORIENTATION_TOPLEFT);
+        $this->im->setImageOrientation(\Imagick::ORIENTATION_TOPLEFT );
     }
 
+    /**
+     *  Convert into sRGB to prevent issues with images in an other format
+     */
+    public function setColorProfile() {
+        if (\Imagick::COLORSPACE_SRGB !== $this->im->getImageColorspace()) {
+            $this->im->transformImageColorspace(\Imagick::COLORSPACE_SRGB );
+        }
+
+        // set global color space
+        $this->im->setColorspace(\Imagick::COLORSPACE_SRGB );
+
+        // set image color space
+        $this->im->setImageColorspace(\Imagick::COLORSPACE_SRGB );
+    }
 }
