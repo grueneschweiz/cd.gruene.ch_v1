@@ -237,19 +237,17 @@ function ImageModule($cibuilder, $bars) {
      * @returns {Number}
      */
     this.detectMinFontSize = function () {
-        var min = 0.5,
-            width_limit = this.getFontSizeWidthLimit(min),
-            height_limit = this.getFontSizeHeightLimit(),
-            geometrical_limit = width_limit < height_limit ? width_limit : height_limit,
-            logo_limit = 0;
+        var factor = 0.08, // the correct 175% would be 0.0925
+            $img = $('.cropit-preview-image-container'),
+            img_width = parseFloat($img.outerWidth()),
+            img_height = parseFloat($img.outerHeight()),
 
-        if ($('#logo-subline').length) {
-            // 2.5 is the zoom factor between the logos subline and the logo headline
-            // 1.75 is the minimal factor between headlines and the logo, according to the ci-guide
-            logo_limit = parseFloat($('#logo-subline').css('font-size')) * 2.25 * 1.75;
-        }
+            // weight the image width double, so we only violate
+            // the rules on slim portrait images (sorry, but without
+            // violation, we can't write anything meaningfull on a insta story)
+            measure = Math.pow(img_height * img_width * img_width, 1 / 3);
 
-        return geometrical_limit > logo_limit ? geometrical_limit : logo_limit;
+        return measure * factor;
     };
 
     /**
