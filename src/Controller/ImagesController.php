@@ -164,6 +164,9 @@ class ImagesController extends AppController
                     // orientation, so the final image won't get rotated again.
                     $this->ImageEditor->setOrientation();
 
+                    // set the color profile to prevent issues with CMYK etc
+                    $this->ImageEditor->setColorProfile();
+
                     // resize image by width
                     $width = round($data->image->size->width * $data->image->zoom, 0);
                     $this->ImageEditor->resizeByWidth($width);
