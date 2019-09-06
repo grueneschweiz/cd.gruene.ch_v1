@@ -176,7 +176,7 @@ class AppController extends Controller
         }
 
         // set $admin as global var for all views
-        if ($this->Auth && $this->Auth->user('id')) {
+        if (property_exists($this, 'Auth') && $this->Auth && $this->Auth->user('id')) {
             $Users = TableRegistry::getTableLocator()->get('Users');
             /** @var User $user */
             $user = $Users->get($this->Auth->user('id'));
