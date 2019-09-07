@@ -152,7 +152,10 @@ return [
 	'Error'          => [
 		'errorLevel'        => E_ALL,
 		'exceptionRenderer' => 'Cake\Error\ExceptionRenderer',
-		'skipLog'           => [],
+		'skipLog'           => [
+		    'Cake\Routing\Exception\MissingControllerException',
+            'Cake\Controller\Exception\MissingActionException'
+        ],
 		'log'               => true,
 		'trace'             => true,
 	],
