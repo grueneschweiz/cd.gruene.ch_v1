@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-09-06 16:00+0000\n"
+"POT-Creation-Date: 2019-09-07 15:25+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -973,7 +973,7 @@ msgid "New line"
 msgstr ""
 
 #: Template/Layout/default.ctp:96
-msgid "Two magenta headlines are only allowed, if the message requires it and would make less sense otherwise. Click Cancel to insert a second magenta bar. \\n\\n(You have to Click cancel, beacuse people never read the message but just clicked OK.)"
+msgid "Two magenta headlines are only allowed, if the message requires it and would make less sense otherwise. Click Cancel to insert a second magenta bar. (You have to Click cancel, beacuse people never read the message but just clicked OK.)"
 msgstr ""
 
 #: Template/Layout/default.ctp:97

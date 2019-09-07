@@ -717,10 +717,6 @@ msgstr "Salut"
 msgid "New line"
 msgstr "Neue Zeile"
 
-#: Template/Layout/defaultctp:96
-msgid "Two magenta headlines are only allowed, if the message requires it and would make less sense otherwise. Is this the case?"
-msgstr "Zwei magentafarbene Headlines sind nur erlaubt, wenn die Nachricht es erfordert und ansonsten keinen Sinn ergeben würde. Ist das der Fall?"
-
 #: Template/Layout/default.ctp:97
 msgid "The logo could not be loaded. Please try again."
 msgstr "Das Logo konnte nicht geladen werden. Bitte versuche es erneut."
@@ -1258,6 +1254,6 @@ msgid "Position the bars by drag and drop"
 msgstr "Positioniere die Balken mittels Drag & Drop"
 
 #: Template/Layout/default.ctp:96
-msgid "Two magenta headlines are only allowed, if the message requires it and would make less sense otherwise. Click Cancel to insert a second magenta bar. \\n\\n(You have to Click cancel, beacuse people never read the message but just clicked OK.)"
-msgstr "Zwei magentafarbene Headlines sind nur dann erlaubt, wenn die Nachricht es erfordert und ansonsten keinen Sinn ergeben würde. Klicke auf Abbrechen um einen zweiten magentafarbenen Balken einzufügen.\\n\\n(Du musst auf Abbrechen klicken, weil die Leute die Meldung nie gelesen haben und einfach OK klickten.)"
+msgid "Two magenta headlines are only allowed, if the message requires it and would make less sense otherwise. Click Cancel to insert a second magenta bar. (You have to Click cancel, beacuse people never read the message but just clicked OK.)"
+msgstr "Zwei magentafarbene Headlines sind nur dann erlaubt, wenn die Nachricht es erfordert und ansonsten keinen Sinn ergeben würde. Klicke auf Abbrechen um einen zweiten magentafarbenen Balken einzufügen. (Du musst auf Abbrechen klicken, weil die Leute die Meldung nie gelesen haben und einfach OK klickten.)"
 
