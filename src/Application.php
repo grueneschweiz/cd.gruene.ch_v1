@@ -18,6 +18,7 @@ namespace App;
 use Cake\Core\Configure;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
 use Cake\Http\BaseApplication;
+use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 
@@ -66,7 +67,6 @@ class Application extends BaseApplication {
         // Load more plugins here
     }
 
-
     /**
      * Setup the middleware queue your application will use.
      *
@@ -91,8 +91,24 @@ class Application extends BaseApplication {
             // creating the middleware instance specify the cache config name by
             // using it's second constructor argument:
             // `new RoutingMiddleware($this, '_cake_routes_')`
-            ->add( new RoutingMiddleware( $this ) );
+            ->add( new RoutingMiddleware( $this ) )
+
+            // CSRF protection
+            ->add( new CsrfProtectionMiddleware() );
 
         return $middlewareQueue;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * By default this will load `config/routes.php` for ease of use and backwards compatibility.
+     *
+     * @param \Cake\Routing\RouteBuilder $routes A route builder to add routes into.
+     * @return void
+     */
+    public function routes($routes) {
+        $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
+        parent::routes($routes);
     }
 }
