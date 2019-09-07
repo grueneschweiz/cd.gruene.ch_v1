@@ -14,27 +14,6 @@
  */
 
 /*
- * You can remove this if you are confident that your PHP version is sufficient.
- */
-if ( version_compare( PHP_VERSION, '7.2.0' ) < 0 ) {
-	trigger_error( 'Your PHP version must be equal or higher than 7.2.0 to use CakePHP.', E_USER_ERROR );
-}
-
-/*
- *  You can remove this if you are confident you have intl installed.
- */
-if ( ! extension_loaded( 'intl' ) ) {
-	trigger_error( 'You must enable the intl extension to use CakePHP.', E_USER_ERROR );
-}
-
-/*
- * You can remove this if you are confident you have mbstring installed.
- */
-if ( ! extension_loaded( 'mbstring' ) ) {
-	trigger_error( 'You must enable the mbstring extension to use CakePHP.', E_USER_ERROR );
-}
-
-/*
  * Configure paths required to find CakePHP + general filepath
  * constants
  */
@@ -53,7 +32,7 @@ require CORE_PATH . 'config' . DS . 'bootstrap.php';
 
 use Cake\Cache\Cache;
 use Cake\Console\ConsoleErrorHandler;
-use Cake\Core\App;
+//use Cake\Core\App;
 use Cake\Core\Configure;
 use Cake\Core\Configure\Engine\PhpConfig;
 use Cake\Database\Type;
@@ -65,6 +44,23 @@ use Cake\Mailer\TransportFactory;
 use Cake\Http\ServerRequest;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
+
+/**
+ * Uncomment block of code below if you want to use `.env` file during development.
+ * You should copy `config/.env.default to `config/.env` and set/modify the
+ * variables as required.
+ *
+ * It is HIGHLY discouraged to use a .env file in production, due to security risks
+ * and decreased performance on each request. The purpose of the .env file is to emulate
+ * the presence of the environment variables like they would be present in production.
+ */
+// if (!env('APP_NAME') && file_exists(CONFIG . '.env')) {
+//     $dotenv = new \josegonzalez\Dotenv\Loader([CONFIG . '.env']);
+//     $dotenv->parse()
+//         ->putenv()
+//         ->toEnv()
+//         ->toServer();
+// }
 
 /*
  * Read configuration file and inject configuration into various
@@ -95,6 +91,8 @@ try {
 if ( Configure::read( 'debug' ) ) {
 	Configure::write( 'Cache._cake_model_.duration', '+2 minutes' );
 	Configure::write( 'Cache._cake_core_.duration', '+2 minutes' );
+    // disable router cache during development
+    Configure::write('Cache._cake_routes_.duration', '+2 seconds');
 }
 
 /*

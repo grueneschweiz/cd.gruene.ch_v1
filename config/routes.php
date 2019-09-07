@@ -44,10 +44,10 @@ use Cake\Routing\Route\DashedRoute;
 Router::defaultRouteClass( DashedRoute::class );
 
 Router::scope( '/', function ( RouteBuilder $routes ) {
-	
+
 	$routes->connect( '/', [ 'controller' => 'Images', 'action' => 'add' ] );
 	$routes->connect( '/protected/**', [ 'controller' => 'Protected', 'action' => 'serve' ] );
-	
+
 	/**
 	 * Connect catchall routes for all controllers.
 	 *
@@ -66,9 +66,3 @@ Router::scope( '/', function ( RouteBuilder $routes ) {
 	 */
 	$routes->fallbacks( DashedRoute::class );
 } );
-
-/**
- * Load all plugin routes.  See the Plugin documentation on
- * how to customize the loading of plugin routes.
- */
-Plugin::routes();
