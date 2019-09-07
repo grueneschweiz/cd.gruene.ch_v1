@@ -93,7 +93,7 @@
 <script>
     var trans = {
         new_line: '<?= htmlspecialchars(__('New line'), ENT_QUOTES) ?>',
-        accent_headline_warning: '<?= htmlspecialchars(__('Two magenta headlines are only allowed, if the message requires it and would make less sense otherwise. Click Cancel to insert a second magenta bar. \n\n(You have to Click cancel, beacuse people never read the message but just clicked OK.)'), ENT_QUOTES) ?>',
+        accent_headline_warning: '<?= htmlspecialchars(__('Two magenta headlines are only allowed, if the message requires it and would make less sense otherwise. Click Cancel to insert a second magenta bar. (You have to Click cancel, beacuse people never read the message but just clicked OK.)'), ENT_QUOTES) ?>',
         logo_loding_error: '<?= htmlspecialchars(__('The logo could not be loaded. Please try again.'), ENT_QUOTES) ?>',
         logo_collision: '<?= htmlspecialchars(__('The bars should never touch the logo. Do you want to move the logo in a other corner?'), ENT_QUOTES) ?>',
         logo_keeps_colliding: '<?= htmlspecialchars(__('The bars should never touch the logo. Please reduce the size of the bars.'), ENT_QUOTES) ?>',
