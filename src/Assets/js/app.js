@@ -29,6 +29,8 @@ $(document).ready(function () {
         return;
     }
 
+    var self = this;
+
     $('#legal-check').legalChecker();
 
     $('#canvas-width-setter, #canvas-height-setter').trigger('change');
@@ -295,6 +297,57 @@ $(document).ready(function () {
 
     // generate image
     $("#image-generate").click(function () {
+        var data = self.getImageData();
+
+        $.ajax({
+            url: '/images/ajaxAdd',
+            type: 'POST',
+            data: {addImage: data},
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-Token', x_csrf_token);
+                $('.warning-image-generation-error').addClass('d-none');
+                if (initialImage) {
+                    $('#legal-check').hide();
+                    $('#please-fill-out-legal').hide();
+                    $('#download-button').show();
+                } else {
+                    $('#legal-check').show();
+                    $('#please-fill-out-legal').show();
+                    $('#download-button').hide();
+                }
+                $('#download-button a#download-img').remove();
+                $('#generating-image-loader').show();
+                $('#sending-legal-loader').hide();
+                $('#generating-image').dialog('open');
+            }
+        }).done(function (data, status) {
+            $('#generating-image-loader').hide();
+
+            if (status === 'success') {
+                var content = $.parseJSON(data);
+                if (content.filename === undefined) {
+                    $('.warning-image-generation-error').removeClass('d-none');
+                    if (content) {
+                        $('.warning-image-generation-error span').text(content);
+                    }
+                    return;
+                }
+                newHash = content.newHash;
+                $('#download-button').html('<a href="/protected/finalimages/' + content.filename + '" class="btn btn-outline-primary" id="download-img" download>' + trans.download_image + '</a>');
+                $('#download-img').click(function () {
+                    $('#generating-image').dialog('close');
+                    $('input[name="hash"]').val(newHash);
+                });
+            } else {
+                alert(trans.image_generation_error);
+            }
+        }).fail(function (data, status, error) {
+            console.log(data, status, error);
+            $('.warning-image-generation-error').removeClass('d-none');
+        });
+    });
+
+    this.getImageData = function() {
         var jsondata,
             bardata = [],
             data,
@@ -387,53 +440,6 @@ $(document).ready(function () {
 
         $rotator.css('transform', 'rotate(-5deg)');
 
-        jsondata = JSON.stringify(data);
-
-        $.ajax({
-            url: '/images/ajaxAdd',
-            type: 'POST',
-            data: {addImage: jsondata},
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-CSRF-Token', x_csrf_token);
-                $('.warning-image-generation-error').addClass('d-none');
-                if (initialImage) {
-                    $('#legal-check').hide();
-                    $('#please-fill-out-legal').hide();
-                    $('#download-button').show();
-                } else {
-                    $('#legal-check').show();
-                    $('#please-fill-out-legal').show();
-                    $('#download-button').hide();
-                }
-                $('#download-button a#download-img').remove();
-                $('#generating-image-loader').show();
-                $('#sending-legal-loader').hide();
-                $('#generating-image').dialog('open');
-            }
-        }).done(function (data, status) {
-            $('#generating-image-loader').hide();
-
-            if (status === 'success') {
-                var content = $.parseJSON(data);
-                if (content.filename === undefined) {
-                    $('.warning-image-generation-error').removeClass('d-none');
-                    if (content) {
-                        $('.warning-image-generation-error span').text(content);
-                    }
-                    return;
-                }
-                newHash = content.newHash;
-                $('#download-button').html('<a href="/protected/finalimages/' + content.filename + '" class="btn btn-outline-primary" id="download-img" download>' + trans.download_image + '</a>');
-                $('#download-img').click(function () {
-                    $('#generating-image').dialog('close');
-                    $('input[name="hash"]').val(newHash);
-                });
-            } else {
-                alert(trans.image_generation_error);
-            }
-        }).fail(function (data, status, error) {
-            console.log(data, status, error);
-            $('.warning-image-generation-error').removeClass('d-none');
-        });
-    });
+        return JSON.stringify(data);
+    }
 });
