@@ -3,183 +3,248 @@
 namespace App\Controller\Component;
 
 use Cake\Controller\Component;
+use Cake\Filesystem\File;
 use Cake\Filesystem\Folder;
 
-class ImageFileHandlerComponent extends Component
-{
-    public function save(\stdClass $data)
-    {
-        // generate a temporary image
-        $this->_tempSaveRawImage($data->image);
+class ImageFileHandlerComponent extends Component {
+    const TTL_CHUNK = 3600; // one hour
+    const TTL_GRADIENTS = 86400; // one day
 
-        // set target image path
-        $dir = new Folder(ROOT . DS . 'protected' . DS . 'rawimages', true);
-        $filename = $data->image->name;
-        $this->setTargetPath($dir->path, $filename);
+    const BASE_PATH = ROOT . DS . 'protected';
+    const FOLDER_CHUNKS = 'chunks';
+    const FOLDER_RAWIMAGES = 'rawimages';
+    const FOLDER_GRADIENTS = 'gradients';
 
-        // validate image
-        $this->allowed_mime = ['image/jpeg', 'image/png'];
-        $this->allowed_ext = ['jpg', 'jpeg', 'png'];
-        $this->max_file_size = 16 * 1024 * 1024; // 16MB
-        $success = $this->validate();
+    const ALLOWED_MIME = [ 'image/jpeg', 'image/png' ];
+    const ALLOWED_EXT = [ 'jpg', 'jpeg', 'png' ];
+    const ALLOWED_MAX_FILE_SIZE = 16 * 1024 * 1024; // 16MB
 
-        // save if valid
-        if (true === $success) {
-            $success = $this->saveRawImage();
+    /**
+     * Calidate the chunk and move the chunk to its final path.
+     *
+     * @param \stdClass $data
+     *
+     * @return bool|string
+     */
+    public function save( \stdClass $data ) {
+        $file_name = $data->image->name;
+
+        $chunk_path = $this->getChunkFileName( $file_name, true );
+        $chunk      = new File( $chunk_path, false );
+
+        $extension = $this->getExtension( $file_name );
+        $valid     = $this->validate( $chunk, $extension );
+
+        if ( true !== $valid ) {
+            return $valid;
         }
 
-        return $success;
-    }
+        $target_path = $this->getTargetPath( $file_name, $this->getRawImagesFolder() );
 
-    /**
-     * Create image from base64 string and save as temporary file
-     * Store temp path to $this->temp_path
-     *
-     * @param \stdClass $image
-     */
-    private function _tempSaveRawImage(\stdClass $image)
-    {
-        //save your data into a variable - last part is the base64 encoded image
-        $encoded = strip_tags($image->src);
-
-        //explode at ',' - the last part should be the encoded image now
-        $exp = explode(',', $encoded);
-
-        //we just get the last element with array_pop
-        $base64 = array_pop($exp);
-
-        //decode the image
-        $data = base64_decode($base64);
-
-        // create folder if it doesn't exist
-        $dir = new Folder(WWW_ROOT . 'tmp', true);
-
-        //generate temp file
-        $temp_file = tempnam($dir->path, '');
-
-        // store image to tempfile
-        file_put_contents($temp_file, $data);
-
-        $this->temp_path = $temp_file;
-    }
-
-    /**
-     * Checks if file doesent exist and stors filepath to $this->target_path
-     *
-     * Increments numer of file by one, of a file with the same name already
-     * exists.
-     *
-     * @param string $dir
-     * @param string $filename
-     */
-    public function setTargetPath(string $dir, string $filename)
-    {
-        $filename = $this->_sanitizeFilename($filename);
-        $target = $dir . DS . $filename;
-
-        // Make sure we dont overwrite anything
-        while (file_exists($target)) {
-            // increment filename by 1
-            $filename = $this->_incrementFilename($filename);
-            // set new upload path
-            $target = $dir . DS . $filename;
+        // move chunk to target path
+        if ( $chunk->copy( $target_path ) && $chunk->delete() ) {
+            return $target_path;
         }
 
-        $this->target_path = $target;
+        return false;
     }
 
     /**
-     * Strip out everything except a-z, A-Z, 0-9, hyphens, underscores and dots
+     * Create an deterministic but hard to guess filename
      *
-     * @param string $filename
+     * @param string $original_file_name
+     * @param bool $full_path return absolute path
      *
      * @return string
      */
-    private function _sanitizeFilename(string $filename)
-    {
-        return strtolower(preg_replace('/[^a-zA-Z0-9\-\._]/', '', $filename));
+    private function getChunkFileName( string $original_file_name, bool $full_path ): string {
+        $file_name = md5( session_id() . $original_file_name );
+
+        if ( $full_path ) {
+            $file_name = $this->getChunkFolder()->path . DS . $file_name;
+        }
+
+        return $file_name;
     }
 
     /**
-     * Increments last number of given filename by one
+     * Return folder for chunks. Create it, if it doesn't exist.
      *
-     * @param string $filename
-     *
-     * @return string
+     * @return Folder
      */
-    private function _incrementFilename(string $filename)
-    {
-        preg_match('/.*\.([a-zA-Z0-9]+)$/', $filename, $ext);
-        preg_match('/.*?([0-9]*)\.[a-zA-Z0-9]+$/', $filename, $numb);
-        $ext = empty($ext[1]) ? '' : (string)$ext[1];
-        $numb = empty($numb[1]) ? '' : (int)$numb[1];
+    private function getChunkFolder(): Folder {
+        return new Folder( self::BASE_PATH . DS . self::FOLDER_CHUNKS, true );
+    }
 
-        $name = str_replace($numb . '.' . $ext, '', $filename);
-
-        if (empty($numb)) {
-            $numb = 1;
-        } else {
-            $numb++;
+    /**
+     * Return the extension fo the given file name or false if none found.
+     *
+     * @param string $file_name
+     *
+     * @return bool|string
+     */
+    private function getExtension( string $file_name ) {
+        if ( ! preg_match( '/.*\.([a-zA-Z0-9]+)$/', $file_name, $extension ) ) {
+            return false;
         }
 
-        return $name . $numb . '.' . $ext;
-
+        return empty( $extension[1] ) ? false : strtolower( $extension[1] );
     }
 
     /**
      * Checks if it's an JPEG oder PNG image and if its not oversize
      *
-     * @return mixed true on success else error string
+     * @param File $file the file to validate
+     * @param string $extension the file extension
+     *
+     * @return true|string true on success else error string
      */
-    public function validate()
-    {
-        $temp_path = $this->temp_path;
-        $allowed_mime = $this->allowed_mime;
-        $allowed_ext = $this->allowed_ext;
-        $max_file_size = $this->max_file_size; // bytes
-        $target_file = $this->target_path;
-
-        // Check file extension
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        if (!in_array($imageFileType, $allowed_ext)) {
-            return __('Only JPG, JPEG & PNG files are allowed.');
+    public function validate( File $file, string $extension ) {
+        // file exists
+        if ( ! $file->exists() ) {
+            return __( 'Uploaded image not found' );
         }
 
-        // Check if image file is a actual image or fake image
-        $check = getimagesize($temp_path);
-        if (false === $check) {
-            return __('Only JPG, JPEG & PNG files are allowed.');
-        } else {
-            if (!in_array($check['mime'], $allowed_mime)) {
-                return __('Only JPG, JPEG & PNG files are allowed.');
-            }
+        // file extension
+        if ( ! in_array( $extension, self::ALLOWED_EXT ) ) {
+            return __( 'Only JPG, JPEG & PNG files are allowed.' );
         }
 
-        // Check file size
-        $filesize = filesize($temp_path);
-        if ($filesize > $max_file_size) {
-            return __('Max file size ({0}MB) exceeded', round($max_file_size / (1024 * 1024)));
+        // mime type
+        if ( ! in_array( $file->mime(), self::ALLOWED_MIME ) ) {
+            return __( 'Only JPG, JPEG & PNG files are allowed.' );
+        }
+
+        // file size
+        if ( self::ALLOWED_MAX_FILE_SIZE < $file->size() ) {
+            return __( 'Max file size ({0}MB) exceeded', round( self::ALLOWED_MAX_FILE_SIZE / ( 1024 * 1024 ) ) );
+        }
+
+        // can we get the image size ?
+        $check = getimagesize( $file->path );
+        if ( false === $check ) {
+            return __( 'Only JPG, JPEG & PNG files are allowed.' );
         }
 
         return true;
     }
 
     /**
-     * Moves the temp image to its target path defined by $this->setTargetPath()
+     * Generate a random file name and return the full path to store the raw image
      *
-     * @return mixed true on success else error string
+     * @param string $file_name
+     * @param Folder $target_dir the destination folder
+     *
+     * @return bool|string
      */
-    public function saveRawImage()
-    {
-        $temp_path = $this->temp_path;
-        $target_path = $this->target_path;
+    private function getTargetPath( string $file_name, Folder $target_dir ) {
+        $extension = $this->getExtension( $file_name );
 
-        // Actually save the image
-        if (rename($temp_path, $target_path)) {
-            return true;
-        } else {
-            return __('Sorry, there was an error uploading your file.');
+        if ( false === $extension ) {
+            return false;
         }
+
+        $target = new File( $target_dir->path . DS . $this->randomHash() . '.' . $extension, false );
+
+        // make sure we get a unique file name (append counter)
+        while ( $target->exists() ) {
+            $target = new File( $target_dir->path . DS . $this->randomHash() . '.' . $extension, false );
+        }
+
+        if ( empty( $target->path ) ) {
+            return false;
+        }
+
+        return $target->path;
+    }
+
+    /**
+     * Get a random string of 32 chars length
+     *
+     * @return string
+     */
+    private function randomHash() {
+        try {
+            return md5( random_bytes( 16 ) );
+        } catch ( \Exception $e ) {
+            return md5( rand() );
+        }
+    }
+
+    /**
+     * Return folder for raw images. Create it, if it doesn't exist.
+     *
+     * @return Folder
+     */
+    private function getRawImagesFolder(): Folder {
+        return new Folder( self::BASE_PATH . DS . self::FOLDER_RAWIMAGES, true );
+    }
+
+    /**
+     * Save the image chunk
+     *
+     * @param string $chunk
+     * @param string $original_file_name
+     *
+     * @return bool
+     */
+    public function saveChunk( string $chunk, string $original_file_name ): bool {
+        $this->removeOldChunks();
+
+        // the image is the part after the last comma
+        $start = strrpos( $chunk, ',' );
+
+        if ( false === $start ) {
+            return false;
+        }
+
+        $base64_chunk = substr( $chunk, $start );
+        $image_chunk  = base64_decode( $base64_chunk );
+
+        if ( false === $image_chunk ) {
+            return false;
+        }
+
+        // this must be the same for every chunk, so don't check for existance
+        $file_path = $this->getChunkFileName( $original_file_name, true );
+
+        // store image to tempfile
+        $file = new File( $file_path, true, 0644 );
+
+        return $file->append( $image_chunk );
+    }
+
+    /**
+     * Remove chunks without change for TTL_CHUNK seconds
+     */
+    private function removeOldChunks(): void {
+        $folder = $this->getChunkFolder();
+        $this->removeOldFiles( $folder, self::TTL_CHUNK );
+    }
+
+    /**
+     * Remove all files in folder that are older than $ttl seconds
+     *
+     * @param Folder $folder
+     * @param int $ttl time to live in seconds
+     *
+     * @return bool
+     */
+    private function removeOldFiles( Folder $folder, int $ttl ): bool {
+        $files   = $folder->read( false, false, true )[1];
+        $max_age = time() - $ttl;
+
+        foreach ( $files as $file ) {
+            $f = new File( $file );
+
+            if ( $f->lastChange() && $f->lastChange() < $max_age ) {
+                if ( ! $f->delete() ) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -189,50 +254,34 @@ class ImageFileHandlerComponent extends Component
      *
      * @return bool true if everything went well
      */
-    public function saveGradient(\Imagick $image)
-    {
+    public function saveGradient( \Imagick $image ) {
+        $this->removeOldGradients();
+
         $format = 'jpeg';
+        $path   = $this->getTargetPath( "gradient.$format", $this->getGradientsFolder() );
+        $image->setImageFormat( $format );
 
-        // set target image path
-        $dir = new Folder(WWW_ROOT . 'gradients', true);
-        $prefix = $image->getimageWidth() . 'x' . $image->getimageHeight() . '_';
-        $filename = uniqid($prefix, true) . '.' . $format;
-        $this->setTargetPath($dir->path, $filename);
-
-        // delete old gradients
-        $seconds = 86400; // 24h
-        $this->_deleteOldFiles($dir->path, $seconds);
-
-        // save
-        $image->setImageFormat($format);
-
-        return $image->writeImage($this->getPath());
-    }
-
-    /**
-     * Deletes all files in $dir oder than $sec seconds
-     *
-     * @param string $dir path to directory
-     * @param int $sec time files should be kept in seconds
-     */
-    private function _deleteOldFiles(string $dir, int $sec)
-    {
-        // cycle through all files in the directory
-        foreach (glob($dir . DS . "*") as $file) {
-            // delete file if it is older than $sec
-            if (filemtime($file) < time() - $sec) {
-                unlink($file);
-            }
+        if ( $image->writeImage( $path ) ) {
+            return $path;
         }
+
+        return false;
     }
 
     /**
-     * Returns image path
-     *
-     * @return string
+     * Remove gradients without change for TTL_GRADIENTS seconds
      */
-    public function getPath()
-    {
-        return $this->target_path;
+    private function removeOldGradients(): void {
+        $folder = $this->getGradientsFolder();
+        $this->removeOldFiles( $folder, self::TTL_GRADIENTS );
+    }
+
+    /**
+     * Return folder for gradients. Create it, if it doesn't exist.
+     *
+     * @return Folder
+     */
+    private function getGradientsFolder(): Folder {
+        return new Folder( self::BASE_PATH . DS . self::FOLDER_GRADIENTS, true );
     }
 }

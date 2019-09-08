@@ -30,6 +30,13 @@ $(document).ready(function () {
     }
 
     var self = this;
+    var uploadChunkSize = 1024*1024; // 1MB
+    var reader = {};
+    var file = {};
+
+    // reset the image uploader
+    // https://stackoverflow.com/a/832730
+    $('.cropit-image-input').replaceWith($('.cropit-image-input').val('').clone(true));
 
     $('#legal-check').legalChecker();
 
@@ -297,6 +304,17 @@ $(document).ready(function () {
 
     // generate image
     $("#image-generate").click(function () {
+        if (self.getImageName()) {
+            self.uploadImage()
+                .then(function() { self.uploadImageData(); })
+                .catch(function() { $('.warning-image-generation-error').removeClass('d-none') });
+        } else {
+            self.uploadImageData();
+        }
+    });
+
+    // upload the bar data etc
+    this.uploadImageData = function() {
         var data = self.getImageData();
 
         $.ajax({
@@ -345,8 +363,9 @@ $(document).ready(function () {
             console.log(data, status, error);
             $('.warning-image-generation-error').removeClass('d-none');
         });
-    });
+    }
 
+    // get the bar, the logo data etc
     this.getImageData = function() {
         var jsondata,
             bardata = [],
@@ -406,8 +425,7 @@ $(document).ready(function () {
                     x: $imageCropper.cropit('offset').x * scaleFactor,
                     y: $imageCropper.cropit('offset').y * scaleFactor
                 },
-                src: $imageCropper.cropit('imageSrc'),
-                name: $('.cropit-image-input').val().split('\\').pop().split('/').pop() // http://stackoverflow.com/questions/423376/how-to-get-the-file-name-from-a-full-path-using-javascript
+                name: self.getImageName()
             },
             preview: {
                 size: {
@@ -441,5 +459,66 @@ $(document).ready(function () {
         $rotator.css('transform', 'rotate(-5deg)');
 
         return JSON.stringify(data);
+    }
+
+    // get the name of the image
+    this.getImageName = function() {
+        // http://stackoverflow.com/questions/423376/how-to-get-the-file-name-from-a-full-path-using-javascript
+        return $('.cropit-image-input').val().split('\\').pop().split('/').pop();
+    }
+
+    // handle image upload, return a promise
+    this.uploadImage = function() {
+        return new Promise(function(resolve, reject) {
+            reader = new FileReader();
+            file = document.querySelector( '.cropit-image-input' ).files[0];
+
+            self.upload_file( 0, resolve, reject );
+        });
+    }
+
+    // upload the image in chunks
+    this.upload_file = function( start, resolve, reject ) {
+        var next_chunk = start + uploadChunkSize + 1;
+        var blob = file.slice( start, next_chunk );
+
+        reader.onloadend = function( event ) {
+            if ( event.target.readyState !== FileReader.DONE ) {
+                return;
+            }
+
+            $.ajax( {
+                url: '/images/ajaxUploadImage',
+                type: 'POST',
+                dataType: 'json',
+                cache: false,
+                data: {
+                    imageChunk: event.target.result,
+                    fileName: self.getImageName()
+                },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-Token', x_csrf_token);
+                },
+                error: function( jqXHR, textStatus, errorThrown ) {
+                    console.log( jqXHR, textStatus, errorThrown );
+                    reject(textStatus);
+                },
+                success: function( data ) {
+                    if (data.content !== true){
+                        reject('Unable to upload image.');
+                    }
+
+                    if ( next_chunk < file.size ) {
+                        // upload next chunk
+                        self.upload_file( next_chunk, resolve, reject );
+                    } else {
+                        // upload completed
+                        resolve();
+                    }
+                }
+            } );
+        };
+
+        reader.readAsDataURL( blob );
     }
 });

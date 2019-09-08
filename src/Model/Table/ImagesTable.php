@@ -163,15 +163,16 @@ class ImagesTable extends Table {
      *
      * @param string $path to the image
      * @param \stdClass $data @see ImagesController::ajaxAdd()
+     * @param string $file_name
      *
      * @return int image id
      */
-    public function addOriginal( string $path, \stdClass $data ) {
+    public function addOriginal( string $path, \stdClass $data, $file_name ) {
         $hash = $this->getNewHash();
         $dims = getimagesize( $path );
 
         $image           = $this->newEntity();
-        $image->filename = $data->image->name;
+        $image->filename = $file_name;
         $image->width    = $dims[0];
         $image->height   = $dims[1];
         $image->hash     = $hash;
