@@ -304,6 +304,8 @@ $(document).ready(function () {
 
     // generate image
     $("#image-generate").click(function () {
+        self.showWorkingDialog();
+
         if (self.getImageName()) {
             self.uploadImage()
                 .then(function() { self.uploadImageData(); })
@@ -323,20 +325,6 @@ $(document).ready(function () {
             data: {addImage: data},
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('X-CSRF-Token', x_csrf_token);
-                $('.warning-image-generation-error').addClass('d-none');
-                if (initialImage) {
-                    $('#legal-check').hide();
-                    $('#please-fill-out-legal').hide();
-                    $('#download-button').show();
-                } else {
-                    $('#legal-check').show();
-                    $('#please-fill-out-legal').show();
-                    $('#download-button').hide();
-                }
-                $('#download-button a#download-img').remove();
-                $('#generating-image-loader').show();
-                $('#sending-legal-loader').hide();
-                $('#generating-image').dialog('open');
             }
         }).done(function (data, status) {
             $('#generating-image-loader').hide();
@@ -363,6 +351,23 @@ $(document).ready(function () {
             console.log(data, status, error);
             $('.warning-image-generation-error').removeClass('d-none');
         });
+    }
+
+    this.showWorkingDialog = function() {
+        $('.warning-image-generation-error').addClass('d-none');
+        if (initialImage) {
+            $('#legal-check').hide();
+            $('#please-fill-out-legal').hide();
+            $('#download-button').show();
+        } else {
+            $('#legal-check').show();
+            $('#please-fill-out-legal').show();
+            $('#download-button').hide();
+        }
+        $('#download-button a#download-img').remove();
+        $('#generating-image-loader').show();
+        $('#sending-legal-loader').hide();
+        $('#generating-image').dialog('open');
     }
 
     // get the bar, the logo data etc
