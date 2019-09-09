@@ -30,7 +30,7 @@ $(document).ready(function () {
     }
 
     var self = this;
-    var uploadChunkSize = 1024*1024; // 1MB
+    var uploadChunkSize = 1024 * 1024; // 1MB
     var reader = {};
     var file = {};
 
@@ -308,15 +308,19 @@ $(document).ready(function () {
 
         if (self.getImageName()) {
             self.uploadImage()
-                .then(function() { self.uploadImageData(); })
-                .catch(function() { $('.warning-image-generation-error').removeClass('d-none') });
+                .then(function () {
+                    self.uploadImageData();
+                })
+                .catch(function () {
+                    $('.warning-image-generation-error').removeClass('d-none')
+                });
         } else {
             self.uploadImageData();
         }
     });
 
     // upload the bar data etc
-    this.uploadImageData = function() {
+    this.uploadImageData = function () {
         var data = self.getImageData();
 
         $.ajax({
@@ -353,7 +357,7 @@ $(document).ready(function () {
         });
     }
 
-    this.showWorkingDialog = function() {
+    this.showWorkingDialog = function () {
         $('.warning-image-generation-error').addClass('d-none');
         if (initialImage) {
             $('#legal-check').hide();
@@ -371,7 +375,7 @@ $(document).ready(function () {
     }
 
     // get the bar, the logo data etc
-    this.getImageData = function() {
+    this.getImageData = function () {
         var jsondata,
             bardata = [],
             data,
@@ -467,32 +471,32 @@ $(document).ready(function () {
     }
 
     // get the name of the image
-    this.getImageName = function() {
+    this.getImageName = function () {
         // http://stackoverflow.com/questions/423376/how-to-get-the-file-name-from-a-full-path-using-javascript
         return $('.cropit-image-input').val().split('\\').pop().split('/').pop();
     }
 
     // handle image upload, return a promise
-    this.uploadImage = function() {
-        return new Promise(function(resolve, reject) {
+    this.uploadImage = function () {
+        return new Promise(function (resolve, reject) {
             reader = new FileReader();
-            file = document.querySelector( '.cropit-image-input' ).files[0];
+            file = document.querySelector('.cropit-image-input').files[0];
 
-            self.upload_file( 0, resolve, reject );
+            self.upload_file(0, resolve, reject);
         });
     }
 
     // upload the image in chunks
-    this.upload_file = function( start, resolve, reject ) {
+    this.upload_file = function (start, resolve, reject) {
         var next_chunk = start + uploadChunkSize + 1;
-        var blob = file.slice( start, next_chunk );
+        var blob = file.slice(start, next_chunk);
 
-        reader.onloadend = function( event ) {
-            if ( event.target.readyState !== FileReader.DONE ) {
+        reader.onloadend = function (event) {
+            if (event.target.readyState !== FileReader.DONE) {
                 return;
             }
 
-            $.ajax( {
+            $.ajax({
                 url: '/images/ajaxUploadImage',
                 type: 'POST',
                 dataType: 'json',
@@ -504,26 +508,26 @@ $(document).ready(function () {
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('X-CSRF-Token', x_csrf_token);
                 },
-                error: function( jqXHR, textStatus, errorThrown ) {
-                    console.log( jqXHR, textStatus, errorThrown );
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR, textStatus, errorThrown);
                     reject(textStatus);
                 },
-                success: function( data ) {
-                    if (data.content !== true){
+                success: function (data) {
+                    if (data.content !== true) {
                         reject('Unable to upload image.');
                     }
 
-                    if ( next_chunk < file.size ) {
+                    if (next_chunk < file.size) {
                         // upload next chunk
-                        self.upload_file( next_chunk, resolve, reject );
+                        self.upload_file(next_chunk, resolve, reject);
                     } else {
                         // upload completed
                         resolve();
                     }
                 }
-            } );
+            });
         };
 
-        reader.readAsDataURL( blob );
+        reader.readAsDataURL(blob);
     }
 });
