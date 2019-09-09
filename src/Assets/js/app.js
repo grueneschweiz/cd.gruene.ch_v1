@@ -438,8 +438,8 @@ $(document).ready(function () {
             },
             preview: {
                 size: {
-                    width: $imageCropper.cropit('previewSize').width * scaleFactor,
-                    height: $imageCropper.cropit('previewSize').height * scaleFactor
+                    width: Math.round($imageCropper.cropit('previewSize').width * scaleFactor),
+                    height: Math.round($imageCropper.cropit('previewSize').height * scaleFactor)
                 }
             },
             bars: {
