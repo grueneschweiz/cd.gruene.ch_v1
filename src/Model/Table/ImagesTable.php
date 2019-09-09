@@ -2,10 +2,6 @@
 
 namespace App\Model\Table;
 
-use App\Model\Entity\Image;
-use Cake\Datasource\EntityInterface;
-use Cake\Log\Log;
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -168,29 +164,25 @@ class ImagesTable extends Table {
      * @return int image id
      */
     public function addOriginal( string $path, \stdClass $data, $file_name ) {
-        $hash = $this->getNewHash();
+
+
+
+
+
         $dims = getimagesize( $path );
 
         $image           = $this->newEntity();
         $image->filename = $file_name;
         $image->width    = $dims[0];
         $image->height   = $dims[1];
-        $image->hash     = $hash;
+        $image->hash     = md5_file( $path );
         $image->user_id  = $data->user_id;
-        $image->flattext = $this->_getBarText( $data->bars->data ) . ' ' . $data->logo->subline;
+        $image->flattext = $this->_getBarText( $data->bars->data );
+        $image->logo_id  = property_exists( $data->logo, 'id' ) ? (int) $data->logo->id : null;
 
         $this->save( $image );
 
         return $image->id;
-    }
-
-    /**
-     * Generate a new image hash
-     *
-     * @return string
-     */
-    public function getNewHash() {
-        return uniqid( '' );
     }
 
     /**
@@ -210,6 +202,15 @@ class ImagesTable extends Table {
     }
 
     /**
+     * Generate a new image hash
+     *
+     * @return string
+     */
+    public function getNewHash() {
+        return uniqid( '' );
+    }
+
+    /**
      * Add the final image
      *
      * @param string $path to the image
@@ -220,38 +221,21 @@ class ImagesTable extends Table {
     public function addFinal( string $path, \stdClass $data, string $filename, int $original_id ) {
         $dims = getimagesize( $path );
 
-        $image = $this->_getOrCreateByHash( $data->hash );
-
+        $image              = $this->newEntity();
         $image->original_id = $original_id;
         $image->filename    = $filename;
         $image->width       = $dims[0];
         $image->height      = $dims[1];
+        $image->hash        = md5_file( $path );
         $image->user_id     = $data->user_id;
-
-        $image->flattext .= $this->_getBarText( $data->bars->data );
+        $image->logo_id     = property_exists( $data->logo, 'id' ) ? (int) $data->logo->id : null;
+        $image->flattext    = $this->_getBarText( $data->bars->data );
 
         $this->save( $image );
     }
 
     /**
-     * Get image by hash. Return a new entity if no image was found.
-     *
-     * @param $hash
-     *
-     * @return Image
-     */
-    private function _getOrCreateByHash( $hash ): Image {
-        $image = $this->find()->where( [ 'hash' => $hash ] )->first();
-        if ( ! $image ) {
-            $image       = $this->newEntity();
-            $image->hash = $hash;
-        }
-
-        return $image;
-    }
-
-    /**
-     * Complete image data with legal information. Wait until image generation has finished.
+     * Complete image data with legal information. Update old information.
      *
      * @param array $data as received by ImagesController::ajaxAddLegal()
      * Must contain at least the following key value pairs (key => [possible, values]):
@@ -263,11 +247,15 @@ class ImagesTable extends Table {
      * - source => any input
      * - licence => ["other", "cc+", "cc"]
      * - originator => any input
+     * @param int $userId
      *
      * @return bool
      */
-    public function addLegal( array $data ) {
-        $image = $this->find()->where( [ 'hash' => $data['hash'] ] )->first();
+    public function addLegal( array $data, int $userId ) {
+        $image = $this->find()
+                      ->where( [ 'hash' => $data['hash'] ] )
+                      ->andWhere( [ 'user_id' => $userId ] )
+                      ->first();
         if ( ! $image ) {
             return false;
         }

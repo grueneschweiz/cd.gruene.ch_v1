@@ -17,7 +17,6 @@ $(document).ready(function () {
 });
 
 var $cibuilder;
-var newHash;
 
 $(document).ready(function () {
     'use strict';
@@ -33,7 +32,7 @@ $(document).ready(function () {
     var uploadChunkSize = 1024 * 1024; // 1MB
     var reader = {};
     var file = {};
-    var oldHash;
+    var rawImageHash;
 
     // reset the image uploader
     // https://stackoverflow.com/a/832730
@@ -313,7 +312,7 @@ $(document).ready(function () {
                     return self.uploadImageData();
                 })
                 .then(function() {
-                    $legalChecker.submit_legal_when_ready( oldHash );
+                    $legalChecker.submit_legal_when_ready( rawImageHash );
                 })
                 .catch(function () {
                     $('.warning-image-generation-error').removeClass('d-none')
@@ -331,7 +330,7 @@ $(document).ready(function () {
             $.ajax({
                 url: '/images/ajaxAdd',
                 type: 'POST',
-                data: {addImage: data},
+                data: {addImage: JSON.stringify(data)}, // todo: send directly (without JSON.stringify)
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('X-CSRF-Token', x_csrf_token);
                 }
@@ -347,12 +346,10 @@ $(document).ready(function () {
                         }
                         return;
                     }
-                    oldHash = $('input[name="hash"]').val();
-                    newHash = content.newHash;
+                    rawImageHash = content.rawImageHash;
                     $('#download-button').html('<a href="/protected/finalimages/' + content.filename + '" class="btn btn-outline-primary" id="download-img" download>' + trans.download_image + '</a>');
                     $('#download-img').click(function () {
                         $('#generating-image').dialog('close');
-                        $('input[name="hash"]').val(newHash);
                     });
 
                     resolve();
@@ -470,14 +467,14 @@ $(document).ready(function () {
                 margin: parseFloat($rotator.css('margin-top')) * scaleFactor,
                 fontsize: parseFloat($subline.css('font-size')) * scaleFactor,
                 subline: $subline.text(),
-                left: parseFloat($subline.css('margin-left')) * scaleFactor
-            },
-            hash: $('input[name="hash"]').val()
+                left: parseFloat($subline.css('margin-left')) * scaleFactor,
+                id: $('#logo').val()
+            }
         };
 
         $rotator.css('transform', 'rotate(-5deg)');
 
-        return JSON.stringify(data);
+        return data;
     }
 
     // get the name of the image

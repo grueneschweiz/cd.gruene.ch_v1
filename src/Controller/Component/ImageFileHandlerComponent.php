@@ -20,7 +20,7 @@ class ImageFileHandlerComponent extends Component {
     const ALLOWED_MAX_FILE_SIZE = 16 * 1024 * 1024; // 16MB
 
     /**
-     * Calidate the chunk and move the chunk to its final path.
+     * Validate the chunk and move the chunk to its final path.
      *
      * @param \stdClass $data
      *
@@ -289,5 +289,18 @@ class ImageFileHandlerComponent extends Component {
      */
     private function getGradientsFolder(): Folder {
         return new Folder( self::BASE_PATH . DS . self::FOLDER_GRADIENTS, true );
+    }
+
+    /**
+     * Return full file path from the given file name or false if file doesn't exist
+     *
+     * @param string $file_name
+     *
+     * @return bool|string
+     */
+    public function getRawImagePath( string $file_name ) {
+        $file = new File( $this->getRawImagesFolder()->path . DS . $file_name );
+
+        return $file->exists() ? $file->pwd() : false;
     }
 }

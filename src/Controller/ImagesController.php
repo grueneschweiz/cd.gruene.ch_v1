@@ -112,15 +112,11 @@ class ImagesController extends AppController {
         // get border options
         $border_options = $this->Images->getBorderOptions();
 
-        // image hash
-        $hash = $this->Images->getNewHash();
-
         $this->set( 'logos', $logos );
         $this->set( 'image_sizes', $image_sizes );
         $this->set( 'layouts', $layouts );
         $this->set( 'color_schemes', $color_schemes );
         $this->set( 'border_options', $border_options );
-        $this->set( 'hash', $hash );
     }
 
     /**
@@ -152,6 +148,7 @@ class ImagesController extends AppController {
             $data          = json_decode( $this->request->getData( 'addImage' ) );
             $data->user_id = $this->Auth->user( 'id' );
             $original_id   = - 1;
+            $hash          = false;
 
             // if a custom image was given
             if ( ! empty( $data->image->name ) ) {
@@ -164,7 +161,24 @@ class ImagesController extends AppController {
                     $success = $exception->getMessage();
                 }
 
+                // prevent duplicates
                 if ( false !== $path ) {
+                    $hash       = md5_file( $path );
+                    $duplicates = $this->Images->find()->where( [ 'hash' => $hash ] );
+                    if ( $duplicates->count() ) {
+                        $older       = $duplicates->first();
+                        $older_path  = $this->ImageFileHandler->getRawImagePath( $older->filename );
+                        $original_id = $older->id;
+                    }
+                    if ( isset( $older_path ) ) {
+                        unlink( $path );
+                        $path    = $older_path;
+                        $success = true;
+                    }
+                }
+
+                // store in db
+                if ( false !== $path && ! isset( $older_path ) ) {
                     $file_name   = pathinfo( $path, PATHINFO_FILENAME ) . '.' . pathinfo( $path, PATHINFO_EXTENSION );
                     $original_id = $this->Images->addOriginal( $path, $data, $file_name );
                     $success     = isset( $original_id ) && ! empty( $original_id );
@@ -252,7 +266,7 @@ class ImagesController extends AppController {
                 $filename = $this->ImageEditor->save();
                 $this->Images->addFinal( $this->ImageEditor->path, $data, $filename, $original_id );
 
-                $content = [ 'success' => true, 'filename' => $filename, 'newHash' => $this->Images->getNewHash() ];
+                $content = [ 'success' => true, 'filename' => $filename, 'rawImageHash' => $hash ];
             } else {
                 $content = $error;
             }
@@ -313,7 +327,8 @@ class ImagesController extends AppController {
         if ( $this->request->is( 'post' ) && $this->request->is( 'ajax' ) ) {
             // get data
             $data   = $this->request->getData();
-            $return = $this->Images->addLegal( $data );
+            $userId = $this->Auth->user( 'id' );
+            $return = $this->Images->addLegal( $data, $userId );
         } else {
             $return = 'access denied';
         }
