@@ -267,12 +267,10 @@ class ImagesTable extends Table {
      * @return bool
      */
     public function addLegal( array $data ) {
-        do {
-            $image = $this->find()->where( [ 'hash' => $data['hash'] ] )->first();
-            if ( ! $image ) {
-                sleep( 1 );
-            }
-        } while ( ! $image );
+        $image = $this->find()->where( [ 'hash' => $data['hash'] ] )->first();
+        if ( ! $image ) {
+            return false;
+        }
 
         if ( $image->original_id ) {
             $original = $this->get( $image->original_id );
