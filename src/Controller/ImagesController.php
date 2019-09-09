@@ -130,7 +130,7 @@ class ImagesController extends AppController {
         if ( $this->request->is( 'post' ) && $this->request->is( 'ajax' ) ) {
             $chunk     = $this->request->getData( 'imageChunk' );
             $file_name = $this->request->getData( 'fileName' );
-            $part      = (int) $this->request->getData('chunkNum' );
+            $part      = (int) $this->request->getData( 'chunkNum' );
             $content   = $this->ImageFileHandler->saveChunk( $chunk, $file_name, $part );
         } else {
             $content = 'access denied';
@@ -156,17 +156,18 @@ class ImagesController extends AppController {
             // if a custom image was given
             if ( ! empty( $data->image->name ) ) {
                 // save it
-                try{
-                    $path = $this->ImageFileHandler->save( $data );
+                try {
+                    $path    = $this->ImageFileHandler->save( $data );
                     $success = $path;
-                } catch (InvalidImageException $exception){
-                    $path = false;
+                } catch ( InvalidImageException $exception ) {
+                    $path    = false;
                     $success = $exception->getMessage();
                 }
 
                 if ( false !== $path ) {
-                    $original_id = $this->Images->addOriginal( $path, $data, $path );
-                    $success = isset( $original_id ) && ! empty( $original_id );
+                    $file_name   = pathinfo( $path, PATHINFO_FILENAME ) . '.' . pathinfo( $path, PATHINFO_EXTENSION );
+                    $original_id = $this->Images->addOriginal( $path, $data, $file_name );
+                    $success     = isset( $original_id ) && ! empty( $original_id );
                 }
             } else {
                 // generate gradient image if custom image is missing
