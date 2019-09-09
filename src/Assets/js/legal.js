@@ -8,11 +8,13 @@
         var self = this;
 
         this._construct = function () {
+            this.resetReadyState();
+
             $('input[name="people"]').on('change', this.people);
             $('input[name="right_of_personality"]').on('change', this.right_of_personality);
             $('select[name="own_image"]').on('change', this.own_image);
 
-            $('#submit-legal').on('click', this.submit_legal);
+            $('#submit-legal').on('click', this.prepare_submit_legal);
 
             $('#stock-image-questions').hide();
             $('#photographer-questions').hide();
@@ -20,6 +22,19 @@
             $('#usage-questions').hide();
             $('#others_can_use').prop('disabled', true);
         };
+
+        this.resetReadyState = function () {
+            self.readyFlag = false;
+
+            if (typeof self.rejectReady === 'function') {
+                self.rejectReady();
+            }
+
+            self.readyPromise = new Promise(function (resolve, reject) {
+                self.resolveReady = resolve;
+                self.rejectReady = reject;
+            });
+        }
 
         this.people = function ($el) {
             var $el = $($el.target);
@@ -117,13 +132,31 @@
             }
         };
 
-        this.submit_legal = function () {
+        this.prepare_submit_legal = function () {
             if (!self.validate()) {
                 return;
             }
 
+            $(self).hide();
+            $('#sending-legal-loader').show();
+
+            self.resolveReady();
+            self.readyFlag = true;
+        };
+
+        this.submit_legal_when_ready = function (hash) {
+            if (self.readyFlag) {
+                this.submit_legal(hash);
+            } else {
+                self.readyPromise.then(function () {
+                    self.submit_legal(hash);
+                });
+            }
+        }
+
+        this.submit_legal = function (hash) {
             var data = {
-                hash: $('input[name="hash"]').val(),
+                hash: hash,
                 people: $('input[name="people"]:checked').val(),
                 right_of_personality: $('input[name="right_of_personality"]:checked').val(),
                 own_image: $('select[name="own_image"]').val(),
@@ -140,8 +173,6 @@
                 data: data,
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('X-CSRF-Token', x_csrf_token);
-                    $(self).hide();
-                    $('#sending-legal-loader').show();
                 }
             }).done(function (xhr, status) {
                 if ('success' === status && xhr === 'true') {
@@ -152,11 +183,12 @@
                 }
             }).always(function () {
                 $('#sending-legal-loader').hide();
+                self.resetReadyState();
             }).fail(function (data, status, error) {
                 console.log(data, status, error);
                 $('.warning-image-generation-error').removeClass('d-none');
             });
-        };
+        }
 
         this.validate = function () {
             var valid = true;

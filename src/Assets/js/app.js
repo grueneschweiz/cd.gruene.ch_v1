@@ -33,12 +33,13 @@ $(document).ready(function () {
     var uploadChunkSize = 1024 * 1024; // 1MB
     var reader = {};
     var file = {};
+    var oldHash;
 
     // reset the image uploader
     // https://stackoverflow.com/a/832730
     $('.cropit-image-input').replaceWith($('.cropit-image-input').val('').clone(true));
 
-    $('#legal-check').legalChecker();
+    var $legalChecker = $('#legal-check').legalChecker();
 
     $('#canvas-width-setter, #canvas-height-setter').trigger('change');
     var startup_width = $('#canvas-width-setter').val();
@@ -309,7 +310,10 @@ $(document).ready(function () {
         if (self.getImageName()) {
             self.uploadImage()
                 .then(function () {
-                    self.uploadImageData();
+                    return self.uploadImageData();
+                })
+                .then(function() {
+                    $legalChecker.submit_legal_when_ready( oldHash );
                 })
                 .catch(function () {
                     $('.warning-image-generation-error').removeClass('d-none')
@@ -321,39 +325,45 @@ $(document).ready(function () {
 
     // upload the bar data etc
     this.uploadImageData = function () {
-        var data = self.getImageData();
+        return new Promise(function (resolve, reject) {
+            var data = self.getImageData();
 
-        $.ajax({
-            url: '/images/ajaxAdd',
-            type: 'POST',
-            data: {addImage: data},
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-CSRF-Token', x_csrf_token);
-            }
-        }).done(function (data, status) {
-            $('#generating-image-loader').hide();
-
-            if (status === 'success') {
-                var content = $.parseJSON(data);
-                if (content.filename === undefined) {
-                    $('.warning-image-generation-error').removeClass('d-none');
-                    if (content) {
-                        $('.warning-image-generation-error span').text(content);
-                    }
-                    return;
+            $.ajax({
+                url: '/images/ajaxAdd',
+                type: 'POST',
+                data: {addImage: data},
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-Token', x_csrf_token);
                 }
-                newHash = content.newHash;
-                $('#download-button').html('<a href="/protected/finalimages/' + content.filename + '" class="btn btn-outline-primary" id="download-img" download>' + trans.download_image + '</a>');
-                $('#download-img').click(function () {
-                    $('#generating-image').dialog('close');
-                    $('input[name="hash"]').val(newHash);
-                });
-            } else {
-                alert(trans.image_generation_error);
-            }
-        }).fail(function (data, status, error) {
-            console.log(data, status, error);
-            $('.warning-image-generation-error').removeClass('d-none');
+            }).done(function (data, status) {
+                $('#generating-image-loader').hide();
+
+                if (status === 'success') {
+                    var content = $.parseJSON(data);
+                    if (content.filename === undefined) {
+                        $('.warning-image-generation-error').removeClass('d-none');
+                        if (content) {
+                            $('.warning-image-generation-error span').text(content);
+                        }
+                        return;
+                    }
+                    oldHash = $('input[name="hash"]').val();
+                    newHash = content.newHash;
+                    $('#download-button').html('<a href="/protected/finalimages/' + content.filename + '" class="btn btn-outline-primary" id="download-img" download>' + trans.download_image + '</a>');
+                    $('#download-img').click(function () {
+                        $('#generating-image').dialog('close');
+                        $('input[name="hash"]').val(newHash);
+                    });
+
+                    resolve();
+                } else {
+                    console.log(data);
+                    reject();
+                }
+            }).fail(function (data, status, error) {
+                console.log(data, status, error);
+                reject();
+            });
         });
     }
 
