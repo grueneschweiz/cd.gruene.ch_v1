@@ -36,13 +36,20 @@ class ImageFileHandlerComponent extends Component {
 
         $extension = $this->getExtension( $file_name );
 
-        $this->validate( $chunk, $extension );
+        try {
+            $this->validate( $chunk, $extension );
+        } catch ( InvalidImageException $exception ) {
+            $chunk->delete();
+            throw $exception;
+        }
 
         $target_path = $this->getTargetPath( $file_name, $this->getRawImagesFolder() );
 
         // move chunk to target path
         if ( $chunk->copy( $target_path ) && $chunk->delete() ) {
             return $target_path;
+        } else {
+            $chunk->delete();
         }
 
         return false;
@@ -98,31 +105,31 @@ class ImageFileHandlerComponent extends Component {
      *
      * @throws InvalidImageException
      */
-    public function validate( File $file, string $extension ):void {
+    public function validate( File $file, string $extension ): void {
         // file exists
         if ( ! $file->exists() ) {
-            throw new InvalidImageException(__( 'Uploaded image not found' ));
+            throw new InvalidImageException( __( 'Uploaded image not found' ) );
         }
 
         // file extension
         if ( ! in_array( $extension, self::ALLOWED_EXT ) ) {
-            throw new InvalidImageException(__( 'Only JPG, JPEG & PNG files are allowed.' ));
+            throw new InvalidImageException( __( 'Only JPG, JPEG & PNG files are allowed.' ) );
         }
 
         // mime type
         if ( ! in_array( $file->mime(), self::ALLOWED_MIME ) ) {
-            throw new InvalidImageException(__( 'Only JPG, JPEG & PNG files are allowed.' ));
+            throw new InvalidImageException( __( 'Only JPG, JPEG & PNG files are allowed.' ) );
         }
 
         // file size
         if ( self::ALLOWED_MAX_FILE_SIZE < $file->size() ) {
-            throw new InvalidImageException(__( 'Max file size ({0}MB) exceeded', round( self::ALLOWED_MAX_FILE_SIZE / ( 1024 * 1024 ) ) ));
+            throw new InvalidImageException( __( 'Max file size ({0}MB) exceeded', round( self::ALLOWED_MAX_FILE_SIZE / ( 1024 * 1024 ) ) ) );
         }
 
         // can we get the image size ?
         $check = getimagesize( $file->path );
         if ( false === $check ) {
-            throw new InvalidImageException(__( 'Only JPG, JPEG & PNG files are allowed.' ));
+            throw new InvalidImageException( __( 'Failed to read image. Try to resize it in an image editor and upload it again.' ) );
         }
     }
 
@@ -182,10 +189,11 @@ class ImageFileHandlerComponent extends Component {
      *
      * @param string $chunk
      * @param string $original_file_name
+     * @param int $chunkNum
      *
      * @return bool
      */
-    public function saveChunk( string $chunk, string $original_file_name ): bool {
+    public function saveChunk( string $chunk, string $original_file_name, int $chunkNum ): bool {
         $this->removeOldChunks();
 
         // the image is the part after the last comma
@@ -208,7 +216,8 @@ class ImageFileHandlerComponent extends Component {
         // store image to tempfile
         $file = new File( $file_path, true, 0644 );
 
-        return $file->append( $image_chunk );
+        // truncate any existing file content on first chunk
+        return 0 === $chunkNum ? $file->write( $image_chunk ) : $file->append( $image_chunk );
     }
 
     /**

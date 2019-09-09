@@ -130,7 +130,8 @@ class ImagesController extends AppController {
         if ( $this->request->is( 'post' ) && $this->request->is( 'ajax' ) ) {
             $chunk     = $this->request->getData( 'imageChunk' );
             $file_name = $this->request->getData( 'fileName' );
-            $content   = $this->ImageFileHandler->saveChunk( $chunk, $file_name );
+            $part      = (int) $this->request->getData('chunkNum' );
+            $content   = $this->ImageFileHandler->saveChunk( $chunk, $file_name, $part );
         } else {
             $content = 'access denied';
         }

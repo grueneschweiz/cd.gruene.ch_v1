@@ -503,6 +503,7 @@ $(document).ready(function () {
                 cache: false,
                 data: {
                     imageChunk: event.target.result,
+                    chunkNum: start,
                     fileName: self.getImageName()
                 },
                 beforeSend: function (xhr) {
