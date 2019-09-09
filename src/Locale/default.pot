@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-09-07 15:25+0000\n"
+"POT-Creation-Date: 2019-09-09 16:59+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -138,24 +138,28 @@ msgstr ""
 msgid "The password could not be saved. Is it secure enough?"
 msgstr ""
 
-#: Controller/Component/ImageEditorComponent.php:195
+#: Controller/Component/ImageEditorComponent.php:204
 msgid "Logo not found."
 msgstr ""
 
-#: Controller/Component/ImageEditorComponent.php:291
+#: Controller/Component/ImageEditorComponent.php:297
 msgid "No valid color scheme given."
 msgstr ""
 
-#: Controller/Component/ImageFileHandlerComponent.php:145;151;154
+#: Controller/Component/ImageFileHandlerComponent.php:111
+msgid "Uploaded image not found"
+msgstr ""
+
+#: Controller/Component/ImageFileHandlerComponent.php:116;121
 msgid "Only JPG, JPEG & PNG files are allowed."
 msgstr ""
 
-#: Controller/Component/ImageFileHandlerComponent.php:161
+#: Controller/Component/ImageFileHandlerComponent.php:126
 msgid "Max file size ({0}MB) exceeded"
 msgstr ""
 
-#: Controller/Component/ImageFileHandlerComponent.php:181
-msgid "Sorry, there was an error uploading your file."
+#: Controller/Component/ImageFileHandlerComponent.php:132
+msgid "Failed to read image. Try to resize it in an image editor and upload it again."
 msgstr ""
 
 #: Model/Table/GroupsTable.php:122
