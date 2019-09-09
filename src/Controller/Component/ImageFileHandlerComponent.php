@@ -25,6 +25,8 @@ class ImageFileHandlerComponent extends Component {
      * @param \stdClass $data
      *
      * @return bool|string
+     *
+     * @throws InvalidImageException
      */
     public function save( \stdClass $data ) {
         $file_name = $data->image->name;
@@ -33,11 +35,8 @@ class ImageFileHandlerComponent extends Component {
         $chunk      = new File( $chunk_path, false );
 
         $extension = $this->getExtension( $file_name );
-        $valid     = $this->validate( $chunk, $extension );
 
-        if ( true !== $valid ) {
-            return $valid;
-        }
+        $this->validate( $chunk, $extension );
 
         $target_path = $this->getTargetPath( $file_name, $this->getRawImagesFolder() );
 
@@ -97,36 +96,34 @@ class ImageFileHandlerComponent extends Component {
      * @param File $file the file to validate
      * @param string $extension the file extension
      *
-     * @return true|string true on success else error string
+     * @throws InvalidImageException
      */
-    public function validate( File $file, string $extension ) {
+    public function validate( File $file, string $extension ):void {
         // file exists
         if ( ! $file->exists() ) {
-            return __( 'Uploaded image not found' );
+            throw new InvalidImageException(__( 'Uploaded image not found' ));
         }
 
         // file extension
         if ( ! in_array( $extension, self::ALLOWED_EXT ) ) {
-            return __( 'Only JPG, JPEG & PNG files are allowed.' );
+            throw new InvalidImageException(__( 'Only JPG, JPEG & PNG files are allowed.' ));
         }
 
         // mime type
         if ( ! in_array( $file->mime(), self::ALLOWED_MIME ) ) {
-            return __( 'Only JPG, JPEG & PNG files are allowed.' );
+            throw new InvalidImageException(__( 'Only JPG, JPEG & PNG files are allowed.' ));
         }
 
         // file size
         if ( self::ALLOWED_MAX_FILE_SIZE < $file->size() ) {
-            return __( 'Max file size ({0}MB) exceeded', round( self::ALLOWED_MAX_FILE_SIZE / ( 1024 * 1024 ) ) );
+            throw new InvalidImageException(__( 'Max file size ({0}MB) exceeded', round( self::ALLOWED_MAX_FILE_SIZE / ( 1024 * 1024 ) ) ));
         }
 
         // can we get the image size ?
         $check = getimagesize( $file->path );
         if ( false === $check ) {
-            return __( 'Only JPG, JPEG & PNG files are allowed.' );
+            throw new InvalidImageException(__( 'Only JPG, JPEG & PNG files are allowed.' ));
         }
-
-        return true;
     }
 
     /**

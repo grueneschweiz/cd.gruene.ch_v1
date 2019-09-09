@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\Component\ImageEditorComponent;
 use App\Controller\Component\ImageFileHandlerComponent;
+use App\Controller\Component\InvalidImageException;
 use App\Model\Entity\User;
 use Cake\Event\Event;
 
@@ -154,22 +155,35 @@ class ImagesController extends AppController {
             // if a custom image was given
             if ( ! empty( $data->image->name ) ) {
                 // save it
-                $path = $this->ImageFileHandler->save( $data );
+                try{
+                    $path = $this->ImageFileHandler->save( $data );
+                    $success = $path;
+                } catch (InvalidImageException $exception){
+                    $path = false;
+                    $success = $exception->getMessage();
+                }
+
                 if ( false !== $path ) {
                     $original_id = $this->Images->addOriginal( $path, $data, $path );
+                    $success = isset( $original_id ) && ! empty( $original_id );
                 }
-                $success = isset( $original_id ) && ! empty( $original_id );
             } else {
                 // generate gradient image if custom image is missing
                 $gradient = $this->ImageEditor->createWithGradient( $data->preview->size );
                 // save it
-                $path = $this->ImageFileHandler->saveGradient( $gradient );
+                $path    = $this->ImageFileHandler->saveGradient( $gradient );
                 $success = (bool) $path;
             }
 
             // if we have a processable image
             if ( true === $success ) {
                 $this->ImageEditor->createFromImage( $path );
+
+                $zoom = (float) $data->image->zoom;
+
+                // set final image dims
+                $width  = (int) $data->preview->size->width;
+                $height = (int) $data->preview->size->height;
 
                 // if its not a gradient
                 if ( ! isset( $gradient ) ) {
@@ -181,21 +195,13 @@ class ImagesController extends AppController {
                     // set the color profile to prevent issues with CMYK etc
                     $this->ImageEditor->setColorProfile();
 
-                    // resize image by width
-                    $width = round( $data->image->size->width * $data->image->zoom, 0 );
-                    $this->ImageEditor->resizeByWidth( $width );
-                }
-
-                // set final image dims
-                $width  = (int) $data->preview->size->width;
-                $height = (int) $data->preview->size->height;
-
-                // if its not a gradient, crop the image
-                if ( ! isset( $gradient ) ) {
+                    // crop
                     $startX = (int) - $data->image->pos->x;
                     $startY = (int) - $data->image->pos->y;
+                    $this->ImageEditor->crop( $width / $zoom, $height / $zoom, $startX / $zoom, $startY / $zoom );
 
-                    $this->ImageEditor->crop( $width, $height, $startX, $startY );
+                    // resize image by width
+                    $this->ImageEditor->resizeByWidth( $width );
                 }
             } else {
                 // if the image couldn't be saved (custom image) or created (generic image)
