@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-07-14 19:52+0000\n"
+"POT-Creation-Date: 2019-09-09 16:59+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,1199 +14,1203 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: Controller/GroupsControllerphp:121;160
+#: Controller/GroupsController.php:121;160
 msgid "The group has been saved."
 msgstr ""
 
-#: Controller/GroupsControllerphp:125;164
+#: Controller/GroupsController.php:125;164
 msgid "The group could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/GroupsControllerphp:193
+#: Controller/GroupsController.php:193
 msgid "The group has been deleted."
 msgstr ""
 
-#: Controller/GroupsControllerphp:195
+#: Controller/GroupsController.php:195
 msgid "The group could not be deleted. Please, try again."
 msgstr ""
 
-#: Controller/LogosControllerphp:115;143
+#: Controller/LogosController.php:115;143
 msgid "The logo has been saved."
 msgstr ""
 
-#: Controller/LogosControllerphp:119;147
+#: Controller/LogosController.php:119;147
 msgid "The logo could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/LogosControllerphp:168
+#: Controller/LogosController.php:168
 msgid "The logo has been deleted."
 msgstr ""
 
-#: Controller/LogosControllerphp:170
+#: Controller/LogosController.php:170
 msgid "The logo could not be deleted. Please, try again."
 msgstr ""
 
-#: Controller/UsersControllerphp:146;239
+#: Controller/UsersController.php:146;239
 msgid "The user has been saved."
 msgstr ""
 
-#: Controller/UsersControllerphp:155;258
+#: Controller/UsersController.php:155;258
 msgid "The user could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/UsersControllerphp:187
+#: Controller/UsersController.php:187
 msgid "The user could not be informed about his new login. Please, do it manually."
 msgstr ""
 
-#: Controller/UsersControllerphp:192
+#: Controller/UsersController.php:192
 msgid "cd.gruene.ch: Account created"
 msgstr ""
 
-#: Controller/UsersControllerphp:193
+#: Controller/UsersController.php:193
 msgid "Salut {{first_name}},\n\nWe're very happy to inform you about your new login on cd.gruene.ch. Now it's time to set your password.\n\nDefine a password: {{password_reset_link}}\n\nOnce you've set the password, use it in combination with this email address to log in:\n\n Email: {{email}}\n\nSincerely,\nThe cd.gruene.ch registration service."
 msgstr ""
 
-#: Controller/UsersControllerphp:327
+#: Controller/UsersController.php:327
 msgid "The user has been deleted."
 msgstr ""
 
-#: Controller/UsersControllerphp:329
+#: Controller/UsersController.php:329
 msgid "The user could not be deleted. Please, try again."
 msgstr ""
 
-#: Controller/UsersControllerphp:376
+#: Controller/UsersController.php:376
 msgid "Your username or password is incorrect."
 msgstr ""
 
-#: Controller/UsersControllerphp:378
+#: Controller/UsersController.php:378
 msgid "Click here to reset your password."
 msgstr ""
 
-#: Controller/UsersControllerphp:380
+#: Controller/UsersController.php:380
 msgid "Too many invalid login attempts. Please try again tomorrow."
 msgstr ""
 
-#: Controller/UsersControllerphp:405
+#: Controller/UsersController.php:405
 msgid "You are now logged out."
 msgstr ""
 
-#: Controller/UsersControllerphp:415
+#: Controller/UsersController.php:415
 msgid "Access denied"
 msgstr ""
 
-#: Controller/UsersControllerphp:463
+#: Controller/UsersController.php:463
 msgid "Password reset cd.gruene.ch"
 msgstr ""
 
-#: Controller/UsersControllerphp:464
+#: Controller/UsersController.php:464
 msgid "Salut {{first_name}}\n\nYou've requested to reset the password for your account on cd.gruene.ch. Click the following link, to set a new password:\n\nSet new password: {{password_reset_link}}\n\nEnjoy,\nThe Greens of Switzerland"
 msgstr ""
 
-#: Controller/UsersControllerphp:492
+#: Controller/UsersController.php:492
 msgid "New user"
 msgstr ""
 
-#: Controller/UsersControllerphp:493
+#: Controller/UsersController.php:493
 msgid "Hello Admin\n\n{{first_name}} {{last_name}} ({{email}}) from {{city}} just applied for a login to cd.gruene.ch.\n\nCreate account: {{approve_url}}\n\nSincerely,\nThe cd.gruene.ch registration service."
 msgstr ""
 
-#: Controller/UsersControllerphp:515
+#: Controller/UsersController.php:515
 msgid "Your application was successfully sent to the Greens Switzerland."
 msgstr ""
 
-#: Controller/UsersControllerphp:536
+#: Controller/UsersController.php:536
 msgid "Permanent login revoked for all devices."
 msgstr ""
 
-#: Controller/UsersControllerphp:564
+#: Controller/UsersController.php:564
 msgid "Your password reset link has expired."
 msgstr ""
 
-#: Controller/UsersControllerphp:566
+#: Controller/UsersController.php:566
 msgid "Click here to get a new password reset link."
 msgstr ""
 
-#: Controller/UsersControllerphp:568
+#: Controller/UsersController.php:568
 msgid "Please make sure to reset your password within the next {number} hours."
 msgstr ""
 
-#: Controller/UsersControllerphp:595
+#: Controller/UsersController.php:595
 msgid "The new password was saved."
 msgstr ""
 
-#: Controller/UsersControllerphp:600
+#: Controller/UsersController.php:600
 msgid "The password could not be saved. Is it secure enough?"
 msgstr ""
 
-#: Controller/Component/ImageEditorComponentphp:190
+#: Controller/Component/ImageEditorComponent.php:204
 msgid "Logo not found."
 msgstr ""
 
-#: Controller/Component/ImageEditorComponentphp:286
+#: Controller/Component/ImageEditorComponent.php:297
 msgid "No valid color scheme given."
 msgstr ""
 
-#: Controller/Component/ImageFileHandlerComponentphp:145;151;154
+#: Controller/Component/ImageFileHandlerComponent.php:111
+msgid "Uploaded image not found"
+msgstr ""
+
+#: Controller/Component/ImageFileHandlerComponent.php:116;121
 msgid "Only JPG, JPEG & PNG files are allowed."
 msgstr ""
 
-#: Controller/Component/ImageFileHandlerComponentphp:161
+#: Controller/Component/ImageFileHandlerComponent.php:126
 msgid "Max file size ({0}MB) exceeded"
 msgstr ""
 
-#: Controller/Component/ImageFileHandlerComponentphp:181
-msgid "Sorry, there was an error uploading your file."
+#: Controller/Component/ImageFileHandlerComponent.php:132
+msgid "Failed to read image. Try to resize it in an image editor and upload it again."
 msgstr ""
 
-#: Model/Table/GroupsTablephp:122
+#: Model/Table/GroupsTable.php:122
 msgid "A group with this name already exists"
 msgstr ""
 
-#: Model/Table/GroupsTablephp:130
+#: Model/Table/GroupsTable.php:130
 msgid "Except for God, one can not be his own parent ;)"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:113
+#: Model/Table/ImagesTable.php:113
 msgid "Square"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:114
+#: Model/Table/ImagesTable.php:114
 msgid "Facebook Timeline Image"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:115
+#: Model/Table/ImagesTable.php:115
 msgid "Facebook Event Image"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:116
+#: Model/Table/ImagesTable.php:116
 msgid "Facebook Featured Website"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:117
+#: Model/Table/ImagesTable.php:117
 msgid "Twitter Feed Image"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:118
+#: Model/Table/ImagesTable.php:118
 msgid "Instagram Story"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:119
+#: Model/Table/ImagesTable.php:119
 msgid "Website Slider"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:120
+#: Model/Table/ImagesTable.php:120
 msgid "Custom size"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:131
+#: Model/Table/ImagesTable.php:131
 msgid "Bars left"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:132
+#: Model/Table/ImagesTable.php:132
 msgid "Bars right"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:143
+#: Model/Table/ImagesTable.php:143
 msgid "White"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:144
+#: Model/Table/ImagesTable.php:144
 msgid "Green"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:145
+#: Model/Table/ImagesTable.php:145
 msgid "Green head- & sublines"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:156
+#: Model/Table/ImagesTable.php:156
 msgid "Standard"
 msgstr ""
 
-#: Model/Table/ImagesTablephp:157
+#: Model/Table/ImagesTable.php:157
 msgid "None"
 msgstr ""
 
-#: Model/Table/UsersGroupsTablephp:100
+#: Model/Table/UsersGroupsTable.php:100
 msgid "This user already belongs to this group."
 msgstr ""
 
-#: Model/Table/UsersTablephp:269
+#: Model/Table/UsersTable.php:269
 msgid "You don't have the privileges to save the users changes concerning the group(s) {groups}."
 msgstr ""
 
-#: Template/Element/admin_navctp:3
-#: Template/Users/indexctp:4
+#: Template/Element/admin_nav.ctp:3
+#: Template/Users/index.ctp:4
 msgid "Users"
 msgstr ""
 
-#: Template/Element/admin_navctp:4
-#: Template/Groups/indexctp:5
+#: Template/Element/admin_nav.ctp:4
+#: Template/Groups/index.ctp:5
 msgid "Groups"
 msgstr ""
 
-#: Template/Element/admin_navctp:5
-#: Template/Logos/indexctp:4
+#: Template/Element/admin_nav.ctp:5
+#: Template/Logos/index.ctp:4
 msgid "Logos"
 msgstr ""
 
-#: Template/Element/browser_updatectp:10
+#: Template/Element/browser_update.ctp:10
 msgid "Please update your browser"
 msgstr ""
 
-#: Template/Element/browser_updatectp:10
+#: Template/Element/browser_update.ctp:10
 msgid "This tool needs a recent browser to work correctly. Please update."
 msgstr ""
 
-#: Template/Element/browser_updatectp:10
+#: Template/Element/browser_update.ctp:10
 msgid "Update browser"
 msgstr ""
 
-#: Template/Element/paginatorctp:31
-#: Template/Images/indexctp:59
+#: Template/Element/paginator.ctp:31
+#: Template/Images/index.ctp:59
 msgid "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total"
 msgstr ""
 
-#: Template/Element/top_navctp:4
+#: Template/Element/top_nav.ctp:4
 msgid "Create Image"
 msgstr ""
 
-#: Template/Element/top_navctp:19
+#: Template/Element/top_nav.ctp:19
 msgid "Admin"
 msgstr ""
 
-#: Template/Element/top_navctp:25
+#: Template/Element/top_nav.ctp:25
 msgid "My Account"
 msgstr ""
 
-#: Template/Element/top_navctp:29
+#: Template/Element/top_nav.ctp:29
 msgid "Logout"
 msgstr ""
 
-#: Template/Element/Group/index_tablectp:4
-#: Template/Groups/viewctp:15
-#: Template/Logos/viewctp:18
+#: Template/Element/Group/index_table.ctp:4
+#: Template/Groups/view.ctp:15
+#: Template/Logos/view.ctp:18
 msgid "Name"
 msgstr ""
 
-#: Template/Element/Group/index_tablectp:5
-#: Template/Element/Logo/index_tablectp:7
-#: Template/Element/User/index_tablectp:8
-#: Template/Images/editctp:3
-#: Template/Images/indexctp:3;25
-#: Template/Images/viewctp:3;67
+#: Template/Element/Group/index_table.ctp:5
+#: Template/Element/Logo/index_table.ctp:7
+#: Template/Element/User/index_table.ctp:8
+#: Template/Images/edit.ctp:3
+#: Template/Images/index.ctp:3;25
+#: Template/Images/view.ctp:3;67
 msgid "Actions"
 msgstr ""
 
-#: Template/Element/Group/index_tablectp:19
-#: Template/Element/Logo/index_tablectp:19
-#: Template/Element/User/index_tablectp:22
-#: Template/Images/indexctp:42
-#: Template/Images/viewctp:78
+#: Template/Element/Group/index_table.ctp:19
+#: Template/Element/Logo/index_table.ctp:19
+#: Template/Element/User/index_table.ctp:22
+#: Template/Images/index.ctp:42
+#: Template/Images/view.ctp:78
 msgid "View"
 msgstr ""
 
-#: Template/Element/Group/index_tablectp:22
-#: Template/Element/Logo/index_tablectp:22
-#: Template/Element/User/index_tablectp:25
-#: Template/Images/indexctp:43
-#: Template/Images/viewctp:80
+#: Template/Element/Group/index_table.ctp:22
+#: Template/Element/Logo/index_table.ctp:22
+#: Template/Element/User/index_table.ctp:25
+#: Template/Images/index.ctp:43
+#: Template/Images/view.ctp:80
 msgid "Edit"
 msgstr ""
 
-#: Template/Element/Group/index_tablectp:26
-#: Template/Element/Logo/index_tablectp:26
-#: Template/Element/User/index_tablectp:29
-#: Template/Images/editctp:5
-#: Template/Images/indexctp:44
-#: Template/Images/viewctp:82
+#: Template/Element/Group/index_table.ctp:26
+#: Template/Element/Logo/index_table.ctp:26
+#: Template/Element/User/index_table.ctp:29
+#: Template/Images/edit.ctp:5
+#: Template/Images/index.ctp:44
+#: Template/Images/view.ctp:82
 msgid "Delete"
 msgstr ""
 
-#: Template/Element/Group/index_tablectp:27
-#: Template/Element/Logo/index_tablectp:27
+#: Template/Element/Group/index_table.ctp:27
+#: Template/Element/Logo/index_table.ctp:27
 msgid "Are you sure you want to delete \"{0}\"?"
 msgstr ""
 
-#: Template/Element/Group/inputctp:15
+#: Template/Element/Group/input.ctp:15
 msgid "This group is a subgroup of:"
 msgstr ""
 
-#: Template/Element/Group/inputctp:24
+#: Template/Element/Group/input.ctp:24
 msgid "Members of this group can use the folowing logos:"
 msgstr ""
 
-#: Template/Element/Group/inputctp:32
+#: Template/Element/Group/input.ctp:32
 msgid "The members of this group are:"
 msgstr ""
 
-#: Template/Element/Group/inputctp:37
+#: Template/Element/Group/input.ctp:37
 msgid "Save Group"
 msgstr ""
 
-#: Template/Element/Logo/index_tablectp:5
-#: Template/Element/Logo/inputctp:21
+#: Template/Element/Logo/index_table.ctp:5
+#: Template/Element/Logo/input.ctp:21
 msgid "Subline Text"
 msgstr ""
 
-#: Template/Element/Logo/index_tablectp:6
+#: Template/Element/Logo/index_table.ctp:6
 msgid "Base Logo"
 msgstr ""
 
-#: Template/Element/Logo/inputctp:7;22
+#: Template/Element/Logo/input.ctp:7;22
 msgid "Ex. gruene.ch / verts.ch"
 msgstr ""
 
-#: Template/Element/Logo/inputctp:15
+#: Template/Element/Logo/input.ctp:15
 msgid "Base logo:"
 msgstr ""
 
-#: Template/Element/Logo/inputctp:27
+#: Template/Element/Logo/input.ctp:27
 msgid "Save Logo"
 msgstr ""
 
-#: Template/Element/User/change_password_fieldctp:5
+#: Template/Element/User/change_password_field.ctp:5
 msgid "Enter password"
 msgstr ""
 
-#: Template/Element/User/change_password_fieldctp:6
+#: Template/Element/User/change_password_field.ctp:6
 msgid "If you leave the password field blank, a randomly generated password will be used."
 msgstr ""
 
-#: Template/Element/User/change_password_fieldctp:10
+#: Template/Element/User/change_password_field.ctp:10
 msgid "Enter new password"
 msgstr ""
 
-#: Template/Element/User/change_password_fieldctp:15
+#: Template/Element/User/change_password_field.ctp:15
 msgid "Leave blank to keep password unchanged"
 msgstr ""
 
-#: Template/Element/User/change_password_fieldctp:16
+#: Template/Element/User/change_password_field.ctp:16
 msgid "If you leave the password field blank, it will remain as it is."
 msgstr ""
 
-#: Template/Element/User/change_password_fieldctp:31
+#: Template/Element/User/change_password_field.ctp:31
 msgid "The password must be at least 8 characters long and contain one lowercase character, one uppercase character and one digit."
 msgstr ""
 
-#: Template/Element/User/change_password_fieldctp:40
+#: Template/Element/User/change_password_field.ctp:40
 msgid "The password must be at least 8 characters long and contain at least:"
 msgstr ""
 
-#: Template/Element/User/change_password_fieldctp:42
+#: Template/Element/User/change_password_field.ctp:42
 msgctxt "password rule"
 msgid "one lowercase character"
 msgstr ""
 
-#: Template/Element/User/change_password_fieldctp:43
+#: Template/Element/User/change_password_field.ctp:43
 msgctxt "password rule"
 msgid "one uppercase character"
 msgstr ""
 
-#: Template/Element/User/change_password_fieldctp:44
+#: Template/Element/User/change_password_field.ctp:44
 msgctxt "password rule"
 msgid "one digit"
 msgstr ""
 
-#: Template/Element/User/index_tablectp:7
-#: Template/Users/viewctp:32
+#: Template/Element/User/index_table.ctp:7
+#: Template/Users/view.ctp:32
 msgid "Managed by"
 msgstr ""
 
-#: Template/Element/User/index_tablectp:30
+#: Template/Element/User/index_table.ctp:30
 msgid "Are you sure you want to delete \"{0} {1}\"?"
 msgstr ""
 
-#: Template/Element/User/inputctp:27
-#: Template/Images/addctp:190;203
-#: Template/Users/viewctp:28
+#: Template/Element/User/input.ctp:27
+#: Template/Images/add.ctp:186;199
+#: Template/Users/view.ctp:28
 msgid "Yes"
 msgstr ""
 
-#: Template/Element/User/inputctp:27
-#: Template/Images/addctp:193;212
-#: Template/Users/viewctp:28
+#: Template/Element/User/input.ctp:27
+#: Template/Images/add.ctp:189;208
+#: Template/Users/view.ctp:28
 msgid "No"
 msgstr ""
 
-#: Template/Element/User/inputctp:29
-#: Template/Users/viewctp:27
+#: Template/Element/User/input.ctp:29
+#: Template/Users/view.ctp:27
 msgid "Super Admin"
 msgstr ""
 
-#: Template/Element/User/inputctp:37
+#: Template/Element/User/input.ctp:37
 msgid "German"
 msgstr ""
 
-#: Template/Element/User/inputctp:38
+#: Template/Element/User/input.ctp:38
 msgid "French"
 msgstr ""
 
-#: Template/Element/User/inputctp:39
+#: Template/Element/User/input.ctp:39
 msgid "English"
 msgstr ""
 
-#: Template/Element/User/inputctp:42
-#: Template/Users/viewctp:22
+#: Template/Element/User/input.ctp:42
+#: Template/Users/view.ctp:22
 msgid "Language"
 msgstr ""
 
-#: Template/Element/User/inputctp:52
+#: Template/Element/User/input.ctp:52
 msgid "The following group is responsible for managing this user"
 msgstr ""
 
-#: Template/Element/User/inputctp:61
+#: Template/Element/User/input.ctp:61
 msgid "This user can use the logos of the following {strong}groups{close_strong}"
 msgstr ""
 
-#: Template/Element/User/inputctp:70
+#: Template/Element/User/input.ctp:70
 msgid "This user can also use the logos of {groups}. Ask the admins of those groups to change that."
 msgstr ""
 
-#: Template/Element/User/inputctp:76
+#: Template/Element/User/input.ctp:76
 msgid "This user can also use the logos of {groups}. Revoke his admin privileges for those groups, to change that"
 msgstr ""
 
-#: Template/Element/User/inputctp:82
+#: Template/Element/User/input.ctp:82
 msgid "This user is admin of the following groups"
 msgstr ""
 
-#: Template/Element/User/inputctp:92
+#: Template/Element/User/input.ctp:92
 msgid "This user is also admin of {groups}. Ask him or the other admins of those groups to change that."
 msgstr ""
 
-#: Template/Element/User/inputctp:98
+#: Template/Element/User/input.ctp:98
 msgid "This user inherited admin privileges of {groups}. Remove the corresponding parent group to change that."
 msgstr ""
 
-#: Template/Element/User/inputctp:109
+#: Template/Element/User/input.ctp:109
 msgid "Notify the user by email and send him a link to set a password."
 msgstr ""
 
-#: Template/Element/User/inputctp:109
+#: Template/Element/User/input.ctp:109
 msgid "Resend user invitation"
 msgstr ""
 
-#: Template/Element/User/inputctp:119
+#: Template/Element/User/input.ctp:119
 msgid "Save User"
 msgstr ""
 
-#: Template/Groups/addctp:3
-#: Template/Groups/indexctp:7
+#: Template/Groups/add.ctp:3
+#: Template/Groups/index.ctp:7
 msgid "Add Group"
 msgstr ""
 
-#: Template/Groups/editctp:3
-#: Template/Groups/viewctp:6
+#: Template/Groups/edit.ctp:3
+#: Template/Groups/view.ctp:6
 msgid "Edit Group"
 msgstr ""
 
-#: Template/Groups/viewctp:10
+#: Template/Groups/view.ctp:10
 msgid "Parent Group"
 msgstr ""
 
-#: Template/Groups/viewctp:19
-#: Template/Logos/viewctp:22
-#: Template/Users/viewctp:36
+#: Template/Groups/view.ctp:19
+#: Template/Logos/view.ctp:22
+#: Template/Users/view.ctp:36
 msgid "Added by"
 msgstr ""
 
-#: Template/Groups/viewctp:23
-#: Template/Images/viewctp:52
-#: Template/Logos/viewctp:26
-#: Template/Users/viewctp:52
+#: Template/Groups/view.ctp:23
+#: Template/Images/view.ctp:52
+#: Template/Logos/view.ctp:26
+#: Template/Users/view.ctp:52
 msgid "Created"
 msgstr ""
 
-#: Template/Groups/viewctp:27
-#: Template/Logos/viewctp:30
-#: Template/Users/viewctp:56
+#: Template/Groups/view.ctp:27
+#: Template/Logos/view.ctp:30
+#: Template/Users/view.ctp:56
 msgid "Last Modified"
 msgstr ""
 
-#: Template/Groups/viewctp:33
+#: Template/Groups/view.ctp:33
 msgid "Logos of this group"
 msgstr ""
 
-#: Template/Groups/viewctp:42
+#: Template/Groups/view.ctp:42
 msgid "Users of this group"
 msgstr ""
 
-#: Template/Groups/viewctp:51
+#: Template/Groups/view.ctp:51
 msgid "Direct child groups"
 msgstr ""
 
-#: Template/Images/addctp:2
+#: Template/Images/add.ctp:2
 msgid "Create an image"
 msgstr ""
 
-#: Template/Images/addctp:3
+#: Template/Images/add.ctp:3
 msgid "Getting your images styled is now a breeze. Try it out!"
 msgstr ""
 
-#: Template/Images/addctp:9
+#: Template/Images/add.ctp:9
 msgid "This defines the size of the final image. Use 'custom size' for non-predefined dimensions."
 msgstr ""
 
-#: Template/Images/addctp:12
+#: Template/Images/add.ctp:12
 msgid "Select image size"
 msgstr ""
 
-#: Template/Images/addctp:17
+#: Template/Images/add.ctp:17
 msgid "Max width is 5000px."
 msgstr ""
 
-#: Template/Images/addctp:20
+#: Template/Images/add.ctp:20
 msgid "Width (px)"
 msgstr ""
 
-#: Template/Images/addctp:29
+#: Template/Images/add.ctp:29
 msgid "Max height is 5000px."
 msgstr ""
 
-#: Template/Images/addctp:32
+#: Template/Images/add.ctp:32
 msgid "Height (px)"
 msgstr ""
 
-#: Template/Images/addctp:43
+#: Template/Images/add.ctp:43
 msgid "The logo is mandatory and may only be omitted on graphics that are part of an already well branded product."
 msgstr ""
 
-#: Template/Images/addctp:47
+#: Template/Images/add.ctp:47
 msgid "Logo"
 msgstr ""
 
-#: Template/Images/addctp:54
+#: Template/Images/add.ctp:54
 msgid "You can upload any JPEG or PNG file. Make sure the resolution is high enough to fill the image."
 msgstr ""
 
-#: Template/Images/addctp:55
+#: Template/Images/add.ctp:55
 msgid "Choose image"
 msgstr ""
 
-#: Template/Images/addctp:60
+#: Template/Images/add.ctp:60
 msgid "Click to select image to upload"
 msgstr ""
 
-#: Template/Images/addctp:66
+#: Template/Images/add.ctp:66
 msgid "Remove image"
 msgstr ""
 
-#: Template/Images/addctp:72;76;94;143;286
+#: Template/Images/add.ctp:72;76;94;139;282
 msgid "Warning!"
 msgstr ""
 
-#: Template/Images/addctp:73
+#: Template/Images/add.ctp:73
 msgid "Image could not be loaded. Make sure to use either the JPEG or PNG format."
 msgstr ""
 
-#: Template/Images/addctp:77
+#: Template/Images/add.ctp:77
 msgid "This image is to small. Please upload one with a higher resolution."
 msgstr ""
 
-#: Template/Images/addctp:84
+#: Template/Images/add.ctp:84
 msgid "The preview image may be smaller than the final image."
 msgstr ""
 
-#: Template/Images/addctp:85
+#: Template/Images/add.ctp:85
 msgid "Position the bars by drag and drop"
 msgstr ""
 
-#: Template/Images/addctp:95;144
+#: Template/Images/add.ctp:95;140
 msgid "At least one bar contains to much text."
 msgstr ""
 
-#: Template/Images/addctp:137
+#: Template/Images/add.ctp:133
 msgid "Be as short as possible. The system will constraint the number of bars and the text size to suit the corporate design."
 msgstr ""
 
-#: Template/Images/addctp:138
+#: Template/Images/add.ctp:134
 msgid "Bar text"
 msgstr ""
 
-#: Template/Images/addctp:141
+#: Template/Images/add.ctp:137
 msgid "Add subline"
 msgstr ""
 
-#: Template/Images/addctp:148
+#: Template/Images/add.ctp:144
 msgid "Generally the bars are on the left side. But you may put them on the right side, if the photo requires it."
 msgstr ""
 
-#: Template/Images/addctp:151
+#: Template/Images/add.ctp:147
 msgid "Layout"
 msgstr ""
 
-#: Template/Images/addctp:156
+#: Template/Images/add.ctp:152
 msgid "Default is the green color schema. Use the white color scheme if your image has a green background. Use green head- & sublines if your background is white."
 msgstr ""
 
-#: Template/Images/addctp:159
+#: Template/Images/add.ctp:155
 msgid "Color scheme"
 msgstr ""
 
-#: Template/Images/addctp:165
+#: Template/Images/add.ctp:161
 msgid "The border is part of the corporate design. You may however omit the border if you use the image in a context where a border looks ugly."
 msgstr ""
 
-#: Template/Images/addctp:168
+#: Template/Images/add.ctp:164
 msgid "Border"
 msgstr ""
 
-#: Template/Images/addctp:172
+#: Template/Images/add.ctp:168
 msgid "Generate Image"
 msgstr ""
 
-#: Template/Images/addctp:176
+#: Template/Images/add.ctp:172
 msgid "Working hard"
 msgstr ""
 
-#: Template/Images/addctp:177
+#: Template/Images/add.ctp:173
 msgid "I'm busy generating your image, please hang on a few ticks. I'll be right there."
 msgstr ""
 
-#: Template/Images/addctp:178
+#: Template/Images/add.ctp:174
 msgid "Please answer meanwhile the legal questions below."
 msgstr ""
 
-#: Template/Images/addctp:183
+#: Template/Images/add.ctp:179
 msgid "Right of personality"
 msgstr ""
 
-#: Template/Images/addctp:186
+#: Template/Images/add.ctp:182
 msgid "Are there any identifiably people in the image?"
 msgstr ""
 
-#: Template/Images/addctp:199
+#: Template/Images/add.ctp:195
 msgid "Are they either people of public interest or have they agreed to the publication of this image?"
 msgstr ""
 
-#: Template/Images/addctp:208
+#: Template/Images/add.ctp:204
 msgid "Unclear"
 msgstr ""
 
-#: Template/Images/addctp:216
+#: Template/Images/add.ctp:212
 msgid "Right of personality:"
 msgstr ""
 
-#: Template/Images/addctp:217
+#: Template/Images/add.ctp:213
 msgid "By law, people have to agree on the publication of photos, where they are identifiably."
 msgstr ""
 
-#: Template/Images/addctp:223
+#: Template/Images/add.ctp:219
 msgid "Copyright"
 msgstr ""
 
-#: Template/Images/addctp:226;255
+#: Template/Images/add.ctp:222;251
 msgid "Who is the originator of the raw image?"
 msgstr ""
 
-#: Template/Images/addctp:229
+#: Template/Images/add.ctp:225
 msgid "Me"
 msgstr ""
 
-#: Template/Images/addctp:230
+#: Template/Images/add.ctp:226
 msgid "Stock image"
 msgstr ""
 
-#: Template/Images/addctp:231
+#: Template/Images/add.ctp:227
 msgid "Agency / Photographer"
 msgstr ""
 
-#: Template/Images/addctp:232
+#: Template/Images/add.ctp:228
 msgid "Friend / Member of the party"
 msgstr ""
 
-#: Template/Images/addctp:233
+#: Template/Images/add.ctp:229
 msgid "I don't know / I'm not sure"
 msgstr ""
 
-#: Template/Images/addctp:239
+#: Template/Images/add.ctp:235
 msgid "Where is the raw image from?"
 msgstr ""
 
-#: Template/Images/addctp:240
+#: Template/Images/add.ctp:236
 msgid "Url to the raw image on the stock image platform."
 msgstr ""
 
-#: Template/Images/addctp:244
+#: Template/Images/add.ctp:240
 msgid "Select the raw images licence"
 msgstr ""
 
-#: Template/Images/addctp:246
+#: Template/Images/add.ctp:242
 msgid "Other"
 msgstr ""
 
-#: Template/Images/addctp:247
+#: Template/Images/add.ctp:243
 msgid "Creative Commons with Attribution"
 msgstr ""
 
-#: Template/Images/addctp:248
+#: Template/Images/add.ctp:244
 msgid "Creative Commons without Limitation"
 msgstr ""
 
-#: Template/Images/addctp:256
+#: Template/Images/add.ctp:252
 msgid "Name of the photographer, agency or person who did this artwork"
 msgstr ""
 
-#: Template/Images/addctp:261
+#: Template/Images/add.ctp:257
 msgid "Copyright:"
 msgstr ""
 
-#: Template/Images/addctp:262
+#: Template/Images/add.ctp:258
 msgid "Publishing this image may violate the intellectual property right."
 msgstr ""
 
-#: Template/Images/addctp:265
+#: Template/Images/add.ctp:261
 msgid "I hereby confirm that:"
 msgstr ""
 
-#: Template/Images/addctp:269
+#: Template/Images/add.ctp:265
 msgid "I have the right to use this raw image"
 msgstr ""
 
-#: Template/Images/addctp:276
+#: Template/Images/add.ctp:272
 msgid "Others can use this raw image without limitation"
 msgstr ""
 
-#: Template/Images/addctp:281
+#: Template/Images/add.ctp:277
 msgid "Confirm legal declarations"
 msgstr ""
 
-#: Template/Images/addctp:287
+#: Template/Images/add.ctp:283
 msgid "The image could not be generated. Please try again."
 msgstr ""
 
-#: Template/Images/editctp:7
-#: Template/Images/indexctp:45
-#: Template/Images/viewctp:6;84
+#: Template/Images/edit.ctp:7
+#: Template/Images/index.ctp:45
+#: Template/Images/view.ctp:6;84
 msgid "Are you sure you want to delete # {0}?"
 msgstr ""
 
-#: Template/Images/editctp:10
-#: Template/Images/viewctp:7
+#: Template/Images/edit.ctp:10
+#: Template/Images/view.ctp:7
 msgid "List Images"
 msgstr ""
 
-#: Template/Images/editctp:11
-#: Template/Images/indexctp:5
-#: Template/Images/viewctp:9
+#: Template/Images/edit.ctp:11
+#: Template/Images/index.ctp:5
+#: Template/Images/view.ctp:9
 msgid "List Users"
 msgstr ""
 
-#: Template/Images/editctp:12
-#: Template/Images/indexctp:6
-#: Template/Images/viewctp:10
+#: Template/Images/edit.ctp:12
+#: Template/Images/index.ctp:6
+#: Template/Images/view.ctp:10
 msgid "New User"
 msgstr ""
 
-#: Template/Images/editctp:13
-#: Template/Images/indexctp:7
-#: Template/Images/viewctp:11
+#: Template/Images/edit.ctp:13
+#: Template/Images/index.ctp:7
+#: Template/Images/view.ctp:11
 msgid "List Bars"
 msgstr ""
 
-#: Template/Images/editctp:14
-#: Template/Images/indexctp:8
-#: Template/Images/viewctp:12
+#: Template/Images/edit.ctp:14
+#: Template/Images/index.ctp:8
+#: Template/Images/view.ctp:12
 msgid "New Bar"
 msgstr ""
 
-#: Template/Images/editctp:20
-#: Template/Images/viewctp:4
+#: Template/Images/edit.ctp:20
+#: Template/Images/view.ctp:4
 msgid "Edit Image"
 msgstr ""
 
-#: Template/Images/editctp:31
+#: Template/Images/edit.ctp:31
 msgid "Submit"
 msgstr ""
 
-#: Template/Images/indexctp:4
-#: Template/Images/viewctp:8
+#: Template/Images/index.ctp:4
+#: Template/Images/view.ctp:8
 msgid "New Image"
 msgstr ""
 
-#: Template/Images/indexctp:12
+#: Template/Images/index.ctp:12
 msgid "Images"
 msgstr ""
 
-#: Template/Images/indexctp:53
+#: Template/Images/index.ctp:53
 msgid "first"
 msgstr ""
 
-#: Template/Images/indexctp:54
+#: Template/Images/index.ctp:54
 msgid "previous"
 msgstr ""
 
-#: Template/Images/indexctp:56
+#: Template/Images/index.ctp:56
 msgid "next"
 msgstr ""
 
-#: Template/Images/indexctp:57
+#: Template/Images/index.ctp:57
 msgid "last"
 msgstr ""
 
-#: Template/Images/viewctp:5
+#: Template/Images/view.ctp:5
 msgid "Delete Image"
 msgstr ""
 
-#: Template/Images/viewctp:19
+#: Template/Images/view.ctp:19
 msgid "User"
 msgstr ""
 
-#: Template/Images/viewctp:24
+#: Template/Images/view.ctp:24
 msgid "Opath"
 msgstr ""
 
-#: Template/Images/viewctp:28
+#: Template/Images/view.ctp:28
 msgid "Npath"
 msgstr ""
 
-#: Template/Images/viewctp:32
+#: Template/Images/view.ctp:32
 msgid "Flattext"
 msgstr ""
 
-#: Template/Images/viewctp:36
+#: Template/Images/view.ctp:36
 msgid "Tags"
 msgstr ""
 
-#: Template/Images/viewctp:40;61
+#: Template/Images/view.ctp:40;61
 msgid "Id"
 msgstr ""
 
-#: Template/Images/viewctp:44
+#: Template/Images/view.ctp:44
 msgid "Width"
 msgstr ""
 
-#: Template/Images/viewctp:48
+#: Template/Images/view.ctp:48
 msgid "Height"
 msgstr ""
 
-#: Template/Images/viewctp:57
+#: Template/Images/view.ctp:57
 msgid "Related Bars"
 msgstr ""
 
-#: Template/Images/viewctp:62
+#: Template/Images/view.ctp:62
 msgid "Image Id"
 msgstr ""
 
-#: Template/Images/viewctp:63
+#: Template/Images/view.ctp:63
 msgid "Text"
 msgstr ""
 
-#: Template/Images/viewctp:64
+#: Template/Images/view.ctp:64
 msgid "Position"
 msgstr ""
 
-#: Template/Images/viewctp:65
+#: Template/Images/view.ctp:65
 msgid "Fontsize"
 msgstr ""
 
-#: Template/Images/viewctp:66
+#: Template/Images/view.ctp:66
 msgid "Type"
 msgstr ""
 
-#: Template/Layout/defaultctp:25
+#: Template/Layout/default.ctp:25
 msgid "salut"
 msgstr ""
 
-#: Template/Layout/defaultctp:48
+#: Template/Layout/default.ctp:48
 msgid "Imprint"
 msgstr ""
 
-#: Template/Layout/defaultctp:59
+#: Template/Layout/default.ctp:59
 msgid "Questions or suggestions?"
 msgstr ""
 
-#: Template/Layout/defaultctp:60
+#: Template/Layout/default.ctp:60
 msgid "We are very keen about your feedback. Feel free to ask or suggest anything."
 msgstr ""
 
-#: Template/Layout/defaultctp:62
+#: Template/Layout/default.ctp:62
 msgid "Feedback on cd.gruene.ch"
 msgstr ""
 
-#: Template/Layout/defaultctp:63
+#: Template/Layout/default.ctp:63
 msgid "Hi Cyrill\n\nI just used cd.gruene.ch and id like to say ..."
 msgstr ""
 
-#: Template/Layout/defaultctp:66
+#: Template/Layout/default.ctp:66
 msgid "Ask or suggest"
 msgstr ""
 
-#: Template/Layout/defaultctp:70
+#: Template/Layout/default.ctp:70
 msgid "Under Development"
 msgstr ""
 
-#: Template/Layout/defaultctp:71
+#: Template/Layout/default.ctp:71
 msgid "This tool is still under development and is continuously extended and improved. If you experience any bugs or if you wish to suggest any new features, please let us know."
 msgstr ""
 
-#: Template/Layout/defaultctp:73
+#: Template/Layout/default.ctp:73
 msgid "Contact us"
 msgstr ""
 
-#: Template/Layout/defaultctp:77
+#: Template/Layout/default.ctp:77
 msgid "Use responsibly"
 msgstr ""
 
-#: Template/Layout/defaultctp:78
+#: Template/Layout/default.ctp:78
 msgid "Every author bears the liability for the images he creates. Make sure you do only use images you are authorized to use and don't forget to give appropriate credits to the originator of the image. If people are visible, they have to agree to the publishing."
 msgstr ""
 
-#: Template/Layout/defaultctp:79
+#: Template/Layout/default.ctp:79
 msgid "Feel free to contact us, if you have any questions about a certain image."
 msgstr ""
 
-#: Template/Layout/defaultctp:82
+#: Template/Layout/default.ctp:82
 msgid "Privacy"
 msgstr ""
 
-#: Template/Layout/defaultctp:83
+#: Template/Layout/default.ctp:83
 msgid "Raw images as well as the final images are stored on the server. The final images will be visible for anyone who has a login to this tool. Raw images may be shared, depending on your choices in the legal questionnaire."
 msgstr ""
 
-#: Template/Layout/defaultctp:84
+#: Template/Layout/default.ctp:84
 msgid "Raw images that are intended to be shared, may be sent to googles vision api for image recognition."
 msgstr ""
 
-#: Template/Layout/defaultctp:95
+#: Template/Layout/default.ctp:95
 msgid "New line"
 msgstr ""
 
-#: Template/Layout/defaultctp:96
-msgid "Two magenta headlines are only allowed, if the message requires it and would make less sense otherwise. Is this the case?"
+#: Template/Layout/default.ctp:96
+msgid "Two magenta headlines are only allowed, if the message requires it and would make less sense otherwise. Click Cancel to insert a second magenta bar. (You have to Click cancel, beacuse people never read the message but just clicked OK.)"
 msgstr ""
 
-#: Template/Layout/defaultctp:97
+#: Template/Layout/default.ctp:97
 msgid "The logo could not be loaded. Please try again."
 msgstr ""
 
-#: Template/Layout/defaultctp:98
+#: Template/Layout/default.ctp:98
 msgid "The bars should never touch the logo. Do you want to move the logo in a other corner?"
 msgstr ""
 
-#: Template/Layout/defaultctp:99
+#: Template/Layout/default.ctp:99
 msgid "The bars should never touch the logo. Please reduce the size of the bars."
 msgstr ""
 
-#: Template/Layout/defaultctp:100
+#: Template/Layout/default.ctp:100
 msgid "Error: The image could not be generated. Please try again."
 msgstr ""
 
-#: Template/Layout/defaultctp:101
+#: Template/Layout/default.ctp:101
 msgid "Download image"
 msgstr ""
 
-#: Template/Layout/defaultctp:102
+#: Template/Layout/default.ctp:102
 msgid "Headline 1"
 msgstr ""
 
-#: Template/Layout/defaultctp:103
+#: Template/Layout/default.ctp:103
 msgid "Headline 2"
 msgstr ""
 
-#: Template/Layout/defaultctp:104
+#: Template/Layout/default.ctp:104
 msgid "Subline 1"
 msgstr ""
 
-#: Template/Layout/defaultctp:105
+#: Template/Layout/default.ctp:105
 msgid "This will clear all input. Do you want to proceed?"
 msgstr ""
 
-#: Template/Layout/defaultctp:106
+#: Template/Layout/default.ctp:106
 msgid "Input not valid:"
 msgstr ""
 
-#: Template/Layout/defaultctp:107
+#: Template/Layout/default.ctp:107
 msgid "Please select the originator of the image."
 msgstr ""
 
-#: Template/Layout/defaultctp:108
+#: Template/Layout/default.ctp:108
 msgid "Please enter the name of the originator."
 msgstr ""
 
-#: Template/Layout/defaultctp:109
+#: Template/Layout/default.ctp:109
 msgid "Please enter url of the platform where you got the image from."
 msgstr ""
 
-#: Template/Layout/defaultctp:110
+#: Template/Layout/default.ctp:110
 msgid "Please confirm that you have the right to use this image."
 msgstr ""
 
-#: Template/Layout/defaultctp:111
+#: Template/Layout/default.ctp:111
 msgid "Input not valid: Please make sure you do not leave any bars empty."
 msgstr ""
 
-#: Template/Layout/errorctp:32
-#: Template/Error/error400ctp:37
-#: Template/Error/error500ctp:42
+#: Template/Layout/error.ctp:32
+#: Template/Error/error400.ctp:37
+#: Template/Error/error500.ctp:42
 msgid "Error"
 msgstr ""
 
-#: Template/Layout/errorctp:40
-#: Template/Users/access_deniedctp:1
+#: Template/Layout/error.ctp:40
+#: Template/Users/access_denied.ctp:1
 msgid "Back"
 msgstr ""
 
-#: Template/Logos/addctp:3
-#: Template/Logos/indexctp:6
+#: Template/Logos/add.ctp:3
+#: Template/Logos/index.ctp:6
 msgid "Add Logo"
 msgstr ""
 
-#: Template/Logos/viewctp:6
+#: Template/Logos/view.ctp:6
 msgid "Edit Logo"
 msgstr ""
 
-#: Template/Logos/viewctp:10
+#: Template/Logos/view.ctp:10
 msgid "Base logo"
 msgstr ""
 
-#: Template/Logos/viewctp:14
+#: Template/Logos/view.ctp:14
 msgid "Subline"
 msgstr ""
 
-#: Template/Logos/viewctp:23
-#: View/Helper/ReferencedByHelperphp:36
+#: Template/Logos/view.ctp:23
+#: View/Helper/ReferencedByHelper.php:36
 msgid "deleted"
 msgstr ""
 
-#: Template/Logos/viewctp:36
+#: Template/Logos/view.ctp:36
 msgid "Groups using this logo"
 msgstr ""
 
-#: Template/Users/addctp:3
-#: Template/Users/indexctp:6
+#: Template/Users/add.ctp:3
+#: Template/Users/index.ctp:6
 msgid "Add User"
 msgstr ""
 
-#: Template/Users/editctp:9
-#: Template/Users/viewctp:6
+#: Template/Users/edit.ctp:9
+#: Template/Users/view.ctp:6
 msgid "Edit User"
 msgstr ""
 
-#: Template/Users/editctp:11
+#: Template/Users/edit.ctp:11
 msgid "Logout on all devices"
 msgstr ""
 
-#: Template/Users/loginctp:3;46
+#: Template/Users/login.ctp:3;46
 msgid "Log in"
 msgstr ""
 
-#: Template/Users/loginctp:7
+#: Template/Users/login.ctp:7
 msgid "We've sent you an email with a link to set a new password. Don't forget to check also the junk mail folder."
 msgstr ""
 
-#: Template/Users/loginctp:10
+#: Template/Users/login.ctp:10
 msgid "Uuups, something went wrong. Please try again later."
 msgstr ""
 
-#: Template/Users/loginctp:16
-#: Template/Users/registerctp:35
-#: Template/Users/viewctp:18
+#: Template/Users/login.ctp:16
+#: Template/Users/register.ctp:35
+#: Template/Users/view.ctp:18
 msgid "Email"
 msgstr ""
 
-#: Template/Users/loginctp:20
+#: Template/Users/login.ctp:20
 msgid "Email address not found. Might your login be registered to an other email address?"
 msgstr ""
 
-#: Template/Users/loginctp:27
+#: Template/Users/login.ctp:27
 msgid "Password"
 msgstr ""
 
-#: Template/Users/loginctp:30
+#: Template/Users/login.ctp:30
 msgid "Forgot password?"
 msgstr ""
 
-#: Template/Users/loginctp:40
+#: Template/Users/login.ctp:40
 msgid "Stay logged in"
 msgstr ""
 
-#: Template/Users/loginctp:51
-#: Template/Users/register-okctp:3
-#: Template/Users/registerctp:3
+#: Template/Users/login.ctp:51
+#: Template/Users/register-ok.ctp:3
+#: Template/Users/register.ctp:3
 msgid "Register"
 msgstr ""
 
-#: Template/Users/loginctp:57
+#: Template/Users/login.ctp:57
 msgid "Get password reset link"
 msgstr ""
 
-#: Template/Users/loginctp:31
+#: Template/Users/login.ctp:31
 msgctxt "Password"
 msgid "Reset it!"
 msgstr ""
 
-#: Template/Users/register-okctp:5
+#: Template/Users/register-ok.ctp:5
 msgid "Thank you for your registration. We will check it and send you the login credentials as soon as possible. Please be aware, that this may take a few days."
 msgstr ""
 
-#: Template/Users/registerctp:10
+#: Template/Users/register.ctp:10
 msgid "First name"
 msgstr ""
 
-#: Template/Users/registerctp:18
+#: Template/Users/register.ctp:18
 msgid "Last name"
 msgstr ""
 
-#: Template/Users/registerctp:26
+#: Template/Users/register.ctp:26
 msgid "City"
 msgstr ""
 
-#: Template/Users/registerctp:44
+#: Template/Users/register.ctp:44
 msgid "Comment"
 msgstr ""
 
-#: Template/Users/registerctp:48
+#: Template/Users/register.ctp:48
 msgid "Apply for login"
 msgstr ""
 
-#: Template/Users/set_my_new_passwordctp:3
+#: Template/Users/set_my_new_password.ctp:3
 msgid "Set new password"
 msgstr ""
 
-#: Template/Users/set_my_new_passwordctp:7
+#: Template/Users/set_my_new_password.ctp:7
 msgid "Save new password"
 msgstr ""
 
-#: Template/Users/viewctp:10
+#: Template/Users/view.ctp:10
 msgid "First Name"
 msgstr ""
 
-#: Template/Users/viewctp:14
+#: Template/Users/view.ctp:14
 msgid "Last Name"
 msgstr ""
 
-#: Template/Users/viewctp:40
+#: Template/Users/view.ctp:40
 msgid "Image count"
 msgstr ""
 
-#: Template/Users/viewctp:44
+#: Template/Users/view.ctp:44
 msgid "Login count"
 msgstr ""
 
-#: Template/Users/viewctp:48
+#: Template/Users/view.ctp:48
 msgid "Last login"
 msgstr ""
 
-#: Template/Users/viewctp:75
+#: Template/Users/view.ctp:75
 msgid "and of their subordinated groups"
 msgstr ""
 
-#: Template/Users/viewctp:62
+#: Template/Users/view.ctp:62
 msgctxt "User is member of {list of groups}"
 msgid "{user} is member of"
 msgstr ""
 
-#: Template/Users/viewctp:73
+#: Template/Users/view.ctp:73
 msgctxt "User can manage {list of groups}"
 msgid "{user} can manage"
 msgstr ""
 
-#: Template/Error/error400ctp:38
+#: Template/Error/error400.ctp:38
 msgid "The requested address {0} was not found on this server."
 msgstr ""
 
-#: Template/Error/error500ctp:40
+#: Template/Error/error500.ctp:40
 msgid "An Internal Error Has Occurred"
 msgstr ""
 

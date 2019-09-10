@@ -7,7 +7,9 @@ RUN apt-get update -y \
     openssl \
     zip \
     unzip \
-    git
+    git \
+    vim \
+    less
 
 # install & enable mysql driver
 RUN docker-php-ext-install pdo_mysql

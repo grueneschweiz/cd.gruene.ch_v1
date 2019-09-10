@@ -164,7 +164,6 @@
         'label' => __('Border'),
         'class' => 'form-control mb-4',
     ]); ?>
-    <?= $this->Form->hidden('hash', ['default' => $hash]) ?>
     <button id="image-generate" class="btn btn-outline-primary mb-3"><?= __('Generate Image') ?></button>
 
 </div>

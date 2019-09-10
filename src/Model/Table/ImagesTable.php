@@ -2,10 +2,6 @@
 
 namespace App\Model\Table;
 
-use App\Model\Entity\Image;
-use Cake\Datasource\EntityInterface;
-use Cake\Log\Log;
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -159,37 +155,59 @@ class ImagesTable extends Table {
     }
 
     /**
-     * Add or update the original image
+     * Add the original image
      *
      * @param string $path to the image
      * @param \stdClass $data @see ImagesController::ajaxAdd()
+     * @param string $file_name
      *
-     * @return int image id
+     * @return bool|int the image id or false on error
      */
-    public function addOriginal( string $path, \stdClass $data ) {
-        $hash = $this->getNewHash();
-        $dims = getimagesize( $path );
-
-        $image           = $this->newEntity();
-        $image->filename = $data->image->name;
-        $image->width    = $dims[0];
-        $image->height   = $dims[1];
-        $image->hash     = $hash;
-        $image->user_id  = $data->user_id;
-        $image->flattext = $this->_getBarText( $data->bars->data ) . ' ' . $data->logo->subline;
-
-        $this->save( $image );
-
-        return $image->id;
+    public function addOriginal( string $path, \stdClass $data, $file_name ) {
+        return $this->addImage( $path, $data, $file_name );
     }
 
     /**
-     * Generate a new image hash
+     * Add imgage from given parameters
      *
-     * @return string
+     * @param string $path to the image
+     * @param \stdClass $data @see ImagesController::ajaxAdd()
+     * @param string $file_name
+     * @param int $original_id the primary key of the original image
+     *
+     * @return bool|int the image id or false on error
      */
-    public function getNewHash() {
-        return uniqid( '' );
+    private function addImage( string $path, \stdClass $data, string $file_name, ?int $original_id = null ) {
+        if ( property_exists( $data->logo, 'id' ) ) {
+            $logo_id = intval( $data->logo->id );
+            $logo_id = $logo_id > 0 ? $logo_id : null;
+        } else {
+            $logo_id = null;
+        }
+
+        // only calculate hash of raw images
+        // gradient based images have an $original_id of -1
+        if ( null === $original_id ) {
+            $hash = md5_file( $path );
+        } else {
+            $hash = null;
+        }
+
+        $dims = getimagesize( $path );
+
+        $image              = $this->newEntity();
+        $image->filename    = $file_name;
+        $image->width       = $dims[0];
+        $image->height      = $dims[1];
+        $image->hash        = $hash;
+        $image->user_id     = $data->user_id;
+        $image->flattext    = $this->_getBarText( $data->bars->data );
+        $image->logo_id     = $logo_id;
+        $image->original_id = $original_id;
+
+        $image = $this->save( $image );
+
+        return $image ? $image->id : false;
     }
 
     /**
@@ -209,48 +227,30 @@ class ImagesTable extends Table {
     }
 
     /**
+     * Generate a new image hash
+     *
+     * @return string
+     */
+    public function getNewHash() {
+        return uniqid( '' );
+    }
+
+    /**
      * Add the final image
      *
      * @param string $path to the image
      * @param \stdClass $data @see ImagesController::ajaxAdd()
-     * @param string $filename
+     * @param string $file_name
      * @param int $original_id the primary key of the original image
+     *
+     * @return bool|int the image id or false on error
      */
-    public function addFinal( string $path, \stdClass $data, string $filename, int $original_id ) {
-        $dims = getimagesize( $path );
-
-        $image = $this->_getOrCreateByHash( $data->hash );
-
-        $image->original_id = $original_id;
-        $image->filename    = $filename;
-        $image->width       = $dims[0];
-        $image->height      = $dims[1];
-        $image->user_id     = $data->user_id;
-
-        $image->flattext .= $this->_getBarText( $data->bars->data );
-
-        $this->save( $image );
+    public function addFinal( string $path, \stdClass $data, string $file_name, int $original_id ) {
+        return $this->addImage( $path, $data, $file_name, $original_id );
     }
 
     /**
-     * Get image by hash. Return a new entity if no image was found.
-     *
-     * @param $hash
-     *
-     * @return Image
-     */
-    private function _getOrCreateByHash( $hash ): Image {
-        $image = $this->find()->where( [ 'hash' => $hash ] )->first();
-        if ( ! $image ) {
-            $image       = $this->newEntity();
-            $image->hash = $hash;
-        }
-
-        return $image;
-    }
-
-    /**
-     * Complete image data with legal information. Wait until image generation has finished.
+     * Complete image data with legal information. Update old information.
      *
      * @param array $data as received by ImagesController::ajaxAddLegal()
      * Must contain at least the following key value pairs (key => [possible, values]):
@@ -262,16 +262,18 @@ class ImagesTable extends Table {
      * - source => any input
      * - licence => ["other", "cc+", "cc"]
      * - originator => any input
+     * @param int $userId
      *
      * @return bool
      */
-    public function addLegal( array $data ) {
-        do {
-            $image = $this->find()->where( [ 'hash' => $data['hash'] ] )->first();
-            if ( ! $image ) {
-                sleep( 1 );
-            }
-        } while ( ! $image );
+    public function addLegal( array $data, int $userId ) {
+        $image = $this->find()
+                      ->where( [ 'hash' => $data['hash'] ] )
+                      ->andWhere( [ 'user_id' => $userId ] )
+                      ->first();
+        if ( ! $image ) {
+            return false;
+        }
 
         if ( $image->original_id ) {
             $original = $this->get( $image->original_id );

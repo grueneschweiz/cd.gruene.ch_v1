@@ -17,7 +17,6 @@ $(document).ready(function () {
 });
 
 var $cibuilder;
-var newHash;
 
 $(document).ready(function () {
     'use strict';
@@ -29,7 +28,17 @@ $(document).ready(function () {
         return;
     }
 
-    $('#legal-check').legalChecker();
+    var self = this;
+    var uploadChunkSize = 1024 * 1024; // 1MB
+    var reader = {};
+    var file = {};
+    var rawImageHash;
+
+    // reset the image uploader
+    // https://stackoverflow.com/a/832730
+    $('.cropit-image-input').replaceWith($('.cropit-image-input').val('').clone(true));
+
+    var $legalChecker = $('#legal-check').legalChecker();
 
     $('#canvas-width-setter, #canvas-height-setter').trigger('change');
     var startup_width = $('#canvas-width-setter').val();
@@ -295,6 +304,87 @@ $(document).ready(function () {
 
     // generate image
     $("#image-generate").click(function () {
+        self.showWorkingDialog();
+
+        if (self.getImageName()) {
+            $('#download-button').hide();
+
+            self.uploadImage()
+                .then(function () {
+                    return self.uploadImageData();
+                })
+                .then(function() {
+                    $legalChecker.submit_legal_when_ready( rawImageHash );
+                })
+                .catch(function () {
+                    $('.warning-image-generation-error').removeClass('d-none')
+                });
+        } else {
+            self.uploadImageData();
+        }
+    });
+
+    // upload the bar data etc
+    this.uploadImageData = function () {
+        return new Promise(function (resolve, reject) {
+            var data = self.getImageData();
+
+            $.ajax({
+                url: '/images/ajaxAdd',
+                type: 'POST',
+                data: {addImage: JSON.stringify(data)}, // todo: send directly (without JSON.stringify)
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-Token', x_csrf_token);
+                }
+            }).done(function (data, status) {
+                $('#generating-image-loader').hide();
+
+                if (status === 'success') {
+                    var content = $.parseJSON(data);
+                    if (content.filename === undefined) {
+                        $('.warning-image-generation-error').removeClass('d-none');
+                        if (content) {
+                            $('.warning-image-generation-error span').text(content);
+                        }
+                        return;
+                    }
+                    rawImageHash = content.rawImageHash;
+                    $('#download-button').html('<a href="/protected/finalimages/' + content.filename + '" class="btn btn-outline-primary" id="download-img" download>' + trans.download_image + '</a>');
+                    $('#download-img').click(function () {
+                        $('#generating-image').dialog('close');
+                    });
+
+                    resolve();
+                } else {
+                    console.log(data);
+                    reject();
+                }
+            }).fail(function (data, status, error) {
+                console.log(data, status, error);
+                reject();
+            });
+        });
+    }
+
+    this.showWorkingDialog = function () {
+        $('.warning-image-generation-error').addClass('d-none');
+        if (initialImage) {
+            $('#legal-check').hide();
+            $('#please-fill-out-legal').hide();
+            $('#download-button').show();
+        } else {
+            $('#legal-check').show();
+            $('#please-fill-out-legal').show();
+            $('#download-button').hide();
+        }
+        $('#download-button a#download-img').remove();
+        $('#generating-image-loader').show();
+        $('#sending-legal-loader').hide();
+        $('#generating-image').dialog('open');
+    }
+
+    // get the bar, the logo data etc
+    this.getImageData = function () {
         var jsondata,
             bardata = [],
             data,
@@ -353,13 +443,12 @@ $(document).ready(function () {
                     x: $imageCropper.cropit('offset').x * scaleFactor,
                     y: $imageCropper.cropit('offset').y * scaleFactor
                 },
-                src: $imageCropper.cropit('imageSrc'),
-                name: $('.cropit-image-input').val().split('\\').pop().split('/').pop() // http://stackoverflow.com/questions/423376/how-to-get-the-file-name-from-a-full-path-using-javascript
+                name: self.getImageName()
             },
             preview: {
                 size: {
-                    width: $imageCropper.cropit('previewSize').width * scaleFactor,
-                    height: $imageCropper.cropit('previewSize').height * scaleFactor
+                    width: Math.round($imageCropper.cropit('previewSize').width * scaleFactor),
+                    height: Math.round($imageCropper.cropit('previewSize').height * scaleFactor)
                 }
             },
             bars: {
@@ -380,60 +469,75 @@ $(document).ready(function () {
                 margin: parseFloat($rotator.css('margin-top')) * scaleFactor,
                 fontsize: parseFloat($subline.css('font-size')) * scaleFactor,
                 subline: $subline.text(),
-                left: parseFloat($subline.css('margin-left')) * scaleFactor
-            },
-            hash: $('input[name="hash"]').val()
+                left: parseFloat($subline.css('margin-left')) * scaleFactor,
+                id: $('#logo').val()
+            }
         };
 
         $rotator.css('transform', 'rotate(-5deg)');
 
-        jsondata = JSON.stringify(data);
+        return data;
+    }
 
-        $.ajax({
-            url: '/images/ajaxAdd',
-            type: 'POST',
-            data: {addImage: jsondata},
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-CSRF-Token', x_csrf_token);
-                $('.warning-image-generation-error').addClass('d-none');
-                if (initialImage) {
-                    $('#legal-check').hide();
-                    $('#please-fill-out-legal').hide();
-                    $('#download-button').show();
-                } else {
-                    $('#legal-check').show();
-                    $('#please-fill-out-legal').show();
-                    $('#download-button').hide();
-                }
-                $('#download-button a#download-img').remove();
-                $('#generating-image-loader').show();
-                $('#sending-legal-loader').hide();
-                $('#generating-image').dialog('open');
-            }
-        }).done(function (data, status) {
-            $('#generating-image-loader').hide();
+    // get the name of the image
+    this.getImageName = function () {
+        // http://stackoverflow.com/questions/423376/how-to-get-the-file-name-from-a-full-path-using-javascript
+        return $('.cropit-image-input').val().split('\\').pop().split('/').pop();
+    }
 
-            if (status === 'success') {
-                var content = $.parseJSON(data);
-                if (content.filename === undefined) {
-                    $('.warning-image-generation-error').removeClass('d-none');
-                    if (content) {
-                        $('.warning-image-generation-error span').text(content);
-                    }
-                    return;
-                }
-                newHash = content.newHash;
-                $('#download-button').html('<a href="/protected/finalimages/' + content.filename + '" class="btn btn-outline-primary" id="download-img" download>' + trans.download_image + '</a>');
-                $('#download-img').click(function () {
-                    $('#generating-image').dialog('close');
-                    $('input[name="hash"]').val(newHash);
-                });
-            } else {
-                alert(trans.image_generation_error);
-            }
-        }).fail(function (data, status, error) {
-            console.log(data, status, error);
-            $('.warning-image-generation-error').removeClass('d-none');
+    // handle image upload, return a promise
+    this.uploadImage = function () {
+        return new Promise(function (resolve, reject) {
+            reader = new FileReader();
+            file = document.querySelector('.cropit-image-input').files[0];
+
+            self.upload_file(0, resolve, reject);
         });
-    });
+    }
+
+    // upload the image in chunks
+    this.upload_file = function (start, resolve, reject) {
+        var next_chunk = start + uploadChunkSize + 1;
+        var blob = file.slice(start, next_chunk);
+
+        reader.onloadend = function (event) {
+            if (event.target.readyState !== FileReader.DONE) {
+                return;
+            }
+
+            $.ajax({
+                url: '/images/ajaxUploadImage',
+                type: 'POST',
+                dataType: 'json',
+                cache: false,
+                data: {
+                    imageChunk: event.target.result,
+                    chunkNum: start,
+                    fileName: self.getImageName()
+                },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-Token', x_csrf_token);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR, textStatus, errorThrown);
+                    reject(textStatus);
+                },
+                success: function (data) {
+                    if (data.content !== true) {
+                        reject('Unable to upload image.');
+                    }
+
+                    if (next_chunk < file.size) {
+                        // upload next chunk
+                        self.upload_file(next_chunk, resolve, reject);
+                    } else {
+                        // upload completed
+                        resolve();
+                    }
+                }
+            });
+        };
+
+        reader.readAsDataURL(blob);
+    }
 });

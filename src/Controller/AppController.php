@@ -57,7 +57,6 @@ class AppController extends Controller
          * see http://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         $this->loadComponent('Security');
-        $this->loadComponent('Csrf');
         $this->loadComponent('Cookie');
 
         /**
@@ -176,7 +175,7 @@ class AppController extends Controller
         }
 
         // set $admin as global var for all views
-        if ($this->Auth && $this->Auth->user('id')) {
+        if (property_exists($this, 'Auth') && $this->Auth && $this->Auth->user('id')) {
             $Users = TableRegistry::getTableLocator()->get('Users');
             /** @var User $user */
             $user = $Users->get($this->Auth->user('id'));
