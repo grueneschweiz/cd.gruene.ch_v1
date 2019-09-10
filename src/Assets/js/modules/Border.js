@@ -16,7 +16,7 @@ function BorderModule($cibuilder, $wrapper) {
         this.$cibuilder = $cibuilder;
 
         // set scale factor
-        this.scale_factor = 0.02;
+        this.scale_factor = 0.0175;
 
         // set wrapper object
         this.$wrapper = $wrapper;
@@ -164,7 +164,7 @@ function BorderModule($cibuilder, $wrapper) {
     this.getBorderWidth = function () {
         var width = this.img_dims.width,
             height = this.img_dims.height;
-        return Math.round(((width + height) / 2) * this.scale_factor);
+        return Math.round(Math.sqrt(width * height) * this.scale_factor);
     };
 
     /**

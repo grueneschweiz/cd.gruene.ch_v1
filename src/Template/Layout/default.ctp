@@ -18,7 +18,6 @@
 <html>
 <?= $this->element('head') ?>
 <body>
-<div class="beta"><img src="/img/beta.svg?v=1.0"></div>
 <div id="wrapper">
     <header>
         <div class="titlebar-wrapper">
