@@ -15,7 +15,6 @@ webroot/tmp
 webroot/css/*
 webroot/js/*
 .htaccess
-!/protected/.htaccess
 .docker/mysql
 vendor
 scripts/deploy.sh
