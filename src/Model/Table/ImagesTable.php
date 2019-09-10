@@ -155,34 +155,59 @@ class ImagesTable extends Table {
     }
 
     /**
-     * Add or update the original image
+     * Add the original image
      *
      * @param string $path to the image
      * @param \stdClass $data @see ImagesController::ajaxAdd()
      * @param string $file_name
      *
-     * @return int image id
+     * @return bool|int the image id or false on error
      */
     public function addOriginal( string $path, \stdClass $data, $file_name ) {
+        return $this->addImage( $path, $data, $file_name );
+    }
 
+    /**
+     * Add imgage from given parameters
+     *
+     * @param string $path to the image
+     * @param \stdClass $data @see ImagesController::ajaxAdd()
+     * @param string $file_name
+     * @param int $original_id the primary key of the original image
+     *
+     * @return bool|int the image id or false on error
+     */
+    private function addImage( string $path, \stdClass $data, string $file_name, ?int $original_id = null ) {
+        if ( property_exists( $data->logo, 'id' ) ) {
+            $logo_id = intval( $data->logo->id );
+            $logo_id = $logo_id > 0 ? $logo_id : null;
+        } else {
+            $logo_id = null;
+        }
 
-
-
+        // only calculate hash of raw images
+        // gradient based images have an $original_id of -1
+        if ( null === $original_id ) {
+            $hash = md5_file( $path );
+        } else {
+            $hash = null;
+        }
 
         $dims = getimagesize( $path );
 
-        $image           = $this->newEntity();
-        $image->filename = $file_name;
-        $image->width    = $dims[0];
-        $image->height   = $dims[1];
-        $image->hash     = md5_file( $path );
-        $image->user_id  = $data->user_id;
-        $image->flattext = $this->_getBarText( $data->bars->data );
-        $image->logo_id  = property_exists( $data->logo, 'id' ) ? (int) $data->logo->id : null;
+        $image              = $this->newEntity();
+        $image->filename    = $file_name;
+        $image->width       = $dims[0];
+        $image->height      = $dims[1];
+        $image->hash        = $hash;
+        $image->user_id     = $data->user_id;
+        $image->flattext    = $this->_getBarText( $data->bars->data );
+        $image->logo_id     = $logo_id;
+        $image->original_id = $original_id;
 
-        $this->save( $image );
+        $image = $this->save( $image );
 
-        return $image->id;
+        return $image ? $image->id : false;
     }
 
     /**
@@ -215,23 +240,13 @@ class ImagesTable extends Table {
      *
      * @param string $path to the image
      * @param \stdClass $data @see ImagesController::ajaxAdd()
-     * @param string $filename
+     * @param string $file_name
      * @param int $original_id the primary key of the original image
+     *
+     * @return bool|int the image id or false on error
      */
-    public function addFinal( string $path, \stdClass $data, string $filename, int $original_id ) {
-        $dims = getimagesize( $path );
-
-        $image              = $this->newEntity();
-        $image->original_id = $original_id;
-        $image->filename    = $filename;
-        $image->width       = $dims[0];
-        $image->height      = $dims[1];
-        $image->hash        = md5_file( $path );
-        $image->user_id     = $data->user_id;
-        $image->logo_id     = property_exists( $data->logo, 'id' ) ? (int) $data->logo->id : null;
-        $image->flattext    = $this->_getBarText( $data->bars->data );
-
-        $this->save( $image );
+    public function addFinal( string $path, \stdClass $data, string $file_name, int $original_id ) {
+        return $this->addImage( $path, $data, $file_name, $original_id );
     }
 
     /**
