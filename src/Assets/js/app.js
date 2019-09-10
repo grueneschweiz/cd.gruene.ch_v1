@@ -307,6 +307,8 @@ $(document).ready(function () {
         self.showWorkingDialog();
 
         if (self.getImageName()) {
+            $('#download-button').hide();
+
             self.uploadImage()
                 .then(function () {
                     return self.uploadImageData();
