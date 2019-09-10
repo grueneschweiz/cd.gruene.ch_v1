@@ -166,14 +166,14 @@ class ImagesController extends AppController {
                     $hash       = md5_file( $path );
                     $duplicates = $this->Images->find()->where( [ 'hash' => $hash ] );
                     if ( $duplicates->count() ) {
-                        $older       = $duplicates->first();
-                        $older_path  = $this->ImageFileHandler->getRawImagePath( $older->filename );
-                        $original_id = $older->id;
+                        $older      = $duplicates->first();
+                        $older_path = $this->ImageFileHandler->getRawImagePath( $older->filename );
                     }
                     if ( isset( $older_path ) ) {
                         unlink( $path );
-                        $path    = $older_path;
-                        $success = true;
+                        $path        = $older_path;
+                        $original_id = $older->id;
+                        $success     = true;
                     }
                 }
 
