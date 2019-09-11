@@ -60,7 +60,10 @@ class ImagesController extends AppController {
      */
     public function index() {
         $this->paginate = [
-            'contain' => [ 'Users' ]
+            'contain' => [ 'Users' ],
+            'order'   => [ 'created' => 'desc' ],
+            'finder'   => 'final',
+            'limit'   => 50,
         ];
         $images         = $this->paginate( $this->Images );
 
@@ -83,6 +86,28 @@ class ImagesController extends AppController {
 
         $this->set( 'image', $image );
         $this->set( '_serialize', [ 'image' ] );
+    }
+
+    /**
+     * Delete an image
+     *
+     * @param null|int $id
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function delete( $id = null ) {
+        $this->request->allowMethod( [ 'post', 'delete' ] );
+        $image = $this->Images->get( $id );
+
+        if ( $image->user_id !== $this->Auth->user( 'id' ) && ! $this->Auth->user( 'super_admin' ) ) {
+            $this->Flash->error( __( "Your not authorized to delete this image." ) );
+        } elseif ( $this->Images->delete( $image ) ) {
+            $this->Flash->success( __( 'The image has been deleted.' ) );
+        } else {
+            $this->Flash->error( __( 'The image could not be deleted. Please, try again.' ) );
+        }
+
+        return $this->redirect( [ 'action' => 'index' ] );
     }
 
     /**
@@ -127,7 +152,7 @@ class ImagesController extends AppController {
             $chunk     = $this->request->getData( 'imageChunk' );
             $file_name = $this->request->getData( 'fileName' );
             $part      = (int) $this->request->getData( 'chunkNum' );
-            $content   = $this->ImageFileHandler->saveChunk( $chunk, $file_name, $part );
+            $content   = $this->ImageFileHandler::saveChunk( $chunk, $file_name, $part );
         } else {
             $content = 'access denied';
         }
@@ -154,7 +179,7 @@ class ImagesController extends AppController {
             if ( ! empty( $data->image->name ) ) {
                 // save it
                 try {
-                    $path    = $this->ImageFileHandler->save( $data );
+                    $path    = $this->ImageFileHandler::save( $data );
                     $success = $path;
                 } catch ( InvalidImageException $exception ) {
                     $path    = false;
@@ -167,7 +192,7 @@ class ImagesController extends AppController {
                     $duplicates = $this->Images->find()->where( [ 'hash' => $hash ] );
                     if ( $duplicates->count() ) {
                         $older      = $duplicates->first();
-                        $older_path = $this->ImageFileHandler->getRawImagePath( $older->filename );
+                        $older_path = $this->ImageFileHandler::getRawImagePath( $older->filename );
                     }
                     if ( isset( $older_path ) ) {
                         unlink( $path );
@@ -187,7 +212,7 @@ class ImagesController extends AppController {
                 // generate gradient image if custom image is missing
                 $gradient = $this->ImageEditor->createWithGradient( $data->preview->size );
                 // save it
-                $path    = $this->ImageFileHandler->saveGradient( $gradient );
+                $path    = $this->ImageFileHandler::saveGradient( $gradient );
                 $success = (bool) $path;
             }
 
@@ -218,6 +243,9 @@ class ImagesController extends AppController {
 
                     // resize image by width
                     $this->ImageEditor->resizeByWidth( $width );
+
+                    // save thumbnail
+                    $this->ImageEditor->makeRawThumb();
                 }
             } else {
                 // if the image couldn't be saved (custom image) or created (generic image)
@@ -264,6 +292,7 @@ class ImagesController extends AppController {
             // if all went right until now
             if ( ! isset( $error ) ) {
                 $filename = $this->ImageEditor->save();
+                $this->ImageEditor->makeFinalThumb();
                 $this->Images->addFinal( $this->ImageEditor->path, $data, $filename, $original_id );
 
                 $content = [ 'success' => true, 'filename' => $filename, 'rawImageHash' => $hash ];

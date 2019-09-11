@@ -5,6 +5,7 @@
 @import "~bootstrap4c-chosen/dist/css/component-chosen.min.css";
 @import '~jquery-ui-css/all.css';
 @import "./styler.scss";
+@import "./gallery.scss";
 
 @font-face {
   font-family: 'Sanuk';
@@ -217,11 +218,4 @@ table .actions {
   a:not(.btn) {
     color: $secondary;
   }
-}
-
-/* -------- beta ---------- */
-.beta {
-  position: absolute;
-  top: 0;
-  right: 0;
 }

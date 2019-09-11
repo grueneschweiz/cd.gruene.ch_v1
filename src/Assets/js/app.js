@@ -9,6 +9,7 @@ require('cropit');
 
 require('./cibuilder.js');
 require('./legal.js');
+require('./gallery.js');
 
 window.$ = $;
 

@@ -1,6 +1,11 @@
 <?php
 $nav = [
     [
+        'label' => __( 'Gallery' ),
+        'route' => ['controller'=>'Images', 'action'=>'index'],
+        'active' => ['Images.index'],
+    ],
+    [
         'label' => __('Create Image'),
         'route' => ['controller' => 'Images', 'action' => 'add'],
         'active' => ['Images.add'],

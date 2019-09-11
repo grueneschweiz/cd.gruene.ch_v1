@@ -1,61 +1,57 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Image'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Bars'), ['controller' => 'Bars', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Bar'), ['controller' => 'Bars', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="images index large-9 medium-8 columns content">
-    <h3><?= __('Images') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-        <tr>
-            <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('opath') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('npath') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('width') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('height') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('flattext') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('tags') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-            <th scope="col" class="actions"><?= __('Actions') ?></th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($images as $image): ?>
-            <tr>
-                <td><?= $this->Number->format($image->id) ?></td>
-                <td><?= $image->has('user') ? $this->Html->link($image->user->id,
-                        ['controller' => 'Users', 'action' => 'view', $image->user->id]) : '' ?></td>
-                <td><?= h($image->opath) ?></td>
-                <td><?= h($image->npath) ?></td>
-                <td><?= $this->Number->format($image->width) ?></td>
-                <td><?= $this->Number->format($image->height) ?></td>
-                <td><?= h($image->flattext) ?></td>
-                <td><?= h($image->tags) ?></td>
-                <td><?= h($image->created) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $image->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $image->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $image->id],
-                        ['confirm' => __('Are you sure you want to delete # {0}?', $image->id)]) ?>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+<?php
+
+use Cake\I18n\Time;
+
+?>
+<div class="images index container-fluid">
+    <div class="mt-4 mb-3">
+        <div class="clearfix mb-2">
+            <h3 class="float-left mr-3"><?= __('Gallery') ?></h3>
+            <a href="<?= $this->Url->build(['action' => 'add']) ?>"
+               class="btn btn-outline-primary"><?= __('Create Image') ?></a>
+        </div>
+        <p><?= __('Have a look at the images your fellows have created.') ?></p>
     </div>
+
+    <?php // todo: implement search here ?>
+
+    <div class="gallery">
+        <?php
+        $user_id     = $this->request->session()->read( 'Auth.User.id' );
+        $super_admin = $this->request->session()->read( 'Auth.User.super_admin' );
+        ?>
+        <?php foreach ( $images as $image ): ?>
+            <?php
+            if ( ! ( $image->src && $image->thumbSrc ) ) {
+                continue;
+            }
+
+            $time    = new Time( $image->created );
+            $created = $time->timeAgoInWords( [
+                'end'      => '2 days',
+                'accuracy' => [ 'hour' => 'hour', 'day' => 'day' ],
+            ] );
+            $by      = '<a href="mailto:' . $image->user->email . '">' . $image->user->first_name . ' ' . $image->user->last_name . '</a>';
+            ?>
+            <div class="gallery-card">
+                <img src="<?= $image->thumbSrc ?>" alt="<?= $image->flattext ?>" class="gallery-image">
+                <div class="caption gallery-image-caption d-none">
+                    <p><?= __( 'Created {0} by {1}.', $created, $by ) ?></p>
+                    <a href="<?= $image->src ?>" download="download"
+                       class="btn btn-outline-primary btn-sm"><?= __( 'Download' ) ?></a>
+                    <?php if ( $image->user->id === $user_id || $super_admin ): ?>
+                        <?= $this->Form->postLink( __( 'Delete' ), [ 'action' => 'delete', $image->id ],
+                            [
+                                'confirm' => __( 'Are you sure you want to delete this image?', $image->id ),
+                                'class'   => 'btn btn-link btn-sm'
+                            ] ) ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <?php if ( $this->Paginator->hasPage( null, 2 ) ) {
+        echo $this->element( 'paginator' );
+    } ?>
 </div>
