@@ -28,7 +28,8 @@ class ImagesController extends AppController {
             'ajaxAdd',
             'ajaxGetLogo',
             'ajaxAddLegal',
-            'ajaxUploadImage'
+            'ajaxUploadImage',
+            'ajaxDelete'
         ] );
     }
 
@@ -95,19 +96,24 @@ class ImagesController extends AppController {
      *
      * @return \Cake\Http\Response|null
      */
-    public function delete( $id = null ) {
+    public function ajaxDelete( $id = null ) {
         $this->request->allowMethod( [ 'post', 'delete' ] );
-        $image = $this->Images->get( $id );
+        if ( $this->request->is( 'ajax' ) ) {
+            $success = false;
+            $image   = $this->Images->get( $id );
 
-        if ( $image->user_id !== $this->Auth->user( 'id' ) && ! $this->Auth->user( 'super_admin' ) ) {
-            $this->Flash->error( __( "You'r not authorized to delete this image." ) );
-        } elseif ( $this->Images->delete( $image ) ) {
-            $this->Flash->success( __( 'The image has been deleted.' ) );
-        } else {
-            $this->Flash->error( __( 'The image could not be deleted. Please, try again.' ) );
+            if ( $image->user_id !== $this->Auth->user( 'id' ) && ! $this->Auth->user( 'super_admin' ) ) {
+                $msg = __( "You'r not authorized to delete this image." );
+            } elseif ( $this->Images->delete( $image ) ) {
+                $msg     = __( 'The image has been deleted.' );
+                $success = true;
+            } else {
+                $msg = __( 'The image could not be deleted. Please, try again.' );
+            }
+
+            $this->set( [ 'content' => json_encode( [ 'success' => $success, 'message' => $msg ] ) ] );
+            $this->render( '/Element/ajaxreturn' );
         }
-
-        return $this->redirect( [ 'action' => 'index' ] );
     }
 
     /**
