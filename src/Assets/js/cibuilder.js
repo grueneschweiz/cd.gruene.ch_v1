@@ -9,6 +9,7 @@
     var Border = require('./modules/Border');
     var Form = require('./modules/Form');
     var Image = require('./modules/Image');
+    var Copyright = require('./modules/Copyright');
 
     /**
      * Instantiate jQuery plugin
@@ -31,6 +32,7 @@
             this.form = new Form(this, $(options.form));
             this.logo = new Logo(this, $(options.logo));
             this.rules = new Rules(this);
+            this.copyright = new Copyright(this, $(options.copyright));
 
             this.registerEventListeners();
         };
@@ -74,6 +76,7 @@
                 self.setFontSize($('.font-size-slider').val());
                 self.setFontSize($('.font-size-slider').val());
                 self.setBorder($('#border-form').val());
+                self.setCopyright();
             });
 
             this.on('fontSizeChanged', function () {
@@ -88,10 +91,15 @@
                 self.image.setBarsTopPosition(); // must be called before font size is changed
                 self.setLogo();
                 self.setFontSize($('.font-size-slider').val());
+                self.setCopyright();
             });
 
             this.on('barDragStop', function () {
                 self.setLogo();
+            });
+
+            this.on('copyrightChanged', function() {
+                self.setCopyright();
             });
 
             this.on('colorSchemeChanged', function () {
@@ -100,6 +108,7 @@
 
             this.on('borderChanged', function () {
                 self.image.setBarsXposition();
+                self.setCopyright();
             });
 
             this.on('textChanged', function () {
@@ -248,6 +257,25 @@
             this.image.setFontSize(size);
 
             this.trigger('fontSizeChanged');
+
+            return this;
+        };
+
+        /**
+         * Set copyright
+         *
+         * @returns {$.fn.$cibuilder}
+         */
+        this.setCopyright = function () {
+            var $img = $('.cropit-preview-image-container');
+
+            this.copyright.set(
+                $('#copyright').val(),
+                $('#layout').val(),
+                $('#border-form').val(),
+                $img.outerHeight(),
+                $img.outerWidth()
+            );
 
             return this;
         };

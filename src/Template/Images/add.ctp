@@ -140,6 +140,15 @@
         <?= __('At least one bar contains to much text.') ?>
     </div>
     <div class="spacer mt-3"></div>
+    <div id="copyright-form" class="d-none">
+        <span class="helptext"
+              title="<?= __('You can add some copyright info to the edge of the image.') ?>"></span>
+        <?= $this->Form->input('copyright', [
+            'label' => __('Copyright info'),
+            'id' => 'copyright',
+            'class' => 'form-control mb-3',
+        ]); ?>
+    </div>
     <span class="helptext"
           title="<?= __('Generally the bars are on the left side. But you may put them on the right side, if the photo requires it.') ?>"></span>
     <?= $this->Form->input('layout', [

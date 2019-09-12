@@ -233,3 +233,19 @@
 #others_can_use.form-check-input:disabled ~ .form-check-label {
   text-decoration: line-through;
 }
+
+#copyright-wrapper {
+    position: absolute;
+    bottom: 0;
+    transform: rotate(-90deg) translateY(100%);
+    transform-origin: left bottom;
+    line-height: 1em;
+    color: #ffffff;
+    text-transform: uppercase;
+    width: 10000px;
+    font-family: Arial;
+
+    &.no-border {
+        margin: 0.75em;
+    }
+}

@@ -105,6 +105,7 @@ $(document).ready(function () {
             $('.image-modifier-controls').show();
             $('#color-scheme-form').removeClass('d-none');
             $('#color_scheme').val('green').trigger('change');
+            $('#copyright-form').removeClass('d-none');
             initialImage = false;
             $cibuilder.trigger('imageChanged');
         }
@@ -136,11 +137,16 @@ $(document).ready(function () {
     var ibars = '<div id="image-bars-dragger" class="' + $('#layout').val() + '"><div id="image-bars" class="' + $('#layout').val() + '"></div></div>';
     $imageCropper.append(ibars);
 
+    // add copyright container to image
+    var icopyright = '<div id="copyright-wrapper"></div>';
+    $imageCropper.append(icopyright);
+
     // instantiate bars object
     $cibuilder = $('#image-bars').cibuilder({
         form: '#bars-form',
         border: '#border-wrapper',
-        logo: '#logo-wrapper'
+        logo: '#logo-wrapper',
+        copyright: '#copyright-wrapper'
     });
 
     // pre populate it
@@ -240,6 +246,11 @@ $(document).ready(function () {
         $('#canvas-format').trigger('change');
     });
 
+    // copyright
+    $('#copyright-form').keyup(function () {
+        $cibuilder.trigger('copyrightChanged');
+    });
+
     // layout
     $('#layout').change(function () {
         // set classes
@@ -314,8 +325,8 @@ $(document).ready(function () {
                 .then(function () {
                     return self.uploadImageData();
                 })
-                .then(function() {
-                    $legalChecker.submit_legal_when_ready( rawImageHash );
+                .then(function () {
+                    $legalChecker.submit_legal_when_ready(rawImageHash);
                 })
                 .catch(function () {
                     $('.warning-image-generation-error').removeClass('d-none')
