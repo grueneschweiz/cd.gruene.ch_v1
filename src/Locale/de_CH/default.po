@@ -67,25 +67,21 @@ msgstr "Du bist nun abgemeldet."
 msgid "Access denied"
 msgstr "Zugriff verweigert"
 
-#: Controller/Component/ImageEditorComponent.php:195
+#: Controller/Component/ImageEditorComponent.php:204
 msgid "Logo not found."
 msgstr "Logo nicht gefunden."
 
-#: Controller/Component/ImageEditorComponent.php:291
+#: Controller/Component/ImageEditorComponent.php:297
 msgid "No valid color scheme given."
 msgstr "Kein gültiges Farbschema angegeben."
 
-#: Controller/Component/ImageFileHandlerComponent.php:145;151;154
+#: Controller/Component/ImageFileHandlerComponent.php:116;121
 msgid "Only JPG, JPEG & PNG files are allowed."
 msgstr "Nur .jpg, .jpeg und .png Dateien sind erlaubt."
 
-#: Controller/Component/ImageFileHandlerComponent.php:161
+#: Controller/Component/ImageFileHandlerComponent.php:126
 msgid "Max file size ({0}MB) exceeded"
 msgstr "Maximale Dateigröße ({0}MB) überschritten"
-
-#: Controller/Component/ImageFileHandlerComponent.php:181
-msgid "Sorry, there was an error uploading your file."
-msgstr "Sorry, es gab einen Fehler beim Hochladen deiner Datei."
 
 #: Model/Table/GroupsTable.php:122
 msgid "A group with this name already exists"
@@ -1256,4 +1252,12 @@ msgstr "Positioniere die Balken mittels Drag & Drop"
 #: Template/Layout/default.ctp:96
 msgid "Two magenta headlines are only allowed, if the message requires it and would make less sense otherwise. Click Cancel to insert a second magenta bar. (You have to Click cancel, beacuse people never read the message but just clicked OK.)"
 msgstr "Zwei magentafarbene Headlines sind nur dann erlaubt, wenn die Nachricht es erfordert und ansonsten keinen Sinn ergeben würde. Klicke auf Abbrechen um einen zweiten magentafarbenen Balken einzufügen. (Du musst auf Abbrechen klicken, weil die Leute die Meldung nie gelesen haben und einfach OK klickten.)"
+
+#: Controller/Component/ImageFileHandlerComponent.php:111
+msgid "Uploaded image not found"
+msgstr ""
+
+#: Controller/Component/ImageFileHandlerComponent.php:132
+msgid "Failed to read image. Try to resize it in an image editor and upload it again."
+msgstr ""
 

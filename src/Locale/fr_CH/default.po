@@ -67,26 +67,22 @@ msgstr "Tu t'es bien déconnectée."
 msgid "Access denied"
 msgstr "Accès refusé."
 
-#: Controller/Component/ImageEditorComponent.php:195
+#: Controller/Component/ImageEditorComponent.php:204
 msgid "Logo not found."
 msgstr "Logo introuvable"
 
 #. Hier geht es um die Balken, also zB. ob grüner Balken mit weisser Schrift oder weisser Balken mit grüner Schrift. (Um es live zu sehen auf cd.gruene.ch musst du zuerst ein Bild hochladen, danach erscheint die Auswahlliste unten)
-#: Controller/Component/ImageEditorComponent.php:291
+#: Controller/Component/ImageEditorComponent.php:297
 msgid "No valid color scheme given."
 msgstr "Aucun modèle de couleurs valide n'a été indiqué."
 
-#: Controller/Component/ImageFileHandlerComponent.php:145;151;154
+#: Controller/Component/ImageFileHandlerComponent.php:116;121
 msgid "Only JPG, JPEG & PNG files are allowed."
 msgstr "Seuls les fichiers JPG, JPEG et PNG sont acceptés."
 
-#: Controller/Component/ImageFileHandlerComponent.php:161
+#: Controller/Component/ImageFileHandlerComponent.php:126
 msgid "Max file size ({0}MB) exceeded"
 msgstr "Dépassement de la taille maximale du fichier ({0}MB)"
-
-#: Controller/Component/ImageFileHandlerComponent.php:181
-msgid "Sorry, there was an error uploading your file."
-msgstr "Désolé, une erreur s'est produite lors de la mise en ligne du fichier."
 
 #: Model/Table/GroupsTable.php:122
 msgid "A group with this name already exists"
@@ -1306,4 +1302,12 @@ msgstr ""
 #: Template/Layout/default.ctp:96
 msgid "Two magenta headlines are only allowed, if the message requires it and would make less sense otherwise. Click Cancel to insert a second magenta bar. (You have to Click cancel, beacuse people never read the message but just clicked OK.)"
 msgstr "Deux lignes magenta sont permises uniquement si c'est nécessaire pour que le message ait un sens. Cliquez sur Annuler pour insérer une deuxième barre magenta. (Vous devez cliquer sur Annuler, car les gens ne lisent jamais le message mais cliquent simplement sur OK)."
+
+#: Controller/Component/ImageFileHandlerComponent.php:111
+msgid "Uploaded image not found"
+msgstr ""
+
+#: Controller/Component/ImageFileHandlerComponent.php:132
+msgid "Failed to read image. Try to resize it in an image editor and upload it again."
+msgstr ""
 
