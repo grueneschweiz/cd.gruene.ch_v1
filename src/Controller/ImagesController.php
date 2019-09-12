@@ -62,7 +62,7 @@ class ImagesController extends AppController {
         $this->paginate = [
             'contain' => [ 'Users' ],
             'order'   => [ 'created' => 'desc' ],
-            'finder'   => 'final',
+            'finder'  => 'final',
             'limit'   => 50,
         ];
         $images         = $this->paginate( $this->Images );
@@ -204,9 +204,13 @@ class ImagesController extends AppController {
 
                 // store in db
                 if ( false !== $path && ! isset( $older_path ) ) {
+                    // is no duplicate -> add the image to the database
                     $file_name   = pathinfo( $path, PATHINFO_FILENAME ) . '.' . pathinfo( $path, PATHINFO_EXTENSION );
                     $original_id = $this->Images->addOriginal( $path, $data, $file_name );
                     $success     = isset( $original_id ) && ! empty( $original_id );
+                } else {
+                    // is a duplicate -> add the bar text to the original
+                    $this->Images->appendBarText( $original_id, $data );
                 }
             } else {
                 // generate gradient image if custom image is missing
