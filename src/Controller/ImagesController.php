@@ -100,7 +100,7 @@ class ImagesController extends AppController {
         $image = $this->Images->get( $id );
 
         if ( $image->user_id !== $this->Auth->user( 'id' ) && ! $this->Auth->user( 'super_admin' ) ) {
-            $this->Flash->error( __( "Your not authorized to delete this image." ) );
+            $this->Flash->error( __( "You'r not authorized to delete this image." ) );
         } elseif ( $this->Images->delete( $image ) ) {
             $this->Flash->success( __( 'The image has been deleted.' ) );
         } else {
@@ -364,5 +364,31 @@ class ImagesController extends AppController {
         $json = json_encode( $return );
         $this->set( [ 'content' => $json ] );
         $this->render( '/Element/ajaxreturn' );
+    }
+
+    public function migrate() {
+        $images = $this->Images->find();
+
+        foreach ( $images as $image ) {
+            if ( $image->isRawImage ) {
+                $path  = ImageFileHandlerComponent::getRawImagePath( $image->filename );
+                $orig  = new \Cake\Filesystem\File( $path );
+                $thumb = new \Cake\Filesystem\File( ImageFileHandlerComponent::getRawThumbPath( $image->filename ) );
+                if ( $orig->exists() && ! $thumb->exists() ) {
+                    $this->ImageEditor->createFromImage( $path );
+                    $this->ImageEditor->file_name = $image->filename;
+                    $this->ImageEditor->makeRawThumb();
+                }
+            } else {
+                $path  = ImageFileHandlerComponent::getFinalImagePath( $image->filename );
+                $orig  = new \Cake\Filesystem\File( $path );
+                $thumb = new \Cake\Filesystem\File( ImageFileHandlerComponent::getFinalThumbPath( $image->filename ) );
+                if ( $orig->exists() && ! $thumb->exists() ) {
+                    $this->ImageEditor->createFromImage( $path );
+                    $this->ImageEditor->file_name = $image->filename;
+                    $this->ImageEditor->makeFinalThumb();
+                }
+            }
+        }
     }
 }

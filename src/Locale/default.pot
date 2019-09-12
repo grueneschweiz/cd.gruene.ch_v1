@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-09-11 16:45+0000\n"
+"POT-Creation-Date: 2019-09-12 07:20+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -31,7 +31,7 @@ msgid "The group could not be deleted. Please, try again."
 msgstr ""
 
 #: Controller/ImagesController.php:103
-msgid "Your not authorized to delete this image."
+msgid "You'r not authorized to delete this image."
 msgstr ""
 
 #: Controller/ImagesController.php:105
@@ -335,7 +335,7 @@ msgstr ""
 #: Template/Element/Logo/index_table.ctp:26
 #: Template/Element/User/index_table.ctp:29
 #: Template/Images/edit.ctp:5
-#: Template/Images/index.ctp:43
+#: Template/Images/index.ctp:46
 #: Template/Images/view.ctp:82
 msgid "Delete"
 msgstr ""
@@ -837,14 +837,14 @@ msgid "Have a look at the images your fellows have created."
 msgstr ""
 
 #: Template/Images/index.ctp:39
-msgid "Created {0} by {1}."
+msgid "Created {time_ago} by {user_name}."
 msgstr ""
 
-#: Template/Images/index.ctp:41
+#: Template/Images/index.ctp:44
 msgid "Download"
 msgstr ""
 
-#: Template/Images/index.ctp:45
+#: Template/Images/index.ctp:48
 msgid "Are you sure you want to delete this image?"
 msgstr ""
 

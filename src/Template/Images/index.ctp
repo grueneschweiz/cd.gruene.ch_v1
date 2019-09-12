@@ -6,11 +6,11 @@ use Cake\I18n\Time;
 <div class="images index container-fluid">
     <div class="mt-4 mb-3">
         <div class="clearfix mb-2">
-            <h3 class="float-left mr-3"><?= __('Gallery') ?></h3>
-            <a href="<?= $this->Url->build(['action' => 'add']) ?>"
-               class="btn btn-outline-primary"><?= __('Create Image') ?></a>
+            <h3 class="float-left mr-3"><?= __( 'Gallery' ) ?></h3>
+            <a href="<?= $this->Url->build( [ 'action' => 'add' ] ) ?>"
+               class="btn btn-outline-primary"><?= __( 'Create Image' ) ?></a>
         </div>
-        <p><?= __('Have a look at the images your fellows have created.') ?></p>
+        <p><?= __( 'Have a look at the images your fellows have created.' ) ?></p>
     </div>
 
     <?php // todo: implement search here ?>
@@ -36,7 +36,10 @@ use Cake\I18n\Time;
             <div class="gallery-card">
                 <img src="<?= $image->thumbSrc ?>" alt="<?= $image->flattext ?>" class="gallery-image">
                 <div class="caption gallery-image-caption d-none">
-                    <p><?= __( 'Created {0} by {1}.', $created, $by ) ?></p>
+                    <p><?= __( 'Created {time_ago} by {user_name}.', [
+                            'time_ago'  => $created,
+                            'user_name' => $by
+                        ] ) ?></p>
                     <a href="<?= $image->src ?>" download="download"
                        class="btn btn-outline-primary btn-sm"><?= __( 'Download' ) ?></a>
                     <?php if ( $image->user->id === $user_id || $super_admin ): ?>

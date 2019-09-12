@@ -67,20 +67,20 @@ msgstr "Tu t'es bien déconnectée."
 msgid "Access denied"
 msgstr "Accès refusé."
 
-#: Controller/Component/ImageEditorComponent.php:204
+#: Controller/Component/ImageEditorComponent.php:240
 msgid "Logo not found."
 msgstr "Logo introuvable"
 
 #. Hier geht es um die Balken, also zB. ob grüner Balken mit weisser Schrift oder weisser Balken mit grüner Schrift. (Um es live zu sehen auf cd.gruene.ch musst du zuerst ein Bild hochladen, danach erscheint die Auswahlliste unten)
-#: Controller/Component/ImageEditorComponent.php:297
+#: Controller/Component/ImageEditorComponent.php:333
 msgid "No valid color scheme given."
 msgstr "Aucun modèle de couleurs valide n'a été indiqué."
 
-#: Controller/Component/ImageFileHandlerComponent.php:116;121
+#: Controller/Component/ImageFileHandlerComponent.php:119;124
 msgid "Only JPG, JPEG & PNG files are allowed."
 msgstr "Seuls les fichiers JPG, JPEG et PNG sont acceptés."
 
-#: Controller/Component/ImageFileHandlerComponent.php:126
+#: Controller/Component/ImageFileHandlerComponent.php:129
 msgid "Max file size ({0}MB) exceeded"
 msgstr "Dépassement de la taille maximale du fichier ({0}MB)"
 
@@ -88,56 +88,56 @@ msgstr "Dépassement de la taille maximale du fichier ({0}MB)"
 msgid "A group with this name already exists"
 msgstr "Il existe déjà un groupe de ce nom."
 
-#: Model/Table/ImagesTable.php:114
+#: Model/Table/ImagesTable.php:111
 msgid "Facebook Timeline Image"
 msgstr "Image partagée sur le fil d'actualités Facebook"
 
-#: Model/Table/ImagesTable.php:116
+#: Model/Table/ImagesTable.php:113
 msgid "Facebook Featured Website"
 msgstr "Aperçu d'un lien partagé sur Facebook"
 
-#: Model/Table/ImagesTable.php:117
+#: Model/Table/ImagesTable.php:114
 msgid "Twitter Feed Image"
 msgstr "Image du flux Twitter"
 
 #. Hier geht es um die Bildergrösse (zB für einen Slider auf der Website 1140x638px)
-#: Model/Table/ImagesTable.php:119
+#: Model/Table/ImagesTable.php:116
 msgid "Website Slider"
 msgstr "Diapositive pour le site"
 
 #. Wenn ich "Eigene Grösse" auswähle, kann ich danach beliebige Pixelwerte für die Breite und die Höhe eingeben
-#: Model/Table/ImagesTable.php:120
+#: Model/Table/ImagesTable.php:117
 msgid "Custom size"
 msgstr "Taille personnalisée"
 
 #. Das sind die Auswahlwerte vom "Layout" und definiert, ob die Balken auf der linken oder auf der rechten Seite über das Bild ragen.
-#: Model/Table/ImagesTable.php:131
+#: Model/Table/ImagesTable.php:128
 msgid "Bars left"
 msgstr "Afficher les barres à gauche"
 
 #. Das sind die Auswahlwerte vom "Layout" und definiert, ob die Balken auf der linken oder auf der rechten Seite über das Bild ragen.
-#: Model/Table/ImagesTable.php:132
+#: Model/Table/ImagesTable.php:129
 msgid "Bars right"
 msgstr "Afficher les barres à droite"
 
-#: Model/Table/ImagesTable.php:143
+#: Model/Table/ImagesTable.php:140
 msgid "White"
 msgstr "blanc"
 
-#: Model/Table/ImagesTable.php:144
+#: Model/Table/ImagesTable.php:141
 msgid "Green"
 msgstr "vert"
 
-#: Model/Table/ImagesTable.php:145
+#: Model/Table/ImagesTable.php:142
 msgid "Green head- & sublines"
 msgstr "Titres et sous-titres verts"
 
 #. Das ist ein Auswahlwert für die Rahmen (mit Standard wird ein weisser Rahmen eingefügt)
-#: Model/Table/ImagesTable.php:156
+#: Model/Table/ImagesTable.php:153
 msgid "Standard"
 msgstr "Par défaut"
 
-#: Model/Table/ImagesTable.php:157
+#: Model/Table/ImagesTable.php:154
 msgid "None"
 msgstr "aucun(e)"
 
@@ -146,14 +146,12 @@ msgstr "aucun(e)"
 #: Template/Element/Logo/index_table.ctp:7
 #: Template/Element/User/index_table.ctp:8
 #: Template/Images/edit.ctp:3
-#: Template/Images/index.ctp:3;25
 #: Template/Images/view.ctp:3;67
 msgid "Actions"
 msgstr "Actions"
 
 #. Kannst du noch überspringen
 #: Template/Images/edit.ctp:13
-#: Template/Images/index.ctp:7
 #: Template/Images/view.ctp:11
 msgid "List Bars"
 msgstr ""
@@ -164,7 +162,6 @@ msgstr ""
 msgid "List Images"
 msgstr ""
 
-#: Template/Images/index.ctp:4
 #: Template/Images/view.ctp:8
 msgid "New Image"
 msgstr "Nouvelle image"
@@ -177,19 +174,17 @@ msgstr "Envoyer"
 #: Template/Element/Logo/index_table.ctp:26
 #: Template/Element/User/index_table.ctp:29
 #: Template/Images/edit.ctp:5
-#: Template/Images/index.ctp:44
+#: Template/Images/index.ctp:43
 #: Template/Images/view.ctp:82
 msgid "Delete"
 msgstr "Supprimer"
 
 #: Template/Images/edit.ctp:7
-#: Template/Images/index.ctp:45
 #: Template/Images/view.ctp:6;84
 msgid "Are you sure you want to delete # {0}?"
 msgstr "Êtes-vous certain de vouloir supprimer cet élément ?"
 
 #: Template/Images/edit.ctp:14
-#: Template/Images/index.ctp:8
 #: Template/Images/view.ctp:12
 msgid "New Bar"
 msgstr "Nouvelle barre"
@@ -197,7 +192,6 @@ msgstr "Nouvelle barre"
 #: Template/Element/Group/index_table.ctp:19
 #: Template/Element/Logo/index_table.ctp:19
 #: Template/Element/User/index_table.ctp:22
-#: Template/Images/index.ctp:42
 #: Template/Images/view.ctp:78
 msgid "View"
 msgstr "Affichage"
@@ -205,33 +199,11 @@ msgstr "Affichage"
 #: Template/Element/Group/index_table.ctp:22
 #: Template/Element/Logo/index_table.ctp:22
 #: Template/Element/User/index_table.ctp:25
-#: Template/Images/index.ctp:43
 #: Template/Images/view.ctp:80
 msgid "Edit"
 msgstr "Modifer"
 
-#. Das bezieht sich auf "Seite", also "Erste [Seite]"
-#: Template/Images/index.ctp:53
-msgid "first"
-msgstr "première page"
-
-#. Das bezieht sich auf "Seite", also "Vorherige [Seite]"
-#: Template/Images/index.ctp:54
-msgid "previous"
-msgstr "page précédente"
-
-#. Das bezieht sich auf "Seite", also "Nächste [Seite]"
-#: Template/Images/index.ctp:56
-msgid "next"
-msgstr "page suivante"
-
-#. Das bezieht sich auf "Seite", also "Letzte [Seite]"
-#: Template/Images/index.ctp:57
-msgid "last"
-msgstr "dernière page"
-
 #: Template/Element/paginator.ctp:31
-#: Template/Images/index.ctp:59
 msgid "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total"
 msgstr "Page {{page}} sur {{pages}}, affichant le(s) enregistrement(s) {{current}} sur un total de {{count}}"
 
@@ -270,19 +242,20 @@ msgstr "Groupes"
 msgid "Logos"
 msgstr "Logos"
 
-#: Template/Element/top_nav.ctp:4
+#: Template/Element/top_nav.ctp:9
+#: Template/Images/index.ctp:11
 msgid "Create Image"
 msgstr "Créer une image"
 
-#: Template/Element/top_nav.ctp:19
+#: Template/Element/top_nav.ctp:24
 msgid "Admin"
 msgstr "Admin"
 
-#: Template/Element/top_nav.ctp:25
+#: Template/Element/top_nav.ctp:30
 msgid "My Account"
 msgstr "Mon compte"
 
-#: Template/Element/top_nav.ctp:29
+#: Template/Element/top_nav.ctp:34
 msgid "Logout"
 msgstr "Déconnexion"
 
@@ -346,13 +319,13 @@ msgid "Enter password"
 msgstr "Merci de saisir le mot de passe"
 
 #: Template/Element/User/input.ctp:27
-#: Template/Images/add.ctp:186;199
+#: Template/Images/add.ctp:185;198
 #: Template/Users/view.ctp:28
 msgid "Yes"
 msgstr "Oui"
 
 #: Template/Element/User/input.ctp:27
-#: Template/Images/add.ctp:189;208
+#: Template/Images/add.ctp:188;207
 #: Template/Users/view.ctp:28
 msgid "No"
 msgstr "Non"
@@ -498,7 +471,7 @@ msgstr "Cliquez pour sélectionner l'image à mettre en ligne."
 msgid "Remove image"
 msgstr "Supprimer l'image"
 
-#: Template/Images/add.ctp:72;76;94;139;282
+#: Template/Images/add.ctp:72;76;94;139;281
 msgid "Warning!"
 msgstr "Attention !"
 
@@ -552,141 +525,134 @@ msgstr "La bordure fait partie du design retenu. Tu as toutefois la possibilité
 msgid "Border"
 msgstr "Bordure"
 
-#: Template/Images/add.ctp:172
+#: Template/Images/add.ctp:171
 msgid "Working hard"
 msgstr "La machine tourne..."
 
-#: Template/Images/add.ctp:173
+#: Template/Images/add.ctp:172
 msgid "I'm busy generating your image, please hang on a few ticks. I'll be right there."
 msgstr "Je suis en train de générer ton image. Merci de patienter quelques instants - j'y suis presque."
 
-#: Template/Images/add.ctp:174
+#: Template/Images/add.ctp:173
 msgid "Please answer meanwhile the legal questions below."
 msgstr "Dans l'intervalle, merci de répondre à quelques questions d'ordre juridique."
 
-#: Template/Images/add.ctp:179
+#: Template/Images/add.ctp:178
 msgid "Right of personality"
 msgstr "Respect de la vie privée"
 
-#: Template/Images/add.ctp:182
+#: Template/Images/add.ctp:181
 msgid "Are there any identifiably people in the image?"
 msgstr "Y a-t-il des personnes identifiables sur l'image ?"
 
-#: Template/Images/add.ctp:195
+#: Template/Images/add.ctp:194
 msgid "Are they either people of public interest or have they agreed to the publication of this image?"
 msgstr "S'agit-il de personnalités publiques, ou de personnes ayant donné leur accord à la publication de l'image ?"
 
-#: Template/Images/add.ctp:204
+#: Template/Images/add.ctp:203
 msgid "Unclear"
 msgstr "Difficile de répondre"
 
-#: Template/Images/add.ctp:212
+#: Template/Images/add.ctp:211
 msgid "Right of personality:"
 msgstr "Respect de la vie privée :"
 
-#: Template/Images/add.ctp:213
+#: Template/Images/add.ctp:212
 msgid "By law, people have to agree on the publication of photos, where they are identifiably."
 msgstr "La loi exige que les personnes identifiables sur une photo doivent donner leur accord à sa publication."
 
-#: Template/Images/add.ctp:219
+#: Template/Images/add.ctp:218
 msgid "Copyright"
 msgstr "Droit d'auteur"
 
-#: Template/Images/add.ctp:222;251
+#: Template/Images/add.ctp:221;250
 msgid "Who is the originator of the raw image?"
 msgstr "Qui est l'auteur de l'image de départ ?"
 
-#: Template/Images/add.ctp:225
+#: Template/Images/add.ctp:224
 msgid "Me"
 msgstr "C'est moi."
 
-#: Template/Images/add.ctp:226
+#: Template/Images/add.ctp:225
 msgid "Stock image"
 msgstr "Image d'archive"
 
-#: Template/Images/add.ctp:227
+#: Template/Images/add.ctp:226
 msgid "Agency / Photographer"
 msgstr "Agence / photographe"
 
-#. Ist das Fragezeichen nicht eher verwirrlich?
-#: Template/Images/add.ctp:228
+#: Template/Images/add.ctp:227
 msgid "Friend / Member of the party"
 msgstr "Amie / membre du parti"
 
 #. weiblich ;)
-#: Template/Images/add.ctp:229
+#: Template/Images/add.ctp:228
 msgid "I don't know / I'm not sure"
 msgstr "Je ne sais pas / je ne suis pas sûre."
 
-#: Template/Images/add.ctp:235
+#: Template/Images/add.ctp:234
 msgid "Where is the raw image from?"
 msgstr "D'ou provient l'image de départ ?"
 
-#: Template/Images/add.ctp:236
+#: Template/Images/add.ctp:235
 msgid "Url to the raw image on the stock image platform."
 msgstr "URL vers l'image brute sur la plateforme d'archivage"
 
-#: Template/Images/add.ctp:240
+#: Template/Images/add.ctp:239
 msgid "Select the raw images licence"
 msgstr "Sélectionne la licence de l'image brute"
 
-#: Template/Images/add.ctp:242
+#: Template/Images/add.ctp:241
 msgid "Other"
 msgstr "autre"
 
-#: Template/Images/add.ctp:243
+#: Template/Images/add.ctp:242
 msgid "Creative Commons with Attribution"
 msgstr "Creative Commons avec mention de l'auteure"
 
-#: Template/Images/add.ctp:244
+#: Template/Images/add.ctp:243
 msgid "Creative Commons without Limitation"
 msgstr "Creative Commons sans restriction"
 
 #. weiblich :)
-#: Template/Images/add.ctp:252
+#: Template/Images/add.ctp:251
 msgid "Name of the photographer, agency or person who did this artwork"
 msgstr "Nom de la photographe, de l'agence ou de la personne à l'origine de l'œuvre."
 
-#: Template/Images/add.ctp:257
+#: Template/Images/add.ctp:256
 msgid "Copyright:"
 msgstr "Droit d'auteure :"
 
-#: Template/Images/add.ctp:258
+#: Template/Images/add.ctp:257
 msgid "Publishing this image may violate the intellectual property right."
 msgstr "La publication de cette image est susceptible de violer les droit de propriété intellectuelle."
 
-#. Steht über den Auswahlwerten: "J'ai le droit d'utiliser cette image brute." und "D'autres personnes peuvent utiliser cette image brute sans restrictions."
-#: Template/Images/add.ctp:261
+#: Template/Images/add.ctp:260
 msgid "I hereby confirm that:"
 msgstr "Je confirme que :"
 
-#: Template/Images/add.ctp:265
+#: Template/Images/add.ctp:264
 msgid "I have the right to use this raw image"
 msgstr "J'ai le droit d'utiliser cette image brute."
 
-#: Template/Images/add.ctp:272
+#: Template/Images/add.ctp:271
 msgid "Others can use this raw image without limitation"
 msgstr "D'autres personnes peuvent utiliser cette image brute sans restrictions."
 
-#. Bezieht sich auf alle die Fragen zum Rechtlichen, die du vorher übersetzt hast.
-#: Template/Images/add.ctp:277
+#: Template/Images/add.ctp:276
 msgid "Confirm legal declarations"
 msgstr "Confirmer l'exactitude des informations fournies"
 
-#. duzen?
-#: Template/Images/add.ctp:283
+#: Template/Images/add.ctp:282
 msgid "The image could not be generated. Please try again."
 msgstr "L'image n'a pas pu être générée. Merci de réessayer."
 
-#. Menüpunkt bei dessen klick eine Liste mit allen Usern gezeigt wird.
 #: Template/Images/edit.ctp:11
-#: Template/Images/index.ctp:5
 #: Template/Images/view.ctp:9
 msgid "List Users"
 msgstr "Afficher la liste des utilisatrices"
 
 #: Template/Images/edit.ctp:12
-#: Template/Images/index.ctp:6
 #: Template/Images/view.ctp:10
 msgid "New User"
 msgstr "Nouvelle utilisatrice"
@@ -695,10 +661,6 @@ msgstr "Nouvelle utilisatrice"
 #: Template/Images/view.ctp:4
 msgid "Edit Image"
 msgstr "Modifier l'image"
-
-#: Template/Images/index.ctp:12
-msgid "Images"
-msgstr "Images"
 
 #: Template/Images/view.ctp:5
 msgid "Delete Image"
@@ -743,63 +705,63 @@ msgstr ""
 msgid "Image Id"
 msgstr "N° d'identification de l'image"
 
-#: Template/Layout/default.ctp:25
+#: Template/Layout/default.ctp:24
 msgid "salut"
 msgstr "Salut"
 
-#: Template/Layout/default.ctp:95
+#: Template/Layout/default.ctp:94
 msgid "New line"
 msgstr "Nouvelle ligne"
 
-#: Template/Layout/default.ctp:97
+#: Template/Layout/default.ctp:96
 msgid "The logo could not be loaded. Please try again."
 msgstr "Le logo n'a pas pu être chargé. Merci de réessayer."
 
-#: Template/Layout/default.ctp:98
+#: Template/Layout/default.ctp:97
 msgid "The bars should never touch the logo. Do you want to move the logo in a other corner?"
 msgstr "Les barres ne doivent pas toucher le logo. Déplacer le logo dans un coin libre ?"
 
-#: Template/Layout/default.ctp:99
+#: Template/Layout/default.ctp:98
 msgid "The bars should never touch the logo. Please reduce the size of the bars."
 msgstr "Les barres ne doivent pas toucher le logo. Merci de réduire la taille des barres."
 
-#: Template/Layout/default.ctp:100
+#: Template/Layout/default.ctp:99
 msgid "Error: The image could not be generated. Please try again."
 msgstr "Erreur : l'image n'a pas pu être générée. Merci de réessayer."
 
-#: Template/Layout/default.ctp:102
+#: Template/Layout/default.ctp:101
 msgid "Headline 1"
 msgstr "Titre 1"
 
-#: Template/Layout/default.ctp:103
+#: Template/Layout/default.ctp:102
 msgid "Headline 2"
 msgstr "Titre 2"
 
-#: Template/Layout/default.ctp:104
+#: Template/Layout/default.ctp:103
 msgid "Subline 1"
 msgstr "Sous-titre 1"
 
-#: Template/Layout/default.ctp:105
+#: Template/Layout/default.ctp:104
 msgid "This will clear all input. Do you want to proceed?"
 msgstr "Cette action effacera l'ensemble du texte saisi. Continuer ?"
 
-#: Template/Layout/default.ctp:106
+#: Template/Layout/default.ctp:105
 msgid "Input not valid:"
 msgstr "Saisie invalide :"
 
-#: Template/Layout/default.ctp:107
+#: Template/Layout/default.ctp:106
 msgid "Please select the originator of the image."
 msgstr "Merci d'indiquer l'auteure de l'image."
 
-#: Template/Layout/default.ctp:108
+#: Template/Layout/default.ctp:107
 msgid "Please enter the name of the originator."
 msgstr "Merci d'indiquer le nom de l'auteure."
 
-#: Template/Layout/default.ctp:109
+#: Template/Layout/default.ctp:108
 msgid "Please enter url of the platform where you got the image from."
 msgstr "Merci d'indiquer l'URL de la base de données d'où provient l'image."
 
-#: Template/Layout/default.ctp:110
+#: Template/Layout/default.ctp:109
 msgid "Please confirm that you have the right to use this image."
 msgstr "Merci de confirmer que tu as le droit d'utiliser cette image."
 
@@ -871,7 +833,7 @@ msgid "An Internal Error Has Occurred"
 msgstr "Une erreur interne s'est produite."
 
 #. oder "une
-#: Template/Images/add.ctp:168
+#: Template/Images/add.ctp:167
 msgid "Generate Image"
 msgstr "Générer l'image"
 
@@ -883,7 +845,6 @@ msgstr "Nouveau mot de passe pour cd.gruene.ch"
 msgid "New user"
 msgstr "Nouvelle utilisatrice"
 
-#. oder d'
 #: Controller/UsersController.php:493
 msgid "Hello Admin\n"
 "\n"
@@ -912,23 +873,23 @@ msgstr "Cette utilisatrice fait déjà partie de ce groupe."
 msgid "The following group is responsible for managing this user"
 msgstr "Le groupe suivant est responsable de la gestion de cette utilisatrice."
 
-#: Template/Layout/default.ctp:48
+#: Template/Layout/default.ctp:47
 msgid "Imprint"
 msgstr "Impressum"
 
-#: Template/Layout/default.ctp:59
+#: Template/Layout/default.ctp:58
 msgid "Questions or suggestions?"
 msgstr "Questions ou suggestions ?"
 
-#: Template/Layout/default.ctp:60
+#: Template/Layout/default.ctp:59
 msgid "We are very keen about your feedback. Feel free to ask or suggest anything."
 msgstr "Nous nous réjouissons de tes remarques. N'hésite pas à nous faire parvenir tes questions ou tes remarques."
 
-#: Template/Layout/default.ctp:62
+#: Template/Layout/default.ctp:61
 msgid "Feedback on cd.gruene.ch"
 msgstr "Commentaire sur cd.gruene.ch"
 
-#: Template/Layout/default.ctp:63
+#: Template/Layout/default.ctp:62
 msgid "Hi Cyrill\n"
 "\n"
 "I just used cd.gruene.ch and id like to say ..."
@@ -936,33 +897,32 @@ msgstr "Salut Cyrill,\n"
 "\n"
 "Je viens d'utiliser cd.gruene.ch, et j'aimerais te dire que..."
 
-#: Template/Layout/default.ctp:66
+#: Template/Layout/default.ctp:65
 msgid "Ask or suggest"
 msgstr "Poser une question ou faire une suggestion"
 
-#: Template/Layout/default.ctp:77
+#: Template/Layout/default.ctp:76
 msgid "Use responsibly"
 msgstr "Usage responsable"
 
-#: Template/Layout/default.ctp:78
+#: Template/Layout/default.ctp:77
 msgid "Every author bears the liability for the images he creates. Make sure you do only use images you are authorized to use and don't forget to give appropriate credits to the originator of the image. If people are visible, they have to agree to the publishing."
 msgstr "Chaque auteure est responsable des images qu'elle génère. Merci de t'assurer que tu n'utilises que des images que tu as le droit d'utiliser, et n'oublie pas de nommer l'auteure de l'image de départ. Si des personnes sont visibles, elles doivent donner leur accord pour la publication."
 
-#: Template/Layout/default.ctp:79
+#: Template/Layout/default.ctp:78
 msgid "Feel free to contact us, if you have any questions about a certain image."
 msgstr "Merci de nous contacter si tu as des questions sur une image."
 
-#: Template/Layout/default.ctp:82
+#: Template/Layout/default.ctp:81
 msgid "Privacy"
 msgstr "Protection des données"
 
 #. Urheberinnenrecht?
-#: Template/Layout/default.ctp:83
+#: Template/Layout/default.ctp:82
 msgid "Raw images as well as the final images are stored on the server. The final images will be visible for anyone who has a login to this tool. Raw images may be shared, depending on your choices in the legal questionnaire."
 msgstr "Tant les images brutes que les images finales sont enregistrées sur le serveur. Les images finales sont visibles pour toutes les utilisatrices inscrites. Les images brutes peuvent être rendues accessibles en fonction des indications que tu as fournies concernant le droit d'auteur."
 
-#. Warum?
-#: Template/Layout/default.ctp:84
+#: Template/Layout/default.ctp:83
 msgid "Raw images that are intended to be shared, may be sent to googles vision api for image recognition."
 msgstr "Les images brutes mises à la disposition des autres utilisatrices sont envoyées à Google pour être identifiées."
 
@@ -1025,7 +985,6 @@ msgstr "Cette adresse électronique est inconnue. Se pourrait-il que ton accès 
 msgid "Your application was successfully sent to the Greens Switzerland."
 msgstr "Ta demande a bien été transmise aux Verts Suisse."
 
-#. bitte überprüfen
 #: Controller/UsersController.php:536
 msgid "Permanent login revoked for all devices."
 msgstr "Annulation de la connexion permanente pour tous les appareils."
@@ -1180,11 +1139,10 @@ msgstr "Laisser vide pour ne pas modifier le mot de passe"
 msgid "If you leave the password field blank, it will remain as it is."
 msgstr "Si tu ne remplis pas le champ « mot de passe », le mot de passe ne sera pas modifié."
 
-#: Template/Layout/default.ctp:101
+#: Template/Layout/default.ctp:100
 msgid "Download image"
 msgstr "Télécharger l'image"
 
-#. Deutsche Formulierung komisch
 #: Model/Table/GroupsTable.php:130
 msgid "Except for God, one can not be his own parent ;)"
 msgstr "Hormis Dieu, personne ne peut être son propre parent ;)"
@@ -1205,15 +1163,15 @@ msgstr "Mettre à jour le navigateur"
 msgid "Base logo"
 msgstr "Logo de base"
 
-#: Template/Layout/default.ctp:70
+#: Template/Layout/default.ctp:69
 msgid "Under Development"
 msgstr "En développement"
 
-#: Template/Layout/default.ctp:71
+#: Template/Layout/default.ctp:70
 msgid "This tool is still under development and is continuously extended and improved. If you experience any bugs or if you wish to suggest any new features, please let us know."
 msgstr "Le développement de cet outil n'est pas achevé ; des améliorations et de nouvelles fonctions sont ajoutées en continu. Si tu trouves des erreurs, ou si tu veux proposer de nouvelles fonctions, nous te remercions de nous faire signe."
 
-#: Template/Layout/default.ctp:73
+#: Template/Layout/default.ctp:72
 msgid "Contact us"
 msgstr "Contacte-nous"
 
@@ -1271,7 +1229,7 @@ msgstr "Cette utilisatrice peut utiliser les logos des {strong}groupes{close_str
 msgid "and of their subordinated groups"
 msgstr "et de ses groupes subordonnés"
 
-#: Template/Layout/default.ctp:111
+#: Template/Layout/default.ctp:110
 msgid "Input not valid: Please make sure you do not leave any bars empty."
 msgstr "Saisie invalide: merci de vérifier qu'aucune barre ne soit restée vide."
 
@@ -1279,15 +1237,16 @@ msgstr "Saisie invalide: merci de vérifier qu'aucune barre ne soit restée vide
 msgid "Resend user invitation"
 msgstr ""
 
-#: Model/Table/ImagesTable.php:113
+#: Model/Table/ImagesTable.php:110
+#, fuzzy
 msgid "Square"
-msgstr ""
+msgstr "Carré"
 
-#: Model/Table/ImagesTable.php:115
+#: Model/Table/ImagesTable.php:112
 msgid "Facebook Event Image"
 msgstr ""
 
-#: Model/Table/ImagesTable.php:118
+#: Model/Table/ImagesTable.php:115
 msgid "Instagram Story"
 msgstr ""
 
@@ -1299,15 +1258,51 @@ msgstr ""
 msgid "Position the bars by drag and drop"
 msgstr ""
 
-#: Template/Layout/default.ctp:96
+#: Template/Layout/default.ctp:95
+#, fuzzy
 msgid "Two magenta headlines are only allowed, if the message requires it and would make less sense otherwise. Click Cancel to insert a second magenta bar. (You have to Click cancel, beacuse people never read the message but just clicked OK.)"
 msgstr "Deux lignes magenta sont permises uniquement si c'est nécessaire pour que le message ait un sens. Cliquez sur Annuler pour insérer une deuxième barre magenta. (Vous devez cliquer sur Annuler, car les gens ne lisent jamais le message mais cliquent simplement sur OK)."
 
-#: Controller/Component/ImageFileHandlerComponent.php:111
+#: Controller/Component/ImageFileHandlerComponent.php:114
 msgid "Uploaded image not found"
 msgstr ""
 
-#: Controller/Component/ImageFileHandlerComponent.php:132
+#: Controller/Component/ImageFileHandlerComponent.php:135
 msgid "Failed to read image. Try to resize it in an image editor and upload it again."
+msgstr ""
+
+#: Controller/ImagesController.php:103
+msgid "Your not authorized to delete this image."
+msgstr ""
+
+#: Controller/ImagesController.php:105
+msgid "The image has been deleted."
+msgstr ""
+
+#: Controller/ImagesController.php:107
+msgid "The image could not be deleted. Please, try again."
+msgstr ""
+
+#: Template/Element/top_nav.ctp:4
+#: Template/Images/index.ctp:9
+#, fuzzy
+msgid "Gallery"
+msgstr "Galerie"
+
+#: Template/Images/index.ctp:13
+#, fuzzy
+msgid "Have a look at the images your fellows have created."
+msgstr "Jetez un coup d'œil aux images que vos collègues ont créées."
+
+#: Template/Images/index.ctp:39
+msgid "Created {0} by {1}."
+msgstr ""
+
+#: Template/Images/index.ctp:41
+msgid "Download"
+msgstr ""
+
+#: Template/Images/index.ctp:45
+msgid "Are you sure you want to delete this image?"
 msgstr ""
 
