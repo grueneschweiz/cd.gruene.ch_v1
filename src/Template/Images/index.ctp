@@ -15,11 +15,23 @@ use Cake\I18n\Time;
     </div>
 
     <div class="input-group mb-3 col-12 col-lg-6">
-        <input id="gallery-search" type="text" class="form-control" placeholder="<?= __('Search title bars text, name of the creator or the logo subline') ?>">
+        <input id="gallery-search"
+               type="text"
+               class="form-control"
+               placeholder="<?= __( 'Search title bars text, name of the creator or the logo subline' ) ?>"
+               value="<?= isset( $search ) ? $search : '' ?>"
+        >
         <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="gallery-search-submit"><?= __('Search') ?></button>
+            <button class="btn btn-outline-secondary"
+                    type="button"
+                    id="gallery-search-submit"
+            ><?= __( 'Search' ) ?></button>
         </div>
     </div>
+
+    <?php if ( isset( $search ) ): ?>
+        <h4><?= __n( 'One match', '{number} Results', $images->count(), [ 'number' => $images->count() ] ) ?></h4>
+    <?php endif; ?>
 
     <div class="gallery">
         <?php
@@ -49,7 +61,8 @@ use Cake\I18n\Time;
                     <a href="<?= $image->src ?>" download="download"
                        class="btn btn-outline-primary btn-sm"><?= __( 'Download' ) ?></a>
                     <?php if ( $image->user->id === $user_id || $super_admin ): ?>
-                        <button class="btn btn-link btn-sm image-delete-button" data-image-id="<?= $image->id ?>"><?= __( 'Delete' ) ?></button>
+                        <button class="btn btn-link btn-sm image-delete-button"
+                                data-image-id="<?= $image->id ?>"><?= __( 'Delete' ) ?></button>
                     <?php endif; ?>
                 </div>
             </div>

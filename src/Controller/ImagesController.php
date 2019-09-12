@@ -86,6 +86,7 @@ class ImagesController extends AppController {
             [ 'limit' => 50, ]
         );
 
+        $this->set( [ 'search' => $string ] );
         $this->set( compact( 'images' ) );
         $this->set( '_serialize', [ 'images' ] );
         $this->render( 'index' );
