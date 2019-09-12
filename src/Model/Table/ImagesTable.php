@@ -385,4 +385,72 @@ class ImagesTable extends Table {
 
         return $return;
     }
+
+    /**
+     * Search for final images
+     *
+     * Search for final images with the given string using an OR operator
+     * between the words. The bar data as well as the subline and the first and
+     * last name of the user, that created the image, is searched. The results
+     * are primarely ordered by the best match, secondary by creation date.
+     *
+     * @param string $string
+     *
+     * @return int[] the image ids
+     */
+    public function search( string $string ): array {
+        $terms   = explode( ' ', $string );
+        $weight  = 100;
+        $matches = [];
+        $buckets = [];
+        $results = [];
+
+        // find all matches and weight them
+        foreach ( $terms as $term ) {
+            $tmatches = $this->find( 'final' )
+                             ->select( 'Images.id' )
+                             ->leftJoinWith( 'Logos' )
+                             ->leftJoinWith( 'Users' )
+                             ->where( [
+                                 'OR' => [
+                                     'Images.flattext LIKE'  => "%$term%",
+                                     'Logos.subline LIKE'    => "%$term%",
+                                     'Users.first_name LIKE' => "%$term%",
+                                     'Users.last_name LIKE'  => "%$term%",
+                                 ]
+                             ] )->extract( 'id' );
+
+
+            foreach ( $tmatches as $match ) {
+                if ( array_key_exists( $match, $matches ) ) {
+                    $matches[ $match ] += $weight;
+                } else {
+                    $matches[ $match ] = $weight;
+                }
+            }
+            $weight --;
+        }
+
+        // group all matches by weight
+        foreach ( $matches as $image_id => $weight ) {
+            $buckets[ $weight ][] = $image_id;
+        }
+
+        // get the highest weighted first
+        krsort( $buckets );
+
+        // retrieve image ids first sorted by highest rated bucked, then by newest date first
+        foreach ( $buckets as $bucket ) {
+            $images = $this->find()
+                           ->select( 'Images.id' )
+                           ->where( [ 'id IN' => $bucket ] )
+                           ->orderDesc( 'created' )
+                           ->extract( 'id' )
+                           ->toArray();
+
+            $results += $images;
+        }
+
+        return $results;
+    }
 }

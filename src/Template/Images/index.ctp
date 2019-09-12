@@ -3,7 +3,8 @@
 use Cake\I18n\Time;
 
 ?>
-<div class="images index container-fluid">
+</div>
+<div class="images index ml-md-3 mr-md-3 container-fluid">
     <div class="mt-4 mb-3">
         <div class="clearfix mb-2">
             <h3 class="float-left mr-3"><?= __( 'Gallery' ) ?></h3>
@@ -13,7 +14,12 @@ use Cake\I18n\Time;
         <p><?= __( 'Have a look at the images your fellows have created.' ) ?></p>
     </div>
 
-    <?php // todo: implement search here ?>
+    <div class="input-group mb-3 col-12 col-lg-6">
+        <input id="gallery-search" type="text" class="form-control" placeholder="<?= __('Search title bars text, name of the creator or the logo subline') ?>">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="gallery-search-submit"><?= __('Search') ?></button>
+        </div>
+    </div>
 
     <div class="gallery">
         <?php
@@ -53,4 +59,3 @@ use Cake\I18n\Time;
     <?php if ( $this->Paginator->hasPage( null, 2 ) ) {
         echo $this->element( 'paginator' );
     } ?>
-</div>

@@ -12,8 +12,32 @@ var imagesLoaded = require('imagesloaded');
             initToggleMeta();
             initMasonry();
             initDeleteButtons();
+            initSearch();
         }
     });
+
+    var initSearch = function () {
+        $('#gallery-search').keyup(function(e) {
+            if (e.keyCode == 13) {
+                search();
+            }
+        });
+
+        $('#gallery-search-submit').click(function() {
+            search();
+        });
+    }
+
+    var search = function() {
+        var terms = $('#gallery-search').val();
+
+        if (0 === terms.trim().length) {
+            window.location = '/images/index';
+            return;
+        }
+
+        window.location = '/images/search/'+encodeURI(terms);
+    }
 
     var initToggleMeta = function () {
         $('.gallery-card').each(function (idx, card) {
