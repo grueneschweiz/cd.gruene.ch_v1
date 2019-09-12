@@ -11,6 +11,7 @@ var imagesLoaded = require('imagesloaded');
         if ($('.gallery').length) {
             initToggleMeta();
             initMasonry();
+            initDeleteButtons();
         }
     });
 
@@ -40,6 +41,42 @@ var imagesLoaded = require('imagesloaded');
 
         imgLoad.on('progress', function () {
             masonry.layout();
+        });
+    }
+
+    var initDeleteButtons = function () {
+        var $buttons = $('.image-delete-button');
+
+        $buttons.click(function () {
+            var $button = $(this);
+
+            if (!confirm(trans.delete_image)) {
+                return;
+            }
+
+            $button.hide();
+            $button.after('<div class="spinner-border spinner-border-sm delete-loader" role="status">\n' +
+                '  <span class="sr-only">Loading...</span>\n' +
+                '</div>');
+
+            $.ajax({
+                url: '/images/ajax-delete/' + $button.data('imageId'),
+                type: 'DELETE',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-Token', x_csrf_token);
+                }
+            }).done(function (data, status) {
+                var resp = $.parseJSON(data);
+                if (status === 'success' && resp.success) {
+                    var $card = $button.closest('.gallery-card');
+                    $card.remove();
+                } else {
+                    $button.parent().find('.delete-loader').remove();
+                    $button.show();
+                    alert(resp.message);
+                }
+            });
+
         });
     }
 

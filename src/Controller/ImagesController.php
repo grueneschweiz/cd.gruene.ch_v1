@@ -28,7 +28,8 @@ class ImagesController extends AppController {
             'ajaxAdd',
             'ajaxGetLogo',
             'ajaxAddLegal',
-            'ajaxUploadImage'
+            'ajaxUploadImage',
+            'ajaxDelete'
         ] );
     }
 
@@ -62,7 +63,7 @@ class ImagesController extends AppController {
         $this->paginate = [
             'contain' => [ 'Users' ],
             'order'   => [ 'created' => 'desc' ],
-            'finder'   => 'final',
+            'finder'  => 'final',
             'limit'   => 50,
         ];
         $images         = $this->paginate( $this->Images );
@@ -95,19 +96,24 @@ class ImagesController extends AppController {
      *
      * @return \Cake\Http\Response|null
      */
-    public function delete( $id = null ) {
+    public function ajaxDelete( $id = null ) {
         $this->request->allowMethod( [ 'post', 'delete' ] );
-        $image = $this->Images->get( $id );
+        if ( $this->request->is( 'ajax' ) ) {
+            $success = false;
+            $image   = $this->Images->get( $id );
 
-        if ( $image->user_id !== $this->Auth->user( 'id' ) && ! $this->Auth->user( 'super_admin' ) ) {
-            $this->Flash->error( __( "You'r not authorized to delete this image." ) );
-        } elseif ( $this->Images->delete( $image ) ) {
-            $this->Flash->success( __( 'The image has been deleted.' ) );
-        } else {
-            $this->Flash->error( __( 'The image could not be deleted. Please, try again.' ) );
+            if ( $image->user_id !== $this->Auth->user( 'id' ) && ! $this->Auth->user( 'super_admin' ) ) {
+                $msg = __( "You'r not authorized to delete this image." );
+            } elseif ( $this->Images->delete( $image ) ) {
+                $msg     = __( 'The image has been deleted.' );
+                $success = true;
+            } else {
+                $msg = __( 'The image could not be deleted. Please, try again.' );
+            }
+
+            $this->set( [ 'content' => json_encode( [ 'success' => $success, 'message' => $msg ] ) ] );
+            $this->render( '/Element/ajaxreturn' );
         }
-
-        return $this->redirect( [ 'action' => 'index' ] );
     }
 
     /**
@@ -204,9 +210,13 @@ class ImagesController extends AppController {
 
                 // store in db
                 if ( false !== $path && ! isset( $older_path ) ) {
+                    // is no duplicate -> add the image to the database
                     $file_name   = pathinfo( $path, PATHINFO_FILENAME ) . '.' . pathinfo( $path, PATHINFO_EXTENSION );
                     $original_id = $this->Images->addOriginal( $path, $data, $file_name );
                     $success     = isset( $original_id ) && ! empty( $original_id );
+                } else {
+                    // is a duplicate -> add the bar text to the original
+                    $this->Images->appendBarText( $original_id, $data );
                 }
             } else {
                 // generate gradient image if custom image is missing

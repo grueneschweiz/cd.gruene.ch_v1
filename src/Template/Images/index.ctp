@@ -43,11 +43,7 @@ use Cake\I18n\Time;
                     <a href="<?= $image->src ?>" download="download"
                        class="btn btn-outline-primary btn-sm"><?= __( 'Download' ) ?></a>
                     <?php if ( $image->user->id === $user_id || $super_admin ): ?>
-                        <?= $this->Form->postLink( __( 'Delete' ), [ 'action' => 'delete', $image->id ],
-                            [
-                                'confirm' => __( 'Are you sure you want to delete this image?', $image->id ),
-                                'class'   => 'btn btn-link btn-sm'
-                            ] ) ?>
+                        <button class="btn btn-link btn-sm image-delete-button" data-image-id="<?= $image->id ?>"><?= __( 'Delete' ) ?></button>
                     <?php endif; ?>
                 </div>
             </div>

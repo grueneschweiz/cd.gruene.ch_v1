@@ -221,14 +221,51 @@ class ImagesTable extends Table {
     private function _getBarText( array $bars ): string {
         $tmp = '';
         foreach ( $bars as $bar ) {
-            $tmp .= $bar->text . ' ';
+            $tmp .= trim( $bar->text ) . ' ';
         }
 
-        return trim( $tmp );
+        return $this->_stripDuplicates( trim( $tmp ) );
     }
 
+    /**
+     * Strip duplicate words from the given string
+     *
+     * @param string $string
+     *
+     * @return string
+     */
+    private function _stripDuplicates( string $string ): string {
+        $tokens = explode( ' ', $string );
+
+        return implode( ' ', array_unique( $tokens ) );
+    }
+
+    /**
+     * Append the given bar text to the image with the given id preventing duplicate words
+     *
+     * This function is mainly used for search purposes.
+     *
+     * @param int $original_id
+     * @param \stdClass $data
+     */
+    public function appendBarText( int $original_id, \stdClass $data ) {
+        $image = $this->get( $original_id );
+
+        $text            = $image->flattext . ' ' . $this->_getBarText( $data->bars->data );
+        $image->flattext = $this->_stripDuplicates( $text );
+
+        $this->save( $image );
+    }
+
+    /**
+     * Custom finder to get all final images
+     *
+     * @param Query $query
+     *
+     * @return Query
+     */
     public function findFinal( Query $query ) {
-        return $query->whereNotNull('original_id');
+        return $query->whereNotNull( 'original_id' );
     }
 
     /**
