@@ -41,6 +41,7 @@ class ImagesController extends AppController {
         $this->loadComponent( 'RequestHandler' );
         $this->loadComponent( 'ImageFileHandler' );
         $this->loadComponent( 'ImageEditor' );
+        $this->loadComponent( 'Paginator' );
     }
 
     /**
@@ -70,6 +71,24 @@ class ImagesController extends AppController {
 
         $this->set( compact( 'images' ) );
         $this->set( '_serialize', [ 'images' ] );
+    }
+
+    /**
+     * Show images matching the given string
+     *
+     * @param string $string
+     */
+    public function search( string $string ) {
+        $results = $this->Images->search( $string );
+
+        $images = $this->Paginator->paginate(
+            $this->Images->find()->contain( 'Users' )->where( [ 'Images.id IN' => $results ] ),
+            [ 'limit' => 50, ]
+        );
+
+        $this->set( compact( 'images' ) );
+        $this->set( '_serialize', [ 'images' ] );
+        $this->render( 'index' );
     }
 
     /**
