@@ -3,7 +3,6 @@
 namespace App\Controller\Component;
 
 use Cake\Controller\Component;
-use Cake\Filesystem\Folder;
 use Cake\Network\Exception\NotFoundException;
 
 class ImageEditorComponent extends Component {
@@ -34,6 +33,9 @@ class ImageEditorComponent extends Component {
      */
     public function createFromImage( string $path ) {
         $this->im = new \Imagick( realpath( $path ) );
+
+        $this->path      = ImageFileHandlerComponent::getNewFinalImagePath( 'image.' . $this->fileFormat );
+        $this->file_name = basename( $this->path );
     }
 
     /**
@@ -82,9 +84,6 @@ class ImageEditorComponent extends Component {
      * @return string filename
      */
     public function save() {
-        $filename   = uniqid() . rand( 0, 9 ) . '.' . $this->fileFormat;
-        $dir        = new Folder( ROOT . DS . 'protected' . DS . 'finalimages', true );
-        $this->path = $dir->path . DS . $filename;
         $this->im->setImageFormat( $this->fileFormat );
 
         // if jpeg
@@ -97,7 +96,44 @@ class ImageEditorComponent extends Component {
 
         $this->im->writeImage( $this->path );
 
-        return $filename;
+        return $this->file_name;
+    }
+
+    /**
+     * Save the final image as thumbnail
+     */
+    public function makeFinalThumb() {
+        $path = ImageFileHandlerComponent::getFinalThumbPath( $this->file_name );
+        $this->generateThumb( $path );
+    }
+
+    /**
+     * Generate a thumbnail of the current image and save it at the given path
+     *
+     * @param string $path
+     */
+    private function generateThumb( string $path ): void {
+        $thumb = clone $this->im;
+
+        // if jpeg
+        if ( in_array( strtolower( $this->fileFormat ), [ 'jpeg', 'jpg' ] ) ) {
+            $thumb->setImageCompressionQuality( 90 );
+            $thumb->setSamplingFactors( [ '2x2', '1x1', '1x1' ] );
+        }
+
+        $thumb->setColorspace( \Imagick::COLORSPACE_SRGB );
+        $thumb->thumbnailImage( 600, 600, true );
+
+        $thumb->writeImage( $path );
+        $thumb->clear();
+    }
+
+    /**
+     * Save the raw image as thumbnail
+     */
+    public function makeRawThumb() {
+        $path = ImageFileHandlerComponent::getRawThumbPath( $this->file_name );
+        $this->generateThumb( $path );
     }
 
     /**

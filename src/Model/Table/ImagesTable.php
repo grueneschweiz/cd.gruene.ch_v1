@@ -2,6 +2,7 @@
 
 namespace App\Model\Table;
 
+use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -226,13 +227,8 @@ class ImagesTable extends Table {
         return trim( $tmp );
     }
 
-    /**
-     * Generate a new image hash
-     *
-     * @return string
-     */
-    public function getNewHash() {
-        return uniqid( '' );
+    public function findFinal( Query $query ) {
+        return $query->whereNotNull('original_id');
     }
 
     /**

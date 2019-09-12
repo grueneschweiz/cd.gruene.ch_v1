@@ -7,17 +7,20 @@ use Cake\Filesystem\File;
 use Cake\Filesystem\Folder;
 
 class ImageFileHandlerComponent extends Component {
-    const TTL_CHUNK = 3600; // one hour
-    const TTL_GRADIENTS = 86400; // one day
+    private const TTL_CHUNK = 3600; // one hour
+    private const TTL_GRADIENTS = 86400; // one day
 
-    const BASE_PATH = ROOT . DS . 'protected';
-    const FOLDER_CHUNKS = 'chunks';
-    const FOLDER_RAWIMAGES = 'rawimages';
-    const FOLDER_GRADIENTS = 'gradients';
+    private const BASE_PATH = ROOT . DS . 'protected';
+    private const FOLDER_CHUNKS = 'chunks';
+    private const FOLDER_RAWIMAGES = 'rawimages';
+    private const FOLDER_RAWTHUMBS = 'rawthumbs';
+    private const FOLDER_GRADIENTS = 'gradients';
+    private const FOLDER_FINALIMAGES = 'finalimages';
+    private const FOLDER_FINALTHUMBS = 'finalthumbs';
 
-    const ALLOWED_MIME = [ 'image/jpeg', 'image/png' ];
-    const ALLOWED_EXT = [ 'jpg', 'jpeg', 'png' ];
-    const ALLOWED_MAX_FILE_SIZE = 16 * 1024 * 1024; // 16MB
+    private const ALLOWED_MIME = [ 'image/jpeg', 'image/png' ];
+    private const ALLOWED_EXT = [ 'jpg', 'jpeg', 'png' ];
+    private const ALLOWED_MAX_FILE_SIZE = 16 * 1024 * 1024; // 16MB
 
     /**
      * Validate the chunk and move the chunk to its final path.
@@ -28,22 +31,22 @@ class ImageFileHandlerComponent extends Component {
      *
      * @throws InvalidImageException
      */
-    public function save( \stdClass $data ) {
+    public static function save( \stdClass $data ) {
         $file_name = $data->image->name;
 
-        $chunk_path = $this->getChunkFileName( $file_name, true );
+        $chunk_path = self::getChunkFileName( $file_name, true );
         $chunk      = new File( $chunk_path, false );
 
-        $extension = $this->getExtension( $file_name );
+        $extension = self::getExtension( $file_name );
 
         try {
-            $this->validate( $chunk, $extension );
+            self::validate( $chunk, $extension );
         } catch ( InvalidImageException $exception ) {
             $chunk->delete();
             throw $exception;
         }
 
-        $target_path = $this->getTargetPath( $file_name, $this->getRawImagesFolder() );
+        $target_path = self::getTargetPath( $file_name, self::getRawImagesFolder() );
 
         // move chunk to target path
         if ( $chunk->copy( $target_path ) && $chunk->delete() ) {
@@ -63,11 +66,11 @@ class ImageFileHandlerComponent extends Component {
      *
      * @return string
      */
-    private function getChunkFileName( string $original_file_name, bool $full_path ): string {
+    private static function getChunkFileName( string $original_file_name, bool $full_path ): string {
         $file_name = md5( session_id() . $original_file_name );
 
         if ( $full_path ) {
-            $file_name = $this->getChunkFolder()->path . DS . $file_name;
+            $file_name = self::getChunkFolder()->pwd() . DS . $file_name;
         }
 
         return $file_name;
@@ -78,7 +81,7 @@ class ImageFileHandlerComponent extends Component {
      *
      * @return Folder
      */
-    private function getChunkFolder(): Folder {
+    private static function getChunkFolder(): Folder {
         return new Folder( self::BASE_PATH . DS . self::FOLDER_CHUNKS, true );
     }
 
@@ -89,7 +92,7 @@ class ImageFileHandlerComponent extends Component {
      *
      * @return bool|string
      */
-    private function getExtension( string $file_name ) {
+    private static function getExtension( string $file_name ) {
         if ( ! preg_match( '/.*\.([a-zA-Z0-9]+)$/', $file_name, $extension ) ) {
             return false;
         }
@@ -105,7 +108,7 @@ class ImageFileHandlerComponent extends Component {
      *
      * @throws InvalidImageException
      */
-    public function validate( File $file, string $extension ): void {
+    private static function validate( File $file, string $extension ): void {
         // file exists
         if ( ! $file->exists() ) {
             throw new InvalidImageException( __( 'Uploaded image not found' ) );
@@ -127,7 +130,7 @@ class ImageFileHandlerComponent extends Component {
         }
 
         // can we get the image size ?
-        $check = getimagesize( $file->path );
+        $check = getimagesize( $file->pwd() );
         if ( false === $check ) {
             throw new InvalidImageException( __( 'Failed to read image. Try to resize it in an image editor and upload it again.' ) );
         }
@@ -141,25 +144,25 @@ class ImageFileHandlerComponent extends Component {
      *
      * @return bool|string
      */
-    private function getTargetPath( string $file_name, Folder $target_dir ) {
-        $extension = $this->getExtension( $file_name );
+    public static function getTargetPath( string $file_name, Folder $target_dir ) {
+        $extension = self::getExtension( $file_name );
 
         if ( false === $extension ) {
             return false;
         }
 
-        $target = new File( $target_dir->path . DS . $this->randomHash() . '.' . $extension, false );
+        $target = new File( $target_dir->pwd() . DS . self::randomHash() . '.' . $extension, false );
 
         // make sure we get a unique file name (append counter)
         while ( $target->exists() ) {
-            $target = new File( $target_dir->path . DS . $this->randomHash() . '.' . $extension, false );
+            $target = new File( $target_dir->pwd() . DS . self::randomHash() . '.' . $extension, false );
         }
 
-        if ( empty( $target->path ) ) {
+        if ( empty( $target->pwd() ) ) {
             return false;
         }
 
-        return $target->path;
+        return $target->pwd();
     }
 
     /**
@@ -167,7 +170,7 @@ class ImageFileHandlerComponent extends Component {
      *
      * @return string
      */
-    private function randomHash() {
+    private static function randomHash() {
         try {
             return md5( random_bytes( 16 ) );
         } catch ( \Exception $e ) {
@@ -180,8 +183,68 @@ class ImageFileHandlerComponent extends Component {
      *
      * @return Folder
      */
-    private function getRawImagesFolder(): Folder {
+    private static function getRawImagesFolder(): Folder {
         return new Folder( self::BASE_PATH . DS . self::FOLDER_RAWIMAGES, true );
+    }
+
+    /**
+     * Generate new unique file name and return full path to final image folder
+     *
+     * @param string $file_name
+     *
+     * @return bool|string
+     */
+    public static function getNewFinalImagePath( string $file_name ) {
+        return self::getTargetPath( $file_name, self::getFinalImagesFolder() );
+    }
+
+    /**
+     * Return folder for final images. Create it, if it doesn't exist.
+     *
+     * @return Folder
+     */
+    public static function getFinalImagesFolder(): Folder {
+        return new Folder( self::BASE_PATH . DS . self::FOLDER_FINALIMAGES, true );
+    }
+
+    /**
+     * Get the full final thumbnail path from the given filename
+     *
+     * @param string $file_name
+     *
+     * @return string
+     */
+    public static function getFinalThumbPath( string $file_name ) {
+        return self::getFinalThumbsFolder()->pwd() . DS . $file_name;
+    }
+
+    /**
+     * Get the full raw thumbnail path from the given filename
+     *
+     * @param string $file_name
+     *
+     * @return string
+     */
+    public static function getRawThumbPath( string $file_name ) {
+        return self::getRawThumbsFolder()->pwd() . DS . $file_name;
+    }
+
+    /**
+     * Return folder for final thumbnails. Create it, if it doesn't exist.
+     *
+     * @return Folder
+     */
+    private static function getFinalThumbsFolder(): Folder {
+        return new Folder( self::BASE_PATH . DS . self::FOLDER_FINALTHUMBS, true );
+    }
+
+    /**
+     * Return folder for raw thumbnails. Create it, if it doesn't exist.
+     *
+     * @return Folder
+     */
+    private static function getRawThumbsFolder(): Folder {
+        return new Folder( self::BASE_PATH . DS . self::FOLDER_RAWTHUMBS, true );
     }
 
     /**
@@ -193,8 +256,8 @@ class ImageFileHandlerComponent extends Component {
      *
      * @return bool
      */
-    public function saveChunk( string $chunk, string $original_file_name, int $chunkNum ): bool {
-        $this->removeOldChunks();
+    public static function saveChunk( string $chunk, string $original_file_name, int $chunkNum ): bool {
+        self::removeOldChunks();
 
         // the image is the part after the last comma
         $start = strrpos( $chunk, ',' );
@@ -211,7 +274,7 @@ class ImageFileHandlerComponent extends Component {
         }
 
         // this must be the same for every chunk, so don't check for existance
-        $file_path = $this->getChunkFileName( $original_file_name, true );
+        $file_path = self::getChunkFileName( $original_file_name, true );
 
         // store image to tempfile
         $file = new File( $file_path, true, 0644 );
@@ -223,9 +286,9 @@ class ImageFileHandlerComponent extends Component {
     /**
      * Remove chunks without change for TTL_CHUNK seconds
      */
-    private function removeOldChunks(): void {
-        $folder = $this->getChunkFolder();
-        $this->removeOldFiles( $folder, self::TTL_CHUNK );
+    private static function removeOldChunks(): void {
+        $folder = self::getChunkFolder();
+        self::removeOldFiles( $folder, self::TTL_CHUNK );
     }
 
     /**
@@ -236,7 +299,7 @@ class ImageFileHandlerComponent extends Component {
      *
      * @return bool
      */
-    private function removeOldFiles( Folder $folder, int $ttl ): bool {
+    private static function removeOldFiles( Folder $folder, int $ttl ): bool {
         $files   = $folder->read( false, false, true )[1];
         $max_age = time() - $ttl;
 
@@ -260,11 +323,11 @@ class ImageFileHandlerComponent extends Component {
      *
      * @return bool true if everything went well
      */
-    public function saveGradient( \Imagick $image ) {
-        $this->removeOldGradients();
+    public static function saveGradient( \Imagick $image ) {
+        self::removeOldGradients();
 
         $format = 'jpeg';
-        $path   = $this->getTargetPath( "gradient.$format", $this->getGradientsFolder() );
+        $path   = self::getTargetPath( "gradient.$format", self::getGradientsFolder() );
         $image->setImageFormat( $format );
 
         if ( $image->writeImage( $path ) ) {
@@ -277,9 +340,9 @@ class ImageFileHandlerComponent extends Component {
     /**
      * Remove gradients without change for TTL_GRADIENTS seconds
      */
-    private function removeOldGradients(): void {
-        $folder = $this->getGradientsFolder();
-        $this->removeOldFiles( $folder, self::TTL_GRADIENTS );
+    private static function removeOldGradients(): void {
+        $folder = self::getGradientsFolder();
+        self::removeOldFiles( $folder, self::TTL_GRADIENTS );
     }
 
     /**
@@ -287,7 +350,7 @@ class ImageFileHandlerComponent extends Component {
      *
      * @return Folder
      */
-    private function getGradientsFolder(): Folder {
+    private static function getGradientsFolder(): Folder {
         return new Folder( self::BASE_PATH . DS . self::FOLDER_GRADIENTS, true );
     }
 
@@ -298,9 +361,39 @@ class ImageFileHandlerComponent extends Component {
      *
      * @return bool|string
      */
-    public function getRawImagePath( string $file_name ) {
-        $file = new File( $this->getRawImagesFolder()->path . DS . $file_name );
+    public static function getRawImagePath( string $file_name ) {
+        $file = new File( self::getRawImagesFolder()->pwd() . DS . $file_name );
 
         return $file->exists() ? $file->pwd() : false;
+    }
+
+    /**
+     * Return full file path from the given file name or false if file doesn't exist
+     *
+     * @param string $file_name
+     *
+     * @return bool|string
+     */
+    public static function getFinalImagePath( string $file_name ) {
+        $file = new File( self::getFinalImagesFolder()->pwd() . DS . $file_name );
+
+        return $file->exists() ? $file->pwd() : false;
+    }
+
+    /**
+     * Return realtive src from given path or false if no valid path was given.
+     *
+     * @param string $path
+     *
+     * @return false|string
+     */
+    public static function pathToSrc( string $path ) {
+        $file = new File($path);
+
+        if ( ! $file->exists() ) {
+            return false;
+        }
+
+        return str_replace( ROOT, '', $path );
     }
 }

@@ -10,6 +10,8 @@
 /protected/fonts/*
 /protected/gradients/*
 /protected/chunks/*
+/protected/finalthumbs/*
+/protected/rawthumbs/*
 /node_modules
 webroot/tmp
 webroot/css/*
@@ -22,6 +24,7 @@ scripts/translate.sh
 scripts/report_errors.sh
 .well-known
 scripts/translations.sh
+Magick-*.log
 
 # OS generated files #
 ######################
