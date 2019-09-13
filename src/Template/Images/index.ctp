@@ -58,7 +58,7 @@ use Cake\I18n\Time;
                             'time_ago'  => $created,
                             'user_name' => $by
                         ] ) ?></p>
-                    <a href="<?= $image->src ?>" download="download"
+                    <a href="<?= $image->src ?>" download
                        class="btn btn-outline-primary btn-sm"><?= __( 'Download' ) ?></a>
                     <?php if ( $image->user->id === $user_id || $super_admin ): ?>
                         <button class="btn btn-link btn-sm image-delete-button"
