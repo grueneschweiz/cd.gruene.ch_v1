@@ -3,7 +3,7 @@ $nav = [
     [
         'label' => __( 'Gallery' ),
         'route' => ['controller'=>'Images', 'action'=>'index'],
-        'active' => ['Images.index'],
+        'active' => ['Images.index', 'Images.search'],
     ],
     [
         'label' => __('Create Image'),
