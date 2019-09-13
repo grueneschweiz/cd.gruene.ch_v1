@@ -90,7 +90,7 @@
                     self.others_can_use();
                     break;
                 case 'stock':
-                    $('input[name="originator"]').val('');
+                    $('input[name="originator"]').val($('#copyright').val());
                     $('#photographer-questions').show();
                     $('#stock-image-questions').show();
                     $('#originator-warning').hide();
@@ -98,7 +98,7 @@
                     self.others_can_use();
                     break;
                 case 'agency':
-                    $('input[name="originator"]').val('');
+                    $('input[name="originator"]').val($('#copyright').val());
                     $('#stock-image-questions').hide();
                     $('#photographer-questions').show();
                     $('#originator-warning').hide();
@@ -106,7 +106,7 @@
                     self.others_can_use();
                     break;
                 case 'friend':
-                    $('input[name="originator"]').val('');
+                    $('input[name="originator"]').val($('#copyright').val());
                     $('#stock-image-questions').hide();
                     $('#photographer-questions').show();
                     $('#originator-warning').hide();
