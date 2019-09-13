@@ -223,7 +223,7 @@
             </div>
         </div>
 
-        <div id="copyright-wrapper">
+        <div id="copyright-legal-wrapper">
             <h3 class="mt-4"><?= __('Copyright') ?></h3>
 
             <?= $this->Form->input('own_image', [
