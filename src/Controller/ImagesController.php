@@ -79,10 +79,18 @@ class ImagesController extends AppController {
      * @param string $string
      */
     public function search( string $string ) {
-        $results = $this->Images->search( $string );
+        $matches = $this->Images->search( $string );
+
+        if ( $matches ) {
+            $results = $this->Images->find()->contain( 'Users' )->where( [ 'Images.id IN' => $matches ] );
+        } else {
+            // we can't use the above where in query, if we dont have any matches
+            // so we create a query that returns NO results!
+            $results = $this->Images->find()->whereNull( 'id' );
+        }
 
         $images = $this->Paginator->paginate(
-            $this->Images->find()->contain( 'Users' )->where( [ 'Images.id IN' => $results ] ),
+            $results,
             [ 'limit' => 50, ]
         );
 
