@@ -403,6 +403,7 @@ $(document).ready(function () {
             $rotator = $('#logo-rotator'),
             $logo_top = $('#logo-top'),
             $subline = $('#logo-subline'),
+            $copyright = $('#copyright-wrapper'),
             $bars = $('#image-bars'),
             bars_pos = $bars.offset(),
             cropper_pos = $('#image-cropper').offset(),
@@ -411,7 +412,10 @@ $(document).ready(function () {
             y_pos = (bars_pos.top - cropper_pos.top) * scaleFactor,
             x_pos,
             logo_y_pos = logo_pos.top - cropper_pos.top,
-            logo_x_pos = logo_pos.left - cropper_pos.left;
+            logo_x_pos = logo_pos.left - cropper_pos.left,
+            copy_pos = $copyright.offset(),
+            copy_x_pos = copy_pos.left - cropper_pos.left,
+            copy_y_pos_bottom = $imageCropper.cropit('previewSize').height - parseFloat($copyright.css('margin-left'));
 
         // calculate bar position
         if ($bars.hasClass('left')) {
@@ -483,6 +487,12 @@ $(document).ready(function () {
                 subline: $subline.text(),
                 left: parseFloat($subline.css('margin-left')) * scaleFactor,
                 id: $('#logo').val()
+            },
+            copyright: {
+                text: $copyright.text(),
+                fontsize: parseFloat($copyright.css('font-size')) * scaleFactor,
+                y_pos_bottom: copy_y_pos_bottom * scaleFactor,
+                x_pos: copy_x_pos * scaleFactor
             }
         };
 
