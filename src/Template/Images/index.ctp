@@ -19,7 +19,7 @@ use Cake\I18n\Time;
                type="text"
                class="form-control"
                placeholder="<?= __( 'Search title bars text, name of the creator or the logo subline' ) ?>"
-               value="<?= isset( $search ) ? $search : '' ?>"
+               value="<?= isset( $search ) ? htmlspecialchars($search, ENT_QUOTES) : '' ?>"
         >
         <div class="input-group-append">
             <button class="btn btn-outline-secondary"
