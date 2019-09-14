@@ -204,10 +204,14 @@ class ImagesController extends AppController {
             set_time_limit( 180 );
 
             // get data
-            $data          = json_decode( $this->request->getData( 'addImage' ) );
-            $data->user_id = $this->Auth->user( 'id' );
-            $original_id   = - 1;
-            $hash          = false;
+            $data       = json_decode( $this->request->getData( 'addImage' ) );
+            $data->user = (object) [
+                'id'        => $this->Auth->user( 'id' ),
+                'full_name' => $this->Auth->user( 'first_name' ) . ' ' . $this->Auth->user( 'last_name' )
+            ];
+
+            $original_id = - 1;
+            $hash        = false;
 
             // if a custom image was given
             if ( ! empty( $data->image->name ) ) {

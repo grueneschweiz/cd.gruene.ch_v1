@@ -2,6 +2,7 @@
 
 namespace App\Model\Table;
 
+use Cake\Datasource\ConnectionManager;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -201,10 +202,13 @@ class ImagesTable extends Table {
         $image->width       = $dims[0];
         $image->height      = $dims[1];
         $image->hash        = $hash;
-        $image->user_id     = $data->user_id;
-        $image->flattext    = $this->_getBarText( $data->bars->data );
+        $image->user_id     = $data->user->id;
         $image->logo_id     = $logo_id;
         $image->original_id = $original_id;
+        $image->flattext    = $this->_getBarText( $data->bars->data )
+                              . ' ' . $data->logo->subline
+                              . ' ' . $this->_stripCopyrightText( $data->copyright->text )
+                              . ' ' . $data->user->full_name;
 
         $image = $this->save( $image );
 
@@ -238,6 +242,23 @@ class ImagesTable extends Table {
         $tokens = explode( ' ', $string );
 
         return implode( ' ', array_unique( $tokens ) );
+    }
+
+    /**
+     * Return only the text after the first collon, all if no collon is found
+     *
+     * @param string $string
+     *
+     * @return string
+     */
+    private function _stripCopyrightText( string $string ): string {
+        $start = strpos( $string, ':' );
+
+        if ( $start >= 0 ) {
+            return trim( substr( $string, $start + 1 ) );
+        }
+
+        return $string;
     }
 
     /**
@@ -399,58 +420,26 @@ class ImagesTable extends Table {
      * @return int[] the image ids
      */
     public function search( string $string ): array {
-        $terms   = explode( ' ', $string );
-        $weight  = 100;
-        $matches = [];
-        $buckets = [];
-        $results = [];
+        $connection = ConnectionManager::get( 'default' );
+        $results    = $connection->execute(
+            'SELECT id, MATCH (flattext) AGAINST (? IN BOOLEAN MODE) as score ' .
+            'FROM ' . $this->getTable() . ' ' .
+            'WHERE deleted IS NULL AND original_id > 0 ' .
+            'ORDER BY score DESC, created DESC',
+            [ $string ]
+        )->fetchAll( 'assoc' );
 
-        // find all matches and weight them
-        foreach ( $terms as $term ) {
-            $tmatches = $this->find( 'final' )
-                             ->select( 'Images.id' )
-                             ->leftJoinWith( 'Logos' )
-                             ->leftJoinWith( 'Users' )
-                             ->where( [
-                                 'OR' => [
-                                     'Images.flattext LIKE'  => "%$term%",
-                                     'Logos.subline LIKE'    => "%$term%",
-                                     'Users.first_name LIKE' => "%$term%",
-                                     'Users.last_name LIKE'  => "%$term%",
-                                 ]
-                             ] )->extract( 'id' );
-
-
-            foreach ( $tmatches as $match ) {
-                if ( array_key_exists( $match, $matches ) ) {
-                    $matches[ $match ] += $weight;
-                } else {
-                    $matches[ $match ] = $weight;
-                }
+        // get the ones with matches manually
+        // because we can't query WHERE score > 0
+        $ids = [];
+        foreach ( $results as $result ) {
+            if ( $result['score'] === '0' ) { // the score will be a string
+                break;
             }
-            $weight --;
+
+            $ids[] = (int) $result['id'];
         }
 
-        // group all matches by weight
-        foreach ( $matches as $image_id => $weight ) {
-            $buckets[ $weight ][] = $image_id;
-        }
-
-        // get the highest weighted first
-        krsort( $buckets );
-
-        // retrieve image ids first sorted by highest rated bucked, then by newest date first
-        foreach ( $buckets as $bucket ) {
-            $images = $this->find()
-                           ->select( 'Images.id' )
-                           ->where( [ 'id IN' => $bucket ] )
-                           ->orderDesc( 'created' )
-                           ->extract( 'id' )
-                           ->toArray();
-
-            $results += $images;
-        }
-
-        return $results;
+        return $ids;
     }
 }
