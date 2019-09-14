@@ -2,23 +2,28 @@
  * The Copyright class
  *
  * @param {$.fn.cibuilder} $cibuilder
- * @param {jQuery} $wrapper object
+ * @param {jQuery} $outer wrapper object
+ * @param {jQuery} $inner wrapper object
  */
-function CopyrightModule($cibuilder, $wrapper) {
+function CopyrightModule($cibuilder, $outer, $inner) {
     "use strict";
 
     /**
      * load the containers on invokation
      *
      * @param {$.fn.cibuilder} $cibuilder
-     * @param {jQuery} wrapper object
+     * @param {jQuery} outer wrapper object
+     * @param {jQuery} inner wrapper object
      */
-    this._construct = function ($cibuilder, $wrapper) {
+    this._construct = function ($cibuilder, $outer, $inner) {
         this.$cibuilder = $cibuilder;
-        this.$wrapper = $wrapper;
-        this.sizeFactor = 0.0225;
-        this.borderMarginFactor = 2.25; // times border width
+        this.$outer = $outer;
+        this.$inner = $inner;
+        this.sizeFactor = 0.01;
+        this.borderSideMarginFactor = 0.2; // times border width
+        this.borderBottomMarginFactor = 3; // times border width
         this.noBorderMargin = 1; // em
+        this.text = '';
     };
 
     /**
@@ -28,6 +33,8 @@ function CopyrightModule($cibuilder, $wrapper) {
      * @param string border
      */
     this.set = function (text, layout, border, height, width) {
+        var was_empty = this.text === '' && text !== '';
+
         if (this.text !== text) {
             this.text = text;
             this.setText();
@@ -37,50 +44,61 @@ function CopyrightModule($cibuilder, $wrapper) {
             this.imgHeight = height;
             this.imgWidth = width;
             this.setFontSize();
+            this.setPosition();
         }
 
-        // yes, we do have to call this in any case
-        this.layout = layout;
-        this.border = border;
-        this.setPosition();
+        if (this.layout !== layout || this.border !== border) {
+            this.layout = layout;
+            this.border = border;
+            this.setPosition();
+        }
+
+        if (was_empty) {
+            this.setPosition();
+        }
     };
 
     this.setPosition = function () {
-        if ('left' === this.layout) {
-            this.$wrapper.removeClass('is-left').addClass('is-right');
-            this.$wrapper.css('left', (this.imgWidth - this.$wrapper.outerHeight(true)) + 'px');
+        if ('auto' === this.border) {
+            this.$outer.removeClass('no-border').addClass('has-border');
+            var border = this.$cibuilder.border.getBorderWidth();
+            var side_margin = border * this.borderSideMarginFactor;
+            var bottom_margin = border * this.borderBottomMarginFactor;
         } else {
-            this.$wrapper.addClass('is-left').removeClass('is-right');
-            this.$wrapper.css('left', 0);
+            this.$outer.addClass('no-border').removeClass('has-border');
+            var font_size = parseFloat(this.$inner.css('font-size'));
+            var side_margin = this.noBorderMargin * font_size;
+            var bottom_margin = this.noBorderMargin * font_size + this.$inner.outerHeight(true);
         }
 
-        if ('auto' === this.border) {
-            this.$wrapper.removeClass('no-border').addClass('has-border');
-            var border = this.$cibuilder.border.getBorderWidth();
-            this.$wrapper.css('margin', (border * this.borderMarginFactor) + 'px');
+        this.$outer.css('bottom', bottom_margin + 'px');
+
+        if ('left' === this.layout) {
+            this.$outer.removeClass('is-left').addClass('is-right');
+            this.$outer.css('left', (this.imgWidth - this.$inner.outerHeight(true) - side_margin) + 'px');
         } else {
-            this.$wrapper.addClass('no-border').removeClass('has-border');
-            this.$wrapper.css('margin', this.noBorderMargin + 'em');
+            this.$outer.addClass('is-left').removeClass('is-right');
+            this.$outer.css('left', side_margin + 'px');
         }
     }
 
     this.setFontSize = function () {
         var fontSize = Math.sqrt(this.imgHeight * this.imgWidth) * this.sizeFactor;
-        this.$wrapper.css('font-size', fontSize + 'px');
+        this.$inner.css('font-size', fontSize + 'px');
     }
 
     this.setText = function () {
         if (this.text.length) {
-            this.$wrapper.text(trans.copy + ' ' + this.text);
+            this.$inner.text(trans.copy + ' ' + this.text);
         } else {
-            this.$wrapper.text('');
+            this.$inner.text('');
         }
     }
 
     /**
      * invoke the constructor
      */
-    this._construct($cibuilder, $wrapper);
+    this._construct($cibuilder, $outer, $inner);
 }
 
 module.exports = CopyrightModule;

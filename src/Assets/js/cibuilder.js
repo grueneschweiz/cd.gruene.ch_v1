@@ -32,7 +32,7 @@
             this.form = new Form(this, $(options.form));
             this.logo = new Logo(this, $(options.logo));
             this.rules = new Rules(this);
-            this.copyright = new Copyright(this, $(options.copyright));
+            this.copyright = new Copyright(this, $(options.copyright_outer), $(options.copyright_inner));
 
             this.registerEventListeners();
         };

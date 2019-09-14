@@ -300,6 +300,13 @@ class ImagesController extends AppController {
                 $error = $success;
             }
 
+            if ( ! isset( $error ) ) {
+                $success = $this->ImageEditor->addCopyright( $data->copyright );
+                if ( ! $success ) {
+                    $error = $success;
+                }
+            }
+
             // if all went right until now
             if ( ! isset( $error ) ) {
                 if ( isset( $data->logo->src ) && strpos( $data->logo->src, 'alternative' ) ) {
