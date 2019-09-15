@@ -436,7 +436,7 @@ class ImagesTable extends Table {
                     ] )
                     ->select( $this )
                     ->where( $match_query )
-                    ->order( [ 'score' => 'DESC', 'created' => 'DESC' ] )
+                    ->order( [ 'score' => 'DESC', 'Images.created' => 'DESC' ] )
                     ->bind( ':terms', $terms, 'string' );
     }
 
@@ -448,18 +448,25 @@ class ImagesTable extends Table {
      * @return string|null
      */
     private function prepareTerms( string $string ): ?string {
+        $query = '';
+
         // quoted strings must be treated differently
         // so extract them first
-        if ( preg_match_all( '/(".*")/U', $string, $quoted ) ) {
-            $query  = implode( ' ', $quoted[0] ) . ' ';
+        if ( preg_match_all( '/([\+\-]?".+")/U', $string, $quoted ) ) {
+            $query  .= implode( ' ', $quoted[0] ) . ' ';
             $string = trim( str_replace( $quoted[0], '', $string ) );
-        } else {
-            $query = '';
+        }
+
+        // terms with quantifiers can't have a wildcard either (innoDB 5.7)
+        // so treat them separately as well
+        if ( preg_match_all( '/([\+\-][\w\.]+)/u', $string, $quantified ) ) {
+            $query  .= implode( ' ', $quantified[0] ) . ' ';
+            $string = trim( str_replace( $quantified[0], '', $string ) );
         }
 
         // if there are unquoted parts left, process them for partial matches
         if ( $string ) {
-            $terms = preg_split( "/[^\w\+\-\"]+/Uu", $string, 0, PREG_SPLIT_NO_EMPTY );
+            $terms = preg_split( "/[^\w\+\-\.]+/Uu", $string, 0, PREG_SPLIT_NO_EMPTY );
 
             if ( ! $terms ) {
                 return $query;
