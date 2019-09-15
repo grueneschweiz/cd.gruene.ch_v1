@@ -420,26 +420,53 @@ class ImagesTable extends Table {
      * @return int[] the image ids
      */
     public function search( string $string ): array {
-        $connection = ConnectionManager::get( 'default' );
-        $results    = $connection->execute(
-            'SELECT id, MATCH (flattext) AGAINST (? IN BOOLEAN MODE) as score ' .
-            'FROM ' . $this->getTable() . ' ' .
-            'WHERE deleted IS NULL AND original_id > 0 ' .
-            'ORDER BY score DESC, created DESC',
-            [ $string ]
-        )->fetchAll( 'assoc' );
+        $terms = $this->prepareTerms( $string );
 
-        // get the ones with matches manually
-        // because we can't query WHERE score > 0
-        $ids = [];
-        foreach ( $results as $result ) {
-            if ( $result['score'] === '0' ) { // the score will be a string
-                break;
-            }
-
-            $ids[] = (int) $result['id'];
+        if ( ! $terms ) {
+            return [];
         }
 
-        return $ids;
+        $connection  = ConnectionManager::get( 'default' );
+        $match_query = 'MATCH (flattext) AGAINST (? IN BOOLEAN MODE)';
+        $results     = $connection->execute(
+            "SELECT id, $match_query as score " .
+            "FROM {$this->getTable()} " .
+            "WHERE deleted IS NULL AND original_id > 0 AND $match_query" .
+            'ORDER BY score DESC, created DESC',
+            [ $terms, $terms ]
+        )->fetchAll( 'assoc' );
+
+        return count( $results ) ? array_column( $results, 'id' ) : [];
+    }
+
+    /**
+     * Do only search word characters and allow partial matches (word start)
+     *
+     * @param string $string
+     *
+     * @return string|null
+     */
+    private function prepareTerms( string $string ): ?string {
+        // quoted strings must be treated differently
+        // so extract them first
+        if ( preg_match_all( '/(".*")/U', $string, $quoted ) ) {
+            $query  = implode( ' ', $quoted[0] ) . ' ';
+            $string = trim( str_replace( $quoted[0], '', $string ) );
+        } else {
+            $query = '';
+        }
+
+        // if there are unquoted parts left, process them for partial matches
+        if ( $string ) {
+            $terms = preg_split( "/[^\w\+\-\"]+/Uu", $string, 0, PREG_SPLIT_NO_EMPTY );
+
+            if ( ! $terms ) {
+                return $query;
+            }
+
+            $query .= implode( '* ', $terms ) . '*';
+        }
+
+        return $query;
     }
 }
