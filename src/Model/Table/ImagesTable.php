@@ -431,7 +431,7 @@ class ImagesTable extends Table {
         $results     = $connection->execute(
             "SELECT id, $match_query as score " .
             "FROM {$this->getTable()} " .
-            "WHERE deleted IS NULL AND original_id > 0 AND $match_query" .
+            "WHERE deleted IS NULL AND original_id IS NOT NULL AND $match_query" .
             'ORDER BY score DESC, created DESC',
             [ $terms, $terms ]
         )->fetchAll( 'assoc' );
