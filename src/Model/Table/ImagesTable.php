@@ -410,9 +410,8 @@ class ImagesTable extends Table {
     /**
      * Search for final images
      *
-     * Search for final images with the given string using an OR operator
-     * between the words. The bar data as well as the subline and the first and
-     * last name of the user, that created the image, is searched. The results
+     * Search for final images with the given string using MySQL's full text
+     * search. All text in the images flattext is searched. The results
      * are primarely ordered by the best match, secondary by creation date.
      *
      * @param string $string
