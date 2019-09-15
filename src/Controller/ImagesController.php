@@ -6,6 +6,7 @@ use App\Controller\Component\ImageEditorComponent;
 use App\Controller\Component\ImageFileHandlerComponent;
 use App\Controller\Component\InvalidImageException;
 use App\Model\Entity\User;
+use Cake\Datasource\ConnectionManager;
 use Cake\Event\Event;
 
 /**
@@ -416,28 +417,47 @@ class ImagesController extends AppController {
     }
 
     public function migrate() {
-        $images = $this->Images->find();
+        $connection = ConnectionManager::get( 'default' );
+
+        $indexes = $connection->execute( 'SHOW INDEX FROM images' )->fetchAll( 'assoc' );
+        $indexes = array_column( $indexes, 'Key_name' );
+
+        if ( ! in_array( 'search', $indexes ) ) {
+            $connection->execute(
+                "ALTER TABLE images
+            ADD FULLTEXT INDEX `search`             
+            (`flattext`);" );
+        }
+
+        $images = $this->Images->find()->contain( [ 'Users', 'Logos' ] );
 
         foreach ( $images as $image ) {
-            if ( $image->isRawImage ) {
-                $path  = ImageFileHandlerComponent::getRawImagePath( $image->filename );
-                $orig  = new \Cake\Filesystem\File( $path );
-                $thumb = new \Cake\Filesystem\File( ImageFileHandlerComponent::getRawThumbPath( $image->filename ) );
-                if ( $orig->exists() && ! $thumb->exists() ) {
-                    $this->ImageEditor->createFromImage( $path );
-                    $this->ImageEditor->file_name = $image->filename;
-                    $this->ImageEditor->makeRawThumb();
-                }
-            } else {
-                $path  = ImageFileHandlerComponent::getFinalImagePath( $image->filename );
-                $orig  = new \Cake\Filesystem\File( $path );
-                $thumb = new \Cake\Filesystem\File( ImageFileHandlerComponent::getFinalThumbPath( $image->filename ) );
-                if ( $orig->exists() && ! $thumb->exists() ) {
-                    $this->ImageEditor->createFromImage( $path );
-                    $this->ImageEditor->file_name = $image->filename;
-                    $this->ImageEditor->makeFinalThumb();
+            $text = $image->flattext;
+
+            if ( $image->logo ) {
+                $logo = $image->logo->subline;
+                if ( false === strpos( $text, $logo ) ) {
+                    $text .= " $logo";
                 }
             }
+
+            if ( $image->user ) {
+                $fname = $image->user->first_name;
+                $lname = $image->user->last_name;
+
+                if ( false === strpos( $text, $fname ) ) {
+                    $text .= " $fname";
+                }
+
+                if ( false === strpos( $text, $lname ) ) {
+                    $text .= " $lname";
+                }
+            }
+
+            $image->flattext = $text;
+            $this->Images->save( $image );
+
+            die('ok');
         }
     }
 }
