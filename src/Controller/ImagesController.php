@@ -456,8 +456,8 @@ class ImagesController extends AppController {
 
             $image->flattext = $text;
             $this->Images->save( $image );
-
-            die('ok');
         }
+
+        die('ok');
     }
 }
