@@ -6,8 +6,8 @@ use App\Controller\Component\ImageEditorComponent;
 use App\Controller\Component\ImageFileHandlerComponent;
 use App\Controller\Component\InvalidImageException;
 use App\Model\Entity\User;
-use Cake\Datasource\ConnectionManager;
 use Cake\Event\Event;
+use Cake\Filesystem\File;
 
 /**
  * Images Controller
@@ -407,47 +407,20 @@ class ImagesController extends AppController {
     }
 
     public function migrate() {
-        $connection = ConnectionManager::get( 'default' );
-
-        $indexes = $connection->execute( 'SHOW INDEX FROM images' )->fetchAll( 'assoc' );
-        $indexes = array_column( $indexes, 'Key_name' );
-
-        if ( ! in_array( 'search', $indexes ) ) {
-            $connection->execute(
-                "ALTER TABLE images
-            ADD FULLTEXT INDEX `search`             
-            (`flattext`);" );
-        }
-
-        $images = $this->Images->find()->contain( [ 'Users', 'Logos' ] );
+        $images = $this->Images->find();
 
         foreach ( $images as $image ) {
-            $text = $image->flattext;
-
-            if ( $image->logo ) {
-                $logo = $image->logo->subline;
-                if ( false === strpos( $text, $logo ) ) {
-                    $text .= " $logo";
-                }
+            if ( $image->isRawImage ) {
+                $file = new File( ImageFileHandlerComponent::getRawImagePath( $image->filename ) );
+            } else {
+                $file = new File( ImageFileHandlerComponent::getFinalImagePath( $image->filename ) );
             }
 
-            if ( $image->user ) {
-                $fname = $image->user->first_name;
-                $lname = $image->user->last_name;
-
-                if ( false === strpos( $text, $fname ) ) {
-                    $text .= " $fname";
-                }
-
-                if ( false === strpos( $text, $lname ) ) {
-                    $text .= " $lname";
-                }
+            if ( ! $file->exists() ) {
+                $this->Images->delete( $image );
             }
-
-            $image->flattext = $text;
-            $this->Images->save( $image );
         }
 
-        die('ok');
+        die( 'ok' );
     }
 }
