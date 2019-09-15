@@ -132,7 +132,7 @@ class ImagesController extends AppController {
             $image   = $this->Images->get( $id );
 
             if ( $image->user_id !== $this->Auth->user( 'id' ) && ! $this->Auth->user( 'super_admin' ) ) {
-                $msg = __( "You'r not authorized to delete this image." );
+                $msg = __( "You're not authorized to delete this image." );
             } elseif ( $this->Images->delete( $image ) ) {
                 $msg     = __( 'The image has been deleted.' );
                 $success = true;

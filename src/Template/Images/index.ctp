@@ -18,7 +18,7 @@ use Cake\I18n\Time;
         <input id="gallery-search"
                type="text"
                class="form-control"
-               placeholder="<?= __( 'Search title bars text, name of the creator or the logo subline' ) ?>"
+               placeholder="<?= __( 'Search title bars, author, logo subline or the copyright' ) ?>"
                value="<?= isset( $search ) ? htmlspecialchars($search, ENT_QUOTES) : '' ?>"
         >
         <div class="input-group-append">

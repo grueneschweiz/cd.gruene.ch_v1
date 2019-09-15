@@ -142,7 +142,7 @@
     <div class="spacer mt-3"></div>
     <div id="copyright-form" class="d-none">
         <span class="helptext"
-              title="<?= __( 'Will be displayed on the lower right or left edge of the image. Enter the name of the person that shot the photo.' ) ?>"></span>
+              title="<?= __( 'Will be displayed on the lower right or left edge of the image. Enter the name of the photographer.' ) ?>"></span>
         <?= $this->Form->input( 'copyright', [
             'label'       => __( 'Copyright info' ),
             'placeholder' => __( 'Optional' ),
