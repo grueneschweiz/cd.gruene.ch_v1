@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-09-15 09:50+0000\n"
+"POT-Creation-Date: 2019-09-15 10:00+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -31,7 +31,7 @@ msgid "The group could not be deleted. Please, try again."
 msgstr ""
 
 #: Controller/ImagesController.php:135
-msgid "You'r not authorized to delete this image."
+msgid "You're not authorized to delete this image."
 msgstr ""
 
 #: Controller/ImagesController.php:137
@@ -646,7 +646,7 @@ msgid "Add subline"
 msgstr ""
 
 #: Template/Images/add.ctp:145
-msgid "Will be displayed on the lower right or left edge of the image. Enter the name of the person that shot the photo."
+msgid "Will be displayed on the lower right or left edge of the image. Enter the name of the photographer."
 msgstr ""
 
 #: Template/Images/add.ctp:147
@@ -849,7 +849,7 @@ msgid "Have a look at the images your fellows have created."
 msgstr ""
 
 #: Template/Images/index.ctp:21
-msgid "Search title bars text, name of the creator or the logo subline"
+msgid "Search title bars, author, logo subline or the copyright"
 msgstr ""
 
 #: Template/Images/index.ctp:28

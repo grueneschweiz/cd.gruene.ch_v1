@@ -1299,16 +1299,8 @@ msgstr ""
 msgid "Are you sure you want to delete this image?"
 msgstr ""
 
-#: Controller/ImagesController.php:135
-msgid "You'r not authorized to delete this image."
-msgstr ""
-
 #: Template/Images/index.ctp:57
 msgid "Created {time_ago} by {user_name}."
-msgstr ""
-
-#: Template/Images/add.ctp:145
-msgid "Will be displayed on the lower right or left edge of the image. Enter the name of the person that shot the photo."
 msgstr ""
 
 #: Template/Images/add.ctp:147
@@ -1317,10 +1309,6 @@ msgstr ""
 
 #: Template/Images/add.ctp:148
 msgid "Optional"
-msgstr ""
-
-#: Template/Images/index.ctp:21
-msgid "Search title bars text, name of the creator or the logo subline"
 msgstr ""
 
 #: Template/Images/index.ctp:28
@@ -1335,5 +1323,17 @@ msgstr[1] ""
 
 #: Template/Layout/default.ctp:112
 msgid "© Photo:"
+msgstr ""
+
+#: Controller/ImagesController.php:135
+msgid "You're not authorized to delete this image."
+msgstr ""
+
+#: Template/Images/add.ctp:145
+msgid "Will be displayed on the lower right or left edge of the image. Enter the name of the photographer."
+msgstr ""
+
+#: Template/Images/index.ctp:21
+msgid "Search title bars, author, logo subline or the copyright"
 msgstr ""
 
