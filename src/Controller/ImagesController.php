@@ -80,19 +80,9 @@ class ImagesController extends AppController {
      * @param string $string
      */
     public function search( string $string ) {
-        $matches = $this->Images->search( $string );
-
-        if ( $matches ) {
-            $results = $this->Images->find()->contain( 'Users' )->where( [ 'Images.id IN' => $matches ] );
-        } else {
-            // we can't use the above where in query, if we dont have any matches
-            // so we create a query that returns NO results!
-            $results = $this->Images->find()->whereNull( 'id' );
-        }
-
         $images = $this->Paginator->paginate(
-            $results,
-            [ 'limit' => 50, ]
+            $this->Images->search( $string ),
+            [ 'limit' => 50 ]
         );
 
         $this->set( [ 'search' => $string ] );
@@ -456,8 +446,8 @@ class ImagesController extends AppController {
 
             $image->flattext = $text;
             $this->Images->save( $image );
-
-            die('ok');
         }
+
+        die('ok');
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Model\Table;
 
-use Cake\Datasource\ConnectionManager;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -410,33 +409,35 @@ class ImagesTable extends Table {
     /**
      * Search for final images
      *
-     * Search for final images with the given string using an OR operator
-     * between the words. The bar data as well as the subline and the first and
-     * last name of the user, that created the image, is searched. The results
+     * Search for final images with the given string using MySQL's full text
+     * search. All text in the images flattext is searched. The results
      * are primarely ordered by the best match, secondary by creation date.
      *
-     * @param string $string
+     * @param string $string the search terms
      *
-     * @return int[] the image ids
+     * @return Query the search results
      */
-    public function search( string $string ): array {
+    public function search( string $string ): Query {
         $terms = $this->prepareTerms( $string );
 
         if ( ! $terms ) {
             return [];
         }
 
-        $connection  = ConnectionManager::get( 'default' );
-        $match_query = 'MATCH (flattext) AGAINST (? IN BOOLEAN MODE)';
-        $results     = $connection->execute(
-            "SELECT id, $match_query as score " .
-            "FROM {$this->getTable()} " .
-            "WHERE deleted IS NULL AND original_id > 0 AND $match_query" .
-            'ORDER BY score DESC, created DESC',
-            [ $terms, $terms ]
-        )->fetchAll( 'assoc' );
+        $match_query = 'MATCH (flattext) AGAINST (:terms IN BOOLEAN MODE)';
 
-        return count( $results ) ? array_column( $results, 'id' ) : [];
+        return $this->find( 'final' )
+                    ->contain( 'Users' )
+                    ->select( [
+                        'score' => $match_query,
+                        'Users.id',
+                        'Users.last_name',
+                        'Users.first_name'
+                    ] )
+                    ->select( $this )
+                    ->where( $match_query )
+                    ->order( [ 'score' => 'DESC', 'created' => 'DESC' ] )
+                    ->bind( ':terms', $terms, 'string' );
     }
 
     /**

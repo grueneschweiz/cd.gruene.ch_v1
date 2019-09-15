@@ -30,7 +30,7 @@ use Cake\I18n\Time;
     </div>
 
     <?php if ( isset( $search ) ): ?>
-        <h4><?= __n( 'One match', '{number} Results', $images->count(), [ 'number' => $images->count() ] ) ?></h4>
+        <h4><?= __n( 'One match', '{number} Results', $this->Paginator->param('count'), [ 'number' => $this->Paginator->param('count') ] ) ?></h4>
     <?php endif; ?>
 
     <div class="gallery">
