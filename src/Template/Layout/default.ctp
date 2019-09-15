@@ -108,7 +108,8 @@
         source_empty: '<?= htmlspecialchars(__('Please enter url of the platform where you got the image from.'), ENT_QUOTES) ?>',
         can_i_use: '<?= htmlspecialchars(__('Please confirm that you have the right to use this image.'), ENT_QUOTES) ?>',
         empty_bars: '<?= htmlspecialchars(__('Input not valid: Please make sure you do not leave any bars empty.'), ENT_QUOTES) ?>',
-        delete_image: '<?= htmlspecialchars(__('Are you sure you want to delete this image?'), ENT_QUOTES) ?>'
+        delete_image: '<?= htmlspecialchars(__('Are you sure you want to delete this image?'), ENT_QUOTES) ?>',
+        copy: '<?= htmlspecialchars(__('© Photo:'), ENT_QUOTES) ?>'
     };
 
     var x_csrf_token = '<?= $this->request->params['_csrfToken'] ?>';

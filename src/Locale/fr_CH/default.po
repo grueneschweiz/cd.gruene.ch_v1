@@ -6,6 +6,7 @@ msgstr ""
 "X-Generator: POEditor.com\n"
 "Project-Id-Version: cd.gruene.ch\n"
 "Language: fr-ch\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: Controller/GroupsController.php:121;160
 msgid "The group has been saved."
@@ -88,56 +89,56 @@ msgstr "Dépassement de la taille maximale du fichier ({0}MB)"
 msgid "A group with this name already exists"
 msgstr "Il existe déjà un groupe de ce nom."
 
-#: Model/Table/ImagesTable.php:111
+#: Model/Table/ImagesTable.php:112
 msgid "Facebook Timeline Image"
 msgstr "Image partagée sur le fil d'actualités Facebook"
 
-#: Model/Table/ImagesTable.php:113
+#: Model/Table/ImagesTable.php:114
 msgid "Facebook Featured Website"
 msgstr "Aperçu d'un lien partagé sur Facebook"
 
-#: Model/Table/ImagesTable.php:114
+#: Model/Table/ImagesTable.php:115
 msgid "Twitter Feed Image"
 msgstr "Image du flux Twitter"
 
 #. Hier geht es um die Bildergrösse (zB für einen Slider auf der Website 1140x638px)
-#: Model/Table/ImagesTable.php:116
+#: Model/Table/ImagesTable.php:117
 msgid "Website Slider"
 msgstr "Diapositive pour le site"
 
 #. Wenn ich "Eigene Grösse" auswähle, kann ich danach beliebige Pixelwerte für die Breite und die Höhe eingeben
-#: Model/Table/ImagesTable.php:117
+#: Model/Table/ImagesTable.php:118
 msgid "Custom size"
 msgstr "Taille personnalisée"
 
 #. Das sind die Auswahlwerte vom "Layout" und definiert, ob die Balken auf der linken oder auf der rechten Seite über das Bild ragen.
-#: Model/Table/ImagesTable.php:128
+#: Model/Table/ImagesTable.php:129
 msgid "Bars left"
 msgstr "Afficher les barres à gauche"
 
 #. Das sind die Auswahlwerte vom "Layout" und definiert, ob die Balken auf der linken oder auf der rechten Seite über das Bild ragen.
-#: Model/Table/ImagesTable.php:129
+#: Model/Table/ImagesTable.php:130
 msgid "Bars right"
 msgstr "Afficher les barres à droite"
 
-#: Model/Table/ImagesTable.php:140
+#: Model/Table/ImagesTable.php:141
 msgid "White"
 msgstr "blanc"
 
-#: Model/Table/ImagesTable.php:141
+#: Model/Table/ImagesTable.php:142
 msgid "Green"
 msgstr "vert"
 
-#: Model/Table/ImagesTable.php:142
+#: Model/Table/ImagesTable.php:143
 msgid "Green head- & sublines"
 msgstr "Titres et sous-titres verts"
 
 #. Das ist ein Auswahlwert für die Rahmen (mit Standard wird ein weisser Rahmen eingefügt)
-#: Model/Table/ImagesTable.php:153
+#: Model/Table/ImagesTable.php:154
 msgid "Standard"
 msgstr "Par défaut"
 
-#: Model/Table/ImagesTable.php:154
+#: Model/Table/ImagesTable.php:155
 msgid "None"
 msgstr "aucun(e)"
 
@@ -174,7 +175,7 @@ msgstr "Envoyer"
 #: Template/Element/Logo/index_table.ctp:26
 #: Template/Element/User/index_table.ctp:29
 #: Template/Images/edit.ctp:5
-#: Template/Images/index.ctp:43
+#: Template/Images/index.ctp:65
 #: Template/Images/view.ctp:82
 msgid "Delete"
 msgstr "Supprimer"
@@ -243,7 +244,7 @@ msgid "Logos"
 msgstr "Logos"
 
 #: Template/Element/top_nav.ctp:9
-#: Template/Images/index.ctp:11
+#: Template/Images/index.ctp:12
 msgid "Create Image"
 msgstr "Créer une image"
 
@@ -319,13 +320,13 @@ msgid "Enter password"
 msgstr "Merci de saisir le mot de passe"
 
 #: Template/Element/User/input.ctp:27
-#: Template/Images/add.ctp:185;198
+#: Template/Images/add.ctp:195;208
 #: Template/Users/view.ctp:28
 msgid "Yes"
 msgstr "Oui"
 
 #: Template/Element/User/input.ctp:27
-#: Template/Images/add.ctp:188;207
+#: Template/Images/add.ctp:198;217
 #: Template/Users/view.ctp:28
 msgid "No"
 msgstr "Non"
@@ -471,7 +472,7 @@ msgstr "Cliquez pour sélectionner l'image à mettre en ligne."
 msgid "Remove image"
 msgstr "Supprimer l'image"
 
-#: Template/Images/add.ctp:72;76;94;139;281
+#: Template/Images/add.ctp:72;76;94;139;291
 msgid "Warning!"
 msgstr "Attention !"
 
@@ -501,149 +502,149 @@ msgstr "Texte de la barre"
 msgid "Add subline"
 msgstr "Rajouter un sous-titre"
 
-#: Template/Images/add.ctp:144
+#: Template/Images/add.ctp:154
 msgid "Generally the bars are on the left side. But you may put them on the right side, if the photo requires it."
 msgstr "En général, les barres se trouvent à gauche. Mais tu peux les placer à droite si la photo l'exige."
 
-#: Template/Images/add.ctp:147
+#: Template/Images/add.ctp:157
 msgid "Layout"
 msgstr "Mise en page"
 
-#: Template/Images/add.ctp:152
+#: Template/Images/add.ctp:162
 msgid "Default is the green color schema. Use the white color scheme if your image has a green background. Use green head- & sublines if your background is white."
 msgstr "Le choix par défaut est le jeu de couleurs vert. Utilise le jeu blanc si l'arrière-plan de votre image est vert. Utilise des titres et des sous-titres verts si l'arrière-plan est blanc."
 
-#: Template/Images/add.ctp:155
+#: Template/Images/add.ctp:165
 msgid "Color scheme"
 msgstr "Jeu de couleurs"
 
-#: Template/Images/add.ctp:161
+#: Template/Images/add.ctp:171
 msgid "The border is part of the corporate design. You may however omit the border if you use the image in a context where a border looks ugly."
 msgstr "La bordure fait partie du design retenu. Tu as toutefois la possibilité de supprimer la bordure si tu utilises l'image dans un contexte où la bordure semble détonner."
 
-#: Template/Images/add.ctp:164
+#: Template/Images/add.ctp:174
 msgid "Border"
 msgstr "Bordure"
 
-#: Template/Images/add.ctp:171
+#: Template/Images/add.ctp:181
 msgid "Working hard"
 msgstr "La machine tourne..."
 
-#: Template/Images/add.ctp:172
+#: Template/Images/add.ctp:182
 msgid "I'm busy generating your image, please hang on a few ticks. I'll be right there."
 msgstr "Je suis en train de générer ton image. Merci de patienter quelques instants - j'y suis presque."
 
-#: Template/Images/add.ctp:173
+#: Template/Images/add.ctp:183
 msgid "Please answer meanwhile the legal questions below."
 msgstr "Dans l'intervalle, merci de répondre à quelques questions d'ordre juridique."
 
-#: Template/Images/add.ctp:178
+#: Template/Images/add.ctp:188
 msgid "Right of personality"
 msgstr "Respect de la vie privée"
 
-#: Template/Images/add.ctp:181
+#: Template/Images/add.ctp:191
 msgid "Are there any identifiably people in the image?"
 msgstr "Y a-t-il des personnes identifiables sur l'image ?"
 
-#: Template/Images/add.ctp:194
+#: Template/Images/add.ctp:204
 msgid "Are they either people of public interest or have they agreed to the publication of this image?"
 msgstr "S'agit-il de personnalités publiques, ou de personnes ayant donné leur accord à la publication de l'image ?"
 
-#: Template/Images/add.ctp:203
+#: Template/Images/add.ctp:213
 msgid "Unclear"
 msgstr "Difficile de répondre"
 
-#: Template/Images/add.ctp:211
+#: Template/Images/add.ctp:221
 msgid "Right of personality:"
 msgstr "Respect de la vie privée :"
 
-#: Template/Images/add.ctp:212
+#: Template/Images/add.ctp:222
 msgid "By law, people have to agree on the publication of photos, where they are identifiably."
 msgstr "La loi exige que les personnes identifiables sur une photo doivent donner leur accord à sa publication."
 
-#: Template/Images/add.ctp:218
+#: Template/Images/add.ctp:228
 msgid "Copyright"
 msgstr "Droit d'auteur"
 
-#: Template/Images/add.ctp:221;250
+#: Template/Images/add.ctp:231;260
 msgid "Who is the originator of the raw image?"
 msgstr "Qui est l'auteur de l'image de départ ?"
 
-#: Template/Images/add.ctp:224
+#: Template/Images/add.ctp:234
 msgid "Me"
 msgstr "C'est moi."
 
-#: Template/Images/add.ctp:225
+#: Template/Images/add.ctp:235
 msgid "Stock image"
 msgstr "Image d'archive"
 
-#: Template/Images/add.ctp:226
+#: Template/Images/add.ctp:236
 msgid "Agency / Photographer"
 msgstr "Agence / photographe"
 
-#: Template/Images/add.ctp:227
+#: Template/Images/add.ctp:237
 msgid "Friend / Member of the party"
 msgstr "Amie / membre du parti"
 
 #. weiblich ;)
-#: Template/Images/add.ctp:228
+#: Template/Images/add.ctp:238
 msgid "I don't know / I'm not sure"
 msgstr "Je ne sais pas / je ne suis pas sûre."
 
-#: Template/Images/add.ctp:234
+#: Template/Images/add.ctp:244
 msgid "Where is the raw image from?"
 msgstr "D'ou provient l'image de départ ?"
 
-#: Template/Images/add.ctp:235
+#: Template/Images/add.ctp:245
 msgid "Url to the raw image on the stock image platform."
 msgstr "URL vers l'image brute sur la plateforme d'archivage"
 
-#: Template/Images/add.ctp:239
+#: Template/Images/add.ctp:249
 msgid "Select the raw images licence"
 msgstr "Sélectionne la licence de l'image brute"
 
-#: Template/Images/add.ctp:241
+#: Template/Images/add.ctp:251
 msgid "Other"
 msgstr "autre"
 
-#: Template/Images/add.ctp:242
+#: Template/Images/add.ctp:252
 msgid "Creative Commons with Attribution"
 msgstr "Creative Commons avec mention de l'auteure"
 
-#: Template/Images/add.ctp:243
+#: Template/Images/add.ctp:253
 msgid "Creative Commons without Limitation"
 msgstr "Creative Commons sans restriction"
 
 #. weiblich :)
-#: Template/Images/add.ctp:251
+#: Template/Images/add.ctp:261
 msgid "Name of the photographer, agency or person who did this artwork"
 msgstr "Nom de la photographe, de l'agence ou de la personne à l'origine de l'œuvre."
 
-#: Template/Images/add.ctp:256
+#: Template/Images/add.ctp:266
 msgid "Copyright:"
 msgstr "Droit d'auteure :"
 
-#: Template/Images/add.ctp:257
+#: Template/Images/add.ctp:267
 msgid "Publishing this image may violate the intellectual property right."
 msgstr "La publication de cette image est susceptible de violer les droit de propriété intellectuelle."
 
-#: Template/Images/add.ctp:260
+#: Template/Images/add.ctp:270
 msgid "I hereby confirm that:"
 msgstr "Je confirme que :"
 
-#: Template/Images/add.ctp:264
+#: Template/Images/add.ctp:274
 msgid "I have the right to use this raw image"
 msgstr "J'ai le droit d'utiliser cette image brute."
 
-#: Template/Images/add.ctp:271
+#: Template/Images/add.ctp:281
 msgid "Others can use this raw image without limitation"
 msgstr "D'autres personnes peuvent utiliser cette image brute sans restrictions."
 
-#: Template/Images/add.ctp:276
+#: Template/Images/add.ctp:286
 msgid "Confirm legal declarations"
 msgstr "Confirmer l'exactitude des informations fournies"
 
-#: Template/Images/add.ctp:282
+#: Template/Images/add.ctp:292
 msgid "The image could not be generated. Please try again."
 msgstr "L'image n'a pas pu être générée. Merci de réessayer."
 
@@ -833,7 +834,7 @@ msgid "An Internal Error Has Occurred"
 msgstr "Une erreur interne s'est produite."
 
 #. oder "une
-#: Template/Images/add.ctp:167
+#: Template/Images/add.ctp:177
 msgid "Generate Image"
 msgstr "Générer l'image"
 
@@ -1237,16 +1238,16 @@ msgstr "Saisie invalide: merci de vérifier qu'aucune barre ne soit restée vide
 msgid "Resend user invitation"
 msgstr ""
 
-#: Model/Table/ImagesTable.php:110
+#: Model/Table/ImagesTable.php:111
 #, fuzzy
 msgid "Square"
 msgstr "Carré"
 
-#: Model/Table/ImagesTable.php:112
+#: Model/Table/ImagesTable.php:113
 msgid "Facebook Event Image"
 msgstr ""
 
-#: Model/Table/ImagesTable.php:115
+#: Model/Table/ImagesTable.php:116
 msgid "Instagram Story"
 msgstr ""
 
@@ -1271,38 +1272,68 @@ msgstr ""
 msgid "Failed to read image. Try to resize it in an image editor and upload it again."
 msgstr ""
 
-#: Controller/ImagesController.php:103
-msgid "Your not authorized to delete this image."
-msgstr ""
-
-#: Controller/ImagesController.php:105
+#: Controller/ImagesController.php:137
 msgid "The image has been deleted."
 msgstr ""
 
-#: Controller/ImagesController.php:107
+#: Controller/ImagesController.php:140
 msgid "The image could not be deleted. Please, try again."
 msgstr ""
 
 #: Template/Element/top_nav.ctp:4
-#: Template/Images/index.ctp:9
+#: Template/Images/index.ctp:10
 #, fuzzy
 msgid "Gallery"
 msgstr "Galerie"
 
-#: Template/Images/index.ctp:13
+#: Template/Images/index.ctp:14
 #, fuzzy
 msgid "Have a look at the images your fellows have created."
 msgstr "Jetez un coup d'œil aux images que vos collègues ont créées."
 
-#: Template/Images/index.ctp:39
-msgid "Created {0} by {1}."
-msgstr ""
-
-#: Template/Images/index.ctp:41
+#: Template/Images/index.ctp:62
 msgid "Download"
 msgstr ""
 
-#: Template/Images/index.ctp:45
+#: Template/Layout/default.ctp:111
 msgid "Are you sure you want to delete this image?"
+msgstr ""
+
+#: Template/Images/index.ctp:57
+msgid "Created {time_ago} by {user_name}."
+msgstr ""
+
+#: Template/Images/add.ctp:147
+msgid "Copyright info"
+msgstr ""
+
+#: Template/Images/add.ctp:148
+msgid "Optional"
+msgstr ""
+
+#: Template/Images/index.ctp:28
+msgid "Search"
+msgstr ""
+
+#: Template/Images/index.ctp:33
+msgid "One match"
+msgid_plural "{number} Results"
+msgstr[0] ""
+msgstr[1] ""
+
+#: Template/Layout/default.ctp:112
+msgid "© Photo:"
+msgstr ""
+
+#: Controller/ImagesController.php:135
+msgid "You're not authorized to delete this image."
+msgstr ""
+
+#: Template/Images/add.ctp:145
+msgid "Will be displayed on the lower right or left edge of the image. Enter the name of the photographer."
+msgstr ""
+
+#: Template/Images/index.ctp:21
+msgid "Search title bars, author, logo subline or the copyright"
 msgstr ""
 

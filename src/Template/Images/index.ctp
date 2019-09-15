@@ -18,8 +18,8 @@ use Cake\I18n\Time;
         <input id="gallery-search"
                type="text"
                class="form-control"
-               placeholder="<?= __( 'Search title bars text, name of the creator or the logo subline' ) ?>"
-               value="<?= isset( $search ) ? $search : '' ?>"
+               placeholder="<?= __( 'Search title bars, author, logo subline or the copyright' ) ?>"
+               value="<?= isset( $search ) ? htmlspecialchars($search, ENT_QUOTES) : '' ?>"
         >
         <div class="input-group-append">
             <button class="btn btn-outline-secondary"
@@ -58,7 +58,7 @@ use Cake\I18n\Time;
                             'time_ago'  => $created,
                             'user_name' => $by
                         ] ) ?></p>
-                    <a href="<?= $image->src ?>" download="download"
+                    <a href="<?= $image->src ?>" download
                        class="btn btn-outline-primary btn-sm"><?= __( 'Download' ) ?></a>
                     <?php if ( $image->user->id === $user_id || $super_admin ): ?>
                         <button class="btn btn-link btn-sm image-delete-button"

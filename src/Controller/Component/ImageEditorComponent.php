@@ -781,6 +781,63 @@ class ImageEditorComponent extends Component {
         $this->im->setImageColorspace( \Imagick::COLORSPACE_SRGB );
     }
 
+    public function addCopyright( \stdClass $copy ) {
+        $text = mb_strtoupper(trim( $copy->text ));
+        if ( empty( $text ) ) {
+            return;
+        }
+
+        // generate the text element to big and scale it down afterward to
+        // improve the text quality
+        $scale_factor = 5;
+
+        $font_size    = $copy->fontsize * $scale_factor;
+        $path_to_font = ROOT . DS . 'protected' . DS . 'fonts' . DS . 'Arial.ttf';
+        $text_color   = new \ImagickPixel( '#888888' );
+
+        // setup text draw object
+        $draw = new \ImagickDraw();
+        $draw->setFontSize( $font_size );
+        $draw->setFont( realpath( $path_to_font ) );
+        $draw->setFillColor( $text_color );
+        $draw->setGravity( \Imagick::GRAVITY_NORTHWEST );
+        $draw->annotation( 0, 0, $text );
+
+        // let's be sure we make the canvas big enough
+        $canvas_width  = $font_size * strlen( $text ) * 2;
+        $canvas_height = $font_size * 2;
+
+        // generate a transparent canvas
+        $canvas = new \Imagick();
+        $canvas->newImage( $canvas_width, $canvas_height, 'transparent' );
+
+        // place the $text on it
+        $canvas->drawImage( $draw );
+
+        $canvas->rotateImage( 'transparent', - 90 );
+
+        // cut transparent borders
+        $canvas->trimImage( 0 );
+
+        // resize to actual size
+        $canvas->resizeImage(
+            round( $canvas->getImageWidth() / $scale_factor ),
+            round( $canvas->getImageHeight() / $scale_factor ),
+            \Imagick::FILTER_LANCZOS,
+            1 );
+
+        // for some unknown reason we have to correct the placement of the text
+        $x_pos_correction = $font_size * 0.025;
+
+        // add it to the final image
+        $this->im->compositeImage(
+            $canvas,
+            \Imagick::COMPOSITE_MODULUSADD,
+            $copy->x_pos + $x_pos_correction,
+            $copy->y_pos - $canvas->getImageHeight()
+        );
+    }
+
     /**
      * Set final image dimensions
      *

@@ -36,7 +36,7 @@ var imagesLoaded = require('imagesloaded');
             return;
         }
 
-        window.location = '/images/search/'+encodeURI(terms);
+        window.location = '/images/search/'+encodeURIComponent(terms);
     }
 
     var initToggleMeta = function () {

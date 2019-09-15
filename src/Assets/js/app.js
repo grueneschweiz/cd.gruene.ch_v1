@@ -105,6 +105,7 @@ $(document).ready(function () {
             $('.image-modifier-controls').show();
             $('#color-scheme-form').removeClass('d-none');
             $('#color_scheme').val('green').trigger('change');
+            $('#copyright-form').removeClass('d-none');
             initialImage = false;
             $cibuilder.trigger('imageChanged');
         }
@@ -136,11 +137,17 @@ $(document).ready(function () {
     var ibars = '<div id="image-bars-dragger" class="' + $('#layout').val() + '"><div id="image-bars" class="' + $('#layout').val() + '"></div></div>';
     $imageCropper.append(ibars);
 
+    // add copyright container to image
+    var icopyright = '<div id="copyright-outer"><div id="copyright-inner"></div></div>';
+    $imageCropper.append(icopyright);
+
     // instantiate bars object
     $cibuilder = $('#image-bars').cibuilder({
         form: '#bars-form',
         border: '#border-wrapper',
-        logo: '#logo-wrapper'
+        logo: '#logo-wrapper',
+        copyright_outer: '#copyright-outer',
+        copyright_inner: '#copyright-inner'
     });
 
     // pre populate it
@@ -240,6 +247,11 @@ $(document).ready(function () {
         $('#canvas-format').trigger('change');
     });
 
+    // copyright
+    $('#copyright-form').keyup(function () {
+        $cibuilder.trigger('copyrightChanged');
+    });
+
     // layout
     $('#layout').change(function () {
         // set classes
@@ -314,8 +326,8 @@ $(document).ready(function () {
                 .then(function () {
                     return self.uploadImageData();
                 })
-                .then(function() {
-                    $legalChecker.submit_legal_when_ready( rawImageHash );
+                .then(function () {
+                    $legalChecker.submit_legal_when_ready(rawImageHash);
                 })
                 .catch(function () {
                     $('.warning-image-generation-error').removeClass('d-none')
@@ -392,6 +404,8 @@ $(document).ready(function () {
             $rotator = $('#logo-rotator'),
             $logo_top = $('#logo-top'),
             $subline = $('#logo-subline'),
+            $copyright_outer = $('#copyright-outer'),
+            $copyright_inner = $copyright_outer.find('#copyright-inner'),
             $bars = $('#image-bars'),
             bars_pos = $bars.offset(),
             cropper_pos = $('#image-cropper').offset(),
@@ -400,7 +414,10 @@ $(document).ready(function () {
             y_pos = (bars_pos.top - cropper_pos.top) * scaleFactor,
             x_pos,
             logo_y_pos = logo_pos.top - cropper_pos.top,
-            logo_x_pos = logo_pos.left - cropper_pos.left;
+            logo_x_pos = logo_pos.left - cropper_pos.left,
+            copy_pos = $copyright_outer.offset(),
+            copy_x_pos = copy_pos.left - cropper_pos.left,
+            copy_y_pos = $imageCropper.cropit('previewSize').height - parseFloat($copyright_outer.css('bottom')) + $copyright_inner.outerHeight();
 
         // calculate bar position
         if ($bars.hasClass('left')) {
@@ -472,6 +489,12 @@ $(document).ready(function () {
                 subline: $subline.text(),
                 left: parseFloat($subline.css('margin-left')) * scaleFactor,
                 id: $('#logo').val()
+            },
+            copyright: {
+                text: $copyright_inner.text(),
+                fontsize: parseFloat($copyright_inner.css('font-size')) * scaleFactor,
+                y_pos: copy_y_pos * scaleFactor,
+                x_pos: copy_x_pos * scaleFactor
             }
         };
 

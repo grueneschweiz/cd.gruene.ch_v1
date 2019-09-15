@@ -6,6 +6,7 @@ use App\Controller\Component\ImageEditorComponent;
 use App\Controller\Component\ImageFileHandlerComponent;
 use App\Controller\Component\InvalidImageException;
 use App\Model\Entity\User;
+use Cake\Datasource\ConnectionManager;
 use Cake\Event\Event;
 
 /**
@@ -79,10 +80,18 @@ class ImagesController extends AppController {
      * @param string $string
      */
     public function search( string $string ) {
-        $results = $this->Images->search( $string );
+        $matches = $this->Images->search( $string );
+
+        if ( $matches ) {
+            $results = $this->Images->find()->contain( 'Users' )->where( [ 'Images.id IN' => $matches ] );
+        } else {
+            // we can't use the above where in query, if we dont have any matches
+            // so we create a query that returns NO results!
+            $results = $this->Images->find()->whereNull( 'id' );
+        }
 
         $images = $this->Paginator->paginate(
-            $this->Images->find()->contain( 'Users' )->where( [ 'Images.id IN' => $results ] ),
+            $results,
             [ 'limit' => 50, ]
         );
 
@@ -123,7 +132,7 @@ class ImagesController extends AppController {
             $image   = $this->Images->get( $id );
 
             if ( $image->user_id !== $this->Auth->user( 'id' ) && ! $this->Auth->user( 'super_admin' ) ) {
-                $msg = __( "You'r not authorized to delete this image." );
+                $msg = __( "You're not authorized to delete this image." );
             } elseif ( $this->Images->delete( $image ) ) {
                 $msg     = __( 'The image has been deleted.' );
                 $success = true;
@@ -196,10 +205,14 @@ class ImagesController extends AppController {
             set_time_limit( 180 );
 
             // get data
-            $data          = json_decode( $this->request->getData( 'addImage' ) );
-            $data->user_id = $this->Auth->user( 'id' );
-            $original_id   = - 1;
-            $hash          = false;
+            $data       = json_decode( $this->request->getData( 'addImage' ) );
+            $data->user = (object) [
+                'id'        => $this->Auth->user( 'id' ),
+                'full_name' => $this->Auth->user( 'first_name' ) . ' ' . $this->Auth->user( 'last_name' )
+            ];
+
+            $original_id = - 1;
+            $hash        = false;
 
             // if a custom image was given
             if ( ! empty( $data->image->name ) ) {
@@ -290,6 +303,13 @@ class ImagesController extends AppController {
                 }
             } else {
                 $error = $success;
+            }
+
+            if ( ! isset( $error ) ) {
+                $success = $this->ImageEditor->addCopyright( $data->copyright );
+                if ( ! $success ) {
+                    $error = $success;
+                }
             }
 
             // if all went right until now
@@ -397,28 +417,47 @@ class ImagesController extends AppController {
     }
 
     public function migrate() {
-        $images = $this->Images->find();
+        $connection = ConnectionManager::get( 'default' );
+
+        $indexes = $connection->execute( 'SHOW INDEX FROM images' )->fetchAll( 'assoc' );
+        $indexes = array_column( $indexes, 'Key_name' );
+
+        if ( ! in_array( 'search', $indexes ) ) {
+            $connection->execute(
+                "ALTER TABLE images
+            ADD FULLTEXT INDEX `search`             
+            (`flattext`);" );
+        }
+
+        $images = $this->Images->find()->contain( [ 'Users', 'Logos' ] );
 
         foreach ( $images as $image ) {
-            if ( $image->isRawImage ) {
-                $path  = ImageFileHandlerComponent::getRawImagePath( $image->filename );
-                $orig  = new \Cake\Filesystem\File( $path );
-                $thumb = new \Cake\Filesystem\File( ImageFileHandlerComponent::getRawThumbPath( $image->filename ) );
-                if ( $orig->exists() && ! $thumb->exists() ) {
-                    $this->ImageEditor->createFromImage( $path );
-                    $this->ImageEditor->file_name = $image->filename;
-                    $this->ImageEditor->makeRawThumb();
-                }
-            } else {
-                $path  = ImageFileHandlerComponent::getFinalImagePath( $image->filename );
-                $orig  = new \Cake\Filesystem\File( $path );
-                $thumb = new \Cake\Filesystem\File( ImageFileHandlerComponent::getFinalThumbPath( $image->filename ) );
-                if ( $orig->exists() && ! $thumb->exists() ) {
-                    $this->ImageEditor->createFromImage( $path );
-                    $this->ImageEditor->file_name = $image->filename;
-                    $this->ImageEditor->makeFinalThumb();
+            $text = $image->flattext;
+
+            if ( $image->logo ) {
+                $logo = $image->logo->subline;
+                if ( false === strpos( $text, $logo ) ) {
+                    $text .= " $logo";
                 }
             }
+
+            if ( $image->user ) {
+                $fname = $image->user->first_name;
+                $lname = $image->user->last_name;
+
+                if ( false === strpos( $text, $fname ) ) {
+                    $text .= " $fname";
+                }
+
+                if ( false === strpos( $text, $lname ) ) {
+                    $text .= " $lname";
+                }
+            }
+
+            $image->flattext = $text;
+            $this->Images->save( $image );
+
+            die('ok');
         }
     }
 }
