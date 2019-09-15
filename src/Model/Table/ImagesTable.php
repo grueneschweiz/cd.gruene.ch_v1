@@ -2,7 +2,6 @@
 
 namespace App\Model\Table;
 
-use Cake\Datasource\ConnectionManager;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -428,17 +427,17 @@ class ImagesTable extends Table {
         $match_query = 'MATCH (flattext) AGAINST (:terms IN BOOLEAN MODE)';
 
         return $this->find( 'final' )
-                        ->contain( 'Users' )
-                        ->select( [
-                            'score' => $match_query,
-                            'Users.id',
-                            'Users.last_name',
-                            'Users.first_name'
-                        ] )
-                        ->select( $this )
-                        ->where( $match_query )
-                        ->orderDesc( 'score' )
-                        ->bind( ':terms', $terms, 'string' );
+                    ->contain( 'Users' )
+                    ->select( [
+                        'score' => $match_query,
+                        'Users.id',
+                        'Users.last_name',
+                        'Users.first_name'
+                    ] )
+                    ->select( $this )
+                    ->where( $match_query )
+                    ->order( [ 'score' => 'DESC', 'created' => 'DESC' ] )
+                    ->bind( ':terms', $terms, 'string' );
     }
 
     /**
