@@ -414,28 +414,31 @@ class ImagesTable extends Table {
      * search. All text in the images flattext is searched. The results
      * are primarely ordered by the best match, secondary by creation date.
      *
-     * @param string $string
+     * @param string $string the search terms
      *
-     * @return int[] the image ids
+     * @return Query the search results
      */
-    public function search( string $string ): array {
+    public function search( string $string ): Query {
         $terms = $this->prepareTerms( $string );
 
         if ( ! $terms ) {
             return [];
         }
 
-        $connection  = ConnectionManager::get( 'default' );
-        $match_query = 'MATCH (flattext) AGAINST (? IN BOOLEAN MODE)';
-        $results     = $connection->execute(
-            "SELECT id, $match_query as score " .
-            "FROM {$this->getTable()} " .
-            "WHERE deleted IS NULL AND original_id IS NOT NULL AND $match_query" .
-            'ORDER BY score DESC, created DESC',
-            [ $terms, $terms ]
-        )->fetchAll( 'assoc' );
+        $match_query = 'MATCH (flattext) AGAINST (:terms IN BOOLEAN MODE)';
 
-        return count( $results ) ? array_column( $results, 'id' ) : [];
+        return $this->find( 'final' )
+                        ->contain( 'Users' )
+                        ->select( [
+                            'score' => $match_query,
+                            'Users.id',
+                            'Users.last_name',
+                            'Users.first_name'
+                        ] )
+                        ->select( $this )
+                        ->where( $match_query )
+                        ->orderDesc( 'score' )
+                        ->bind( ':terms', $terms, 'string' );
     }
 
     /**
