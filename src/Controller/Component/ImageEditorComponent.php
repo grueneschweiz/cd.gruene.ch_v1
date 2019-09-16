@@ -774,6 +774,11 @@ class ImageEditorComponent extends Component {
             $this->im->transformImageColorspace( \Imagick::COLORSPACE_SRGB );
         }
 
+        // strip the image of any profiles, comments or these PNG chunks:
+        // bKGD,cHRM,EXIF,gAMA,iCCP,iTXt,sRGB,tEXt,zCCP,zTXt,date.
+        // this fixes issues with images that have integrated color profiles
+        $this->im->stripImage();
+
         // set global color space
         $this->im->setColorspace( \Imagick::COLORSPACE_SRGB );
 
@@ -781,6 +786,9 @@ class ImageEditorComponent extends Component {
         $this->im->setImageColorspace( \Imagick::COLORSPACE_SRGB );
     }
 
+    /**
+     * Add copyright text to the lower right or left
+     */
     public function addCopyright( \stdClass $copy ) {
         $text = mb_strtoupper(trim( $copy->text ));
         if ( empty( $text ) ) {
