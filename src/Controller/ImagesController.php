@@ -247,6 +247,7 @@ class ImagesController extends AppController {
                 }
             } elseif ( self::IMAGE_TYPE_TRANSPARENT === $data->image->type ) {
                 // do nothing
+                $original_id = - 2;
                 $success = true;
             } else { // its a gradient
                 // generate gradient image if custom image is missing
