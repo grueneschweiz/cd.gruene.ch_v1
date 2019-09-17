@@ -17,6 +17,10 @@ use Cake\Filesystem\File;
  * @property ImageFileHandlerComponent $ImageFileHandler
  */
 class ImagesController extends AppController {
+    private const IMAGE_TYPE_GRADIENT = 0;
+    private const IMAGE_TYPE_TRANSPARENT = 1;
+    private const IMAGE_TYPE_CUSTOM = 2;
+
     /**
      * Do first
      *
@@ -190,7 +194,7 @@ class ImagesController extends AppController {
      * Generate image
      */
     public function ajaxAdd() {
-        if ( $this->request->is( 'post' ) && $this->request->is( 'ajax' ) ) {
+//        if ( $this->request->is( 'post' ) && $this->request->is( 'ajax' ) ) {
             // to generate big images we need more time
             set_time_limit( 180 );
 
@@ -205,7 +209,7 @@ class ImagesController extends AppController {
             $hash        = false;
 
             // if a custom image was given
-            if ( ! empty( $data->image->name ) ) {
+            if ( self::IMAGE_TYPE_CUSTOM === $data->image->type && ! empty( $data->image->name ) ) {
                 // save it
                 try {
                     $path    = $this->ImageFileHandler::save( $data );
@@ -241,7 +245,10 @@ class ImagesController extends AppController {
                     // is a duplicate -> add the bar text to the original
                     $this->Images->appendBarText( $original_id, $data );
                 }
-            } else {
+            } elseif ( self::IMAGE_TYPE_TRANSPARENT === $data->image->type ) {
+                // do nothing
+                $success = true;
+            } else { // its a gradient
                 // generate gradient image if custom image is missing
                 $gradient = $this->ImageEditor->createWithGradient( $data->preview->size );
                 // save it
@@ -251,7 +258,11 @@ class ImagesController extends AppController {
 
             // if we have a processable image
             if ( true === $success ) {
-                $this->ImageEditor->createFromImage( $path );
+                if ( self::IMAGE_TYPE_TRANSPARENT === $data->image->type ) {
+                    $this->ImageEditor->createTransparent( $data->preview->size );
+                } else {
+                    $this->ImageEditor->createFromImage( $path );
+                }
 
                 $zoom = (float) $data->image->zoom;
 
@@ -259,8 +270,8 @@ class ImagesController extends AppController {
                 $width  = (int) $data->preview->size->width;
                 $height = (int) $data->preview->size->height;
 
-                // if its not a gradient
-                if ( ! isset( $gradient ) ) {
+                // if a custom image
+                if ( self::IMAGE_TYPE_CUSTOM === $data->image->type ) {
                     // since we've already read the image with the right orientation
                     // (according to the EXIF information) we should now reset the
                     // orientation, so the final image won't get rotated again.
@@ -339,9 +350,9 @@ class ImagesController extends AppController {
             } else {
                 $content = $error;
             }
-        } else {
-            $content = 'access denied';
-        }
+//        } else {
+//            $content = 'access denied';
+//        }
 
         $json = json_encode( $content );
         $this->set( [ 'content' => $json ] );

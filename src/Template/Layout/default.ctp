@@ -109,7 +109,9 @@
         can_i_use: '<?= htmlspecialchars(__('Please confirm that you have the right to use this image.'), ENT_QUOTES) ?>',
         empty_bars: '<?= htmlspecialchars(__('Input not valid: Please make sure you do not leave any bars empty.'), ENT_QUOTES) ?>',
         delete_image: '<?= htmlspecialchars(__('Are you sure you want to delete this image?'), ENT_QUOTES) ?>',
-        copy: '<?= htmlspecialchars(__('© Photo:'), ENT_QUOTES) ?>'
+        copy: '<?= htmlspecialchars(__('© Photo:'), ENT_QUOTES) ?>',
+        gradient: '<?= htmlspecialchars(__('Gradient'), ENT_QUOTES) ?>',
+        transparent: '<?= htmlspecialchars(__('Transparent'), ENT_QUOTES) ?>'
     };
 
     var x_csrf_token = '<?= $this->request->params['_csrfToken'] ?>';

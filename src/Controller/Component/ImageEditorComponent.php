@@ -760,6 +760,25 @@ class ImageEditorComponent extends Component {
     }
 
     /**
+     * Generate new image with transparent background
+     *
+     * @param \stdClass $size
+     *
+     * @throws \ImagickException
+     */
+    public function createTransparent( \stdClass $size ) {
+        $height = (int) $size->height;
+        $width  = (int) $size->width;
+
+        $this->im = new \Imagick();
+        $this->im->newImage( $width, $height, 'transparent' );
+
+        $this->setFileFormat( 'png' );
+        $this->path = ImageFileHandlerComponent::getNewFinalImagePath( 'image.' . $this->fileFormat );
+        $this->file_name = basename( $this->path );
+    }
+
+    /**
      * Set the image orientation do default, so it won't get rotated or flipped
      */
     public function setOrientation() {
@@ -790,7 +809,7 @@ class ImageEditorComponent extends Component {
      * Add copyright text to the lower right or left
      */
     public function addCopyright( \stdClass $copy ) {
-        $text = mb_strtoupper(trim( $copy->text ));
+        $text = mb_strtoupper( trim( $copy->text ) );
         if ( empty( $text ) ) {
             return;
         }

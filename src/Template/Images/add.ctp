@@ -62,8 +62,8 @@
                        accept=".png, .jpg, .jpeg, image/png, image/jpeg">
             </div>
             <div class="input-group-append">
-                <button id="remove-image" class="btn btn-outline-secondary"
-                        type="button"><?= __( 'Remove image' ); ?></button>
+                <button id="background-toggle" class="btn btn-outline-secondary"
+                        type="button"><?= __( 'Transparent' ); ?></button>
             </div>
         </div>
     </div>
