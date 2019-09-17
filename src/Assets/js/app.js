@@ -35,6 +35,13 @@ $(document).ready(function () {
     var file = {};
     var rawImageHash;
 
+    /**
+     * Indicated what image we show currently
+     *
+     * @type {number} 0 = Gradient; 1 = Transparent; 2 = Custom
+     */
+    var imageType = 0;
+
     // reset the image uploader
     // https://stackoverflow.com/a/832730
     $('.cropit-image-input').replaceWith($('.cropit-image-input').val('').clone(true));
@@ -44,7 +51,6 @@ $(document).ready(function () {
     $('#canvas-width-setter, #canvas-height-setter').trigger('change');
     var startup_width = $('#canvas-width-setter').val();
     var startup_height = $('#canvas-height-setter').val();
-    var initialImage = true;
 
     var initialScaleFactor = 2;
     var scaleFactor = initialScaleFactor;
@@ -102,20 +108,50 @@ $(document).ready(function () {
             $('.warning-image-size-error').addClass('d-none');
         },
         onFileChange: function () {
-            $('.image-modifier-controls').show();
-            $('#color-scheme-form').removeClass('d-none');
-            $('#color_scheme').val('green').trigger('change');
-            $('#copyright-form').removeClass('d-none');
-            initialImage = false;
+            if (2 === imageType){
+                $('.image-modifier-controls').show();
+                $('#color-scheme-form').removeClass('d-none');
+                $('#color_scheme').val('green').trigger('change');
+                $('#copyright-form').removeClass('d-none');
+            } else if (1 === imageType){
+                $('.image-modifier-controls').hide();
+                $('#color-scheme-form').removeClass('d-none');
+                $('#color_scheme').val('green').trigger('change');
+                $('#copyright-form').addClass('d-none');
+            } else {
+                $('.image-modifier-controls').hide();
+                $('#color-scheme-form').addClass('d-none');
+                $('#color_scheme').val('white').trigger('change');
+                $('#copyright-form').addClass('d-none');
+            }
+
             $cibuilder.trigger('imageChanged');
         }
     });
 
-    // remove image
-    $('#remove-image').click(function () {
-        if (confirm(trans.reload)) {
-            location.reload();
+    // set image type for cutom images
+    $('input.cropit-image-input').change(function () {
+        if ($(this).val()) {
+            imageType = 2;
+            $('#background-toggle').text(trans.gradient);
+            $('input.cropit-image-input').trigger('change.cropit');
         }
+    });
+
+    // gradient / transparent image
+    $('#background-toggle').click(function () {
+        if (0 === imageType) {
+            imageType = 1;
+            $(this).text(trans.gradient);
+            $imageCropper.cropit('imageSrc', '/img/transparent.png');
+        } else {
+            imageType = 0;
+            $(this).text(trans.transparent);
+            $imageCropper.cropit('imageSrc', '/img/bg5000.png');
+        }
+
+        $('input.cropit-image-input').val('');
+        $('input.cropit-image-input').trigger('change.cropit');
     });
 
     // hide bars and logo on image move
@@ -224,8 +260,8 @@ $(document).ready(function () {
 
         $imageCropper.cropit('previewSize', {width: width, height: height});
 
-        // set zoom of initial image
-        if (initialImage) {
+        // set zoom of custom image
+        if (3 === imageType) {
             wfactor = width / image.width;
             hfactor = height / image.height;
             factor = wfactor > hfactor ? wfactor : hfactor;
@@ -319,7 +355,7 @@ $(document).ready(function () {
     $("#image-generate").click(function () {
         self.showWorkingDialog();
 
-        if (self.getImageName()) {
+        if (2 === imageType) {
             $('#download-button').hide();
 
             self.uploadImage()
@@ -381,14 +417,14 @@ $(document).ready(function () {
 
     this.showWorkingDialog = function () {
         $('.warning-image-generation-error').addClass('d-none');
-        if (initialImage) {
-            $('#legal-check').hide();
-            $('#please-fill-out-legal').hide();
-            $('#download-button').show();
-        } else {
+        if (2 === imageType) {
             $('#legal-check').show();
             $('#please-fill-out-legal').show();
             $('#download-button').hide();
+        } else {
+            $('#legal-check').hide();
+            $('#please-fill-out-legal').hide();
+            $('#download-button').show();
         }
         $('#download-button a#download-img').remove();
         $('#generating-image-loader').show();
@@ -461,7 +497,8 @@ $(document).ready(function () {
                     x: $imageCropper.cropit('offset').x * scaleFactor,
                     y: $imageCropper.cropit('offset').y * scaleFactor
                 },
-                name: self.getImageName()
+                name: self.getImageName(),
+                type: imageType
             },
             preview: {
                 size: {

@@ -4,7 +4,7 @@ use Cake\I18n\Time;
 
 ?>
 </div>
-<div class="images index ml-md-3 mr-md-3 container-fluid">
+<div class="images index pl-md-3 pr-md-3 container-fluid">
     <div class="mt-4 mb-3">
         <div class="clearfix mb-2">
             <h3 class="float-left mr-3"><?= __( 'Gallery' ) ?></h3>

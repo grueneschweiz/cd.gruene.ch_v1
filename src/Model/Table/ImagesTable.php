@@ -285,7 +285,7 @@ class ImagesTable extends Table {
      * @return Query
      */
     public function findFinal( Query $query ) {
-        return $query->whereNotNull( 'original_id' );
+        return $query->whereNotNull( 'original_id' )->andWhere( [ 'original_id <>' => - 2 ] );
     }
 
     /**
