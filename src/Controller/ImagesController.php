@@ -194,7 +194,7 @@ class ImagesController extends AppController {
      * Generate image
      */
     public function ajaxAdd() {
-//        if ( $this->request->is( 'post' ) && $this->request->is( 'ajax' ) ) {
+        if ( $this->request->is( 'post' ) && $this->request->is( 'ajax' ) ) {
             // to generate big images we need more time
             set_time_limit( 180 );
 
@@ -248,7 +248,7 @@ class ImagesController extends AppController {
             } elseif ( self::IMAGE_TYPE_TRANSPARENT === $data->image->type ) {
                 // do nothing
                 $original_id = - 2;
-                $success = true;
+                $success     = true;
             } else { // its a gradient
                 // generate gradient image if custom image is missing
                 $gradient = $this->ImageEditor->createWithGradient( $data->preview->size );
@@ -351,9 +351,9 @@ class ImagesController extends AppController {
             } else {
                 $content = $error;
             }
-//        } else {
-//            $content = 'access denied';
-//        }
+        } else {
+            $content = 'access denied';
+        }
 
         $json = json_encode( $content );
         $this->set( [ 'content' => $json ] );
@@ -410,6 +410,12 @@ class ImagesController extends AppController {
             $data   = $this->request->getData();
             $userId = $this->Auth->user( 'id' );
             $return = $this->Images->addLegal( $data, $userId );
+
+            if ( - 1 === $return ) {
+                // if the image was primerly uploaded by another user, we don't
+                // want to block it, bo we also don't overwrite the legal information
+                $return = true;
+            }
         } else {
             $return = 'access denied';
         }
