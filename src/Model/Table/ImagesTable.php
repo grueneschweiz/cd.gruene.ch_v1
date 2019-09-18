@@ -109,7 +109,7 @@ class ImagesTable extends Table {
         return [
             '1080x1080' => __( 'Square' ),
             '1200x630'  => __( 'Facebook Timeline Image' ),
-            '1920x1080' => __( 'Facebook Event Image' ),
+            '1920x1080' => __( 'Facebook Event Image / Video (Full HD)' ),
             '1200x628'  => __( 'Facebook Featured Website' ),
             '1024x512'  => __( 'Twitter Feed Image' ),
             '1080x1920' => __( 'Instagram Story' ),
