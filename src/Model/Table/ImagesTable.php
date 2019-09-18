@@ -317,15 +317,26 @@ class ImagesTable extends Table {
      * - originator => any input
      * @param int $userId
      *
-     * @return bool
+     * @return bool|int -1 if this image was primarely uploaded by another user
      */
     public function addLegal( array $data, int $userId ) {
         $image = $this->find()
                       ->where( [ 'hash' => $data['hash'] ] )
-                      ->andWhere( [ 'user_id' => $userId ] )
                       ->first();
+
+        // no image found
         if ( ! $image ) {
             return false;
+        }
+
+        $image = $this->find()
+                      ->where( [ 'hash' => $data['hash'] ] )
+                      ->andWhere( [ 'user_id' => $userId ] )
+                      ->first();
+
+        // there is an image, but created by someone else
+        if ( ! $image ) {
+            return - 1;
         }
 
         if ( $image->original_id ) {
