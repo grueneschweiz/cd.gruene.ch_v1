@@ -34,8 +34,31 @@ class ImageEditorComponent extends Component {
     public function createFromImage( string $path ) {
         $this->im = new \Imagick( realpath( $path ) );
 
+        $this->_autoRotate();
+
         $this->path      = ImageFileHandlerComponent::getNewFinalImagePath( 'image.' . $this->fileFormat );
         $this->file_name = basename( $this->path );
+    }
+
+    private function _autoRotate() {
+        $orientation = $this->im->getImageOrientation();
+
+        switch ($orientation) {
+            case \Imagick::ORIENTATION_BOTTOMRIGHT:
+                $this->im->rotateimage("#000", 180); // rotate 180 degrees
+                break;
+
+            case \Imagick::ORIENTATION_RIGHTTOP:
+                $this->im->rotateImage("#000", 90); // rotate 90 degrees CW
+                break;
+
+            case \Imagick::ORIENTATION_LEFTBOTTOM:
+                $this->im->rotateImage("#000", -90); // rotate 90 degrees CCW
+                break;
+        }
+
+        // Now that it's auto-rotated, make sure the EXIF data is correct
+        $this->im->setImageOrientation(\Imagick::ORIENTATION_TOPLEFT);
     }
 
     /**
