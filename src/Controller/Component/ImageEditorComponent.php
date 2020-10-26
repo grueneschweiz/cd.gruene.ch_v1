@@ -882,7 +882,7 @@ class ImageEditorComponent extends Component {
         // add it to the final image
         $this->im->compositeImage(
             $canvas,
-            \Imagick::COMPOSITE_MODULUSADD,
+            \Imagick::COMPOSITE_DIFFERENCE,
             $copy->x_pos + $x_pos_correction,
             $copy->y_pos - $canvas->getImageHeight()
         );
