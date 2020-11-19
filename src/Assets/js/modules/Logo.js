@@ -43,7 +43,8 @@ function LogoModule($cibuilder, $wrapper) {
     this.width_factor = {
         gruene: 0.765,
         verda: 0.748,
-        verdi: 0.79
+        verdi: 0.79,
+        "vert-e-s": 1.175
     };
 
     /**
