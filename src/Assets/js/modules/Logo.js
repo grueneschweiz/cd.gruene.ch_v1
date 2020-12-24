@@ -44,7 +44,8 @@ function LogoModule($cibuilder, $wrapper) {
         gruene: 0.765,
         verda: 0.748,
         verdi: 0.79,
-        "vert-e-s": 1.175
+        "vert-e-s": 1.175,
+        "gruene-vert-e-s": 1.12
     };
 
     /**
