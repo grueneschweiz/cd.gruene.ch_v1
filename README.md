@@ -2,7 +2,7 @@
 
 This is project is superseeded by [grueneschweiz/imagery](https://github.com/grueneschweiz/imagery).
 
---
+---
 
 # Corporate Design Images Creator
 This tools aims to provide a simple way to generate images conforming the corporate design rules.
